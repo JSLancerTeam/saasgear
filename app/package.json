@@ -29,7 +29,7 @@
     "prestart": "npm run build:tailwind",
     "prebuild": "npm run build:tailwind",
     "lint": "stylelint **/*.{js,jsx} && eslint --ext .js --ext .jsx .",
-    "lint:fix": "stylelint **/*.{js,jsx} --fix && eslint --ext .js --ext .jsx . --fix",
+    "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "lint:staged": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -64,7 +64,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && npm run lint"
     }
   },
   "devDependencies": {

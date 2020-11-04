@@ -1,32 +1,11 @@
-const { ApolloServer, gql } = require('apollo-server');
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const typeDefs = gql`
-	type Book {
-		title: String
-		author: String
-	}
-	type Query {
-		books: [Book]
-	}
-`;
+app.get('/', (req, res) => {
+	res.send('Hello World!');
+});
 
-const books = [
-	{
-		title: 'The Awakening',
-		author: 'Kate Chopin',
-	},
-	{
-		title: 'City of Glass',
-		author: 'Paul Auster',
-	},
-];
-
-const resolvers = {
-	Query: {
-		books: () => books,
-	},
-};
-const server = new ApolloServer({ typeDefs, resolvers });
-server.listen().then(({ url }) => {
-	console.log(`🚀  Server ready at ${url}`);
+app.listen(port, () => {
+	console.log(`Example app listening at http://localhost:${port}`);
 });

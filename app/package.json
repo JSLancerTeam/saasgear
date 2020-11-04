@@ -62,7 +62,11 @@
       "git add --force"
     ]
   },
-  "pre-commit": "lint:staged",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
@@ -74,6 +78,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
     "lint-staged": "^10.5.1",
     "pre-commit": "^1.2.2",
     "prettier": "^2.1.2",

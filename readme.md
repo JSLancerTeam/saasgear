@@ -87,7 +87,7 @@ All code in this repository is provided under the MIT
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| scalars (custom scalars for graphql type and input)  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| date.scalar.js -> custom date scalar  
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| schemas (graphql schemas)  
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| user.schema.js -> schema for feature user
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| user.schema.js -> schema for feature user  
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| root.resolver.js -> this file combine all resolver  
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| root.schema.js -> this file combine all schema   
 | helpers (Helpers function)  

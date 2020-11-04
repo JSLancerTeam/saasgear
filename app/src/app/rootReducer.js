@@ -1,9 +1,9 @@
-import { combineReducers } from '@reduxjs/toolkit'
+import { combineReducers } from '@reduxjs/toolkit';
 
-import todoSlide from 'features/todoSlice'
+import todoSlide from 'features/todoSlice';
 
 const rootReducer = combineReducers({
   todo: todoSlide,
-})
+});
 
-export default rootReducer
+export default rootReducer;

@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/todo',
     component: Todo,
-  }
+  },
 ];
 
 export default routes;

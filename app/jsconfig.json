@@ -9,7 +9,9 @@
       "components/*": ["components/*"],
       "containers/*": ["containers/*"],
       "features/*": ["features/*"],
+      "graphql/*": ["graphql/*"],
       "utils/*": ["utils/*"]
     }
-  }
+  },
+  "include": ["src/**/*"]
 }

@@ -115,7 +115,7 @@ function SignUpForm({ onSubmit, register, errors }) {
               />
             </svg>
           </span>
-          Sign in
+          Sign up
         </button>
       </div>
     </form>

@@ -7,7 +7,7 @@ import AdminLayout from 'components/Layout/Admin';
 import SignIn from 'containers/SignIn';
 import SignUp from 'containers/SignUp';
 import apolloClient from './apollo';
-import 'assets/main.css';
+import 'assets/css/main.css';
 
 function App() {
   return (

@@ -27,8 +27,8 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "build:css": "postcss src/assets/css/tailwind.css -o src/assets/css/main.css",
+    "watch:css": "postcss src/assets/css/tailwind.css -o src/assets/css/main.css",
     "lint": "stylelint **/*.{js,jsx} && eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "lint:staged": "lint-staged",

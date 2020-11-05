@@ -3,8 +3,10 @@
 | caches (all cache providers here, Such as redis, memcache, etc)  
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| redis.cache.js (redis cache provider config or functionality)  
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| memcache.cache.js (redis cache provider config or functionality)  
+| configs  
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| knexfile.js (config for knex)  
 | constants (all constants for application)  
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| status.constant.js (file constant of http status code)
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| status.constant.js (file constant of http status code)  
 | database  
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| db.config.js (Config database)  
 | docs (All documents here, such as Postman collection, schema docs, mutation, query, etc)  

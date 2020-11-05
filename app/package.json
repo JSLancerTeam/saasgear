@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@hookform/resolvers": "^1.0.0",
     "@reduxjs/toolkit": "^1.4.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
@@ -11,6 +12,7 @@
     "apollo-link-context": "^1.0.20",
     "apollo-link-error": "^1.1.13",
     "apollo-upload-client": "^14.1.2",
+    "classnames": "^2.2.6",
     "dayjs": "^1.9.4",
     "graphql": "^15.4.0",
     "prop-types": "^15.7.2",
@@ -22,17 +24,16 @@
     "react-scripts": "4.0.0",
     "redux": "^4.0.5",
     "styled-components": "^5.2.1",
-    "tailwindcss": "^1.9.6"
+    "yup": "^0.29.3"
   },
   "scripts": {
-    "build:tailwind": "tailwindcss build src/app/tailwind.css -o src/app/tailwind.output.css",
-    "prestart": "npm run build:tailwind",
-    "prebuild": "npm run build:tailwind",
+    "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "lint": "stylelint **/*.{js,jsx} && eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "lint:staged": "lint-staged",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run watch:css && react-scripts start",
+    "build": "npm run build:css && react-scripts build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -68,6 +69,8 @@
     }
   },
   "devDependencies": {
+    "@tailwindcss/ui": "^0.7.2",
+    "autoprefixer": "^9.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
@@ -80,11 +83,13 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.1",
+    "postcss-cli": "^8.2.0",
     "pre-commit": "^1.2.2",
     "prettier": "^2.1.2",
     "stylelint": "^13.7.2",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.10.0"
+    "stylelint-processor-styled-components": "^1.10.0",
+    "tailwindcss": "^1.9.6"
   }
 }

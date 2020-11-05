@@ -59,7 +59,7 @@ module.exports = {
     'max-len': 0,
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
-    'no-console': 2,
+    'no-console': 1,
     'no-unused-vars': 2,
     'no-use-before-define': 0,
     'prefer-template': 2,
@@ -75,6 +75,12 @@ module.exports = {
     'react/require-extension': 0,
     'react/self-closing-comp': 0,
     'react/sort-comp': 0,
+    'react/jsx-props-no-spreading': [
+      2,
+      {
+        custom: 'ignore',
+      },
+    ],
   },
   settings: {
     'import/resolver': {

@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import cn from 'classnames';
+import { Transition } from '@headlessui/react';
 import routes from 'routes';
 
 function AdminLayout() {
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+  const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false);
+
   function renderSidebar() {
     return routes
       .filter((route) => route.isSidebar)
       .map((route) => (
         <Link
           to={route.path}
-          className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+          className={cn(
+            'px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700',
+            { block: isOpenMenuMobile },
+          )}
           key={route.path}
         >
           {route.name}
         </Link>
       ));
+  }
+
+  function toggleOpenDropdown() {
+    setIsOpenDropdown(!isOpenDropdown);
+  }
+
+  function toggleMenuMobile() {
+    setIsOpenMenuMobile(!isOpenMenuMobile);
   }
 
   return (
@@ -68,6 +84,7 @@ function AdminLayout() {
                       aria-label="User menu"
                       aria-haspopup="true"
                       type="button"
+                      onClick={toggleOpenDropdown}
                     >
                       <img
                         className="h-8 w-8 rounded-full"
@@ -76,39 +93,54 @@ function AdminLayout() {
                       />
                     </button>
                   </div>
-
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
-                    <div
-                      className="py-1 rounded-md bg-white shadow-xs"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="user-menu"
-                    >
-                      <Link
-                        to="/profile"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
+                  <Transition
+                    show={isOpenDropdown}
+                    enter="transition ease-out duration-100 transform"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="transition ease-in duration-75 transform"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    {(ref) => (
+                      <div
+                        ref={ref}
+                        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
                       >
-                        Your Profile
-                      </Link>
+                        <div
+                          className="py-1 rounded-md bg-white shadow-xs"
+                          role="menu"
+                          aria-orientation="vertical"
+                          aria-labelledby="user-menu"
+                        >
+                          <Link
+                            to="/profile"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            role="menuitem"
+                            onClick={toggleOpenDropdown}
+                          >
+                            Your Profile
+                          </Link>
 
-                      <Link
-                        to="/setting"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        Settings
-                      </Link>
+                          <Link
+                            to="/setting"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            role="menuitem"
+                          >
+                            Settings
+                          </Link>
 
-                      <Link
-                        to="/signout"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        Sign out
-                      </Link>
-                    </div>
-                  </div>
+                          <Link
+                            to="/signin"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            role="menuitem"
+                          >
+                            Sign out
+                          </Link>
+                        </div>
+                      </div>
+                    )}
+                  </Transition>
                 </div>
               </div>
             </div>
@@ -116,9 +148,13 @@ function AdminLayout() {
               <button
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
                 type="button"
+                onClick={toggleMenuMobile}
               >
                 <svg
-                  className="block h-6 w-6"
+                  className={cn(
+                    'block h-6 w-6',
+                    isOpenMenuMobile ? 'hidden' : 'block',
+                  )}
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -131,7 +167,10 @@ function AdminLayout() {
                   />
                 </svg>
                 <svg
-                  className="hidden h-6 w-6"
+                  className={cn(
+                    'block h-6 w-6',
+                    isOpenMenuMobile ? 'block' : 'hidden',
+                  )}
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -148,7 +187,7 @@ function AdminLayout() {
           </div>
         </div>
 
-        <div className="hidden md:hidden">
+        <div className={cn('md:hidden', isOpenMenuMobile ? 'block' : 'hidden')}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {renderSidebar()}
           </div>
@@ -176,6 +215,7 @@ function AdminLayout() {
               <Link
                 to="/profile"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                onClick={toggleOpenDropdown}
               >
                 Your Profile
               </Link>
@@ -188,7 +228,7 @@ function AdminLayout() {
               </Link>
 
               <Link
-                to="/signout"
+                to="/signin"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
               >
                 Sign out
@@ -200,7 +240,7 @@ function AdminLayout() {
 
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
+          <div className="rounded-lg h-96">
             <Switch>
               {routes.map((route) => (
                 <Route

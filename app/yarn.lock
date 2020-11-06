@@ -1196,6 +1196,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@headlessui/react@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-0.2.0.tgz#a31f90892d736243ba91c1474f534b3256d0c538"
+  integrity sha512-YV+vF+QhTRcspydPdHF3ZXe+FkOiJpRdqMjjFIIX9bSdT2O2T7GurgKQdGgamNUM+B99MZBOTRqxS8Dlh485eg==
+
 "@hookform/resolvers@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-1.0.0.tgz#ad924cb846343fe0a42addcf0b055c4f9aa2dcb9"

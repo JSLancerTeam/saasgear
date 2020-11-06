@@ -1,4 +1,5 @@
 import Dashborad from 'containers/Dashboard';
+import Profile from 'containers/Profile';
 import Todo from 'containers/Todo';
 
 const routes = [
@@ -13,6 +14,12 @@ const routes = [
     name: 'Todo',
     component: Todo,
     isSidebar: true,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    isSidebar: false,
   },
 ];
 

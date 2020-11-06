@@ -69,5 +69,5 @@ yarn-debug.log*
 yarn-error.log*
 
 #src
-/src/app/tailwind.output.css
+/src/assets/css/main.css
 .env

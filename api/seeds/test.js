@@ -2,6 +2,10 @@ export const seed = function (knex) {
 	return knex('users')
 		.del()
 		.then(function () {
-			return knex('users').insert([{ user_name: 'Minh Tri1' }, { user_name: 'Minh Tri2' }, { user_name: 'Minh Tri3' }]);
+			return knex('users').insert([
+				{ email: 'abc@gmail.com', password: 1, name: '1' },
+				{ email: 'abc1@gmail.com', password: 1, name: '2' },
+				{ email: 'abc2@gmail.com', password: 1, name: '3' },
+			]);
 		});
 };

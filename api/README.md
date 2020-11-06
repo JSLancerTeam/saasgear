@@ -40,7 +40,7 @@ server.js
 ## CREATE MIGRATION FILE
 
 ```bash
-knex migrate:make --migrations-directory ./migrations -x cjs #{tableName}
+knex migrate:make --migrations-directory ./migrations #{tableName}
 ```
 
 ## RUN MIGRATION

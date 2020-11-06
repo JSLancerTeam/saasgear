@@ -6,15 +6,20 @@
 	"type": "module",
 	"scripts": {
 		"start": "nodemon --inspect server",
-		"db:migrate": "knex migrate:latest --knexfile constants/knexfile.cjs",
-		"db:rollback": "knex migrate:rollback --knexfile constants/knexfile.cjs",
-		"db:seed": "knex --esm seed:run --knexfile constants/knexfile.cjs"
+		"db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
+		"db:rollback": "knex --esm migrate:rollback --knexfile config/knexfile.cjs",
+		"db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
+		"db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs"
 	},
 	"dependencies": {
 		"apollo-server-express": "^2.19.0",
+		"bcryptjs": "^2.4.3",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"fastest-validator": "^1.8.0",
+		"jsonwebtoken": "^8.5.1",
 		"knex": "^0.21.12",
+		"lodash": "^4.17.20",
 		"morgan": "^1.10.0",
 		"mysql2": "^2.2.5",
 		"redis": "^3.0.2"

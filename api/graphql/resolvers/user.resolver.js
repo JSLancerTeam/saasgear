@@ -1,11 +1,15 @@
 import { registerUser } from '../../services/authentication/register.js';
 import { loginUser } from '../../services/authentication/login.js';
 import { getProfileUserById } from '../../services/user/profileUser.js';
+import { verifyEmail } from '../../services/authentication/verifyEmail.js';
 
 const resolvers = {
 	Query: {
 		profileUser: (_, { id }) => {
 			return getProfileUserById(id);
+		},
+		verify: (_, { token }) => {
+			return verifyEmail(token);
 		},
 	},
 	Mutation: {

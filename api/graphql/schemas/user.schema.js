@@ -5,19 +5,21 @@ export const UserSchema = gql`
 	type User {
 		id: ID!
 		email: String!
-		name: String
-		isActive: Boolean
+		name: String!
+		is_active: Boolean!
 	}
-	type Respone {
-		token: String!
+	type Response {
+		token: String
+		verified: Boolean
 	}
 
 	type Query {
 		profileUser(id: ID): User
+		verify(token: String!): Response!
 	}
 
 	type Mutation {
-		register(email: String, password: String, name: String): Respone!
-		login(email: String, password: String): Respone!
+		register(email: String!, password: String!, name: String!): Response!
+		login(email: String!, password: String!): Response!
 	}
 `;

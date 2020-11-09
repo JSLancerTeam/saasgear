@@ -1,19 +1,26 @@
 import database from '../config/database.config.js';
+import union from 'lodash/union.js';
 
 const TABLE = 'users';
 
-export const getUserByEmail = (email) => {
+export function getUserByEmail(email) {
 	return database(TABLE).where({ email }).first();
-};
+}
 
-export const getUserById = (id) => {
+export function getUserById(id) {
 	return database(TABLE).where({ id }).first();
-};
+}
 
-const User = {
-	create: function (...arg) {
-		return database(TABLE).insert(...arg);
-	},
-};
+export function createUser(...arg) {
+	return database(TABLE).insert(...arg);
+}
 
-export default User;
+export function getUserByIdAndJoinUserToken(id) {
+	const users = ['users.name', 'users.email', 'users.id', 'users.is_active'];
+	const userToken = ['user_token.token', 'user_token.type'];
+	return database(TABLE).join('user_token', 'users.id', 'user_token.user_id').select(union(users, userToken)).where({ user_id: id });
+}
+
+export function activeUser(id) {
+	return database(TABLE).where({ id }).update({ is_active: true });
+}

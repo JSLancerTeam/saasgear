@@ -9,7 +9,7 @@ import accessLogStream from './middlewares/logger.middleware.js';
 import RootSchema from './graphql/root.schema.js';
 import RootResolver from './graphql/root.resolver.js';
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3001;
 
 const server = new Apollo.ApolloServer({ schema: Apollo.makeExecutableSchema({ typeDefs: RootSchema, resolvers: RootResolver }) });
 app.use(morgan('short', { stream: accessLogStream }));

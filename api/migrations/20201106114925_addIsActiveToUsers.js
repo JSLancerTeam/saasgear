@@ -1,7 +1,14 @@
 export function up(knex) {
 	return knex.schema.table('users', function (t) {
-		t.boolean('isActive').defaultTo(false);
+		t.boolean('is_active').defaultTo(false);
 	});
 }
 
-exports.down = function (knex) {};
+export async function down(knex) {
+	const exists = await knex.schema.hasColumn('users', 'isActive');
+	if (exists) {
+		return knex.schema.table('users', function (t) {
+			t.dropColumn('isActive');
+		});
+	}
+}

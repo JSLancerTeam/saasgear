@@ -12,6 +12,7 @@
 		"db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs"
 	},
 	"dependencies": {
+		"@sendgrid/mail": "^7.4.0",
 		"apollo-server-express": "^2.19.0",
 		"bcryptjs": "^2.4.3",
 		"cors": "^2.8.5",
@@ -23,7 +24,8 @@
 		"lodash": "^4.17.20",
 		"morgan": "^1.10.0",
 		"mysql2": "^2.2.5",
-		"redis": "^3.0.2"
+		"redis": "^3.0.2",
+		"uuid": "^8.3.1"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.6"

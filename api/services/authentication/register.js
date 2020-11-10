@@ -2,9 +2,11 @@ import pkg from 'apollo-server-express';
 import _ from 'lodash';
 import Validator from 'fastest-validator';
 
-import User, { getUserByEmail } from '../../repository/user.repository.js';
+import { getUserByEmail, createUser } from '../../repository/user.repository.js';
+import { createUserTokenByUser } from '../../repository/user_token.repository.js';
 import { generatePassword } from '../../helpers/hashing.helper.js';
-import { sign } from '../../helpers/jwt.helper.js';
+import { sendMailToVerifyEmail } from '../../helpers/sendmail.helper.js';
+import { generateRandomKey } from '../../helpers/genarateRandomkey.js';
 
 const { UserInputError, ApolloError } = pkg;
 
@@ -24,7 +26,7 @@ async function registerUser(email, password, name) {
 		});
 	}
 	if (_.isUndefined(password)) {
-		throw new UserInputError('email is required', {
+		throw new UserInputError('password is required', {
 			invalidArgs: 'email',
 		});
 	}
@@ -41,15 +43,27 @@ async function registerUser(email, password, name) {
 		});
 	}
 
-	const user = await getUserByEmail(email);
-	if (user) {
-		throw new ApolloError('Email address has been used');
-	}
-	const passwordHashed = await generatePassword(password);
-	const newUserId = await User.create({ email, password: passwordHashed, name });
-	const token = sign({ id: newUserId });
+	try {
+		const user = await getUserByEmail(email);
+		if (user && user.is_active) {
+			throw new ApolloError('Email address has been used');
+		} else if (user && !user.is_active) {
+			throw new ApolloError('Your account is not yet verify');
+		}
 
-	return { token };
+		const passwordHashed = await generatePassword(password);
+		const tokenVerifyEmail = generateRandomKey();
+		const newUserId = await createUser({ email, password: passwordHashed, name });
+
+		await Promise.all([
+			sendMailToVerifyEmail({ email: 'tmtzminhtri@gmail.com', subject: 'Confirm your email address', name, token: tokenVerifyEmail, url: 'http://localhost:3001' }),
+			createUserTokenByUser(newUserId, tokenVerifyEmail, 'verify_email'),
+		]);
+		return { token: null, verified: false };
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
 }
 
 export { registerUser };

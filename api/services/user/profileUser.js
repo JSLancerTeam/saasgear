@@ -1,6 +1,7 @@
-import { getUserById } from '../../repository/user.repository.js';
+import { getUserById, getUserByIdAndJoinUserToken } from '../../repository/user.repository.js';
 
 export async function getProfileUserById(id) {
-	const user = await getUserById(id);
-	return user;
+	const a = await getUserByIdAndJoinUserToken(id);
+	console.log(a);
+	return getUserById(id);
 }

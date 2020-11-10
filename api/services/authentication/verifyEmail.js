@@ -1,6 +1,7 @@
 import { findRecordByToken, activeUserToken } from '../../repository/user_token.repository.js';
-import { activeUser } from '../../repository/user.repository.js';
+import { activeUser, getUserByEmail } from '../../repository/user.repository.js';
 import pkg from 'apollo-server-express';
+import { sendMailToVerifyEmail } from '../../helpers/sendmail.helper.js';
 const { ApolloError } = pkg;
 
 function isValidDate(createdAt) {
@@ -25,6 +26,19 @@ export async function verifyEmail(token) {
 	} else {
 		return {
 			verified: false,
+		};
+	}
+}
+
+export async function resendVerifyEmail({ email, name }) {
+	try {
+		await sendMailToVerifyEmail({ email: 'tmtzminhtri@gmail.com', name, subject: 'Resend your email address', url: 'http://localhost:3001' });
+		return {
+			status: true,
+		};
+	} catch (error) {
+		return {
+			status: false,
 		};
 	}
 }

@@ -13,9 +13,14 @@ export const UserSchema = gql`
 		verified: Boolean
 	}
 
+	type ResponseStatus {
+		status: Boolean!
+	}
+
 	type Query {
-		profileUser(id: ID): User
+		profileUser: User
 		verify(token: String!): Response!
+		resendEmail: ResponseStatus!
 	}
 
 	type Mutation {

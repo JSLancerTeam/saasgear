@@ -22,6 +22,14 @@ module.exports = {
       jsx: true,
     },
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.jsx'],
+      },
+    },
+  },
   rules: {
     'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],
@@ -81,13 +89,5 @@ module.exports = {
         custom: 'ignore',
       },
     ],
-  },
-  settings: {
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx'],
-      },
-    },
   },
 };

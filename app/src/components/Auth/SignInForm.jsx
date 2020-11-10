@@ -2,25 +2,31 @@ import React from 'react';
 import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function SignInForm({ onSubmit, register, errors }) {
+function SignInForm({
+  onSubmit,
+  register,
+  errorsForm,
+  errorAPI,
+  isSubmitting,
+}) {
   return (
     <form className="mt-8" onSubmit={onSubmit}>
       <div className="col-span-6 sm:col-span-3">
         <label
-          htmlFor="username"
+          htmlFor="email"
           className="block text-sm font-medium leading-5 text-gray-700"
         >
-          Username
+          Email
         </label>
         <input
-          id="username"
-          name="username"
+          id="email"
+          name="email"
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.username && (
+        {errorsForm && errorsForm.email && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.username.message}
+            {errorsForm.email.message}
           </p>
         )}
       </div>
@@ -38,12 +44,18 @@ function SignInForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.password && (
+        {errorsForm && errorsForm.password && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.password.message}
+            {errorsForm.password.message}
           </p>
         )}
       </div>
+      {errorAPI && (
+        <p className="text-red-500 text-xs italic mt-1 text-center">
+          {errorAPI}
+        </p>
+      )}
+
       <div className="mt-6 flex items-center justify-between">
         <div className="flex items-center">
           <input
@@ -75,6 +87,7 @@ function SignInForm({ onSubmit, register, errors }) {
         <button
           type="submit"
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+          disabled={isSubmitting}
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-3">
             <svg
@@ -89,7 +102,7 @@ function SignInForm({ onSubmit, register, errors }) {
               />
             </svg>
           </span>
-          Sign in
+          {isSubmitting ? 'Please wait' : 'Sign in'}
         </button>
       </div>
     </form>
@@ -99,7 +112,9 @@ function SignInForm({ onSubmit, register, errors }) {
 SignInForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
-  errors: PropsType.object,
+  errorsForm: PropsType.object,
+  errorAPI: PropsType.string,
+  isSubmitting: PropsType.bool.isRequired,
 };
 
 export default SignInForm;

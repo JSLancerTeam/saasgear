@@ -16,6 +16,7 @@
     "classnames": "^2.2.6",
     "dayjs": "^1.9.4",
     "graphql": "^15.4.0",
+    "graphql.macro": "^1.4.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

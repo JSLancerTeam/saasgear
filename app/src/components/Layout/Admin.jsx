@@ -3,6 +3,7 @@ import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import cn from 'classnames';
 import { Transition } from '@headlessui/react';
 import routes from 'routes';
+import { JWT_STORAGE_KEY } from 'constants/index';
 
 function AdminLayout() {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -31,6 +32,10 @@ function AdminLayout() {
 
   function toggleMenuMobile() {
     setIsOpenMenuMobile(!isOpenMenuMobile);
+  }
+
+  function signout() {
+    localStorage.removeItem(JWT_STORAGE_KEY);
   }
 
   return (
@@ -134,6 +139,7 @@ function AdminLayout() {
                             to="/signin"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
+                            onClick={signout}
                           >
                             Sign out
                           </Link>
@@ -230,6 +236,7 @@ function AdminLayout() {
               <Link
                 to="/signin"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                onClick={signout}
               >
                 Sign out
               </Link>

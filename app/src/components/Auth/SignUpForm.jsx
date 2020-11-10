@@ -2,25 +2,50 @@ import React from 'react';
 import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function SignUpForm({ onSubmit, register, errors }) {
+function SignUpForm({
+  onSubmit,
+  register,
+  errorsForm,
+  errorAPI,
+  isSubmitting,
+}) {
   return (
     <form className="mt-8" onSubmit={onSubmit}>
       <div className="col-span-6 sm:col-span-3">
         <label
-          htmlFor="username"
+          htmlFor="name"
           className="block text-sm font-medium leading-5 text-gray-700"
         >
-          Username
+          Name
         </label>
         <input
-          id="username"
-          name="username"
+          id="name"
+          name="name"
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.username && (
+        {errorsForm && errorsForm.name && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.username.message}
+            {errorsForm.name.message}
+          </p>
+        )}
+      </div>
+      <div className="col-span-6 sm:col-span-3 mt-6">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium leading-5 text-gray-700"
+        >
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+          ref={register}
+        />
+        {errorsForm && errorsForm.email && (
+          <p className="text-red-500 text-xs italic mt-1">
+            {errorsForm.email.message}
           </p>
         )}
       </div>
@@ -38,9 +63,9 @@ function SignUpForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.password && (
+        {errorsForm && errorsForm.password && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.password.message}
+            {errorsForm.password.message}
           </p>
         )}
       </div>
@@ -58,9 +83,9 @@ function SignUpForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.passwordConfirmation && (
+        {errorsForm && errorsForm.passwordConfirmation && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.passwordConfirmation.message}
+            {errorsForm.passwordConfirmation.message}
           </p>
         )}
       </div>
@@ -91,9 +116,15 @@ function SignUpForm({ onSubmit, register, errors }) {
         </div>
       </div>
 
-      {errors && errors.agreement && (
+      {errorsForm && errorsForm.agreement && (
         <p className="text-red-500 text-xs italic mt-1">
-          {errors.agreement.message}
+          {errorsForm.agreement.message}
+        </p>
+      )}
+
+      {errorAPI && (
+        <p className="text-red-500 text-xs italic mt-1 text-center">
+          {errorAPI}
         </p>
       )}
 
@@ -101,6 +132,7 @@ function SignUpForm({ onSubmit, register, errors }) {
         <button
           type="submit"
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+          disabled={isSubmitting}
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-3">
             <svg
@@ -115,7 +147,7 @@ function SignUpForm({ onSubmit, register, errors }) {
               />
             </svg>
           </span>
-          Sign up
+          {isSubmitting ? 'Please wait' : 'Sign up'}
         </button>
       </div>
     </form>
@@ -125,7 +157,9 @@ function SignUpForm({ onSubmit, register, errors }) {
 SignUpForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
-  errors: PropsType.object,
+  errorsForm: PropsType.object,
+  errorAPI: PropsType.string,
+  isSubmitting: PropsType.bool.isRequired,
 };
 
 export default SignUpForm;

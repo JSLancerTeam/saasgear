@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@craco/craco": "^5.8.0",
     "@headlessui/react": "^0.2.0",
     "@hookform/resolvers": "^1.0.0",
     "@reduxjs/toolkit": "^1.4.0",
@@ -15,6 +16,7 @@
     "apollo-upload-client": "^14.1.2",
     "classnames": "^2.2.6",
     "dayjs": "^1.9.4",
+    "eslint-import-resolver-alias": "^1.1.2",
     "graphql": "^15.4.0",
     "graphql.macro": "^1.4.2",
     "prop-types": "^15.7.2",
@@ -34,9 +36,9 @@
     "lint": "stylelint **/*.{js,jsx} && eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "lint:staged": "lint-staged",
-    "start": "npm run watch:css && react-scripts start",
-    "build": "npm run build:css && react-scripts build",
-    "eject": "react-scripts eject"
+    "start": "npm run watch:css && craco start",
+    "build": "npm run build:css && craco build",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [

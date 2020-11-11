@@ -5,7 +5,7 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
-import { JWT_STORAGE_KEY } from 'constants/index';
+import { JWT_STORAGE_KEY } from '@/constants/index';
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('JWT_STORAGE_KEY');

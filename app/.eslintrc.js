@@ -24,10 +24,12 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx'],
-      },
+      alias: {
+        map: [
+          ['@', './src'],
+        ],
+        extensions: ['.ts', '.js', '.jsx', '.json']
+      }
     },
   },
   rules: {

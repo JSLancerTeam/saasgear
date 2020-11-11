@@ -37,6 +37,32 @@ server.js
 
 ![Flow](https://res.cloudinary.com/tuananh-asia/image/upload/v1604460716/ggg_yl8vbk.png)
 
+## If you are using Docker.
+
+### Docker.1: Using this .env
+```
+DATABASE_NAME=saasgear
+DATABASE_HOST=db
+DATABASE_PASSWORD=root
+DATABASE_USER=root
+DATABASE_PORT=3306
+
+DB_HOST_OUTSIZE_DOCKER=localhost
+DB_PORT_OUTSIZE_DOCKER=33061 
+
+JWT_SECRET=JWT_SECRET
+JWT_ISSUER=JSLANCER
+JWT_SUBJECT=JSLANCER
+JWT_AUDIENCE=https://jslancer.com
+JWT_EXPIRESIN=12h
+JWT_ALGORITHM=HS256
+
+SENDGRID_API_KEY=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
+MAIL_FROM=tmtzminhtri@gmail.com
+
+```
+### Docker.2: Port of app is 3005
+
 ## CREATE MIGRATION FILE
 
 ```bash
@@ -66,3 +92,4 @@ knex seed:make #{fileName}
 ```bash
 yarn db:seed
 ```
+

@@ -6,6 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "nodemon --inspect server",
+		"dev": "nodemon --inspect server",
 		"db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
 		"db:rollback": "knex --esm migrate:rollback --knexfile config/knexfile.cjs",
 		"db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",

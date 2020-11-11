@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import cn from 'classnames';
+
 import { Transition } from '@headlessui/react';
-import routes from 'routes';
-import { JWT_STORAGE_KEY } from 'constants/index';
+import routes from '@/routes';
+import Portal from '@/components/Portal';
+import { JWT_STORAGE_KEY } from '@/constants/index';
 
 function AdminLayout() {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false);
+
+  const [isActive] = useState(false);
 
   function renderSidebar() {
     return routes
@@ -37,7 +41,6 @@ function AdminLayout() {
   function signout() {
     localStorage.removeItem(JWT_STORAGE_KEY);
   }
-
   return (
     <div>
       <nav className="bg-gray-800">
@@ -247,6 +250,11 @@ function AdminLayout() {
 
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          {!isActive && (
+            <Portal>
+              <RenderModalVerifyEmail />
+            </Portal>
+          )}
           <div className="rounded-lg h-96">
             <Switch>
               {routes.map((route) => (
@@ -261,6 +269,38 @@ function AdminLayout() {
           </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+function RenderModalVerifyEmail() {
+  return (
+    <div className="bg-gray-600 h-screen fixed top-0 right-0 w-screen bg-opacity-50">
+      <div className="flex justify-center mt-10">
+        <div className="border-2 bg-white rounded" style={{ width: 500 }}>
+          <div className="px-8 py-8">
+            <div className="text-center text-2xl mb-6">
+              Xác thực địa chỉ email
+            </div>
+            <div className="border-1">
+              <button
+                type="button"
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+              >
+                <svg
+                  className="w-6 h-6 animate-spin h-5 w-5 mr-3"
+                  fill="#22b549"
+                  viewBox="0 0 24 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeWidth="4" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                Gửi lại email
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

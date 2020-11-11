@@ -16,7 +16,7 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-
+console.log(process.env.REACT_APP_GRAPHQL_URL);
 const client = new ApolloClient({
   link: ApolloLink.from([
     authLink,

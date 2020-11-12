@@ -1,5 +1,5 @@
-import { getUserById } from '../../repository/user.repository.js';
+import { getUserById } from '~/repository/user.repository';
 
 export async function getProfileUserById(id) {
-	return getUserById(id);
+  return getUserById(id);
 }

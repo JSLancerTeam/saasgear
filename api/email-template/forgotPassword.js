@@ -1,4 +1,4 @@
-import sendMail from '../libs/mail.js';
+import sendMail from '~/libs/mail';
 
 export function sendForgotPasswordEmail(email, subject, name, token) {
   return sendMail(
@@ -27,5 +27,6 @@ export function sendForgotPasswordEmail(email, subject, name, token) {
     <p style="display: block;text-align: center;">
       - If it is from you, click <a href="${process.env.FRONTEND_URL}/reset-password?&token=${token}">here</a> to reset your password.
     </p>
-    </div>`);
+    </div>`,
+  );
 }

@@ -1,7 +1,7 @@
-import { randomBytes } from 'crypto'
+import { randomBytes } from 'crypto';
 
-const generateRandomKey = () => {
-  return new Promise((resolve, reject) => {
+const generateRandomKey = () =>
+  new Promise((resolve, reject) => {
     randomBytes(32, (error, buf) => {
       if (error) {
         return reject(error);
@@ -10,6 +10,5 @@ const generateRandomKey = () => {
       return resolve(token);
     });
   });
-}
 
 export default generateRandomKey;

@@ -1,10 +1,10 @@
-import sendMail from '../libs/mail.js';
+import sendMail from '~/libs/mail';
 
 export function sendMailToVerifyEmail({ email, subject, name, token, url }) {
-	return sendMail(
-		email,
-		subject,
-		`<div style="
+  return sendMail(
+    email,
+    subject,
+    `<div style="
     max-width: 500px;
     margin: 0 auto;
     font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
@@ -32,6 +32,6 @@ export function sendMailToVerifyEmail({ email, subject, name, token, url }) {
     <p style="display: block;text-align: left;font-size: 14px;margin-top: 20px;word-wrap: break-word;">Or verify using this link: <a href="${url}?token=${token}">${url}?token=${token}</a></p>
     <p style="display: block;text-align: left;font-size: 14px;margin-top: 20px;word-wrap: break-word;">If you do not take any action on our website, please ignore this message.</p>
     <p style="display: block;text-align: left;font-size: 14px;margin-top: 20px;">Thank you!</p>
-  </div>`
-	);
+  </div>`,
+  );
 }

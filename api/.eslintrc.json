@@ -1,0 +1,45 @@
+{
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["prettier", "airbnb-base"],
+  "plugins": ["prettier"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "operator-linebreak": ["error", "after"],
+    "object-curly-newline": ["error", { "consistent": true }],
+    "arrow-body-style": [2, "as-needed"],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+    "implicit-arrow-linebreak": 0,
+    "class-methods-use-this": 0,
+    "import/imports-first": 1,
+    "import/newline-after-import": 1,
+    "import/no-dynamic-require": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default": 0,
+    "import/no-unresolved": 2,
+    "import/no-webpack-loader-syntax": 0,
+    "import/prefer-default-export": 0,
+    "indent": [
+      2,
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "no-confusing-arrow": 0,
+    "no-console": 0,
+    "no-unused-vars": 2,
+    "no-param-reassign": 0,
+    "no-use-before-define": 0
+  }
+}

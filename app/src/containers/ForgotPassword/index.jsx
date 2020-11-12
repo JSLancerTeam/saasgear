@@ -10,32 +10,46 @@ const ForgotPasswordSchema = yup.object().shape({
 });
 
 function ForgotPassword() {
+  const [next, setNext] = React.useState(false);
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(ForgotPasswordSchema),
   });
 
   function onSubmit(data) {
-    // eslint-disable-next-line no-console
     console.log(data);
+    setNext(!next);
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div>
+          t
           <img className="mx-auto h-12 w-auto" src={logo} alt="JSlancer" />
           <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
             Forgot Password
           </h2>
         </div>
-        <h3 className="mt-6 text-base leading-9 font-extrabold text-gray-900">
-          Please enter your email address to recover your password
-        </h3>
-        <ForgotPasswordForm
-          onSubmit={handleSubmit(onSubmit)}
-          register={register}
-          errors={errors}
-        />
+        {!next ? (
+          <>
+            <h3 className="mt-6 text-base leading-9 font-extrabold text-gray-900">
+              Please enter your email address that you used to register. We
+              &apos;ll send you an email with a link to reset your password
+            </h3>
+            <ForgotPasswordForm
+              onSubmit={handleSubmit(onSubmit)}
+              register={register}
+              errors={errors}
+            />
+          </>
+        ) : (
+          <div className="rounded shadow px-4 py-2 mt-6 bg-gray-200">
+            <h3 className="text-base leading-9 font-extrabold text-gray-900">
+              We&apos;ve sent you an email with a link to reset password. Please
+              check your email so create new password
+            </h3>
+          </div>
+        )}
       </div>
     </div>
   );

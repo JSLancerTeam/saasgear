@@ -2,6 +2,8 @@ import { registerUser } from '../../services/authentication/register.js';
 import { loginUser } from '../../services/authentication/login.js';
 import { getProfileUserById } from '../../services/user/profileUser.js';
 import { verifyEmail, resendVerifyEmail } from '../../services/authentication/verifyEmail.js';
+import { forgotPasswordUser } from '../../services/authentication/forgotPassword.js';
+import { resetPasswordUser } from '../../services/authentication/resetPassword.js';
 
 const resolvers = {
 	Query: {
@@ -22,6 +24,12 @@ const resolvers = {
 		login: function (_, { email, password }) {
 			return loginUser(email, password);
 		},
+		forgotPassword: async (_, { email }) => {
+      return forgotPasswordUser(email);
+		},
+		resetPassword: async (_, { token, password, confirmPassword }) => {
+      return resetPasswordUser(token, password, confirmPassword);
+    },
 	},
 };
 

@@ -1,5 +1,15 @@
-import { v4 } from 'uuid';
+import { randomBytes } from 'crypto'
 
-export function generateRandomKey() {
-	return v4().split('-').join('').substr(4, 5);
+const generateRandomKey = () => {
+  return new Promise((resolve, reject) => {
+    randomBytes(32, (error, buf) => {
+      if (error) {
+        return reject(error);
+      }
+      const token = buf.toString('hex');
+      return resolve(token);
+    });
+  });
 }
+
+export default generateRandomKey;

@@ -4,7 +4,8 @@ export function up(knex) {
 		t.string('name').notNullable();
 		t.string('email').notNullable();
 		t.string('password').notNullable();
-		t.timestamps(true, true);
+		t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+		t.dateTime('updated_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 		t.unique('email');
 	});
 }

@@ -1,7 +1,7 @@
 import { findRecordByToken, activeUserToken } from '../../repository/user_token.repository.js';
-import { activeUser, getUserByEmail } from '../../repository/user.repository.js';
+import { activeUser } from '../../repository/user.repository.js';
 import pkg from 'apollo-server-express';
-import { sendMailToVerifyEmail } from '../../helpers/sendmail.helper.js';
+import { sendMailToVerifyEmail } from '../../email-template/verifyEmail.js';
 const { ApolloError } = pkg;
 
 function isValidDate(createdAt) {

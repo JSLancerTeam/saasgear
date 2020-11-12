@@ -5,8 +5,8 @@ import Validator from 'fastest-validator';
 import { getUserByEmail, createUser } from '../../repository/user.repository.js';
 import { createUserTokenByUser } from '../../repository/user_token.repository.js';
 import { generatePassword } from '../../helpers/hashing.helper.js';
-import { sendMailToVerifyEmail } from '../../helpers/sendmail.helper.js';
-import { generateRandomKey } from '../../helpers/genarateRandomkey.js';
+import { sendMailToVerifyEmail } from '../../email-template/verifyEmail.js';
+import generateRandomKey from '../../helpers/genarateRandomkey.js';
 
 const { UserInputError, ApolloError } = pkg;
 

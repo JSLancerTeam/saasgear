@@ -5,7 +5,8 @@ export function up(knex) {
 		t.string('token');
 		t.string('type');
 		t.boolean('is_active').defaultTo(false);
-		t.timestamps(true, true);
+		t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+		t.dateTime('updated_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 		t.foreign('user_id').references('id').inTable('users');
 	});
 }

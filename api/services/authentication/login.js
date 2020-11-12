@@ -6,7 +6,7 @@ import { comparePassword } from '../../helpers/hashing.helper.js';
 import { sign } from '../../helpers/jwt.helper.js';
 import { getUserByEmail } from '../../repository/user.repository.js';
 
-const { ApolloError, UserInputError } = pkg;
+const { AuthenticationError, UserInputError } = pkg;
 
 function loginValidation(data) {
 	const validator = new Validator();
@@ -32,11 +32,16 @@ async function loginUser(email, password) {
 			invalidArgs: isValidInput.map((it) => it.field).join(','),
 		});
 	}
+
 	const user = await getUserByEmail(email);
-	if (!user) throw new ApolloError('Email is incorect');
+	if (!user) {
+		throw new AuthenticationError('Invalid email or password');
+	}
 
 	const matchPassword = await comparePassword(password, user.password);
-	if (!matchPassword) throw new ApolloError('Wrong Password');
+	if (!matchPassword) {
+		throw new AuthenticationError('Invalid email or password');
+	}
 
 	const token = sign({ id: user.id });
 

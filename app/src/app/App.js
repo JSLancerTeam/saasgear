@@ -3,7 +3,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import PrivateRoute from '@/routes/PrivateRoute';
-import AdminLayout from '@/components/Layout/Admin';
+import AdminLayout from '@/containers/Layout/Admin';
 import SignIn from '@/containers/SignIn';
 import SignUp from '@/containers/SignUp';
 import ForgotPassword from '@/containers/ForgotPassword';

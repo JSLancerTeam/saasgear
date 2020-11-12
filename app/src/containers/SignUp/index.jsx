@@ -6,9 +6,8 @@ import { useMutation } from '@apollo/react-hooks';
 import { loader } from 'graphql.macro';
 import { useHistory } from 'react-router-dom';
 
-import SignUpForm from 'components/Auth/SignUpForm';
-import logo from 'assets/images/logo.png';
-import { JWT_STORAGE_KEY } from 'constants/index';
+import SignUpForm from '@/components/Auth/SignUpForm';
+import logo from '@/assets/images/logo.png';
 
 const SignUpSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -37,9 +36,8 @@ function SignUp() {
 
   async function onSubmit(params) {
     const { data } = await registerMutation({ variables: params });
-    if (data && data.register && data.register.token) {
-      localStorage.setItem(JWT_STORAGE_KEY, data.register.token);
-      history.push('/');
+    if (data) {
+      history.push('/signin');
     }
   }
 

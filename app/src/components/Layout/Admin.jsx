@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
-
 import { Transition } from '@headlessui/react';
-import routes from '@/routes';
-import Portal from '@/components/Portal';
-import { JWT_STORAGE_KEY } from '@/constants/index';
 
-function AdminLayout() {
+import routes from '@/routes';
+import logo from '@/assets/images/logo.png';
+
+function AdminLayout({ signout, infoUser }) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
-  const [isActive] = useState(false);
+  useEffect(() => {
+    if (infoUser && !infoUser.is_active) {
+      setShowAlert(true);
+    }
+  }, [infoUser]);
 
   function renderSidebar() {
     return routes
@@ -38,9 +43,10 @@ function AdminLayout() {
     setIsOpenMenuMobile(!isOpenMenuMobile);
   }
 
-  function signout() {
-    localStorage.removeItem(JWT_STORAGE_KEY);
+  function onCloseAlert() {
+    setShowAlert(false);
   }
+
   return (
     <div>
       <nav className="bg-gray-800">
@@ -49,11 +55,7 @@ function AdminLayout() {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Link to="/">
-                  <img
-                    className="h-8 w-8"
-                    src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg"
-                    alt="Workflow logo"
-                  />
+                  <img className="h-8 w-auto" src={logo} alt="JSlancer" />
                 </Link>
               </div>
               <div className="hidden md:block">
@@ -113,7 +115,7 @@ function AdminLayout() {
                     {(ref) => (
                       <div
                         ref={ref}
-                        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+                        className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg"
                       >
                         <div
                           className="py-1 rounded-md bg-white shadow-xs"
@@ -249,12 +251,27 @@ function AdminLayout() {
       </nav>
 
       <main>
+        {showAlert && (
+          <div className="text-white p-1 border-0 relative mb-4 bg-yellow-300">
+            <span className="text-xl inline-block mr-5 align-middle">
+              <i className="fas fa-bell" />
+            </span>
+            <span className="inline-block align-middle mr-8">
+              A verification link has been sent to your email account. Please
+              check email
+              <b>{` ${infoUser.email} `}</b>
+              to verify your account
+            </span>
+            <button
+              className="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-1 mr-6 outline-none focus:outline-none"
+              onClick={onCloseAlert}
+              type="button"
+            >
+              <span>×</span>
+            </button>
+          </div>
+        )}
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {!isActive && (
-            <Portal>
-              <RenderModalVerifyEmail />
-            </Portal>
-          )}
           <div className="rounded-lg h-96">
             <Switch>
               {routes.map((route) => (
@@ -273,36 +290,9 @@ function AdminLayout() {
   );
 }
 
-function RenderModalVerifyEmail() {
-  return (
-    <div className="bg-gray-600 h-screen fixed top-0 right-0 w-screen bg-opacity-50">
-      <div className="flex justify-center mt-10">
-        <div className="border-2 bg-white rounded" style={{ width: 500 }}>
-          <div className="px-8 py-8">
-            <div className="text-center text-2xl mb-6">
-              Xác thực địa chỉ email
-            </div>
-            <div className="border-1">
-              <button
-                type="button"
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-              >
-                <svg
-                  className="w-6 h-6 animate-spin h-5 w-5 mr-3"
-                  fill="#22b549"
-                  viewBox="0 0 24 32"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path strokeWidth="4" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-                Gửi lại email
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+AdminLayout.propTypes = {
+  signout: PropTypes.func.isRequired,
+  infoUser: PropTypes.object,
+};
 
 export default AdminLayout;

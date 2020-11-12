@@ -1,7 +1,7 @@
 import { verify } from '../../helpers/jwt.helper.js';
 import pkg from 'apollo-server-express';
 import { getUserById } from '../../repository/user.repository.js';
-const { AuthenticationError, ApolloError } = pkg;
+const { AuthenticationError } = pkg;
 
 export default async function (bearerToken) {
 	if (bearerToken) {
@@ -18,10 +18,6 @@ export default async function (bearerToken) {
 				name: userInfo.name,
 			};
 		} catch (error) {
-			console.log(error);
-			if (error.name === 'TokenExpiredError') {
-				throw new ApolloError(error.message, error.name);
-			}
 			throw new AuthenticationError('Authentication failure');
 		}
 	}

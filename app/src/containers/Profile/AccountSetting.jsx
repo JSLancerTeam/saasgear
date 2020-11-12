@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import AccountForm from 'components/Profile/AccountForm';
+import AccountForm from '@/components/Profile/AccountForm';
 
 const AccountSettingSchema = yup.object().shape({
   firstName: yup.string().required('First name is required'),
@@ -12,9 +12,10 @@ const AccountSettingSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Email invalid'),
 });
 
-function AccountSetting({ isActive }) {
+function AccountSetting({ isActive, user }) {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(AccountSettingSchema),
+    defaultValues: user,
   });
 
   function onSubmit(data) {
@@ -39,6 +40,7 @@ function AccountSetting({ isActive }) {
 
 AccountSetting.propTypes = {
   isActive: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default AccountSetting;

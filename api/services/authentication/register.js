@@ -65,7 +65,6 @@ async function registerUser(email, password, name) {
         subject: 'Confirm your email address',
         name,
         token: tokenVerifyEmail,
-        url: 'http://localhost:3001',
       }),
       createUserTokenByUser(newUserId, tokenVerifyEmail, 'verify_email'),
     ]);

@@ -8,6 +8,7 @@ import SignIn from '@/containers/SignIn';
 import SignUp from '@/containers/SignUp';
 import ForgotPassword from '@/containers/ForgotPassword';
 import ResetPassword from '@/containers/ResetPassword';
+import VerifyEmail from '@/containers/VerifyEmail';
 import apolloClient from './apollo';
 import '@/assets/css/main.css';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signup" component={SignUp} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password" component={ResetPassword} />
+          <Route path="/verify-email" component={VerifyEmail} />
           <PrivateRoute render={(props) => <AdminLayout {...props} />} />
           <Redirect from="*" to="/" />
         </Switch>

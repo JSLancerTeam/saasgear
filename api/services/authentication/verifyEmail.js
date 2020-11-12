@@ -36,10 +36,9 @@ export async function verifyEmail(token) {
 export async function resendVerifyEmail({ email, name }) {
   try {
     await sendMailToVerifyEmail({
-      email,
+      email: 'tmtzminhtri@gmail.com',
       name,
       subject: 'Resend your email address',
-      url: 'http://localhost:3001',
     });
     return {
       status: true,

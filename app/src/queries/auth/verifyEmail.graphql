@@ -1,0 +1,5 @@
+query verifyToken($token: String!) {
+  verify(token: $token) {
+    verified
+  }
+}

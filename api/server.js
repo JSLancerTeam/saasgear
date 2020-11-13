@@ -9,7 +9,7 @@ import Apollo from 'apollo-server-express';
 import accessLogStream from './middlewares/logger.middleware';
 import RootSchema from './graphql/root.schema';
 import RootResolver from './graphql/root.resolver';
-import getUserLogined from './services/authentication/getUserLogined';
+import getUserLogined from './services/authentication/get-user-logined.service';
 
 dotenv.config();
 const app = express();

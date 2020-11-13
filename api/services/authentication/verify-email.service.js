@@ -35,6 +35,7 @@ export async function verifyEmail(token) {
 
 export async function resendVerifyEmail({ email, name }) {
   try {
+    console.log(email);
     await sendMailToVerifyEmail({
       email: 'tmtzminhtri@gmail.com',
       name,

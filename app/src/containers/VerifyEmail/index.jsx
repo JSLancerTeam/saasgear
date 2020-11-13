@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
@@ -17,7 +17,7 @@ export default function VerifyEmail() {
     variables: { token },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token) {
       history.replace('/');
     }

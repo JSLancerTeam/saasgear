@@ -5,6 +5,7 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
+
 import { JWT_STORAGE_KEY } from '@/constants';
 
 const authLink = setContext((_, { headers }) => {
@@ -16,7 +17,7 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-console.log(process.env.REACT_APP_GRAPHQL_URL);
+
 const client = new ApolloClient({
   link: ApolloLink.from([
     authLink,

@@ -3,14 +3,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
-import { loader } from 'graphql.macro';
 import { useHistory } from 'react-router-dom';
 
 import SignInForm from '@/components/Auth/SignInForm';
 import logo from '@/assets/images/logo.png';
 import { JWT_STORAGE_KEY } from '@/constants';
-
-const loginQuery = loader('../../queries/auth/login.graphql');
+import loginQuery from '@/queries/auth/login';
 
 const SignInSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Email invalid'),

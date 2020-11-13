@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import logo from 'assets/images/logo.png';
+import logo from '@/assets/images/logo.png';
 import ResetPasswordForm from '@/components/Auth/ResetPasswordForm';
-import { GetQueryParam } from '../../common';
+import getQueryParam from '@/utils/getQueryParam';
 
 const ForgotPasswordSchema = yup.object().shape({
   password: yup.string().required('Password is required'),
@@ -17,7 +17,7 @@ const ForgotPasswordSchema = yup.object().shape({
 });
 
 function ResetPassword() {
-  const query = GetQueryParam();
+  const query = getQueryParam();
   const history = useHistory();
   const token = query.get('token');
   const { register, handleSubmit, errors } = useForm({

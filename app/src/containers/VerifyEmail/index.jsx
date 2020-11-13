@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import classnames from 'classnames';
-import logo from 'assets/images/logo.png';
 
-import { GetQueryParam } from '../../common';
-
-const verifyEmailQuery = loader('../../queries/auth/verifyEmail.graphql');
+import logo from '@/assets/images/logo.png';
+import getQueryParam from '@/utils/getQueryParam';
+import verifyEmailQuery from '@/queries/auth/verifyEmail';
 
 export default function VerifyEmail() {
-  const query = GetQueryParam();
+  const query = getQueryParam();
   const token = query.get('token');
   const history = useHistory();
   const { data, loading } = useQuery(verifyEmailQuery, {

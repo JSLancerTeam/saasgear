@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import ForgotPasswordForm from 'components/Auth/ForgotPasswordForm';
-import logo from 'assets/images/logo.png';
+import logo from '@/assets/images/logo.png';
 
 const ForgotPasswordSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Email invalid'),
@@ -16,6 +16,7 @@ function ForgotPassword() {
   });
 
   function onSubmit(data) {
+    // eslint-disable-next-line no-console
     console.log(data);
     setSubmited(!submited);
   }

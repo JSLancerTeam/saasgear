@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
-import { loader } from 'graphql.macro';
 import { useHistory } from 'react-router-dom';
 
 import SignUpForm from '@/components/Auth/SignUpForm';
 import logo from '@/assets/images/logo.png';
+import registerQuery from '@/queries/auth/register';
 
 const SignUpSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -24,8 +24,6 @@ const SignUpSchema = yup.object().shape({
     .oneOf([true], 'You must agree with our Privacy Policy')
     .required(),
 });
-
-const registerQuery = loader('../../queries/auth/register.graphql');
 
 function SignUp() {
   const { register, handleSubmit, errors: errorsForm } = useForm({

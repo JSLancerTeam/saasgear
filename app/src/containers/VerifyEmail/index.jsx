@@ -59,7 +59,7 @@ export default function VerifyEmail() {
                   <b className="capitalize">
                     {data.verify.verified
                       ? 'Verify email success'
-                      : 'Token không tồn tại hoặc đã hết hạn sử dụng'}
+                      : 'Token not exist or has expired'}
                   </b>
                 </span>
               </div>

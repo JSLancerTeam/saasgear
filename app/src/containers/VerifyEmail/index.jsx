@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
@@ -17,7 +17,7 @@ export default function VerifyEmail() {
     variables: { token },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token) {
       history.replace('/');
     }
@@ -59,7 +59,7 @@ export default function VerifyEmail() {
                   <b className="capitalize">
                     {data.verify.verified
                       ? 'Verify email success'
-                      : 'Token không tồn tại hoặc đã hết hạn sử dụng'}
+                      : 'Token not exist or has expired'}
                   </b>
                 </span>
               </div>

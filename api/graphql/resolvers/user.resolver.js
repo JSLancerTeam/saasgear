@@ -10,8 +10,6 @@ import { resetPasswordUser } from '~/services/authentication/reset-password.serv
 const resolvers = {
   Query: {
     profileUser: (_, args, { user }) => user,
-    verify: (_, { token }) => verifyEmail(token),
-    resendEmail: (_, args, { user }) => resendVerifyEmail(user),
   },
   Mutation: {
     register(_, { email, password, name }) {
@@ -23,6 +21,8 @@ const resolvers = {
     forgotPassword: async (_, { email }) => forgotPasswordUser(email),
     resetPassword: async (_, { token, password, confirmPassword }) =>
       resetPasswordUser(token, password, confirmPassword),
+    verify: (_, { token }) => verifyEmail(token),
+    resendEmail: (_, args, { user }) => resendVerifyEmail(user),
   },
 };
 

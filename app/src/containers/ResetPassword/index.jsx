@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -24,7 +24,7 @@ function ResetPassword() {
     resolver: yupResolver(ForgotPasswordSchema),
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token) {
       history.replace('/login');
     }

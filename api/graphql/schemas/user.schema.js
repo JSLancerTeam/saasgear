@@ -20,8 +20,6 @@ export const UserSchema = gql`
 
   type Query {
     profileUser: User
-    verify(token: String!): Response!
-    resendEmail: ResponseStatus!
   }
 
   type Mutation {
@@ -33,5 +31,7 @@ export const UserSchema = gql`
       password: String!
       confirmPassword: String!
     ): Boolean!
+    verify(token: String!): Response!
+    resendEmail: ResponseStatus!
   }
 `;

@@ -4,6 +4,7 @@ export function up(knex) {
     t.string('name').notNullable();
     t.string('email').notNullable();
     t.string('password').notNullable();
+    t.boolean('is_active').defaultTo(false);
     t.dateTime('created_at')
       .notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));

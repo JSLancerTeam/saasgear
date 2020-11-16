@@ -1,6 +1,16 @@
 import database from '~/config/database.config';
+import { TABLES } from '~/constants/table-name.constant';
 
-const TABLE = 'user_token';
+const TABLE = TABLES.userToken;
+const userTokenColumns = {
+  id: 'user_token.id',
+  userId: 'user_token.user_id',
+  token: 'user_token.token',
+  type: 'user_token.type',
+  isActive: 'user_token.is_active',
+  createAt: 'users.created_at',
+  updatedAt: 'users.updated_at',
+};
 
 async function createToken(userId, token, type) {
   return database(TABLE).insert({ token, type, user_id: userId });
@@ -25,6 +35,7 @@ async function removeUserToken(id) {
 }
 
 export {
+  userTokenColumns,
   createToken,
   changeTokenStatus,
   removeUserToken,

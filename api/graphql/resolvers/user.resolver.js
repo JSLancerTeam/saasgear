@@ -12,8 +12,8 @@ const resolvers = {
     profileUser: (_, args, { user }) => user,
   },
   Mutation: {
-    register(_, { email, password, name }) {
-      return registerUser(email, password, name);
+    register(_, { email, password, name, planName, billingType }) {
+      return registerUser(email, password, name, planName, billingType);
     },
     login(_, { email, password }) {
       return loginUser(email, password);

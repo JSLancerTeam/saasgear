@@ -80,7 +80,7 @@ const Pricing = () => {
                   <span>{isYearly ? '/year' : '/month'}</span>
                 </div>
                 <button
-                  onClick={() => window.location.href = `${process.env.appUrl}/signup?plan=${plan.id}&isYearly=${isYearly}`}
+                  onClick={() => window.location.href = `${process.env.appUrl}/signup?plan=${plan.id}&isYearly=${isYearly ? 1 : 0}`}
                   className="w-full bg-gray-800 text-white py-2 rounded-lg"
                 >Start 14 day trial</button>
               </div>

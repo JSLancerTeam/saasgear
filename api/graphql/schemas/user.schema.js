@@ -18,12 +18,23 @@ export const UserSchema = gql`
     status: Boolean!
   }
 
-  type Query {
+  enum BillingType {
+    MONTHLY
+    YEARLY
+  }
+
+  extend type Query {
     profileUser: User
   }
 
-  type Mutation {
-    register(email: String!, password: String!, name: String!): Response!
+  extend type Mutation {
+    register(
+      email: String!
+      password: String!
+      name: String!
+      planName: String
+      billingType: BillingType
+    ): Response!
     login(email: String!, password: String!): Response!
     forgotPassword(email: String!): Boolean!
     resetPassword(

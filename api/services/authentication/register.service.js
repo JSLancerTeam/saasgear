@@ -7,10 +7,13 @@ import { generatePassword } from '~/helpers/hashing.helper';
 import { sendMailToVerifyEmail } from '~/email-template/verifyEmail';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import { registerValidation } from '~/utils/validations/authenticate.validation';
+import { createUserPlan } from '~/services/user/plans-user.service';
+import { addMultiPermissions } from '~/services/user/permission.service';
+import { BILLING_PRICE } from '~/constants/billing.constant';
 
 const { ValidationError, ApolloError } = pkg;
 
-async function registerUser(email, password, name) {
+async function registerUser(email, password, name, planName, billingType) {
   const isValidInput = registerValidation({ email, password, name });
   if (_.isArray(isValidInput)) {
     throw new ValidationError(isValidInput.map((it) => it.message).join(','), {
@@ -33,6 +36,12 @@ async function registerUser(email, password, name) {
       password: passwordHashed,
       name,
     });
+
+    if (planName) {
+      const { price, permissions } = BILLING_PRICE[planName];
+      await createUserPlan(newUserId, planName, price, billingType);
+      await addMultiPermissions(newUserId, permissions);
+    }
 
     await Promise.all([
       sendMailToVerifyEmail({

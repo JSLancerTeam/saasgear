@@ -40,6 +40,7 @@
     "no-console": 0,
     "no-unused-vars": 2,
     "no-param-reassign": 0,
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "no-unsafe-finally": 0
   }
 }

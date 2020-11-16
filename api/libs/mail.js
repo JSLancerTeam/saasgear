@@ -1,21 +1,15 @@
-import sgMail from '@sendgrid/mail';
+import mailgunFactory from 'mailgun-js';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const mailgun = mailgunFactory({
+  apiKey: process.env.MAILGUN_API_KEY,
+  domain: process.env.MAILGUN_DOMAIN,
+});
 
 export default async function sendMail(to, subject, html) {
-  const msg = {
+  return mailgun.messages().send({
     from: process.env.MAIL_FROM,
     to,
     subject,
     html,
-  };
-  try {
-    await sgMail.send(msg);
-  } catch (error) {
-    console.error(error);
-
-    if (error.response) {
-      console.error(error.response.body);
-    }
-  }
+  });
 }

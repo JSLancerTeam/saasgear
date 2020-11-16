@@ -2,7 +2,7 @@ import database from '~/config/database.config';
 
 const TABLE = 'user_token';
 
-async function createUserTokenByUser(userId, token, type) {
+async function createToken(userId, token, type) {
   return database(TABLE).insert({ token, type, user_id: userId });
 }
 
@@ -10,12 +10,14 @@ async function updateUserTokenById(id, token) {
   return database(TABLE).where({ id }).update({ token });
 }
 
-async function findRecordByToken(token) {
+async function findToken(token) {
   return database(TABLE).where({ token }).first();
 }
 
-async function activeUserToken(id) {
-  return database(TABLE).where({ id }).update({ is_active: true });
+async function changeTokenStatus(id, type, isActive = true) {
+  const condition = { type };
+  if (id) condition.id = id;
+  return database(TABLE).where(condition).update({ is_active: isActive });
 }
 
 async function removeUserToken(id) {
@@ -23,9 +25,9 @@ async function removeUserToken(id) {
 }
 
 export {
-  createUserTokenByUser,
-  activeUserToken,
+  createToken,
+  changeTokenStatus,
   removeUserToken,
   updateUserTokenById,
-  findRecordByToken,
+  findToken,
 };

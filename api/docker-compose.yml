@@ -26,4 +26,4 @@ services:
       - DB_HOST=db
       - DB_NAME=saas
       - DB_USER=root
-      - DB_PASSWORD=root
+      - DB_PASSWORD=root 

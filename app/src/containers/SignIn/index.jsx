@@ -6,9 +6,9 @@ import { useMutation } from '@apollo/react-hooks';
 import { loader } from 'graphql.macro';
 import { useHistory } from 'react-router-dom';
 
-import SignInForm from 'components/Auth/SignInForm';
-import logo from 'assets/images/logo.png';
-import { JWT_STORAGE_KEY } from 'constants/index';
+import SignInForm from '@/components/Auth/SignInForm';
+import logo from '@/assets/images/logo.png';
+import { JWT_STORAGE_KEY } from '@/constants';
 
 const loginQuery = loader('../../queries/auth/login.graphql');
 

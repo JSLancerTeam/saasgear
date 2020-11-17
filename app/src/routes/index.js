@@ -1,6 +1,6 @@
-import Dashborad from 'containers/Dashboard';
-import Profile from 'containers/Profile';
-import Todo from 'containers/Todo';
+import Dashborad from '@/containers/Dashboard';
+import Profile from '@/containers/Profile';
+import Todo from '@/containers/Todo';
 
 const routes = [
   {

@@ -25,11 +25,12 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: {
-        map: [
-          ['@', './src'],
-        ],
-        extensions: ['.ts', '.js', '.jsx', '.json']
-      }
+        map: [['@', './src']],
+        extensions: ['.ts', '.js', '.jsx', '.json'],
+      },
+      node: {
+        paths: ['src'],
+      },
     },
   },
   rules: {
@@ -71,6 +72,7 @@ module.exports = {
     'no-confusing-arrow': 0,
     'no-console': 1,
     'no-unused-vars': 2,
+    'no-param-reassign': 0,
     'no-use-before-define': 0,
     'prefer-template': 2,
     'react/destructuring-assignment': 0,

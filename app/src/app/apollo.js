@@ -5,10 +5,10 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
-import { JWT_STORAGE_KEY } from '@/constants/index';
+import { JWT_STORAGE_KEY } from '@/constants';
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('JWT_STORAGE_KEY');
+  const token = localStorage.getItem(JWT_STORAGE_KEY);
   return {
     headers: {
       ...headers,
@@ -16,16 +16,14 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-
+console.log(process.env.REACT_APP_GRAPHQL_URL);
 const client = new ApolloClient({
   link: ApolloLink.from([
     authLink,
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors)
-        graphQLErrors.forEach(({ message, locations, path }) =>
-          console.error(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          ),
+        graphQLErrors.forEach(({ message, path }) =>
+          console.error(`[GraphQL error]: Message: ${message}, Path: ${path}`),
         );
 
       if (networkError) console.error(`[Network error]: ${networkError}`);
@@ -34,8 +32,10 @@ const client = new ApolloClient({
         const errors = graphQLErrors[0];
         switch (errors.extensions.code) {
           case 'UNAUTHENTICATED':
-            localStorage.removeItem(JWT_STORAGE_KEY);
-            window.location.href = '/signin';
+            if (!window.location.pathname.startsWith('/signin')) {
+              localStorage.removeItem(JWT_STORAGE_KEY);
+              window.location.href = '/signin';
+            }
             break;
           // handle other errors
           case 'ANOTHER_ERROR_CODE':

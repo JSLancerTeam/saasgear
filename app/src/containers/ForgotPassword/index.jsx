@@ -1,36 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import ForgotPasswordForm from 'components/Auth/ForgotPasswordForm';
-import logo from 'assets/images/logo.png';
+import logo from '@/assets/images/logo.png';
 
 const ForgotPasswordSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Email invalid'),
 });
 
 function ForgotPassword() {
-  const [next, setNext] = React.useState(false);
+  const [submited, setSubmited] = useState(false);
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(ForgotPasswordSchema),
   });
 
   function onSubmit(data) {
+    // eslint-disable-next-line no-console
     console.log(data);
-    setNext(!next);
+    setSubmited(!submited);
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div>
-          t
           <img className="mx-auto h-12 w-auto" src={logo} alt="JSlancer" />
           <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
             Forgot Password
           </h2>
         </div>
-        {!next ? (
+        {!submited ? (
           <>
             <h3 className="mt-6 text-base leading-9 font-extrabold text-gray-900">
               Please enter your email address that you used to register. We

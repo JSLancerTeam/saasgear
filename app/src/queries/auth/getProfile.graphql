@@ -1,8 +1,0 @@
-query GetProfile {
-  profileUser {
-    id
-    email
-    name
-    is_active
-  }
-}

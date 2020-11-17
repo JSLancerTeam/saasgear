@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
 import SecurityForm from '@/components/Profile/SecurityForm';
 
 const SecuritySettingSchema = yup.object().shape({

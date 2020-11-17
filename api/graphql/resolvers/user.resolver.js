@@ -1,22 +1,19 @@
-import { registerUser } from '~/services/authentication/register';
-import { loginUser } from '~/services/authentication/login';
-import { getProfileUserById } from '~/services/user/profileUser';
+import { registerUser } from '~/services/authentication/register.service';
+import { loginUser } from '~/services/authentication/login.service';
 import {
   verifyEmail,
   resendVerifyEmail,
-} from '~/services/authentication/verifyEmail';
-import { forgotPasswordUser } from '~/services/authentication/forgotPassword';
-import { resetPasswordUser } from '~/services/authentication/resetPassword';
+} from '~/services/authentication/verify-email.service';
+import { forgotPasswordUser } from '~/services/authentication/forgot-password.service';
+import { resetPasswordUser } from '~/services/authentication/reset-password.service';
 
 const resolvers = {
   Query: {
-    profileUser: (_, args, { user }) => getProfileUserById(user.id),
-    verify: (_, { token }) => verifyEmail(token),
-    resendEmail: (_, args, { user }) => resendVerifyEmail(user),
+    profileUser: (_, args, { user }) => user,
   },
   Mutation: {
-    register(_, { email, password, name }) {
-      return registerUser(email, password, name);
+    register(_, { email, password, name, planName, billingType }) {
+      return registerUser(email, password, name, planName, billingType);
     },
     login(_, { email, password }) {
       return loginUser(email, password);
@@ -24,6 +21,8 @@ const resolvers = {
     forgotPassword: async (_, { email }) => forgotPasswordUser(email),
     resetPassword: async (_, { token, password, confirmPassword }) =>
       resetPasswordUser(token, password, confirmPassword),
+    verify: (_, { token }) => verifyEmail(token),
+    resendEmail: (_, args, { user }) => resendVerifyEmail(user),
   },
 };
 

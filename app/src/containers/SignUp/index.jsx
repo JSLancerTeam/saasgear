@@ -3,11 +3,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
-import { loader } from 'graphql.macro';
 import { useHistory } from 'react-router-dom';
 
 import SignUpForm from '@/components/Auth/SignUpForm';
 import logo from '@/assets/images/logo.png';
+import registerQuery from '@/queries/auth/register';
+import getQueryParam from '@/utils/getQueryParam';
 
 const SignUpSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -25,16 +26,24 @@ const SignUpSchema = yup.object().shape({
     .required(),
 });
 
-const registerQuery = loader('../../queries/auth/register.graphql');
-
 function SignUp() {
   const { register, handleSubmit, errors: errorsForm } = useForm({
     resolver: yupResolver(SignUpSchema),
   });
   const [registerMutation, { error, loading }] = useMutation(registerQuery);
   const history = useHistory();
+  const query = getQueryParam();
 
   async function onSubmit(params) {
+    const planName = query.get('plan');
+
+    if (planName) {
+      params = {
+        ...params,
+        planName,
+        billingType: query.get('isYearly') === '1' ? 'YEARLY' : 'MONTHLY',
+      };
+    }
     const { data } = await registerMutation({ variables: params });
     if (data) {
       history.push('/signin');

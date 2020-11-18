@@ -9,10 +9,10 @@ import { loginValidation } from '~/utils/validations/authenticate.validation';
 const { AuthenticationError, ValidationError } = pkg;
 
 async function loginUser(email, password) {
-  const isValidInput = loginValidation({ email, password });
-  if (_.isArray(isValidInput)) {
-    throw new ValidationError(isValidInput.map((it) => it.message).join(','), {
-      invalidArgs: isValidInput.map((it) => it.field).join(','),
+  const validResult = loginValidation({ email, password });
+  if (_.isArray(validResult)) {
+    throw new ValidationError(validResult.map((it) => it.message).join(','), {
+      invalidArgs: validResult.map((it) => it.field).join(','),
     });
   }
 

@@ -2,7 +2,7 @@ const usersTable = {
   id: 'users.id',
   name: 'users.name',
   email: 'users.email',
-  createAt: 'user.created_at',
+  createAt: 'users.created_at',
 };
 
 const userTokenTable = {

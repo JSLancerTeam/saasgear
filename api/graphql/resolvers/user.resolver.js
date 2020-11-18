@@ -2,7 +2,7 @@ import { registerUser } from '~/services/authentication/register.service';
 import { loginUser } from '~/services/authentication/login.service';
 import {
   verifyEmail,
-  resendVerifyEmail,
+  resendEmailAction,
 } from '~/services/authentication/verify-email.service';
 import { forgotPasswordUser } from '~/services/authentication/forgot-password.service';
 import { resetPasswordUser } from '~/services/authentication/reset-password.service';
@@ -22,7 +22,8 @@ const resolvers = {
     resetPassword: async (_, { token, password, confirmPassword }) =>
       resetPasswordUser(token, password, confirmPassword),
     verify: (_, { token }) => verifyEmail(token),
-    resendEmail: (_, args, { user }) => resendVerifyEmail(user),
+    resendEmail: (_, { type }, { user }) =>
+      resendEmailAction(user, type.toLowerCase()),
   },
 };
 

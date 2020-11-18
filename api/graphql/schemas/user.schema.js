@@ -3,28 +3,28 @@ import pkg from 'apollo-server-express';
 const { gql } = pkg;
 
 export const UserSchema = gql`
+  enum BillingType {
+    MONTHLY
+    YEARLY
+  }
+
+  enum SendMailType {
+    VERIFY_EMAIL
+    FORGOT_PASSWORD
+  }
+
   type User {
     id: ID!
     email: String!
     name: String!
     is_active: Boolean!
   }
-  type Response {
-    token: String
-    verified: Boolean
-  }
-
-  type ResponseStatus {
-    status: Boolean!
-  }
-
-  enum BillingType {
-    MONTHLY
-    YEARLY
+  type ResponseUserLogin {
+    token: String!
   }
 
   extend type Query {
-    profileUser: User
+    profileUser: User!
   }
 
   extend type Mutation {
@@ -34,15 +34,15 @@ export const UserSchema = gql`
       name: String!
       planName: String
       billingType: BillingType
-    ): Response!
-    login(email: String!, password: String!): Response!
+    ): Boolean!
+    login(email: String!, password: String!): ResponseUserLogin!
     forgotPassword(email: String!): Boolean!
     resetPassword(
       token: String!
       password: String!
       confirmPassword: String!
     ): Boolean!
-    verify(token: String!): Response!
-    resendEmail: ResponseStatus!
+    verify(token: String!): Boolean!
+    resendEmail(type: SendMailType!): Boolean!
   }
 `;

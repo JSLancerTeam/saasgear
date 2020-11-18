@@ -1,13 +1,9 @@
 import pkg from 'apollo-server-express';
 import dayjs from 'dayjs';
-import _ from 'lodash';
 import Validator from 'fastest-validator';
 import { updateUser } from '~/repository/user.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
-import {
-  findRecordByToken,
-  removeUserToken,
-} from '~/repository/user_token.repository';
+import { findToken, removeUserToken } from '~/repository/user_token.repository';
 import logger from '~/utils/logger';
 
 const { ApolloError, ValidationError, ForbiddenError, UserInputError } = pkg;
@@ -28,16 +24,19 @@ function resetPasswordValidation(data) {
 
 export async function resetPasswordUser(token, password, confirmPassword) {
   try {
-    const isValidInput = resetPasswordValidation({ password });
-    if (_.isArray(isValidInput)) {
-      throw new UserInputError(isValidInput.map((it) => it.message).join(','), {
-        invalidArgs: isValidInput.map((it) => it.field).join(','),
-      });
+    const validateResult = resetPasswordValidation({ password });
+    if (validateResult.length) {
+      throw new UserInputError(
+        validateResult.map((it) => it.message).join(','),
+        {
+          invalidArgs: validateResult.map((it) => it.field).join(','),
+        },
+      );
     }
     if (password !== confirmPassword) {
       return new ValidationError('Password and confirm password do not match');
     }
-    const session = await findRecordByToken(token);
+    const session = await findToken(token);
     if (!session || !session.id) {
       throw new ApolloError('Session not found');
     }

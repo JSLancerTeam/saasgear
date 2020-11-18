@@ -14,9 +14,6 @@ export default gql`
       name: $name
       planName: $planName
       billingType: $billingType
-    ) {
-      verified
-      token
-    }
+    )
   }
 `;

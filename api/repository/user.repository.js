@@ -1,8 +1,18 @@
 import union from 'lodash/union';
 import database from '~/config/database.config';
-import { userTokenTable, usersTable } from '~/constants/table-name.constant';
+import { userTokenColumns } from './user_token.repository';
+import { TABLES } from '~/constants/table-name.constant';
 
-const TABLE = 'users';
+const TABLE = TABLES.users;
+
+const usersColumns = {
+  id: 'users.id',
+  name: 'users.name',
+  email: 'users.email',
+  createAt: 'users.created_at',
+  updatedAt: 'users.updated_at',
+  isActive: 'users.is_active',
+};
 
 async function getUserByEmail(email) {
   return database(TABLE).where({ email }).first();
@@ -21,13 +31,12 @@ async function updateUser(id, data) {
 }
 
 async function getUserByIdAndJoinUserToken(id, type) {
-  const tableJoin = 'user_token';
-  const users = Object.values(usersTable);
-  const userToken = Object.values(userTokenTable);
+  const users = Object.values(usersColumns);
+  const userToken = Object.values(userTokenColumns);
   return database(TABLE)
-    .join(tableJoin, usersTable.id, userTokenTable.userId)
+    .join(TABLES.userToken, usersColumns.id, userTokenColumns.userId)
     .select(union(users, userToken))
-    .where({ [usersTable.id]: id, [userTokenTable.type]: type })
+    .where({ [usersColumns.id]: id, [userTokenColumns.type]: type })
     .first();
 }
 
@@ -36,6 +45,7 @@ async function activeUser(id) {
 }
 
 export {
+  usersColumns,
   getUserByEmail,
   getUserById,
   getUserByIdAndJoinUserToken,

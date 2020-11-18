@@ -5,11 +5,12 @@ import {
 } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import {
-  createUserTokenByUser,
+  createToken,
   updateUserTokenById,
 } from '~/repository/user_token.repository';
-import { sendForgotPasswordEmail } from '~/email-template/forgotPassword';
 import logger from '~/utils/logger';
+import sendMail from '~/libs/mail';
+import generateTemplateEmail from '~/helpers/generate-template-email';
 
 const { ApolloError } = pkg;
 
@@ -26,16 +27,20 @@ export async function forgotPasswordUser(email) {
     const tokenGenerated = await generateRandomKey();
     const token = `${tokenGenerated}-${user.id}`;
     if (!session) {
-      await createUserTokenByUser(user.id, token, 'forgot_password');
+      await createToken(user.id, token, 'forgot_password');
     } else {
-      await updateUserTokenById(session.token_id, token);
+      await updateUserTokenById(session.id, token);
     }
-    await sendForgotPasswordEmail(
-      user.email,
-      'Forgot password at Saasgear',
-      user.name,
-      token,
-    );
+
+    const template = generateTemplateEmail({
+      fileName: 'forgotPassword.mjml',
+      data: {
+        name: session.name,
+        url: `${process.env.FRONTEND_URL}/reset-password?&token=${token}`,
+      },
+    });
+
+    await sendMail(session.email, ' Reset Password from SAASGEAR', template);
     return true;
   } catch (error) {
     logger.error(error);

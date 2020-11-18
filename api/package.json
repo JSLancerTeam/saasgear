@@ -1,57 +1,59 @@
 {
-	"name": "api",
-	"version": "1.0.0",
-	"main": "server.js",
-	"license": "MIT",
-	"type": "module",
-	"scripts": {
-		"start": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
-		"dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
-		"db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
-		"db:rollback": "knex --esm migrate:rollback --knexfile config/knexfile.cjs",
-		"db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
-		"db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs",
-		"postinstall": "link-module-alias",
-		"lint": "eslint --ext .js .",
-		"lint:fix": "eslint --ext .js . --fix"
-	},
-	"dependencies": {
-		"@sendgrid/mail": "^7.4.0",
-		"apollo-server-express": "^2.19.0",
-		"bcryptjs": "^2.4.3",
-		"bunyan": "^1.8.14",
-		"cors": "^2.8.5",
-		"crypto": "^1.0.1",
-		"dayjs": "^1.9.6",
-		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-		"fastest-validator": "^1.8.0",
-		"jsonwebtoken": "^8.5.1",
-		"knex": "^0.21.12",
-		"link-module-alias": "^1.2.0",
-		"lodash": "^4.17.20",
-		"morgan": "^1.10.0",
-		"mysql2": "^2.2.5",
-		"redis": "^3.0.2",
+  "name": "api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
+    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
+    "db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
+    "db:rollback": "knex --esm migrate:rollback --knexfile config/knexfile.cjs",
+    "db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
+    "db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs",
+    "postinstall": "link-module-alias",
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --ext .js . --fix"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.19.0",
+    "bcryptjs": "^2.4.3",
+    "bunyan": "^1.8.14",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dayjs": "^1.9.6",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fastest-validator": "^1.8.0",
+    "handlebars": "^4.7.6",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.12",
+    "link-module-alias": "^1.2.0",
+    "lodash": "^4.17.20",
+    "mailgun-js": "^0.22.0",
 		"stripe": "^8.121.0",
-		"uuid": "^8.3.1"
-	},
-	"devDependencies": {
-		"eslint": "^7.13.0",
-		"eslint-config-airbnb-base": "^14.2.1",
-		"eslint-config-prettier": "^6.15.0",
-		"eslint-plugin-import": "^2.22.1",
-		"eslint-plugin-prettier": "^3.1.4",
-		"husky": "^4.3.0",
-		"nodemon": "^2.0.6",
-		"prettier": "^2.1.2"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm run lint"
-		}
-	},
-	"_moduleAliases": {
-		"~": "."
-	}
+    "mjml": "^4.7.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "redis": "^3.0.2",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "_moduleAliases": {
+    "~": "."
+  }
 }

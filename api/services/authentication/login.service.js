@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import pkg from 'apollo-server-express';
 
 import { comparePassword } from '~/helpers/hashing.helper';
@@ -9,11 +8,14 @@ import { loginValidation } from '~/utils/validations/authenticate.validation';
 const { AuthenticationError, ValidationError } = pkg;
 
 async function loginUser(email, password) {
-  const isValidInput = loginValidation({ email, password });
-  if (_.isArray(isValidInput)) {
-    throw new ValidationError(isValidInput.map((it) => it.message).join(','), {
-      invalidArgs: isValidInput.map((it) => it.field).join(','),
-    });
+  const validateResult = loginValidation({ email, password });
+  if (validateResult.length) {
+    throw new ValidationError(
+      validateResult.map((it) => it.message).join(','),
+      {
+        invalidArgs: validateResult.map((it) => it.field).join(','),
+      },
+    );
   }
 
   const user = await getUserByEmail(email);
@@ -26,13 +28,13 @@ async function loginUser(email, password) {
     throw new AuthenticationError('Invalid email or password');
   }
 
-  const token = sign({
-    email: user.email,
-    name: user.name,
-    createdAt: user.created_at,
-  });
-
-  return { token };
+  return {
+    token: sign({
+      email: user.email,
+      name: user.name,
+      createdAt: user.created_at,
+    }),
+  };
 }
 
 export { loginUser };

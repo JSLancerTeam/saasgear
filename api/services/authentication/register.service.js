@@ -1,25 +1,28 @@
 import pkg from 'apollo-server-express';
-import _ from 'lodash';
 
 import { getUserByEmail, createUser } from '~/repository/user.repository';
-import { createUserTokenByUser } from '~/repository/user_token.repository';
+import { createToken } from '~/repository/user_token.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
-import { sendMailToVerifyEmail } from '~/email-template/verifyEmail';
+import generateTemplateEmail from '~/helpers/generate-template-email';
 import generateRandomKey from '~/helpers/genarateRandomkey';
+import sendMail from '~/libs/mail';
 import { registerValidation } from '~/utils/validations/authenticate.validation';
 import { createUserPlan } from '~/services/user/plans-user.service';
 import { addMultiPermissions } from '~/services/user/permission.service';
 import { BILLING_PRICE } from '~/constants/billing.constant';
-import { sign } from '~/helpers/jwt.helper';
+import logger from '~/utils/logger';
 
 const { ValidationError, ApolloError } = pkg;
 
 async function registerUser(email, password, name, planName, billingType) {
-  const isValidInput = registerValidation({ email, password, name });
-  if (_.isArray(isValidInput)) {
-    throw new ValidationError(isValidInput.map((it) => it.message).join(','), {
-      invalidArgs: isValidInput.map((it) => it.field).join(','),
-    });
+  const validateResult = registerValidation({ email, password, name });
+  if (validateResult.length) {
+    throw new ValidationError(
+      validateResult.map((it) => it.message).join(','),
+      {
+        invalidArgs: validateResult.map((it) => it.field).join(','),
+      },
+    );
   }
 
   try {
@@ -38,29 +41,27 @@ async function registerUser(email, password, name, planName, billingType) {
       name,
     });
 
-    const token = sign({
-      email,
-      name,
-    });
-
     if (planName) {
       const { price, permissions } = BILLING_PRICE[planName];
       await createUserPlan(newUserId, planName, price, billingType);
       await addMultiPermissions(newUserId, permissions);
     }
 
-    await Promise.all([
-      sendMailToVerifyEmail({
-        email: 'tmtzminhtri@gmail.com',
-        subject: 'Confirm your email address',
+    const template = generateTemplateEmail({
+      fileName: 'verifyEmail.mjml',
+      data: {
         name,
-        token: tokenVerifyEmail,
-      }),
-      createUserTokenByUser(newUserId, tokenVerifyEmail, 'verify_email'),
+        url: `${process.env.FRONTEND_URL}/verify-email?token=${tokenVerifyEmail}`,
+      },
+    });
+
+    await Promise.all([
+      sendMail(email, 'Confirm your email address', template),
+      createToken(newUserId, tokenVerifyEmail, 'verify_email'),
     ]);
-    return { token, verified: false };
+    return true;
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     throw error;
   }
 }

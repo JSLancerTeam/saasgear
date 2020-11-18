@@ -8,6 +8,7 @@ function SignUpForm({
   errorsForm,
   errorAPI,
   isSubmitting,
+  submitText = 'Submit',
 }) {
   return (
     <form className="mt-8" onSubmit={onSubmit}>
@@ -147,7 +148,7 @@ function SignUpForm({
               />
             </svg>
           </span>
-          {isSubmitting ? 'Please wait' : 'Sign up'}
+          {isSubmitting ? 'Please wait' : submitText}
         </button>
       </div>
     </form>
@@ -160,6 +161,7 @@ SignUpForm.propTypes = {
   errorsForm: PropsType.object,
   errorAPI: PropsType.string,
   isSubmitting: PropsType.bool.isRequired,
+  submitText: PropsType.string,
 };
 
 export default SignUpForm;

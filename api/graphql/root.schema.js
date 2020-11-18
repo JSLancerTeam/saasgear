@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 import { UserSchema } from './schemas/user.schema';
+import { StripeSchema } from './schemas/stripe.schema';
 
 const rootSchema = gql`
   scalar Date
@@ -19,4 +20,4 @@ const rootSchema = gql`
   }
 `;
 
-export default [rootSchema, UserSchema];
+export default [rootSchema, UserSchema, StripeSchema];

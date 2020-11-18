@@ -8,6 +8,8 @@
     "@headlessui/react": "^0.2.0",
     "@hookform/resolvers": "^1.0.0",
     "@reduxjs/toolkit": "^1.4.0",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.11.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",

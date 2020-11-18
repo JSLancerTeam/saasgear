@@ -10,6 +10,7 @@ import { registerValidation } from '~/utils/validations/authenticate.validation'
 import { createUserPlan } from '~/services/user/plans-user.service';
 import { addMultiPermissions } from '~/services/user/permission.service';
 import { BILLING_PRICE } from '~/constants/billing.constant';
+import { sign } from '~/helpers/jwt.helper';
 
 const { ValidationError, ApolloError } = pkg;
 
@@ -37,6 +38,11 @@ async function registerUser(email, password, name, planName, billingType) {
       name,
     });
 
+    const token = sign({
+      email,
+      name,
+    });
+
     if (planName) {
       const { price, permissions } = BILLING_PRICE[planName];
       await createUserPlan(newUserId, planName, price, billingType);
@@ -52,7 +58,7 @@ async function registerUser(email, password, name, planName, billingType) {
       }),
       createUserTokenByUser(newUserId, tokenVerifyEmail, 'verify_email'),
     ]);
-    return { token: null, verified: false };
+    return { token, verified: false };
   } catch (error) {
     console.error(error);
     throw error;

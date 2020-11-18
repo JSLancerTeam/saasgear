@@ -16,6 +16,7 @@ export default gql`
       billingType: $billingType
     ) {
       verified
+      token
     }
   }
 `;

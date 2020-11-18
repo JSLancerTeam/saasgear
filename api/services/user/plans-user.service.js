@@ -1,4 +1,7 @@
-import { createNewUserPlan } from '~/repository/user_plans.repository';
+import {
+  createNewUserPlan,
+  getUserPlanById,
+} from '~/repository/user_plans.repository';
 
 /**
  * Create user plan
@@ -21,4 +24,8 @@ export async function createUserPlan(userId, planName, price, billingType) {
     price,
     billingType.toString().toLowerCase(),
   );
+}
+
+export async function getUserPlan(userId) {
+  return getUserPlanById(userId);
 }

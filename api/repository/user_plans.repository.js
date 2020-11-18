@@ -11,4 +11,8 @@ async function createNewUserPlan(userId, planName, price, billingType) {
   });
 }
 
-export { createNewUserPlan };
+async function getUserPlanById(userId) {
+  return database(TABLE).where({ user_id: userId }).first();
+}
+
+export { createNewUserPlan, getUserPlanById };

@@ -4,7 +4,7 @@ export function up(knex) {
     t.integer('user_id').unsigned().notNullable();
     t.string('token');
     t.string('type');
-    t.boolean('is_active').defaultTo(false);
+    t.boolean('is_active').defaultTo(true);
     t.dateTime('created_at')
       .notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));

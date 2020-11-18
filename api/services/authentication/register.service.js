@@ -1,5 +1,4 @@
 import pkg from 'apollo-server-express';
-import _ from 'lodash';
 
 import { getUserByEmail, createUser } from '~/repository/user.repository';
 import { createToken } from '~/repository/user_token.repository';
@@ -16,11 +15,14 @@ import logger from '~/utils/logger';
 const { ValidationError, ApolloError } = pkg;
 
 async function registerUser(email, password, name, planName, billingType) {
-  const validResult = registerValidation({ email, password, name });
-  if (_.isArray(validResult)) {
-    throw new ValidationError(validResult.map((it) => it.message).join(','), {
-      invalidArgs: validResult.map((it) => it.field).join(','),
-    });
+  const validateResult = registerValidation({ email, password, name });
+  if (validateResult.length) {
+    throw new ValidationError(
+      validateResult.map((it) => it.message).join(','),
+      {
+        invalidArgs: validateResult.map((it) => it.field).join(','),
+      },
+    );
   }
 
   try {

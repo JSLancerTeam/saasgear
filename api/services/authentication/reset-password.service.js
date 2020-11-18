@@ -1,6 +1,5 @@
 import pkg from 'apollo-server-express';
 import dayjs from 'dayjs';
-import _ from 'lodash';
 import Validator from 'fastest-validator';
 import { updateUser } from '~/repository/user.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
@@ -25,11 +24,14 @@ function resetPasswordValidation(data) {
 
 export async function resetPasswordUser(token, password, confirmPassword) {
   try {
-    const validResult = resetPasswordValidation({ password });
-    if (_.isArray(validResult)) {
-      throw new UserInputError(validResult.map((it) => it.message).join(','), {
-        invalidArgs: validResult.map((it) => it.field).join(','),
-      });
+    const validateResult = resetPasswordValidation({ password });
+    if (validateResult.length) {
+      throw new UserInputError(
+        validateResult.map((it) => it.message).join(','),
+        {
+          invalidArgs: validateResult.map((it) => it.field).join(','),
+        },
+      );
     }
     if (password !== confirmPassword) {
       return new ValidationError('Password and confirm password do not match');

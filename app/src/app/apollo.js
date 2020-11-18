@@ -5,6 +5,7 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
+import { createNetworkStatusNotifier } from 'react-apollo-network-status';
 
 import { JWT_STORAGE_KEY } from '@/constants';
 
@@ -18,8 +19,14 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const {
+  link: networkStatusNotifierLink,
+  useApolloNetworkStatus,
+} = createNetworkStatusNotifier();
+
 const client = new ApolloClient({
   link: ApolloLink.from([
+    networkStatusNotifierLink,
     authLink,
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors)
@@ -65,4 +72,4 @@ const client = new ApolloClient({
   },
 });
 
-export default client;
+export { client, useApolloNetworkStatus };

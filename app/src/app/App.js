@@ -9,12 +9,12 @@ import SignUp from '@/containers/SignUp';
 import ForgotPassword from '@/containers/ForgotPassword';
 import ResetPassword from '@/containers/ResetPassword';
 import VerifyEmail from '@/containers/VerifyEmail';
-import apolloClient from './apollo';
+import { client } from './apollo';
 import '@/assets/css/main.css';
 
 function App() {
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <BrowserRouter>
         <Switch>
           <Route path="/signin" component={SignIn} />

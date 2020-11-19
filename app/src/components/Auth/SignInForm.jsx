@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 function SignInForm({
   onSubmit,
   register,
-  errorsForm,
-  errorAPI,
+  formErrors,
+  apiError,
   isSubmitting,
 }) {
   return (
@@ -24,9 +24,9 @@ function SignInForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.email && (
+        {formErrors && formErrors.email && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.email.message}
+            {formErrors.email.message}
           </p>
         )}
       </div>
@@ -44,15 +44,15 @@ function SignInForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.password && (
+        {formErrors && formErrors.password && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.password.message}
+            {formErrors.password.message}
           </p>
         )}
       </div>
-      {errorAPI && (
+      {apiError && (
         <p className="text-red-500 text-xs italic mt-1 text-center">
-          {errorAPI}
+          {apiError}
         </p>
       )}
 
@@ -112,8 +112,8 @@ function SignInForm({
 SignInForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
-  errorsForm: PropsType.object,
-  errorAPI: PropsType.string,
+  formErrors: PropsType.object,
+  apiError: PropsType.string,
   isSubmitting: PropsType.bool.isRequired,
 };
 

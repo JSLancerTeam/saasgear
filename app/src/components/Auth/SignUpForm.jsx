@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 function SignUpForm({
   onSubmit,
   register,
-  errorsForm,
-  errorAPI,
+  formErrors,
+  apiError,
   isSubmitting,
   submitText = 'Submit',
 }) {
@@ -25,9 +25,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.name && (
+        {formErrors && formErrors.name && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.name.message}
+            {formErrors.name.message}
           </p>
         )}
       </div>
@@ -44,9 +44,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.email && (
+        {formErrors && formErrors.email && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.email.message}
+            {formErrors.email.message}
           </p>
         )}
       </div>
@@ -64,9 +64,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.password && (
+        {formErrors && formErrors.password && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.password.message}
+            {formErrors.password.message}
           </p>
         )}
       </div>
@@ -84,9 +84,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.passwordConfirmation && (
+        {formErrors && formErrors.passwordConfirmation && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.passwordConfirmation.message}
+            {formErrors.passwordConfirmation.message}
           </p>
         )}
       </div>
@@ -109,7 +109,7 @@ function SignUpForm({
 
         <div className="text-sm leading-5">
           <Link
-            to="/signin"
+            to="/auth/signin"
             className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
           >
             Already account?
@@ -117,15 +117,15 @@ function SignUpForm({
         </div>
       </div>
 
-      {errorsForm && errorsForm.agreement && (
+      {formErrors && formErrors.agreement && (
         <p className="text-red-500 text-xs italic mt-1">
-          {errorsForm.agreement.message}
+          {formErrors.agreement.message}
         </p>
       )}
 
-      {errorAPI && (
+      {apiError && (
         <p className="text-red-500 text-xs italic mt-1 text-center">
-          {errorAPI}
+          {apiError}
         </p>
       )}
 
@@ -158,8 +158,8 @@ function SignUpForm({
 SignUpForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
-  errorsForm: PropsType.object,
-  errorAPI: PropsType.string,
+  formErrors: PropsType.object,
+  apiError: PropsType.string,
   isSubmitting: PropsType.bool.isRequired,
   submitText: PropsType.string,
 };

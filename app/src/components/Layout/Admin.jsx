@@ -8,16 +8,16 @@ import routes from '@/routes';
 import logo from '@/assets/images/logo.png';
 import GlobalLoading from './GlobalLoading';
 
-function AdminLayout({ signout, infoUser }) {
+function AdminLayout({ signout, user }) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    if (infoUser && !infoUser.is_active) {
+    if (user && !user.is_active) {
       setShowAlert(true);
     }
-  }, [infoUser]);
+  }, [user]);
 
   function renderSidebar() {
     return routes
@@ -261,7 +261,7 @@ function AdminLayout({ signout, infoUser }) {
             <span className="inline-block align-middle mr-8">
               A verification link has been sent to your email account. Please
               check email
-              <b>{` ${infoUser.email} `}</b>
+              <b>{` ${user.email} `}</b>
               to verify your account
             </span>
             <button
@@ -294,7 +294,7 @@ function AdminLayout({ signout, infoUser }) {
 
 AdminLayout.propTypes = {
   signout: PropTypes.func.isRequired,
-  infoUser: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default AdminLayout;

@@ -12,14 +12,14 @@ function AdminLayoutContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProfileUser({ data, loading }));
+    dispatch(setProfileUser({ data: data?.profileUser, loading }));
   }, [data, loading]);
 
   function signout() {
     localStorage.removeItem(JWT_STORAGE_KEY);
   }
 
-  return <AdminLayout signout={signout} infoUser={data && data.profileUser} />;
+  return <AdminLayout signout={signout} user={data?.profileUser} />;
 }
 
 export default AdminLayoutContainer;

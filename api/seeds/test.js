@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 export const seed = (knex) =>
   knex('users')
     .del()

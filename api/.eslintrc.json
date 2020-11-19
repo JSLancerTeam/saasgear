@@ -4,8 +4,7 @@
     "es6": true,
     "node": true
   },
-  "extends": ["prettier", "airbnb-base"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb-base"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -14,7 +13,6 @@
     "ecmaVersion": 2018
   },
   "rules": {
-    "prettier/prettier": "error",
     "operator-linebreak": ["error", "after"],
     "object-curly-newline": ["error", { "consistent": true }],
     "arrow-body-style": [2, "as-needed"],

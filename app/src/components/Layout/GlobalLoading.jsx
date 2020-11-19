@@ -1,43 +1,27 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import { useApolloNetworkStatus } from '@/app/apollo';
+import { awaitSetTimeOut } from '@/utils/timer';
 
 const loading = keyframes`
   0% {
 		width: 0;
 	}
 
-	20% {
-		width: 10%;
+	100% {
+		width: 70%
 	}
+`;
 
-	25% {
-		width: 24%;
-	}
+const completing = keyframes`
+  100% {
+    width: 70%;
+  }
+`;
 
-	43% {
-		width: 41%;
-	}
-
-	56% {
-		width: 50%;
-	}
-
-	66% {
-		width: 52%;
-	}
-
-	71% {
-		width: 60%;
-	}
-
-	75% {
-		width: 76%;
-    
-	}
-
-	94% {
-		width: 86%;
+const completed = keyframes`
+  0% {
+		width: 70%;
 	}
 
 	100% {
@@ -48,8 +32,9 @@ const loading = keyframes`
 const ProgressBar = styled.div`
   overflow: hidden;
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 10;
+  top: 0;
 `;
 
 const Bar = styled.div`
@@ -60,22 +45,65 @@ const Progress = styled.div`
   background: #0362fc;
   padding: 1px;
   width: 0;
-  animation: ${loading} 3s ease infinite;
+
+  ${(props) =>
+    props.loading &&
+    css`
+      animation: ${loading} 4s ease;
+    `}
+
+  ${(props) =>
+    props.completing &&
+    css`
+      animation: ${completing} 0.3s ease;
+    `}
+
+  ${(props) =>
+    props.completed &&
+    css`
+      animation: ${completed} 0.3s ease;
+    `}
 `;
 
 function GlobalLoading() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isCompleting, setIsCompleting] = useState(false);
   const status = useApolloNetworkStatus();
 
-  if (status.numPendingQueries > 0) {
-    return (
-      <ProgressBar>
-        <Bar>
-          <Progress />
-        </Bar>
-      </ProgressBar>
-    );
+  useEffect(() => {
+    updateStatus();
+  }, [status]);
+
+  async function updateStatus() {
+    if (status.numPendingMutations || status.numPendingQueries) {
+      setIsLoading(true);
+      setIsCompleted(false);
+      setIsCompleting(false);
+    } else if (isLoading) {
+      setIsCompleting(true);
+      await awaitSetTimeOut(300);
+      setIsCompleted(true);
+      await awaitSetTimeOut(300);
+      setIsCompleted(false);
+      setIsCompleting(false);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
   }
-  return null;
+
+  return (
+    <ProgressBar>
+      <Bar>
+        <Progress
+          loading={isLoading}
+          completing={isCompleting}
+          completed={isCompleted}
+        />
+      </Bar>
+    </ProgressBar>
+  );
 }
 
 export default GlobalLoading;

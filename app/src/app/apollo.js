@@ -39,12 +39,11 @@ const client = new ApolloClient({
         const errors = graphQLErrors[0];
         switch (errors.extensions.code) {
           case 'UNAUTHENTICATED':
-            if (!window.location.pathname.startsWith('/signin')) {
+            if (!window.location.pathname.startsWith('/auth')) {
               localStorage.removeItem(JWT_STORAGE_KEY);
               window.location.href = '/auth/signin';
             }
             break;
-          // handle other errors
           case 'ANOTHER_ERROR_CODE':
             break;
           default:

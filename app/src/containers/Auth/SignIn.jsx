@@ -22,11 +22,17 @@ function SignIn() {
   const history = useHistory();
 
   async function onSubmit(params) {
-    const { data } = await loginMutation({ variables: params });
-    if (data && data.login && data.login.token) {
-      localStorage.setItem(JWT_STORAGE_KEY, data.login.token);
-      history.push('/');
+    try {
+      const { data } = await loginMutation({ variables: params });
+      if (data && data.login && data.login.token) {
+        localStorage.setItem(JWT_STORAGE_KEY, data.login.token);
+        history.push('/');
+      }
+    } catch (e) {
+      console.log(e);
     }
+
+    return false;
   }
 
   return (

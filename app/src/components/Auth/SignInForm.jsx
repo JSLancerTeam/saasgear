@@ -50,11 +50,6 @@ function SignInForm({
           </p>
         )}
       </div>
-      {apiError && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">
-          {apiError}
-        </p>
-      )}
 
       <div className="mt-6 flex items-center justify-between">
         <div className="flex items-center">
@@ -105,6 +100,10 @@ function SignInForm({
           {isSubmitting ? 'Please wait' : 'Sign in'}
         </button>
       </div>
+
+      {apiError && (
+        <p className="text-red-500 text-xs italic mt-1">{apiError}</p>
+      )}
     </form>
   );
 }

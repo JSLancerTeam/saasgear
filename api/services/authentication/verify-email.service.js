@@ -67,7 +67,7 @@ export async function resendEmailAction(user, type) {
           fileName: 'forgotPassword.mjml',
           data: {
             name: user.name,
-            url: `${process.env.FRONTEND_URL}/reset-password?token=${token}`,
+            url: `${process.env.FRONTEND_URL}/auth/reset-password?token=${token}`,
           },
         });
         break;

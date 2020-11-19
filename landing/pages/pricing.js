@@ -51,13 +51,13 @@ const Pricing = () => {
         <h1 className="font-bold text-5xl">Pricing Plans</h1>
         <p className="text-gray-700 text-lg mt-4">Start building for free, then add a site plan to go live. Account plans unlock additional features</p>
         <div className="bg-gray-200 p-1 w-auto inline-block rounded-lg mt-8">
-          <button 
+          <button
             className={cn("px-10 py-2 rounded-lg bg-transparent outline-none focus:outline-none", {
               "bg-white": !isYearly
             })}
             onClick={() => setIsYearly(false)}
           >Monthly billing</button>
-          <button 
+          <button
             className={cn("px-10 py-2 rounded-lg bg-transparent outline-none focus:outline-none", {
               "bg-white": isYearly
             })}
@@ -80,7 +80,7 @@ const Pricing = () => {
                   <span>{isYearly ? '/year' : '/month'}</span>
                 </div>
                 <button
-                  onClick={() => window.location.href = `${process.env.appUrl}/signup?plan=${plan.id}&isYearly=${isYearly ? 1 : 0}`}
+                  onClick={() => window.location.href = `${process.env.appUrl}/auth/signup?plan=${plan.id}&isYearly=${isYearly ? 1 : 0}`}
                   className="w-full bg-gray-800 text-white py-2 rounded-lg"
                 >Start 14 day trial</button>
               </div>

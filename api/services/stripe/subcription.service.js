@@ -2,6 +2,7 @@ import { ApolloError } from 'apollo-server-express';
 import dayjs from 'dayjs';
 import Stripe from 'stripe';
 import { getUserPlan } from '~/services/user/plans-user.service';
+import logger from '~/utils/logger';
 
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
@@ -49,6 +50,7 @@ export async function createNewSubcription(token, user) {
     });
     return true;
   } catch (error) {
+    logger.error(error);
     throw new ApolloError('Something went wrong!');
   }
 }

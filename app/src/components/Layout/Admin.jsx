@@ -142,7 +142,7 @@ function AdminLayout({ signout, infoUser }) {
                           </Link>
 
                           <Link
-                            to="/signin"
+                            to="/auth/signin"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
                             onClick={signout}
@@ -240,7 +240,7 @@ function AdminLayout({ signout, infoUser }) {
               </Link>
 
               <Link
-                to="/signin"
+                to="/auth/signin"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                 onClick={signout}
               >

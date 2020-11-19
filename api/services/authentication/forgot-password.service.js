@@ -36,7 +36,7 @@ export async function forgotPasswordUser(email) {
       fileName: 'forgotPassword.mjml',
       data: {
         name: session.name,
-        url: `${process.env.FRONTEND_URL}/reset-password?&token=${token}`,
+        url: `${process.env.FRONTEND_URL}/auth/reset-password?&token=${token}`,
       },
     });
 

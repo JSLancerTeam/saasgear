@@ -75,7 +75,7 @@ function SignInForm({
 
         <div className="text-sm leading-5">
           <Link
-            to="/forgot-password"
+            to="/auth/forgot-password"
             className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
           >
             Forgot your password?

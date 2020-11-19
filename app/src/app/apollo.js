@@ -6,7 +6,6 @@ import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
 import { createNetworkStatusNotifier } from 'react-apollo-network-status';
-
 import { JWT_STORAGE_KEY } from '@/constants';
 
 const authLink = setContext((_, { headers }) => {
@@ -42,12 +41,11 @@ const client = new ApolloClient({
           case 'UNAUTHENTICATED':
             if (!window.location.pathname.startsWith('/signin')) {
               localStorage.removeItem(JWT_STORAGE_KEY);
-              window.location.href = '/signin';
+              window.location.href = '/auth/signin';
             }
             break;
           // handle other errors
           case 'ANOTHER_ERROR_CODE':
-            console.error('cc');
             break;
           default:
         }

@@ -45,7 +45,7 @@ function ForgotPasswordForm({ onSubmit, register, errors }) {
           </span>
           Send
         </button>
-        <Link to="/signin" className="mt-3 block text-blue-500">
+        <Link to="/auth/signin" className="mt-3 block text-blue-500">
           Go back to login
         </Link>
       </div>

@@ -34,7 +34,7 @@ export const UserSchema = gql`
       name: String!
       planName: String
       billingType: BillingType
-    ): Boolean!
+    ): ResponseUserLogin!
     login(email: String!, password: String!): ResponseUserLogin!
     forgotPassword(email: String!): Boolean!
     resetPassword(

@@ -6,7 +6,6 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
 import SignUpForm from '@/components/Auth/SignUpForm';
-import logo from '@/assets/images/logo.png';
 import registerQuery from '@/queries/auth/register';
 import getQueryParam from '@/utils/getQueryParam';
 import StripeContainer from '@/containers/Stripe';
@@ -47,7 +46,7 @@ function SignUp() {
       };
     }
     const { data } = await registerMutation({ variables: params });
-    if (data && data.register && data.register.token) {
+    if (data?.register?.token) {
       localStorage.setItem(JWT_STORAGE_KEY, data.register.token);
 
       if (planName) {
@@ -72,7 +71,7 @@ function SignUp() {
           onSubmit={handleSubmit(onSubmit)}
           register={register}
           formErrors={formErrors}
-          apiError={error && error.message}
+          apiError={error?.message}
           isSubmitting={loading}
           submitText={planName ? 'Next' : 'Sign up'}
         />

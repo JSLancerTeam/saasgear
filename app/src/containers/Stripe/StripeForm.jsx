@@ -52,7 +52,7 @@ function StripeFormContainer() {
       isSubmitting={isSubmitting}
       submitText="Start 14 days trial"
       error={error}
-      errorAPI={errorAPI && errorAPI.message}
+      errorAPI={errorAPI?.message}
     />
   );
 }

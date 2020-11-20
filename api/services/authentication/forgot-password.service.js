@@ -1,6 +1,6 @@
 import pkg from 'apollo-server-express';
 import {
-  getUserByEmail,
+  findUser,
   getUserByIdAndJoinUserToken,
 } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
@@ -16,7 +16,7 @@ const { ApolloError } = pkg;
 
 export async function forgotPasswordUser(email) {
   try {
-    const user = await getUserByEmail(email);
+    const user = await findUser({ email });
     if (!user || !user.id) {
       throw new ApolloError('Can not find any user');
     }

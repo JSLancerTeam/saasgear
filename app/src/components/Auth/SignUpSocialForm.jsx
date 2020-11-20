@@ -1,45 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropsType from 'prop-types';
 import TheLockSvg from '@/assets/images/svg/the-lock.svg';
 
-function ResetPasswordForm({ onSubmit, register, errors }) {
+export default function SignUpSocialForm({ onSubmit, formErrors, register }) {
   return (
     <form className="mt-8" onSubmit={onSubmit}>
       <div className="col-span-6 sm:col-span-3">
         <label
-          htmlFor="password"
+          htmlFor="email"
           className="block text-sm font-medium leading-5 text-gray-700"
         >
-          New password
+          Email
         </label>
         <input
-          id="password"
-          name="password"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+          id="email"
+          name="email"
           ref={register}
-        />
-        {errors?.password && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.password.message}
-          </p>
-        )}
-      </div>
-      <div className="col-span-6 sm:col-span-3 mt-6">
-        <label
-          htmlFor="passwordConfirmation"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Re-enter Password
-        </label>
-        <input
-          id="passwordConfirmation"
-          name="passwordConfirmation"
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
         />
-        {errors?.passwordConfirmation && (
+        {formErrors?.email && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.passwordConfirmation.message}
+            {formErrors.email.message}
           </p>
         )}
       </div>
@@ -47,6 +28,7 @@ function ResetPasswordForm({ onSubmit, register, errors }) {
         <button
           type="submit"
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+          // disabled={isSubmitting}
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-3">
             <img
@@ -55,17 +37,16 @@ function ResetPasswordForm({ onSubmit, register, errors }) {
               alt="the-lock"
             />
           </span>
-          Reset Password
+          Please wait
+          {/* {isSubmitting ? 'Please wait' : submitText} */}
         </button>
       </div>
     </form>
   );
 }
 
-ResetPasswordForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
-  errors: PropTypes.object,
+SignUpSocialForm.propTypes = {
+  onSubmit: PropsType.func.isRequired,
+  register: PropsType.func.isRequired,
+  formErrors: PropsType.object,
 };
-
-export default ResetPasswordForm;

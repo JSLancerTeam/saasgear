@@ -14,7 +14,7 @@ function AdminLayout({ signout, user }) {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    if (user && !user.is_active) {
+    if (user && !user.isActive) {
       setShowAlert(true);
     }
   }, [user]);
@@ -99,7 +99,11 @@ function AdminLayout({ signout, user }) {
                     >
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={
+                          user?.avatarUrl
+                            ? user.avatarUrl
+                            : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                        }
                         alt=""
                       />
                     </button>
@@ -209,7 +213,11 @@ function AdminLayout({ signout, user }) {
                 <Link to="/">
                   <img
                     className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src={
+                      user?.avatarUrl
+                        ? user.avatarUrl
+                        : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                    }
                     alt=""
                   />
                 </Link>

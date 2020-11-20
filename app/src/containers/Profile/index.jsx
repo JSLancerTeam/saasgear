@@ -26,7 +26,11 @@ const Profile = () => {
             <div className="flex flex-row items-center justify-start p-4">
               <div className="flex-shrink-0 w-24">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  src={
+                    data.avatarUrl
+                      ? data.avatarUrl
+                      : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                  }
                   alt="media"
                   className="rounded-full h-20 w-20 shadow-outline mb-2"
                 />

@@ -6,7 +6,6 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
 import SignUpForm from '@/components/Auth/SignUpForm';
-import logo from '@/assets/images/logo.png';
 import registerQuery from '@/queries/auth/register';
 import getQueryParam from '@/utils/getQueryParam';
 import StripeContainer from '@/containers/Stripe';

@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ResetPasswordForm({ onSubmit, register, errors }) {
-  return (
+function ResetPasswordForm({ onSubmit, register, errors, apiError }) {
+  return apiError ? (
+    <h3 className="mt-6 text-base leading-9 font-extrabold text-gray-900 text-center">
+      {apiError}
+    </h3>
+  ) : (
     <form className="mt-8" onSubmit={onSubmit}>
       <div className="col-span-6 sm:col-span-3">
         <label
@@ -58,6 +62,7 @@ ResetPasswordForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   errors: PropTypes.object,
+  apiError: PropTypes.string,
 };
 
 export default ResetPasswordForm;

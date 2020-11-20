@@ -44,6 +44,6 @@ export async function forgotPasswordUser(email) {
     return true;
   } catch (error) {
     logger.error(error);
-    throw new ApolloError('Something went wrong!');
+    throw new ApolloError(error);
   }
 }

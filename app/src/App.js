@@ -2,12 +2,12 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
+import Auth from '@/containers/Auth/Auth';
 import PrivateRoute from '@/routes/PrivateRoute';
 import AdminLayout from '@/containers/Layout/Admin';
 import VerifyEmail from '@/containers/VerifyEmail';
-import { client } from './apollo';
+import { client } from '@/config/apollo';
 import '@/assets/css/main.css';
-import Auth from '@/containers/Auth/Auth';
 
 function App() {
   return (

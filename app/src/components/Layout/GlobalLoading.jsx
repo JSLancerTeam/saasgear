@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
-import { useApolloNetworkStatus } from '@/app/apollo';
+import { useApolloNetworkStatus } from '@/config/apollo';
 import { awaitSetTimeOut } from '@/utils/timer';
 
 const loading = keyframes`

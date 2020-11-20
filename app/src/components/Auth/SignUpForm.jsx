@@ -145,6 +145,7 @@ function SignUpForm({
           {isSubmitting ? 'Please wait' : submitText}
         </button>
       </div>
+
       {apiError && (
         <p className="text-red-500 text-xs italic mt-1">{apiError}</p>
       )}

@@ -17,7 +17,7 @@ export async function loginGithub(code) {
   const { name, email, avatar_url, id } = userInfoResponse.data;
 
   if (email) {
-    const userByEmail = await findUser({ email: 'tmtzminhtri1@gmail.com' });
+    const userByEmail = await findUser({ email });
     if (userByEmail) {
       throw new Apollo.ApolloError('Email address has been used');
     }
@@ -32,6 +32,7 @@ export async function loginGithub(code) {
     });
     return { token: sign({ email, name }) };
   }
+
   const user = await findUser({ provider_id: id });
   if (user) {
     return {

@@ -6,10 +6,13 @@ import {
 } from '~/services/authentication/verify-email.service';
 import { forgotPasswordUser } from '~/services/authentication/forgot-password.service';
 import { resetPasswordUser } from '~/services/authentication/reset-password.service';
+import { loginGithub } from '~/services/authentication/github-login.service';
+import { registerAccountByGithub } from '~/services/authentication/register-social.service';
 
 const resolvers = {
   Query: {
     profileUser: (_, args, { user }) => user,
+    loginByGithub: (_, { code }) => loginGithub(code),
   },
   Mutation: {
     register(_, { email, password, name, planName, billingType }) {
@@ -24,6 +27,10 @@ const resolvers = {
     verify: (_, { token }) => verifyEmail(token),
     resendEmail: (_, { type }, { user }) =>
       resendEmailAction(user, type.toLowerCase()),
+    registerSocialAccount: (
+      _,
+      { provider, email, name, avatarUrl, providerId },
+    ) => registerAccountByGithub(provider, email, name, avatarUrl, providerId),
   },
 };
 

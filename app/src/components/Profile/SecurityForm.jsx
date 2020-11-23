@@ -17,7 +17,7 @@ function SecurityForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.currentPassword && (
+        {errors?.currentPassword && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.currentPassword.message}
           </p>
@@ -36,7 +36,7 @@ function SecurityForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.newPassword && (
+        {errors?.newPassword && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.newPassword.message}
           </p>
@@ -55,7 +55,7 @@ function SecurityForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.confirmPassword && (
+        {errors?.confirmPassword && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.confirmPassword.message}
           </p>

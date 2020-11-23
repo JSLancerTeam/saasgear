@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TheLockSvg from '@/assets/images/svg/the-lock.svg';
 
 function ResetPasswordForm({ onSubmit, register, errors, apiError }) {
   return apiError ? (
@@ -21,7 +22,7 @@ function ResetPasswordForm({ onSubmit, register, errors, apiError }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.password && (
+        {errors?.password && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.password.message}
           </p>
@@ -40,7 +41,7 @@ function ResetPasswordForm({ onSubmit, register, errors, apiError }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.passwordConfirmation && (
+        {errors?.passwordConfirmation && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.passwordConfirmation.message}
           </p>
@@ -51,6 +52,13 @@ function ResetPasswordForm({ onSubmit, register, errors, apiError }) {
           type="submit"
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
         >
+          <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+            <img
+              className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
+              src={TheLockSvg}
+              alt="the-lock"
+            />
+          </span>
           Reset Password
         </button>
       </div>

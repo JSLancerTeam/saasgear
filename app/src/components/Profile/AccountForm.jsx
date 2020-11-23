@@ -17,7 +17,7 @@ function AccountForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.firstName && (
+        {errors?.firstName && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.firstName.message}
           </p>
@@ -36,7 +36,7 @@ function AccountForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.lastName && (
+        {errors?.lastName && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.lastName.message}
           </p>
@@ -55,7 +55,7 @@ function AccountForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.email && (
+        {errors?.email && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.email.message}
           </p>
@@ -74,7 +74,7 @@ function AccountForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.company && (
+        {errors?.company && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.company.message}
           </p>
@@ -93,7 +93,7 @@ function AccountForm({ onSubmit, register, errors }) {
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors && errors.position && (
+        {errors?.position && (
           <p className="text-red-500 text-xs italic mt-1">
             {errors.position.message}
           </p>

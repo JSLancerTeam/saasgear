@@ -57,7 +57,7 @@ export default function VerifyEmail() {
                   <b className="capitalize">
                     {verifyResult !== null
                       ? 'Verify email success'
-                      : error && error.message}
+                      : error?.message}
                   </b>
                 </span>
               </div>

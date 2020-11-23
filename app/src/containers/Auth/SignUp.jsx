@@ -46,7 +46,7 @@ function SignUp() {
       };
     }
     const { data } = await registerMutation({ variables: params });
-    if (data && data.register && data.register.token) {
+    if (data?.register?.token) {
       localStorage.setItem(JWT_STORAGE_KEY, data.register.token);
 
       if (planName) {
@@ -71,7 +71,7 @@ function SignUp() {
           onSubmit={handleSubmit(onSubmit)}
           register={register}
           formErrors={formErrors}
-          apiError={error && error.message}
+          apiError={error?.message}
           isSubmitting={loading}
           submitText={planName ? 'Next' : 'Sign up'}
         />

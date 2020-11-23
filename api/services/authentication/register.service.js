@@ -1,6 +1,6 @@
 import pkg from 'apollo-server-express';
 
-import { getUserByEmail, createUser } from '~/repository/user.repository';
+import { findUser, createUser } from '~/repository/user.repository';
 import { createToken } from '~/repository/user_token.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
 import generateTemplateEmail from '~/helpers/generate-template-email';
@@ -27,7 +27,7 @@ async function registerUser(email, password, name, planName, billingType) {
   }
 
   try {
-    const user = await getUserByEmail(email);
+    const user = await findUser({ email });
     if (user && user.is_active) {
       throw new ApolloError('Email address has been used');
     } else if (user && !user.is_active) {

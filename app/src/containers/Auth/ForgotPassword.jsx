@@ -28,7 +28,6 @@ function ForgotPassword() {
       console.log(e);
       setIsSubmitted(false);
     }
-
   }
 
   return (
@@ -42,7 +41,7 @@ function ForgotPassword() {
         errors={errors}
         isSubmitted={isSubmitted && !error}
         isSubmitting={loading}
-        apiError={error && error.message}
+        apiError={error?.message}
       />
     </>
   );

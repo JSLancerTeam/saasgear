@@ -15,11 +15,18 @@ export async function loginGithub(code) {
   const { access_token, token_type } = response.data;
   const userInfoResponse = await getProfile(`${token_type} ${access_token}`);
   const { name, email, avatar_url, id } = userInfoResponse.data;
-
   if (email) {
-    const userByEmail = await findUser({ email: 'tmtzminhtri1@gmail.com' });
+    const userByEmail = await findUser({ email });
     if (userByEmail) {
-      throw new Apollo.ApolloError('Email address has been used');
+      return {
+        user: {
+          name,
+          email,
+          avatarUrl: avatar_url,
+          providerId: id,
+          provider: SOCIAL_PROVIDER.github,
+        },
+      };
     }
 
     await createUser({

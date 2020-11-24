@@ -2,7 +2,12 @@ import React from 'react';
 import PropsType from 'prop-types';
 import TheLockSvg from '@/assets/images/svg/the-lock.svg';
 
-export default function SignUpSocialForm({ onSubmit, formErrors, register }) {
+export default function SignUpSocialForm({
+  onSubmit,
+  formErrors,
+  register,
+  errorAPI,
+}) {
   return (
     <form className="mt-8" onSubmit={onSubmit}>
       <div className="col-span-6 sm:col-span-3">
@@ -41,6 +46,9 @@ export default function SignUpSocialForm({ onSubmit, formErrors, register }) {
           {/* {isSubmitting ? 'Please wait' : submitText} */}
         </button>
       </div>
+      {errorAPI && (
+        <p className="text-red-500 text-xs italic mt-1">{errorAPI}</p>
+      )}
     </form>
   );
 }
@@ -49,4 +57,5 @@ SignUpSocialForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
   formErrors: PropsType.object,
+  errorAPI: PropsType.string,
 };

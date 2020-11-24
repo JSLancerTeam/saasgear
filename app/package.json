@@ -28,6 +28,7 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-toastify": "^6.1.0",
     "redux": "^4.0.5",
     "styled-components": "^5.2.1",
     "yup": "^0.29.3"

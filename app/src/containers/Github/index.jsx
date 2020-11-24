@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
-
 import getQueryParam from '@/utils/getQueryParam';
 import githubLoginQuery from '@/queries/auth/githubLogin';
 import { JWT_STORAGE_KEY } from '@/constants';
 import FormRegister from './FormRegister';
+
 
 export default function Github() {
   const query = getQueryParam();

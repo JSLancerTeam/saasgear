@@ -10,11 +10,13 @@ import Github from '@/containers/Github';
 import { client } from '@/config/apollo';
 
 import '@/assets/css/main.css';
+import GlobalLoading from '@/components/Layout/GlobalLoading';
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
+        <GlobalLoading />
         <Switch>
           <Route path="/auth" component={Auth} />
           <Route path="/verify-email" component={VerifyEmail} />

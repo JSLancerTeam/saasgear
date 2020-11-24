@@ -6,7 +6,6 @@ import { Transition } from '@headlessui/react';
 
 import routes from '@/routes';
 import logo from '@/assets/images/logo.png';
-import GlobalLoading from './GlobalLoading';
 
 function AdminLayout({ signout, user }) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -259,7 +258,6 @@ function AdminLayout({ signout, user }) {
         </div>
       </nav>
 
-      <GlobalLoading />
       <main>
         {showAlert && (
           <div className="text-white p-1 border-0 relative mb-4 bg-yellow-300">

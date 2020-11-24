@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import logo from '@/assets/images/logo.png';
-import GlobalLoading from '@/components/Layout/GlobalLoading';
 
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -10,7 +9,6 @@ import ResetPassword from './ResetPassword';
 
 const Auth = () => (
   <>
-    <GlobalLoading />
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <img className="mx-auto h-12 w-auto" src={logo} alt="JSlancer" />

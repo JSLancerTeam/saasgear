@@ -106,7 +106,7 @@ function SignIn() {
           onSubmit={handleSubmit(onSubmit)}
           register={register}
           formErrors={formErrors}
-          errorAPI={error?.message}
+          apiError={error?.message}
           isSubmitting={loading}
         />
         <div className="my-3">

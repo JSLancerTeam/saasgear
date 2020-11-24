@@ -72,7 +72,9 @@ function GlobalLoading() {
   const status = useApolloNetworkStatus();
 
   useEffect(() => {
+    console.log(status);
     updateStatus();
+
   }, [status]);
 
   async function updateStatus() {

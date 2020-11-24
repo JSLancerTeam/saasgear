@@ -17,10 +17,11 @@ export const usersColumns = {
   providerId: 'users.provider_id',
 };
 
-export async function findUser({ id, email }) {
+export async function findUser({ id, email, provider_id }) {
   const condition = {};
   if (id) condition.id = id;
   if (email) condition.email = email;
+  if (provider_id) condition.provider_id = provider_id;
   return database(TABLE).where(condition).first();
 }
 

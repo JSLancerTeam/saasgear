@@ -1,7 +1,13 @@
 import React from 'react';
 import PropsType from 'prop-types';
 
-function SecurityForm({ onSubmit, register, errors }) {
+function SecurityForm({ 
+  onSubmit, 
+  register, 
+  formErrors,
+  apiError,
+  isSubmitting, 
+}) {
   return (
     <form className="form flex flex-wrap w-full" onSubmit={onSubmit}>
       <div className="w-full">
@@ -14,12 +20,13 @@ function SecurityForm({ onSubmit, register, errors }) {
         <input
           id="currentPassword"
           name="currentPassword"
+          type="password"
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors?.currentPassword && (
+        {formErrors?.currentPassword && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.currentPassword.message}
+            {formErrors.currentPassword.message}
           </p>
         )}
       </div>
@@ -33,12 +40,13 @@ function SecurityForm({ onSubmit, register, errors }) {
         <input
           id="newPassword"
           name="newPassword"
+          type="password"
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors?.newPassword && (
+        {formErrors?.newPassword && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.newPassword.message}
+            {formErrors.newPassword.message}
           </p>
         )}
       </div>
@@ -52,21 +60,28 @@ function SecurityForm({ onSubmit, register, errors }) {
         <input
           id="confirmPassword"
           name="confirmPassword"
+          type="password"
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errors?.confirmPassword && (
+        {formErrors?.confirmPassword && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errors.confirmPassword.message}
+            {formErrors.confirmPassword.message}
           </p>
         )}
       </div>
-      <button
-        type="submit"
-        className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded py-2 px-4 mt-4"
-      >
-        Submit
-      </button>
+      <div className="w-full mt-4">
+        {apiError && (
+          <p className="text-red-500 text-sm text-left italic">{apiError}</p>
+        )}
+        <button
+          type="submit"
+          className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded py-2 px-4 mt-4"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Please wait' : 'Submit'}
+        </button>
+      </div>
     </form>
   );
 }
@@ -74,7 +89,9 @@ function SecurityForm({ onSubmit, register, errors }) {
 SecurityForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
-  errors: PropsType.object,
+  formErrors: PropsType.object,
+  apiError: PropsType.string,
+  isSubmitting: PropsType.bool.isRequired,
 };
 
 export default SecurityForm;

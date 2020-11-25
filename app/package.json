@@ -39,8 +39,9 @@
     "lint": "stylelint **/*.{js,jsx} && eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "lint:staged": "lint-staged",
+    "lint:prod": "NODE_ENV=production npm run lint",
     "start": "npm run watch:css && craco start",
-    "build": "npm run build:css && craco build",
+    "build": "npm run lint:prod && npm run build:css && craco build",
     "eject": "craco eject"
   },
   "eslintConfig": {

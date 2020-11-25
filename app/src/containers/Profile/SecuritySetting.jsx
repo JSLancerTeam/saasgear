@@ -3,26 +3,32 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useMutation } from '@apollo/react-hooks';
 import * as yup from 'yup';
+import { toast } from 'react-toastify';
 
 import SecurityForm from '@/components/Profile/SecurityForm';
+import changePasswordQuery from '@/queries/auth/changePassword';
 
 const SecuritySettingSchema = yup.object().shape({
   currentPassword: yup.string().required('Current password is required'),
-  newPassword: yup.string().required('New password is required'),
+  newPassword: yup.string().required('New password is required').min(6, 'Password must be at least 6 characters'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('newPassword'), null], 'Password must match'),
 });
 
 function SecuritySetting({ isActive }) {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SecuritySettingSchema),
   });
+  const [changePasswordMutation, { error, loading }] = useMutation(changePasswordQuery);
 
-  function onSubmit(data) {
-    // eslint-disable-next-line no-console
-    console.log(data);
+  async function onSubmit(params) {
+    const { data } = await changePasswordMutation({ variables: params });
+    if (data?.changePassword) {
+      toast.success('Change password successfully!')
+    }
   }
 
   return (
@@ -32,7 +38,9 @@ function SecuritySetting({ isActive }) {
           <SecurityForm
             onSubmit={handleSubmit(onSubmit)}
             register={register}
-            errors={errors}
+            formErrors={formErrors}
+            apiError={error?.message}
+            isSubmitting={loading}
           />
         </div>
       </div>

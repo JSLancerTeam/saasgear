@@ -1,30 +1,16 @@
 import pkg from 'apollo-server-express';
 import dayjs from 'dayjs';
-import Validator from 'fastest-validator';
 import { updateUser } from '~/repository/user.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
 import { findToken, removeUserToken } from '~/repository/user_token.repository';
 import logger from '~/utils/logger';
+import { changePasswordValidation } from '~/utils/validations/authenticate.validation';
 
 const { ApolloError, ValidationError, ForbiddenError, UserInputError } = pkg;
 
-function resetPasswordValidation(data) {
-  const validator = new Validator();
-  const schema = {
-    password: {
-      type: 'string',
-      min: 6,
-      max: 50,
-      optional: true,
-      empty: false,
-    },
-  };
-  return validator.validate(data, schema);
-}
-
 export async function resetPasswordUser(token, password, confirmPassword) {
   try {
-    const validateResult = resetPasswordValidation({ password });
+    const validateResult = changePasswordValidation({ password });
     if (validateResult.length) {
       throw new UserInputError(
         validateResult.map((it) => it.message).join(','),

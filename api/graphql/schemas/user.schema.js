@@ -53,6 +53,7 @@ export const UserSchema = gql`
     ): ResponseUserLogin!
 
     login(email: String!, password: String!): ResponseUserLogin!
+
     registerSocialAccount(
       provider: String!
       email: String!
@@ -60,7 +61,10 @@ export const UserSchema = gql`
       avatarUrl: String!
       providerId: String!
     ): ResponseUserLogin!
+
     forgotPassword(email: String!): Boolean!
+
+    changePassword(currentPassword: String!, newPassword: String!): Boolean!
 
     resetPassword(
       token: String!

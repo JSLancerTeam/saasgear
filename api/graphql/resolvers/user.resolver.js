@@ -6,6 +6,7 @@ import {
 } from '~/services/authentication/verify-email.service';
 import { forgotPasswordUser } from '~/services/authentication/forgot-password.service';
 import { resetPasswordUser } from '~/services/authentication/reset-password.service';
+import { changePasswordUser } from '~/services/authentication/change-password.service';
 import { loginGithub } from '~/services/authentication/github-login.service';
 import { registerAccountByGithub } from '~/services/authentication/register-social.service';
 
@@ -22,6 +23,8 @@ const resolvers = {
       return loginUser(email, password);
     },
     forgotPassword: async (_, { email }) => forgotPasswordUser(email),
+    changePassword: async (_, { currentPassword, newPassword }, { user }) =>
+      changePasswordUser(user.id, currentPassword, newPassword),
     resetPassword: async (_, { token, password, confirmPassword }) =>
       resetPasswordUser(token, password, confirmPassword),
     verify: (_, { token }) => verifyEmail(token),

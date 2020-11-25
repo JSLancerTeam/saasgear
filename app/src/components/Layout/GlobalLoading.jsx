@@ -72,7 +72,6 @@ function GlobalLoading() {
   const status = useApolloNetworkStatus();
 
   useEffect(() => {
-    console.log(status);
     updateStatus();
 
   }, [status]);
@@ -99,7 +98,7 @@ function GlobalLoading() {
     <ProgressBar>
       <Bar>
         <Progress
-          loading={isLoading}
+          loading={isLoading ? 1 : 0}
           completing={isCompleting}
           completed={isCompleted}
         />

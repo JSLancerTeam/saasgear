@@ -18,6 +18,7 @@
     "apollo-upload-client": "^14.1.2",
     "classnames": "^2.2.6",
     "dayjs": "^1.9.4",
+    "fb": "^2.0.0",
     "graphql": "^15.4.0",
     "graphql.macro": "^1.4.2",
     "prop-types": "^15.7.2",

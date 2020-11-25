@@ -8,7 +8,7 @@ import Auth from '@/containers/Auth/Auth';
 import PrivateRoute from '@/routes/PrivateRoute';
 import AdminLayout from '@/containers/Layout/Admin';
 import VerifyEmail from '@/containers/VerifyEmail';
-import Github from '@/containers/Github';
+import Social from '@/containers/Social';
 import { client } from '@/config/apollo';
 import '@/assets/css/main.css';
 import GlobalLoading from '@/components/Layout/GlobalLoading';
@@ -30,7 +30,7 @@ function App() {
         <Switch>
           <Route path="/auth" component={Auth} />
           <Route path="/verify-email" component={VerifyEmail} />
-          <Route path="/github/callback" component={Github} />
+          <Route path="/social/:provider/callback" component={Social} />
           <PrivateRoute render={(props) => <AdminLayout {...props} />} />
           <Redirect from="*" to="/" />
         </Switch>

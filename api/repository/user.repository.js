@@ -17,23 +17,16 @@ export const usersColumns = {
   providerId: 'users.provider_id',
 };
 
-export async function findUser({ id, email, provider_id }) {
+export async function findUser({ id, email, provider_id, provider }) {
   const condition = {};
   if (id) condition.id = id;
   if (email) condition.email = email;
   if (provider_id) condition.provider_id = provider_id;
+  if (provider) condition.provider = provider;
   return database(TABLE).where(condition).first();
 }
 
-export async function createUser({
-  name,
-  email,
-  password = 'null',
-  provider,
-  provider_id,
-  is_active,
-  avatar_url,
-}) {
+export async function createUser({ name, email, password = 'null', provider, provider_id, is_active, avatar_url }) {
   const data = { name, email, password };
   if (is_active) data.is_active = is_active;
   if (provider) data.provider = provider;

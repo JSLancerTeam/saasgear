@@ -1,28 +1,29 @@
 import React, { useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import getQueryParam from '@/utils/getQueryParam';
-import githubLoginQuery from '@/queries/auth/githubLogin';
+import socialLoginQuery from '@/queries/auth/socialLogin';
 import { JWT_STORAGE_KEY } from '@/constants';
 import { toggleToastError } from '@/features/auth/user';
 import FormRegister from './FormRegister';
 
-
-export default function Github() {
+export default function Social() {
   const query = getQueryParam();
   const code = query.get('code');
-  const { data, loading, error } = useQuery(githubLoginQuery, {
-    variables: { code },
-  });
+  const { provider } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const { data, loading, error } = useQuery(socialLoginQuery, {
+    variables: { provider: provider.toUpperCase(), code },
+  });
+
   useEffect(() => {
-    if (!loading && data?.loginByGithub?.token) {
-      localStorage.setItem(JWT_STORAGE_KEY, data.loginByGithub.token);
-      history.push('/');
+    if (!loading && data?.loginBySocial?.token) {
+      localStorage.setItem(JWT_STORAGE_KEY, data.loginBySocial.token);
+      history.replace('/');
     }
   }, [data, loading, error]);
 
@@ -37,8 +38,8 @@ export default function Github() {
   }, [error]);
 
   return loading ? (
-    <div>Loading....</div>
+    <div>{provider}</div>
   ) : (
-    !error && <FormRegister data={data?.loginByGithub} />
+    !error && <FormRegister data={data?.loginBySocial} />
   );
 }

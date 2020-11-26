@@ -1,8 +1,8 @@
 import { gql } from 'graphql.macro';
 
 export default gql`
-  query githubLogin($code: String) {
-    loginByGithub(code: $code) {
+  query socialLogin($provider: SocialProviderType!, $code: String!) {
+    loginBySocial(provider: $provider, code: $code) {
       token
       user {
         name
@@ -15,9 +15,9 @@ export default gql`
   }
 `;
 
-export const registerAccountByGithub = gql`
+export const registerAccountBySocial = gql`
   mutation registerSocial(
-    $provider: String!
+    $provider: SocialProviderType!
     $email: String!
     $name: String!
     $avatarUrl: String!

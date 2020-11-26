@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 import PropsType from 'prop-types';
 
-import { registerAccountByGithub } from '@/queries/auth/githubLogin';
+import { registerAccountBySocial } from '@/queries/auth/socialLogin';
 import { JWT_STORAGE_KEY } from '@/constants';
 import SignUpSocialForm from '@/components/Auth/SignUpSocialForm';
 
@@ -15,7 +15,7 @@ const registerSchema = yup.object().shape({
 });
 
 export default function FormRegister({ data }) {
-  const [registerMutation, { error }] = useMutation(registerAccountByGithub);
+  const [registerMutation, { error }] = useMutation(registerAccountBySocial);
   const history = useHistory();
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(registerSchema),
@@ -23,7 +23,7 @@ export default function FormRegister({ data }) {
 
   async function onSubmit(formdata) {
     const params = {
-      provider: data.user.provider,
+      provider: data.user.provider.toUpperCase(),
       providerId: data.user.providerId,
       avatarUrl: data.user.avatarUrl,
       name: data.user.name,

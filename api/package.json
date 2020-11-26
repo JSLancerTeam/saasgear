@@ -32,14 +32,15 @@
     "link-module-alias": "^1.2.0",
     "lodash": "^4.17.20",
     "mailgun-js": "^0.22.0",
-    "stripe": "^8.121.0",
     "mjml": "^4.7.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
     "redis": "^3.0.2",
+    "stripe": "^8.121.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",

@@ -13,6 +13,12 @@ export const UserSchema = gql`
     FORGOT_PASSWORD
   }
 
+  enum SocialProviderType {
+    GITHUB
+    FACEBOOK
+    GOOGLE
+  }
+
   type User {
     id: ID!
     email: String!
@@ -40,37 +46,21 @@ export const UserSchema = gql`
 
   extend type Query {
     profileUser: User!
-    loginByGithub(code: String): ResponseUserSocial!
+    loginBySocial(provider: SocialProviderType!, code: String!): ResponseUserSocial!
   }
 
   extend type Mutation {
-    register(
-      email: String!
-      password: String!
-      name: String!
-      planName: String
-      billingType: BillingType
-    ): ResponseUserLogin!
+    register(email: String!, password: String!, name: String!, planName: String, billingType: BillingType): ResponseUserLogin!
 
     login(email: String!, password: String!): ResponseUserLogin!
 
-    registerSocialAccount(
-      provider: String!
-      email: String!
-      name: String!
-      avatarUrl: String!
-      providerId: String!
-    ): ResponseUserLogin!
+    registerSocialAccount(provider: SocialProviderType!, email: String!, name: String!, avatarUrl: String!, providerId: String!): ResponseUserLogin!
 
     forgotPassword(email: String!): Boolean!
 
     changePassword(currentPassword: String!, newPassword: String!): Boolean!
 
-    resetPassword(
-      token: String!
-      password: String!
-      confirmPassword: String!
-    ): Boolean!
+    resetPassword(token: String!, password: String!, confirmPassword: String!): Boolean!
 
     verify(token: String!): Boolean!
 

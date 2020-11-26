@@ -64,7 +64,7 @@ function SignIn() {
       {
         name: 'Facebook',
         logo: FaceBookSvg,
-        url: `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&scope=user`,
+        url: `https://www.facebook.com/v9.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/facebook/callback&scope=email`,
       },
       {
         name: 'Google',

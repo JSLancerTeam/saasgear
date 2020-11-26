@@ -5,9 +5,6 @@ import { sign } from '~/helpers/jwt.helper';
 import AxiosInstance from '~/utils/axios-instance';
 
 export async function loginGithub(code) {
-  if (!code) {
-    throw new Apollo.ApolloError('Invalid');
-  }
   const response = await getAccessTokenFromGithub(code);
   if (response.data.error) {
     throw new Apollo.ApolloError(response.data.error_description);
@@ -17,6 +14,9 @@ export async function loginGithub(code) {
   const { name, email, avatar_url, id } = userInfoResponse.data;
   if (email) {
     const userByEmail = await findUser({ email });
+    if (userByEmail?.provider === SOCIAL_PROVIDER.github && parseInt(userByEmail?.provider_id, 10) === id) {
+      return { token: sign({ email, name }) };
+    }
     if (userByEmail) {
       return {
         user: {
@@ -37,10 +37,11 @@ export async function loginGithub(code) {
       avatar_url,
       is_active: true,
     });
+
     return { token: sign({ email, name }) };
   }
 
-  const user = await findUser({ provider_id: id });
+  const user = await findUser({ provider_id: id, provider: SOCIAL_PROVIDER.github });
   if (user) {
     return {
       token: sign({

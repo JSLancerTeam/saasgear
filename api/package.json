@@ -7,6 +7,7 @@
   "scripts": {
     "start": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
     "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
+    "db:create-products": "node --experimental-modules --es-module-specifier-resolution=node scripts/create-products.js",
     "db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
     "db:rollback": "knex --esm migrate:rollback --knexfile config/knexfile.cjs",
     "db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
@@ -26,6 +27,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fastest-validator": "^1.8.0",
+    "graphql-resolvers": "^0.4.2",
     "handlebars": "^4.7.6",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.12",

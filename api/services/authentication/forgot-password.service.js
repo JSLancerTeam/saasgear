@@ -7,7 +7,7 @@ import generateRandomKey from '~/helpers/genarateRandomkey';
 import {
   createToken,
   updateUserTokenById,
-} from '~/repository/user_token.repository';
+} from '~/repository/user_tokens.repository';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
 import generateTemplateEmail from '~/helpers/generate-template-email';

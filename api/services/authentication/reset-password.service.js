@@ -2,7 +2,7 @@ import pkg from 'apollo-server-express';
 import dayjs from 'dayjs';
 import { updateUser } from '~/repository/user.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
-import { findToken, removeUserToken } from '~/repository/user_token.repository';
+import { findToken, removeUserToken } from '~/repository/user_tokens.repository';
 import logger from '~/utils/logger';
 import { changePasswordValidation } from '~/utils/validations/authenticate.validation';
 

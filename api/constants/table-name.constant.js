@@ -1,8 +1,10 @@
 const TABLES = {
   users: 'users',
-  userToken: 'user_token',
+  userTokens: 'user_tokens',
   userPlans: 'user_plans',
   userPermissions: 'user_permissions',
+  products: 'products',
+  prices: 'prices',
 };
 
 export { TABLES };

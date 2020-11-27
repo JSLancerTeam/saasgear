@@ -1,5 +1,5 @@
 export function up(knex) {
-  return knex.schema.createTable('user_token', (t) => {
+  return knex.schema.createTable('user_tokens', (t) => {
     t.increments('id');
     t.integer('user_id').unsigned().notNullable();
     t.string('token');
@@ -16,5 +16,5 @@ export function up(knex) {
 }
 
 export function down(knex) {
-  return knex.schema.dropTable('user_token');
+  return knex.schema.dropTable('user_tokens');
 }

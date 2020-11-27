@@ -3,7 +3,7 @@ import Apollo from 'apollo-server-express';
 import { createUser, findUser } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import generateTemplateEmail from '~/helpers/generate-template-email';
-import { createToken } from '~/repository/user_token.repository';
+import { createToken } from '~/repository/user_tokens.repository';
 import sendMail from '~/libs/mail';
 import { sign } from '~/helpers/jwt.helper';
 

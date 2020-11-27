@@ -1,21 +1,22 @@
 import pkg from 'apollo-server-express';
 
 import { findUser, createUser } from '~/repository/user.repository';
-import { createToken } from '~/repository/user_token.repository';
+import { createToken } from '~/repository/user_tokens.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
 import generateTemplateEmail from '~/helpers/generate-template-email';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import sendMail from '~/libs/mail';
 import { registerValidation } from '~/utils/validations/authenticate.validation';
-import { createUserPlan } from '~/services/user/plans-user.service';
-import { addMultiPermissions } from '~/services/user/permission.service';
-import { BILLING_PRICE } from '~/constants/billing.constant';
 import logger from '~/utils/logger';
 import { sign } from '~/helpers/jwt.helper';
+import { findProductAndPriceByType } from '~/repository/products.repository';
+import { createNewSubcription } from '~/services/stripe/subcription.service';
+import { addMultiPermissions } from '~/services/user/permission.service';
+import { PERMISSION_PLAN } from '~/constants/billing.constant';
 
 const { ValidationError, ApolloError } = pkg;
 
-async function registerUser(email, password, name, planName, billingType) {
+async function registerUser(email, password, name, paymentMethodToken, planName, billingType) {
   const validateResult = registerValidation({ email, password, name });
   if (validateResult.length) {
     throw new ValidationError(
@@ -35,24 +36,32 @@ async function registerUser(email, password, name, planName, billingType) {
     }
 
     const passwordHashed = await generatePassword(password);
-    const tokenVerifyEmail = await generateRandomKey();
-    const newUserId = await createUser({
-      email,
-      password: passwordHashed,
-      name,
-    });
-
-    const token = sign({
-      email,
-      name,
-    });
+    const userData = {
+      email, password: passwordHashed, name,
+    };
+    let newUserId = null;
 
     if (planName) {
-      const { price, permissions } = BILLING_PRICE[planName];
-      await createUserPlan(newUserId, planName, price, billingType);
-      await addMultiPermissions(newUserId, permissions);
+      const product = await findProductAndPriceByType(planName, billingType);
+      if (!product) {
+        throw new ApolloError('Can not find any plan');
+      }
+
+      const userPlanData = {
+        product_id: product.id,
+        price_id: product.price_id,
+      };
+
+      const [userId] = await Promise.all([
+        createUser(userData, userPlanData),
+        createNewSubcription(paymentMethodToken, email, name, product.price_stripe_id),
+      ]);
+      newUserId = userId;
+    } else {
+      newUserId = await createUser(userData);
     }
 
+    const tokenVerifyEmail = await generateRandomKey();
     const template = generateTemplateEmail({
       fileName: 'verifyEmail.mjml',
       data: {
@@ -61,10 +70,18 @@ async function registerUser(email, password, name, planName, billingType) {
       },
     });
 
-    await Promise.all([
+    const pms = [
       sendMail(email, 'Confirm your email address', template),
       createToken(newUserId, tokenVerifyEmail, 'verify_email'),
-    ]);
+    ];
+    if (planName && PERMISSION_PLAN[planName]) {
+      pms.push(addMultiPermissions(newUserId, PERMISSION_PLAN[planName]));
+    }
+
+    await Promise.all(pms);
+
+    const token = sign({ email, name });
+
     return { token };
   } catch (error) {
     logger.error(error);

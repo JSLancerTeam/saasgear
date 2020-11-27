@@ -4,7 +4,7 @@ import {
   findToken,
   changeTokenStatus,
   createToken,
-} from '~/repository/user_token.repository';
+} from '~/repository/user_tokens.repository';
 import { activeUser } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import generateTemplateEmail from '~/helpers/generate-template-email';

@@ -4,40 +4,41 @@ import Layout from '../components/layout';
 
 const plans = [
   {
-    id: 'freelancer',
-    name: 'Freelancer',
-    price: 12,
-    desc: 'All the basics for starting a new business',
+    id: 'demo',
+    name: 'Demo',
+    price: 0,
+    desc: 'Preview functionality right on this site',
     includeds: [
-      'Potenti felis, in cras at at ligula nunc.',
-      'Orci neque eget pellentesque.',
-      'Donec mauris sit in eu tincidunt etiam.',
+      'Free sign up.',
+      'Test-drive features.',
+      'Explore example gallery.',
     ],
   },
   {
-    id: 'startup',
-    name: 'Startup',
-    price: 24,
-    desc: 'All the basics for starting a new business',
+    id: 'starter',
+    name: 'Starter',
+    price: 75,
+    desc: 'Kickstart your project with all features and code',
     includeds: [
-      'Potenti felis, in cras at at ligula nunc.',
-      'Orci neque eget pellentesque.',
-      'Donec mauris sit in eu tincidunt etiam.',
-      'Faucibus volutpat magna',
+      'Save weeks of development time.',
+      'Full source code download.',
+      'Self-service documentation.',
+      'Slack community support',
+      'One year of product updates',
     ],
   },
   {
-    id: 'enterprise',
-    name: 'Enterprise',
-    price: 48,
-    desc: 'All the basics for starting a new business',
+    id: 'professional',
+    name: 'Professional',
+    price: 295,
+    desc: 'We help you get up and running even faster',
     includeds: [
-      'Potenti felis, in cras at at ligula nunc.',
-      'Orci neque eget pellentesque.',
-      'Donec mauris sit in eu tincidunt etiam.',
-      'Faucibus volutpat magna',
-      'Id sed tellus in varius quisque',
-      'Risus egestas faucibus',
+      'Everything in the Starter plan.',
+      'One-on-one onboarding and setup.',
+      'Design consulting session with you/your team.',
+      'Customized code working towards your MVP',
+      'Production deployment to a VPS of your choice',
+      'Automated server setup and deploy scripts',
     ],
   },
 ]
@@ -73,16 +74,29 @@ const Pricing = () => {
               })}
             >
               <div className="border-b border-gray-300 pb-6 px-8">
-                <h4 className="text-xl">{plan.name}</h4>
+                <h4 className="text-2xl font-semibold">{plan.name}</h4>
                 <p className="mt-3 text-gray-700">{plan.desc}</p>
-                <div className="my-5">
-                  <span className="text-4xl font-bold">${isYearly ? plan.price * 9 : plan.price}</span>
-                  <span>{isYearly ? '/year' : '/month'}</span>
-                </div>
-                <button
-                  onClick={() => window.location.href = `${process.env.appUrl}/auth/signup?plan=${plan.id}&isYearly=${isYearly ? 1 : 0}`}
-                  className="w-full bg-gray-800 text-white py-2 rounded-lg"
-                >Start 14 day trial</button>
+                {plan.price > 0 ? (
+                  <div className="my-5">
+                    <span className="text-4xl font-bold">${isYearly ? plan.price * 9 : plan.price}</span>
+                    <span>{isYearly ? '/year' : '/month'}</span>
+                  </div>
+                ) : (
+                  <div className="my-5">
+                    <span className="text-4xl font-bold">Free</span>
+                  </div>
+                )}
+                {plan.price > 0 ? (
+                  <button
+                    onClick={() => window.location.href = `${process.env.appUrl}/auth/signup?plan=${plan.id}&isYearly=${isYearly ? 1 : 0}`}
+                    className="w-full bg-gray-800 text-white py-2 rounded-lg"
+                  >Start 14 day trial</button>
+                ) : (
+                  <button
+                    onClick={() => window.location.href = `${process.env.appUrl}/auth/signup`}
+                    className="w-full bg-gray-800 text-white py-2 rounded-lg"
+                  >Try now</button>
+                )}
               </div>
               <div className="px-8 mt-5">
                 <h5 className="uppercase">What's included</h5>

@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import Stripe from 'stripe';
 import { getUserPlan } from '~/services/user/plans-user.service';
 import logger from '~/utils/logger';
+import { lowerCaseAndTrim } from '~/helpers/string.helper';
 
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 const { ApolloError } = Apollo;
@@ -26,7 +27,7 @@ export async function createNewSubcription(token, user) {
     }
 
     const customer = await stripe.customers.create({
-      email: user.email,
+      email: lowerCaseAndTrim(user.email),
       name: user.name,
       source: token,
     });

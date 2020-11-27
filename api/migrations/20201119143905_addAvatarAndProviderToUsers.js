@@ -2,7 +2,7 @@ export function up(knex) {
   return knex.schema.table('users', (table) => {
     table.string('avatar_url');
     table.string('provider');
-    table.string('provider_id', 20);
+    table.string('provider_id', 30);
   });
 }
 

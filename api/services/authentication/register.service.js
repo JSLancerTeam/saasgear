@@ -12,18 +12,16 @@ import { addMultiPermissions } from '~/services/user/permission.service';
 import { BILLING_PRICE } from '~/constants/billing.constant';
 import logger from '~/utils/logger';
 import { sign } from '~/helpers/jwt.helper';
+import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 const { ValidationError, ApolloError } = pkg;
 
 async function registerUser(email, password, name, planName, billingType) {
   const validateResult = registerValidation({ email, password, name });
   if (validateResult.length) {
-    throw new ValidationError(
-      validateResult.map((it) => it.message).join(','),
-      {
-        invalidArgs: validateResult.map((it) => it.field).join(','),
-      },
-    );
+    throw new ValidationError(validateResult.map((it) => it.message).join(','), {
+      invalidArgs: validateResult.map((it) => it.field).join(','),
+    });
   }
 
   try {
@@ -53,7 +51,7 @@ async function registerUser(email, password, name, planName, billingType) {
       await addMultiPermissions(newUserId, permissions);
     }
 
-    const template = generateTemplateEmail({
+    const template = await generateTemplateEmail({
       fileName: 'verifyEmail.mjml',
       data: {
         name,
@@ -61,10 +59,7 @@ async function registerUser(email, password, name, planName, billingType) {
       },
     });
 
-    await Promise.all([
-      sendMail(email, 'Confirm your email address', template),
-      createToken(newUserId, tokenVerifyEmail, 'verify_email'),
-    ]);
+    await Promise.all([sendMail(email, 'Confirm your email address', template), createToken(newUserId, tokenVerifyEmail, SEND_MAIL_TYPE.VERIFY_EMAIL)]);
     return { token };
   } catch (error) {
     logger.error(error);

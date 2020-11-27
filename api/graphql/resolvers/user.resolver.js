@@ -6,6 +6,7 @@ import { resetPasswordUser } from '~/services/authentication/reset-password.serv
 import { changePasswordUser } from '~/services/authentication/change-password.service';
 import { loginSocial } from '~/services/authentication/social-login.service';
 import { registerAccountBySocial } from '~/services/authentication/register-social.service';
+import { lowerCaseAndTrim } from '~/helpers/string.helper';
 
 const resolvers = {
   Query: {
@@ -14,17 +15,17 @@ const resolvers = {
   },
   Mutation: {
     register(_, { email, password, name, planName, billingType }) {
-      return registerUser(email, password, name, planName, billingType);
+      return registerUser(lowerCaseAndTrim(email), password, name, planName, billingType);
     },
     login(_, { email, password }) {
-      return loginUser(email, password);
+      return loginUser(lowerCaseAndTrim(email), password);
     },
-    forgotPassword: async (_, { email }) => forgotPasswordUser(email),
+    forgotPassword: async (_, { email }) => forgotPasswordUser(lowerCaseAndTrim(email)),
     changePassword: async (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword),
     resetPassword: async (_, { token, password, confirmPassword }) => resetPasswordUser(token, password, confirmPassword),
     verify: (_, { token }) => verifyEmail(token),
-    resendEmail: (_, { type }, { user }) => resendEmailAction(user, type.toLowerCase()),
-    registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, email, name, avatarUrl, providerId),
+    resendEmail: (_, { type }, { user }) => resendEmailAction(user, lowerCaseAndTrim(type)),
+    registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, lowerCaseAndTrim(email), name, avatarUrl, providerId),
   },
 };
 

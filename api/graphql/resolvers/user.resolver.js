@@ -24,7 +24,7 @@ const resolvers = {
     changePassword: async (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword),
     resetPassword: async (_, { token, password, confirmPassword }) => resetPasswordUser(token, password, confirmPassword),
     verify: (_, { token }) => verifyEmail(token),
-    resendEmail: (_, { type }, { user }) => resendEmailAction(user, type.toLowerCase()),
+    resendEmail: (_, { type }, { user }) => resendEmailAction(user, lowerCaseAndTrim(type)),
     registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, lowerCaseAndTrim(email), name, avatarUrl, providerId),
   },
 };

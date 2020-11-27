@@ -7,6 +7,7 @@ import generateTemplateEmail from '~/helpers/generate-template-email';
 import sendMail from '~/libs/mail';
 import logger from '~/utils/logger';
 import { lowerCaseAndTrim } from '~/helpers/string.helper';
+import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 const { ApolloError } = pkg;
 
@@ -18,7 +19,7 @@ export async function verifyEmail(authToken) {
   try {
     const token = await findToken(authToken);
 
-    if (!token || !token.is_active || token.type !== 'verify_email') {
+    if (!token || !token.is_active || token.type !== SEND_MAIL_TYPE.VERIFY_EMAIL) {
       throw new ApolloError('Invalid token');
     }
 
@@ -41,7 +42,7 @@ export async function resendEmailAction(user, type) {
     let subject;
     const token = await generateRandomKey();
     switch (type) {
-      case 'verify_email':
+      case SEND_MAIL_TYPE.VERIFY_EMAIL:
         if (user.is_active === 1) {
           throw new ApolloError('Account verified');
         }
@@ -55,7 +56,7 @@ export async function resendEmailAction(user, type) {
         });
         break;
 
-      case 'forgot_password':
+      case SEND_MAIL_TYPE.FORGOT_PASSWORD:
         subject = 'Resend reset password';
         template = await generateTemplateEmail({
           fileName: 'forgotPassword.mjml',

@@ -12,6 +12,7 @@ import { addMultiPermissions } from '~/services/user/permission.service';
 import { BILLING_PRICE } from '~/constants/billing.constant';
 import logger from '~/utils/logger';
 import { sign } from '~/helpers/jwt.helper';
+import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 const { ValidationError, ApolloError } = pkg;
 
@@ -58,7 +59,7 @@ async function registerUser(email, password, name, planName, billingType) {
       },
     });
 
-    await Promise.all([sendMail(email, 'Confirm your email address', template), createToken(newUserId, tokenVerifyEmail, 'verify_email')]);
+    await Promise.all([sendMail(email, 'Confirm your email address', template), createToken(newUserId, tokenVerifyEmail, SEND_MAIL_TYPE.VERIFY_EMAIL)]);
     return { token };
   } catch (error) {
     logger.error(error);

@@ -6,6 +6,7 @@ import generateTemplateEmail from '~/helpers/generate-template-email';
 import { createToken } from '~/repository/user_token.repository';
 import sendMail from '~/libs/mail';
 import { sign } from '~/helpers/jwt.helper';
+import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 export async function registerAccountBySocial(provider, email, name, avatarUrl, providerId) {
   const existEmail = await findUser({ email });
@@ -30,7 +31,7 @@ export async function registerAccountBySocial(provider, email, name, avatarUrl, 
     },
   });
 
-  await Promise.all([sendMail(email, 'Confirm your email address', template), createToken(userId, tokenVerifyEmail, 'verify_email')]);
+  await Promise.all([sendMail(email, 'Confirm your email address', template), createToken(userId, tokenVerifyEmail, SEND_MAIL_TYPE.VERIFY_EMAIL)]);
 
   return {
     token: sign({

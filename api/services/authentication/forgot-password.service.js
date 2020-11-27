@@ -5,6 +5,7 @@ import { createToken, updateUserTokenById } from '~/repository/user_token.reposi
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
 import generateTemplateEmail from '~/helpers/generate-template-email';
+import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 const { ApolloError } = pkg;
 
@@ -14,11 +15,11 @@ export async function forgotPasswordUser(email) {
     if (!user || !user.id) {
       throw new ApolloError('Can not find any user');
     }
-    const session = await getUserByIdAndJoinUserToken(user.id, 'forgot_password');
+    const session = await getUserByIdAndJoinUserToken(user.id, SEND_MAIL_TYPE.FORGOT_PASSWORD);
     const tokenGenerated = await generateRandomKey();
     const token = `${tokenGenerated}-${user.id}`;
     if (!session) {
-      await createToken(user.id, token, 'forgot_password');
+      await createToken(user.id, token, SEND_MAIL_TYPE.FORGOT_PASSWORD);
     } else {
       await updateUserTokenById(session.id, token);
     }

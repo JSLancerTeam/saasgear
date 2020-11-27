@@ -6,6 +6,7 @@ import generateRandomKey from '~/helpers/genarateRandomkey';
 import generateTemplateEmail from '~/helpers/generate-template-email';
 import sendMail from '~/libs/mail';
 import logger from '~/utils/logger';
+import { lowerCaseAndTrim } from '~/helpers/string.helper';
 
 const { ApolloError } = pkg;
 
@@ -78,7 +79,7 @@ export async function resendEmailAction(user, type) {
     }
 
     await changeTokenStatus(null, type, false);
-    await Promise.all([createToken(user.id, token, type), sendMail(user.email, subject, template)]);
+    await Promise.all([createToken(user.id, token, type), sendMail(lowerCaseAndTrim(user.email), subject, template)]);
 
     return true;
   } catch (error) {

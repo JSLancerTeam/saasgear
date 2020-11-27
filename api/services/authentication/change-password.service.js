@@ -39,7 +39,7 @@ export async function changePasswordUser(userId, currentPassword, newPassword) {
       },
     });
 
-    await sendMail(user.email, 'Change Password from SAASGEAR', template);
+    await sendMail(user.email, 'Change Password from SaaSgear', template);
     return true;
   } catch (error) {
     logger.error(error);

@@ -1,10 +1,6 @@
 import pkg from 'apollo-server-express';
 import dayjs from 'dayjs';
-import {
-  findToken,
-  changeTokenStatus,
-  createToken,
-} from '~/repository/user_token.repository';
+import { findToken, changeTokenStatus, createToken } from '~/repository/user_token.repository';
 import { activeUser } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import generateTemplateEmail from '~/helpers/generate-template-email';
@@ -29,10 +25,7 @@ export async function verifyEmail(authToken) {
       throw new ApolloError('Token had expired');
     }
 
-    await Promise.all([
-      changeTokenStatus(token.id, token.type, false),
-      activeUser(token.user_id),
-    ]);
+    await Promise.all([changeTokenStatus(token.id, token.type, false), activeUser(token.user_id)]);
 
     return true;
   } catch (error) {
@@ -52,7 +45,7 @@ export async function resendEmailAction(user, type) {
           throw new ApolloError('Account verified');
         }
         subject = 'Resend confirm your email address';
-        template = generateTemplateEmail({
+        template = await generateTemplateEmail({
           fileName: 'verifyEmail.mjml',
           data: {
             name: user.name,
@@ -63,7 +56,7 @@ export async function resendEmailAction(user, type) {
 
       case 'forgot_password':
         subject = 'Resend reset password';
-        template = generateTemplateEmail({
+        template = await generateTemplateEmail({
           fileName: 'forgotPassword.mjml',
           data: {
             name: user.name,
@@ -74,7 +67,7 @@ export async function resendEmailAction(user, type) {
 
       default:
         subject = 'Resend confirm your email address';
-        template = generateTemplateEmail({
+        template = await generateTemplateEmail({
           fileName: 'verifyEmail.mjml',
           data: {
             name: user.name,
@@ -85,10 +78,7 @@ export async function resendEmailAction(user, type) {
     }
 
     await changeTokenStatus(null, type, false);
-    await Promise.all([
-      createToken(user.id, token, type),
-      sendMail(user.email, subject, template),
-    ]);
+    await Promise.all([createToken(user.id, token, type), sendMail(user.email, subject, template)]);
 
     return true;
   } catch (error) {

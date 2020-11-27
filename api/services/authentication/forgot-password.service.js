@@ -1,13 +1,7 @@
 import pkg from 'apollo-server-express';
-import {
-  findUser,
-  getUserByIdAndJoinUserToken,
-} from '~/repository/user.repository';
+import { findUser, getUserByIdAndJoinUserToken } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
-import {
-  createToken,
-  updateUserTokenById,
-} from '~/repository/user_token.repository';
+import { createToken, updateUserTokenById } from '~/repository/user_token.repository';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
 import generateTemplateEmail from '~/helpers/generate-template-email';
@@ -20,10 +14,7 @@ export async function forgotPasswordUser(email) {
     if (!user || !user.id) {
       throw new ApolloError('Can not find any user');
     }
-    const session = await getUserByIdAndJoinUserToken(
-      user.id,
-      'forgot_password',
-    );
+    const session = await getUserByIdAndJoinUserToken(user.id, 'forgot_password');
     const tokenGenerated = await generateRandomKey();
     const token = `${tokenGenerated}-${user.id}`;
     if (!session) {
@@ -32,7 +23,7 @@ export async function forgotPasswordUser(email) {
       await updateUserTokenById(session.id, token);
     }
 
-    const template = generateTemplateEmail({
+    const template = await generateTemplateEmail({
       fileName: 'forgotPassword.mjml',
       data: {
         name: session.name,

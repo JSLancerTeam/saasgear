@@ -22,7 +22,7 @@ export async function registerAccountBySocial(provider, email, name, avatarUrl, 
   });
   const tokenVerifyEmail = await generateRandomKey();
 
-  const template = generateTemplateEmail({
+  const template = await generateTemplateEmail({
     fileName: 'verifyEmail.mjml',
     data: {
       name,
@@ -30,8 +30,7 @@ export async function registerAccountBySocial(provider, email, name, avatarUrl, 
     },
   });
 
-  sendMail(email, 'Confirm your email address', template);
-  await createToken(userId, tokenVerifyEmail, 'verify_email');
+  await Promise.all([sendMail(email, 'Confirm your email address', template), createToken(userId, tokenVerifyEmail, 'verify_email')]);
 
   return {
     token: sign({

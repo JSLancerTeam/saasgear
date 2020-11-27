@@ -18,12 +18,9 @@ export async function changePasswordUser(userId, currentPassword, newPassword) {
 
     const validateResult = changePasswordValidation({ password: newPassword });
     if (validateResult.length) {
-      throw new UserInputError(
-        validateResult.map((it) => it.message).join(','),
-        {
-          invalidArgs: validateResult.map((it) => it.field).join(','),
-        },
-      );
+      throw new UserInputError(validateResult.map((it) => it.message).join(','), {
+        invalidArgs: validateResult.map((it) => it.field).join(','),
+      });
     }
 
     const matchPassword = await comparePassword(currentPassword, user.password);
@@ -34,7 +31,7 @@ export async function changePasswordUser(userId, currentPassword, newPassword) {
     const passwordHashed = await generatePassword(newPassword);
     await updateUser(user.id, { password: passwordHashed });
 
-    const template = generateTemplateEmail({
+    const template = await generateTemplateEmail({
       fileName: 'changePassword.mjml',
       data: {
         name: user.name,

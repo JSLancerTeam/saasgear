@@ -69,7 +69,7 @@ function SignIn() {
       {
         name: 'Google',
         logo: GoogleSvg,
-        url: `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&scope=user`,
+        url: `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/google/callback&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}`,
       },
       {
         name: 'Github',

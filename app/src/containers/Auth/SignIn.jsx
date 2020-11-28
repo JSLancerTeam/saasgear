@@ -64,12 +64,12 @@ function SignIn() {
       {
         name: 'Facebook',
         logo: FaceBookSvg,
-        url: `https://www.facebook.com/v9.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/facebook/callback&scope=email`,
+        url: `https://www.facebook.com/v9.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_KEY}&redirect_uri=${window.location.origin}/social/facebook/callback&scope=email`,
       },
       {
         name: 'Google',
         logo: GoogleSvg,
-        url: `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/google/callback&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}`,
+        url: `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&redirect_uri=${window.location.origin}/social/google/callback&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}`,
       },
       {
         name: 'Github',

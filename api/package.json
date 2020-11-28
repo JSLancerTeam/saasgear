@@ -9,6 +9,7 @@
     "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
     "db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
     "db:rollback": "knex --esm migrate:rollback --knexfile config/knexfile.cjs",
+    "db:create": "knex --esm migrate:make --knexfile config/knexfile.cjs",
     "db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
     "db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs",
     "postinstall": "link-module-alias",

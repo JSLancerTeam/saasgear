@@ -1,4 +1,4 @@
-import userResolves from './resolvers/user.resolver';
-import stripeResolves from './resolvers/stripe.resolver';
+import userResolver from './resolvers/user.resolver';
+import stripeResolver from './resolvers/stripe.resolver';
 
-export default [userResolves, stripeResolves];
+export default [userResolver, stripeResolver];

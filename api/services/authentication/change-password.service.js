@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { findUser, updateUser } from '~/repository/user.repository';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
-import generateTemplateEmail from '~/helpers/generate-template-email';
+import compileEmailTemplate from '~/helpers/compile-email-template';
 import { comparePassword, generatePassword } from '~/helpers/hashing.helper';
 import { changePasswordValidation } from '~/utils/validations/authenticate.validation';
 
@@ -31,7 +31,7 @@ export async function changePasswordUser(userId, currentPassword, newPassword) {
     const passwordHashed = await generatePassword(newPassword);
     await updateUser(user.id, { password: passwordHashed });
 
-    const template = await generateTemplateEmail({
+    const template = await compileEmailTemplate({
       fileName: 'changePassword.mjml',
       data: {
         name: user.name,

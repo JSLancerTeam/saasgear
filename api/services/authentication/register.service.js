@@ -3,7 +3,7 @@ import pkg from 'apollo-server-express';
 import { findUser, createUser } from '~/repository/user.repository';
 import { createToken } from '~/repository/user_token.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
-import generateTemplateEmail from '~/helpers/generate-template-email';
+import compileEmailTemplate from '~/helpers/compile-email-template';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import sendMail from '~/libs/mail';
 import { registerValidation } from '~/utils/validations/authenticate.validation';
@@ -51,7 +51,7 @@ async function registerUser(email, password, name, planName, billingType) {
       await addMultiPermissions(newUserId, permissions);
     }
 
-    const template = await generateTemplateEmail({
+    const template = await compileEmailTemplate({
       fileName: 'verifyEmail.mjml',
       data: {
         name,

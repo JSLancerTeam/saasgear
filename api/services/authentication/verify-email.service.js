@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { findToken, changeTokenStatus, createToken } from '~/repository/user_token.repository';
 import { activeUser } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
-import generateTemplateEmail from '~/helpers/generate-template-email';
+import compileEmailTemplate from '~/helpers/compile-email-template';
 import sendMail from '~/libs/mail';
 import logger from '~/utils/logger';
 import { lowerCaseAndTrim } from '~/helpers/string.helper';
@@ -47,7 +47,7 @@ export async function resendEmailAction(user, type) {
           throw new ApolloError('Account verified');
         }
         subject = 'Resend confirm your email address';
-        template = await generateTemplateEmail({
+        template = await compileEmailTemplate({
           fileName: 'verifyEmail.mjml',
           data: {
             name: user.name,
@@ -58,7 +58,7 @@ export async function resendEmailAction(user, type) {
 
       case SEND_MAIL_TYPE.FORGOT_PASSWORD:
         subject = 'Resend reset password';
-        template = await generateTemplateEmail({
+        template = await compileEmailTemplate({
           fileName: 'forgotPassword.mjml',
           data: {
             name: user.name,
@@ -69,7 +69,7 @@ export async function resendEmailAction(user, type) {
 
       default:
         subject = 'Resend confirm your email address';
-        template = await generateTemplateEmail({
+        template = await compileEmailTemplate({
           fileName: 'verifyEmail.mjml',
           data: {
             name: user.name,

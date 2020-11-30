@@ -4,7 +4,7 @@ import generateRandomKey from '~/helpers/genarateRandomkey';
 import { createToken, updateUserTokenById } from '~/repository/user_token.repository';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
-import generateTemplateEmail from '~/helpers/generate-template-email';
+import compileEmailTemplate from '~/helpers/compile-email-template';
 import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 const { ApolloError } = pkg;
@@ -24,7 +24,7 @@ export async function forgotPasswordUser(email) {
       await updateUserTokenById(session.id, token);
     }
 
-    const template = await generateTemplateEmail({
+    const template = await compileEmailTemplate({
       fileName: 'forgotPassword.mjml',
       data: {
         name: session.name,

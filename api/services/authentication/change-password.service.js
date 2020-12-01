@@ -13,19 +13,19 @@ export async function changePasswordUser(userId, currentPassword, newPassword) {
   try {
     const user = await findUser({ id: userId });
     if (!user || !user.id) {
-      throw new ApolloError('Can not find any user');
+      return new ApolloError('Can not find any user');
     }
 
     const validateResult = changePasswordValidation({ password: newPassword });
     if (validateResult.length) {
-      throw new UserInputError(validateResult.map((it) => it.message).join(','), {
+      return new UserInputError(validateResult.map((it) => it.message).join(','), {
         invalidArgs: validateResult.map((it) => it.field).join(','),
       });
     }
 
     const matchPassword = await comparePassword(currentPassword, user.password);
     if (!matchPassword) {
-      throw new ApolloError('Current password is not correct');
+      return new ApolloError('Current password is not correct');
     }
 
     const passwordHashed = await generatePassword(newPassword);

@@ -1,13 +1,13 @@
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/table-name.constant';
 
-const TABLE = TABLES.userToken;
+const TABLE = TABLES.userTokens;
 export const userTokenColumns = {
-  id: 'user_token.id',
-  userId: 'user_token.user_id',
-  token: 'user_token.token',
-  type: 'user_token.type',
-  isActive: 'user_token.is_active',
+  id: 'user_tokens.id',
+  userId: 'user_tokens.user_id',
+  token: 'user_tokens.token',
+  type: 'user_tokens.type',
+  isActive: 'user_tokens.is_active',
   createAt: 'users.created_at',
   updatedAt: 'users.updated_at',
 };

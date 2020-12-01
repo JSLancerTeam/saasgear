@@ -1,10 +1,10 @@
 export function up(knex) {
-  return knex.schema.createTable('user_plans', (t) => {
+  return knex.schema.createTable('user_tokens', (t) => {
     t.increments('id');
     t.integer('user_id').unsigned().notNullable();
-    t.string('plan_name');
-    t.float('price');
-    t.string('billing_type');
+    t.string('token');
+    t.string('type');
+    t.boolean('is_active').defaultTo(true);
     t.dateTime('created_at')
       .notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
@@ -16,5 +16,5 @@ export function up(knex) {
 }
 
 export function down(knex) {
-  return knex.schema.dropTable('user_plans');
+  return knex.schema.dropTable('user_tokens');
 }

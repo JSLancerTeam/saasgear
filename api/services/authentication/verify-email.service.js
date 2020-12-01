@@ -1,6 +1,10 @@
 import pkg from 'apollo-server-express';
 import dayjs from 'dayjs';
-import { findToken, changeTokenStatus, createToken } from '~/repository/user_token.repository';
+import {
+  findToken,
+  changeTokenStatus,
+  createToken,
+} from '~/repository/user_tokens.repository';
 import { activeUser } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import compileEmailTemplate from '~/helpers/compile-email-template';
@@ -20,11 +24,11 @@ export async function verifyEmail(authToken) {
     const token = await findToken(authToken);
 
     if (!token || !token.is_active || token.type !== SEND_MAIL_TYPE.VERIFY_EMAIL) {
-      throw new ApolloError('Invalid token');
+      return new ApolloError('Invalid token');
     }
 
     if (!isValidDate(token.created_at)) {
-      throw new ApolloError('Token had expired');
+      return new ApolloError('Token had expired');
     }
 
     await Promise.all([changeTokenStatus(token.id, token.type, false), activeUser(token.user_id)]);

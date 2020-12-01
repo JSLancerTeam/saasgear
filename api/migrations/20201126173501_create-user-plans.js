@@ -4,6 +4,7 @@ export function up(knex) {
     t.integer('user_id').unsigned().notNullable();
     t.integer('product_id').unsigned().notNullable();
     t.integer('price_id').unsigned().notNullable();
+    t.string('subcription_id').notNullable();
     t.dateTime('created_at')
       .notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));

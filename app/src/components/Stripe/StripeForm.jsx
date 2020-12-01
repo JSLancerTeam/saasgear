@@ -90,7 +90,7 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
       <button
         type="submit"
         disabled={isSubmitting}
-        className="py-2 px-4 w-full border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
+        className="py-2 px-4 w-full text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
       >
         {isSubmitting ? 'Please wait' : submitText}
       </button>

@@ -12,6 +12,6 @@ export default async function sendMail(to, subject, html) {
       to,
       subject,
       html,
-    }).then(() => resolve()).catch(() => resolve())
+    }).then(() => resolve()).catch(() => resolve());
   });
 }

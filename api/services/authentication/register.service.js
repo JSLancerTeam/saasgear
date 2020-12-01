@@ -47,16 +47,16 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
         throw new ApolloError('Can not find any plan');
       }
 
-      const userPlanData = {
-        product_id: product.id,
-        price_id: product.price_id,
-      };
+      const subscriptionId = await createNewSubcription(paymentMethodToken, email, name, product.price_stripe_id);
 
-      const [userId] = await Promise.all([
-        createUser(userData, userPlanData),
-        createNewSubcription(paymentMethodToken, email, name, product.price_stripe_id),
-      ]);
-      newUserId = userId;
+      if (subscriptionId) {
+        const userPlanData = {
+          product_id: product.id,
+          price_id: product.price_id,
+          subcription_id: subscriptionId,
+        };
+        newUserId = await createUser(userData, userPlanData);
+      }
     } else {
       newUserId = await createUser(userData);
     }

@@ -5,6 +5,7 @@ const { gql } = pkg;
 export const UserPlanSchema = gql`
 
   type ResponseUserPlan {
+    id: Int!
     userId: Int!
     productId: Int!
     priceId: Int!
@@ -15,6 +16,12 @@ export const UserPlanSchema = gql`
   }
 
   extend type Query {
-    getUserPlan: ResponseUserPlan!
+    getUserPlan: ResponseUserPlan
+  }
+
+  extend type Mutation {
+    createUserPlan(paymentMethodToken: String!, planName: String!, billingType: BillingType!): Boolean!
+    updateUserPlan(userPlanId: Int!, planName: String!, billingType: BillingType!): Boolean!
+    deleteUserPlan(userPlanId: Int!): Boolean!
   }
 `;

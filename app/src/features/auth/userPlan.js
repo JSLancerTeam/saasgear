@@ -13,7 +13,7 @@ const userPlan = createSlice({
       const { data, loading } = action.payload;
       const dataUserPlan = data || {};
       state.data = dataUserPlan;
-      state.loading = loading;
+      state.loading = loading || false;
     },
   },
 });

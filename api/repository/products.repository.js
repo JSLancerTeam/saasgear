@@ -40,7 +40,7 @@ export function findProductInType(types) {
 
 export function findProductAndPriceByType(productType, priceType) {
   return database(TABLE)
-    .join(TABLES.prices, productColumns.id, priceColumns.product_id)
+    .join(TABLES.prices, productColumns.id, priceColumns.productId)
     .select(productColumns, `${priceColumns.id} as price_id`, priceColumns.amount, `${priceColumns.type} as price_type`, `${priceColumns.stripeId} as price_stripe_id`)
     .where({ [productColumns.type]: productType, [priceColumns.type]: priceType })
     .first();

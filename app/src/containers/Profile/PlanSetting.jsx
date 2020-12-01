@@ -1,52 +1,99 @@
-import React,  { useState } from 'react';
+import React,  { useState, useEffect } from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useDispatch, useSelector } from 'react-redux';
+
 import StripeContainer from '@/containers/Stripe';
+import deleteUserPlanQuery from '@/queries/userPlans/deleteUserPlan';
+import updateUserPlanQuery from '@/queries/userPlans/updateUserPlan';
+import createUserPlanQuery from '@/queries/userPlans/createUserPlan';
+import getUserPlanQuery from '@/queries/userPlans/getUserPlan';
+import { setUserPlan } from '@/features/auth/userPlan';
 
 const plans = [
   {
-    id: 'freelancer',
-    name: 'Freelancer',
-    desc: 'For solo user',
-    price: 12,
+    id: 'starter',
+    name: 'Starter',
+    price: 75,
+    desc: 'Kickstart your project with all features and code',
   },
   {
-    id: 'startup',
-    name: 'Startup',
-    desc: 'For small & medium bussinesses',
-    price: 24,
+    id: 'professional',
+    name: 'Professional',
+    price: 295,
+    desc: 'We help you get up and running even faster',
   },
-  {
-    id: 'enterprise',
-    name: 'Enterprise',
-    desc: 'For large company',
-    price: 48,
-  }
 ]
 
 const PlanSetting = ({ isActive }) => {
   const [isYearly, setIsYearly] = useState(false);
-  const [subChanged, setSubChanged] = useState('');
+  const [selectedPlan, setSelectedPlan] = useState('');
+  const { data: currentPlan } = useSelector((state) => state.userPlan);
+  const [deleteUserPlanMutation, { error: errorDelete, loading: isDeletingUserPlan }] = useMutation(deleteUserPlanQuery);
+  const [updateUserPlanMutation, { error: errorUpdate, loading: isUpdatingUserPlan }] = useMutation(updateUserPlanQuery);
+  const [createUserPlanMutation, { error: errorCreate, loading: isCreatingUserPlan }] = useMutation(createUserPlanQuery);
+  const [fetchUserPlan, { data: userPlanData }] = useLazyQuery(getUserPlanQuery);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (!isEmpty(currentPlan)) {
+      setSelectedPlan(currentPlan.productType);
+      setIsYearly(currentPlan.priceType === 'yearly');
+    }
+  }, [currentPlan])
+
+  useEffect(() => {
+    if (userPlanData?.getUserPlan) {
+      dispatch(setUserPlan({ data: userPlanData?.getUserPlan }));
+    }
+  }, [userPlanData])
 
   function toggle() {
     setIsYearly(!isYearly);
   }
 
-  function changeSub(name) {
-    setSubChanged(name);
+  function changePlan(name) {
+    setSelectedPlan(name);
   }
 
-  function createPaymentMethodSuccess(token) {
-    console.log(token);
+  function checkIsCurrentPlan(planId) {
+    return currentPlan.productType === planId && ((currentPlan.priceType === 'monthly' && !isYearly) || (currentPlan.priceType === 'yearly' && isYearly))
   }
 
-  const currentPlan = {
-    plan_name: 'startup',
-    price: 24,
-    type: 'monthly'
+  async function handleCancelSubscription() {
+    await deleteUserPlanMutation({
+      variables: { userPlanId: currentPlan.id }
+    });
+    setIsYearly(false);
+    setSelectedPlan('');
+    dispatch(setUserPlan({}));
   }
 
-  const planChanged = !!subChanged && plans.find(item => item.id === subChanged);
+  async function createPaymentMethodSuccess(token) {
+    const data = {
+      paymentMethodToken: token,
+      planName: planChanged.id,
+      billingType: isYearly ? 'YEARLY' : 'MONTHLY',
+    }
+    await createUserPlanMutation({ variables: data});
+    fetchUserPlan();
+  }
+
+  async function handleChangeSubcription() {
+    await updateUserPlanMutation({ variables: {
+      userPlanId: currentPlan.id,
+      planName: planChanged.id,
+      billingType: isYearly ? 'YEARLY' : 'MONTHLY',
+    }});
+
+    fetchUserPlan();
+  }
+
+  const planChanged = !!selectedPlan && plans.find(item => item.id === selectedPlan);
+  const amountCurrent = currentPlan.amount || 0;
+  const amountNew = planChanged ? planChanged.price : 0;
 
   return (
     <div className={cn('p-4', isActive ? 'block' : 'hidden')}>
@@ -71,24 +118,35 @@ const PlanSetting = ({ isActive }) => {
             </label>
           </div>
         </div>
-        <div className="flex justify-around mt-8">
-          {plans.map(plan => (
+        <div className="flex justify-center mt-8">
+          {plans.map((plan, index) => (
             <div
-              className={cn("border border-gray-30 rounded-md pt-8 pb-4 px-4 w-full md:w-3/12 text-center", 
-                {'bg-gray-50': planChanged && plan.id === planChanged.id }
+              className={cn("border border-gray-30 rounded-md pt-8 pb-4 px-4 w-full md:w-3/12 text-center cursor-pointer", 
+                {
+                  'bg-gray-50': planChanged && plan.id === planChanged.id,
+                  'ml-8': index > 0,
+                }
               )} 
               key={plan.id}
+              aria-hidden
+              onClick={() => changePlan(plan.id)}
             >
               <h2 className="text-2xl font-semibold">{plan.name}</h2>
               <p className="text-gray-700 mt-2">{plan.desc}</p>
               <div className="mt-8">
-                <span className="font-bold text-4xl">${isYearly ? plan.price * 9 : plan.price}.00</span>
-                <span>/{isYearly ? 'year' : 'month'}</span>
+                {plan.price > 0 ? (
+                  <>
+                    <span className="font-bold text-4xl">${isYearly ? plan.price * 9 : plan.price}</span>
+                    <span>/{isYearly ? 'year' : 'month'}</span>
+                  </>
+                ) : (
+                  <span className="font-bold text-4xl">Free</span>
+                )}
               </div>
-              {(currentPlan.plan_name === plan.id && ((currentPlan.type === 'monthly' && !isYearly) || (currentPlan.type === 'yearly' && isYearly))) ? (
+              {checkIsCurrentPlan(plan.id) ? (
                 <button disabled className="w-full cursor-default bg-blue-200 text-gray-600 py-2 rounded-md mt-8" type="button">Current plan</button>
               ) : (
-                <button className="w-full bg-blue-500 text-white py-2 rounded-md mt-8" type="button" onClick={() => changeSub(plan.id)}>Get started</button>
+                <button className="w-full bg-blue-500 text-white py-2 rounded-md mt-8" type="button" onClick={() => changePlan(plan.id)}>Get started</button>
               )}
             </div>
           ))}
@@ -96,32 +154,66 @@ const PlanSetting = ({ isActive }) => {
         <div className="text-center font-semibold mt-4">
           <p>See plan details on <a className="text-blue-700" href={`${process.env.REACT_APP_LANDING_PAGE}/pricing`} target="_blank">Pricing page</a></p>
         </div>
+      </div>
 
-        {planChanged && (
+      {planChanged && (
+        checkIsCurrentPlan(planChanged.id) ? (
+          <div className="border-t border-gray-300 mt-10 pt-10 flex justify-center">
+            <button 
+              type="button" 
+              className="w-4/12 py-2 px-4 text-sm leading-5 font-medium rounded-md text-white bg-red-500"
+              disabled={isDeletingUserPlan}
+              onClick={handleCancelSubscription}
+            >Cancel Subcription</button>
+          </div>
+        ) : (
           <div className="border-t border-gray-300 mt-10 pt-10 grid grid-cols-3">
-            <div className="w-full border-r border-gray-300">
+            <div className="w-full">
               <div className="mb-4">
                 <p>Current subcription</p>
-                <span className="font-semibold">${currentPlan.price}.00</span>
+                <span className="font-semibold">${amountCurrent}</span>
               </div>
               <div className="mb-4">
                 <p>New subcription</p>
-                <span className="font-semibold">${isYearly ? planChanged.price * 9 : planChanged.price}.00</span>
+                <span className="font-semibold">${isYearly ? amountNew * 9 : amountNew}</span>
               </div>
               <div className="mb-4">
                 <p>Balance due right now</p>
-                <span className="font-semibold">${Math.max((isYearly ? planChanged.price * 9 : planChanged.price) - currentPlan.price, 0)}.00</span>
+                <span className="font-semibold">${Math.max((isYearly ? amountNew * 9 : amountNew) - amountCurrent, 0)}</span>
               </div>
             </div>
-            <div className="col-span-2">
-              <StripeContainer 
-                onSubmitSuccess={createPaymentMethodSuccess}
-                className="w-6/12 mx-auto"
-              />
+            <div className="col-span-2 border-l border-gray-300 flex justify-center items-center">
+              {isEmpty(currentPlan) ? (
+                <StripeContainer 
+                  onSubmitSuccess={createPaymentMethodSuccess}
+                  apiLoading={isCreatingUserPlan}
+                  className="w-6/12 mx-auto"
+                />
+              ) : (
+                <button 
+                  type="button" 
+                  className="w-6/12 py-2 px-4 text-sm leading-5 font-medium rounded-md text-white bg-indigo-600"
+                  onClick={handleChangeSubcription}
+                  disabled={isUpdatingUserPlan}
+                >{isUpdatingUserPlan ? 'Please wait' : 'Change Subcription'}</button>
+              )}
             </div>
           </div>
-        )}
-      </div>
+        )
+      )}
+
+      {errorCreate?.message && (
+        <p className="text-red-500 text-center italic mt-4">{errorCreate.message}</p>
+      )}
+
+      {errorUpdate?.message && (
+        <p className="text-red-500 text-center italic mt-4">{errorUpdate.message}</p>
+      )}
+
+      {errorDelete?.message && (
+        <p className="text-red-500 text-center italic mt-4">{errorDelete.message}</p>
+      )}
+
     </div>
   );
 }

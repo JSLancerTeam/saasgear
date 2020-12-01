@@ -42,6 +42,8 @@
     "no-unused-vars": 2,
     "no-param-reassign": 0,
     "no-use-before-define": 0,
+    "no-restricted-syntax": 0,
+    "no-continue": 0,
     "no-unsafe-finally": 0
   }
 }

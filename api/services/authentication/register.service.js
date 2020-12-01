@@ -37,7 +37,9 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
 
     const passwordHashed = await generatePassword(password);
     const userData = {
-      email, password: passwordHashed, name,
+      email,
+      password: passwordHashed,
+      name,
     };
     let newUserId = null;
 
@@ -72,7 +74,7 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
 
     const pms = [
       sendMail(email, 'Confirm your email address', template),
-      createToken(newUserId, tokenVerifyEmail, 'verify_email'),
+      createToken(newUserId, tokenVerifyEmail, SEND_MAIL_TYPE.VERIFY_EMAIL),
     ];
     if (planName && PERMISSION_PLAN[planName]) {
       pms.push(addMultiPermissions(newUserId, PERMISSION_PLAN[planName]));
@@ -81,8 +83,6 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
     await Promise.all(pms);
 
     const token = sign({ email, name });
-
-    await Promise.all([sendMail(email, 'Confirm your email address', template), createToken(newUserId, tokenVerifyEmail, SEND_MAIL_TYPE.VERIFY_EMAIL)]);
     return { token };
   } catch (error) {
     logger.error(error);

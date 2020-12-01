@@ -63,5 +63,7 @@ export const UserSchema = gql`
     verify(token: String!): Boolean!
 
     resendEmail(type: SendMailType!): Boolean!
+
+    deleteAccount: Boolean!
   }
 `;

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import AccountForm from '@/components/Profile/AccountForm';
+import DeleteAccount from './DeleteAccount';
 
 const AccountSettingSchema = yup.object().shape({
   firstName: yup.string().required('First name is required'),
@@ -13,6 +14,9 @@ const AccountSettingSchema = yup.object().shape({
 });
 
 function AccountSetting({ isActive, user }) {
+  const [isOpenModalDeleteAccount, setIsOpenModalDeleteAccount] = useState(
+    false,
+  );
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(AccountSettingSchema),
     defaultValues: user,
@@ -31,9 +35,15 @@ function AccountSetting({ isActive, user }) {
             onSubmit={handleSubmit(onSubmit)}
             register={register}
             errors={errors}
+            openPopupDeleteAccount={() => setIsOpenModalDeleteAccount(true)}
           />
         </div>
       </div>
+
+      <DeleteAccount
+        isOpen={isOpenModalDeleteAccount}
+        closeModal={() => setIsOpenModalDeleteAccount(false)}
+      />
     </div>
   );
 }

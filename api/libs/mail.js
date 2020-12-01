@@ -1,4 +1,5 @@
 import mailgunFactory from 'mailgun-js';
+import Sentry from '@sentry/node';
 
 const mailgun = mailgunFactory({
   apiKey: process.env.MAILGUN_API_KEY,
@@ -12,6 +13,9 @@ export default async function sendMail(to, subject, html) {
       to,
       subject,
       html,
-    }).then(() => resolve()).catch(() => resolve());
+    }).then(() => resolve()).catch((error) => {
+      Sentry.captureException(error);
+      resolve();
+    });
   });
 }

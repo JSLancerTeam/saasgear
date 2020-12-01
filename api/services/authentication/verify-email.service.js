@@ -24,11 +24,11 @@ export async function verifyEmail(authToken) {
     const token = await findToken(authToken);
 
     if (!token || !token.is_active || token.type !== SEND_MAIL_TYPE.VERIFY_EMAIL) {
-      throw new ApolloError('Invalid token');
+      return new ApolloError('Invalid token');
     }
 
     if (!isValidDate(token.created_at)) {
-      throw new ApolloError('Token had expired');
+      return new ApolloError('Token had expired');
     }
 
     await Promise.all([changeTokenStatus(token.id, token.type, false), activeUser(token.user_id)]);

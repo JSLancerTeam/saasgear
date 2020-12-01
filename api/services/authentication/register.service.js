@@ -28,9 +28,11 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
   try {
     const user = await findUser({ email });
     if (user && user.is_active) {
-      throw new ApolloError('Email address has been used');
-    } else if (user && !user.is_active) {
-      throw new ApolloError('Your account is not yet verify');
+      return new ApolloError('Email address has been used');
+    }
+
+    if (user && !user.is_active) {
+      return new ApolloError('Your account is not yet verify');
     }
 
     const passwordHashed = await generatePassword(password);
@@ -42,7 +44,7 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
     if (planName) {
       const product = await findProductAndPriceByType(planName, billingType);
       if (!product) {
-        throw new ApolloError('Can not find any plan');
+        return new ApolloError('Can not find any plan');
       }
 
       const subscriptionId = await createNewSubcription(paymentMethodToken, email, name, product.price_stripe_id);

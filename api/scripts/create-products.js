@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import Sentry from '@sentry/node';
 import { insertProduct, findProductInType } from '~/repository/products.repository';
 
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
@@ -68,4 +69,4 @@ async function run() {
   return true;
 }
 
-run().then(() => console.log('insert successfully')).then(() => process.exit()).catch((err) => console.log(err));
+run().then(() => console.log('insert successfully')).then(() => process.exit()).catch((err) => Sentry.captureException(err));

@@ -21,12 +21,12 @@ export async function createUserPlan(userId, paymentMethodToken, planName, billi
   try {
     const user = await findUser({ id: userId });
     if (!user) {
-      throw new ApolloError('Can not find any user');
+      return new ApolloError('Can not find any user');
     }
 
     const product = await findProductAndPriceByType(planName, billingType);
     if (!product) {
-      throw new ApolloError('Can not find any plan');
+      return new ApolloError('Can not find any plan');
     }
 
     const subscriptionId = await createNewSubcription(paymentMethodToken, user.email, user.name, product.price_stripe_id);
@@ -49,12 +49,12 @@ export async function updateUserPlan(usePlanId, planName, billingType) {
   try {
     const userPlan = await getUserPlanById(usePlanId);
     if (!userPlan) {
-      throw new ApolloError('Can not find any user plan');
+      return new ApolloError('Can not find any user plan');
     }
 
     const product = await findProductAndPriceByType(planName, billingType);
     if (!product) {
-      throw new ApolloError('Can not find any plan');
+      return new ApolloError('Can not find any plan');
     }
 
     await updateSubcription(userPlan.subcription_id, product.price_stripe_id);
@@ -76,7 +76,7 @@ export async function deleteUserPlan(id) {
   try {
     const userPlan = await getUserPlanById(id);
     if (!userPlan) {
-      throw new ApolloError('Can not find any user plan');
+      return new ApolloError('Can not find any user plan');
     }
 
     await cancelSubcription(userPlan.subcription_id);

@@ -1,12 +1,10 @@
 import _ from 'lodash';
-import pkg from 'apollo-server-express';
+import { AuthenticationError, ValidationError } from 'apollo-server-express';
 
 import { comparePassword } from '~/helpers/hashing.helper';
 import { sign } from '~/helpers/jwt.helper';
 import { getUserByEmail } from '~/repository/user.repository';
 import { loginValidation } from '~/utils/validations/authenticate.validation';
-
-const { AuthenticationError, ValidationError } = pkg;
 
 async function loginUser(email, password) {
   const isValidInput = loginValidation({ email, password });

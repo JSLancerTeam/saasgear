@@ -1,12 +1,10 @@
-import pkg from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 import {
   findRecordByToken,
   activeUserToken,
 } from '~/repository/user_token.repository';
 import { activeUser } from '~/repository/user.repository';
 import { sendMailToVerifyEmail } from '~/email-template/verifyEmail';
-
-const { ApolloError } = pkg;
 
 function isValidDate(createdAt) {
   const tokenDate = new Date(createdAt);

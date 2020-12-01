@@ -1,4 +1,9 @@
-import pkg from 'apollo-server-express';
+import {
+  ApolloError,
+  ValidationError,
+  ForbiddenError,
+  UserInputError,
+} from 'apollo-server-express';
 import dayjs from 'dayjs';
 import _ from 'lodash';
 import Validator from 'fastest-validator';
@@ -9,8 +14,6 @@ import {
   removeUserToken,
 } from '~/repository/user_token.repository';
 import logger from '~/utils/logger';
-
-const { ApolloError, ValidationError, ForbiddenError, UserInputError } = pkg;
 
 function resetPasswordValidation(data) {
   const validator = new Validator();

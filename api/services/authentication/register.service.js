@@ -1,4 +1,4 @@
-import pkg from 'apollo-server-express';
+import { ValidationError, ApolloError } from 'apollo-server-express';
 import _ from 'lodash';
 
 import { getUserByEmail, createUser } from '~/repository/user.repository';
@@ -10,8 +10,6 @@ import { registerValidation } from '~/utils/validations/authenticate.validation'
 import { createUserPlan } from '~/services/user/plans-user.service';
 import { addMultiPermissions } from '~/services/user/permission.service';
 import { BILLING_PRICE } from '~/constants/billing.constant';
-
-const { ValidationError, ApolloError } = pkg;
 
 async function registerUser(email, password, name, planName, billingType) {
   const isValidInput = registerValidation({ email, password, name });

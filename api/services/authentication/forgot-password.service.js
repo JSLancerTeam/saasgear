@@ -1,4 +1,4 @@
-import pkg from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 import {
   getUserByEmail,
   getUserByIdAndJoinUserToken,
@@ -10,8 +10,6 @@ import {
 } from '~/repository/user_token.repository';
 import { sendForgotPasswordEmail } from '~/email-template/forgotPassword';
 import logger from '~/utils/logger';
-
-const { ApolloError } = pkg;
 
 export async function forgotPasswordUser(email) {
   try {

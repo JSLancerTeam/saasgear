@@ -4,7 +4,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import Apollo from 'apollo-server-express';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
 
 import accessLogStream from './middlewares/logger.middleware';
 import RootSchema from './graphql/root.schema';
@@ -22,13 +22,13 @@ const corsOptions = {
 };
 
 (function startServer() {
-  app.use(morgan('short', { stream: accessLogStream }));
+  app.use(morgan('combined', { stream: accessLogStream }));
   app.use(cors(corsOptions));
   app.get('/', (req, res) => {
     res.send('Hello World!');
   });
-  const serverGraph = new Apollo.ApolloServer({
-    schema: Apollo.makeExecutableSchema({
+  const serverGraph = new ApolloServer({
+    schema: makeExecutableSchema({
       typeDefs: RootSchema,
       resolvers: RootResolver,
     }),

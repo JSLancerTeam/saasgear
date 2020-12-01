@@ -14,9 +14,8 @@
           Verify your email address
         </mj-text>
         <mj-text font-size="18px" align="center" color="#555" line-height="30px"
-          >Hi {{name}}!!! Please confirm that you want to use this as your
-          SASSGEAR account email address. Once it's done you will be able to
-          start selling!</mj-text
+          >Hi {{name}}! Please confirm that you want to use this as your
+          SaaSgear account email address.</mj-text
         >
         <mj-button
           background-color="#06adef"
@@ -25,7 +24,7 @@
           font-size="15px"
           href="{{url}}"
         >
-          VERIFY MY EMAIL
+          Verify my email
         </mj-button>
         <mj-divider border-color="#06adef" width="100px"></mj-divider>
         <mj-social icon-size="30px" mode="horizontal">

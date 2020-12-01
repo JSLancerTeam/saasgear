@@ -8,7 +8,7 @@ export default function Nav() {
           <div className="lg:w-0 lg:flex-1">
             <Link href="/">
               <a className="flex">
-                <img className="h-8 w-auto sm:h-10" src="/images/logo.png" alt="Saasgear" />
+                <img className="h-8 w-auto sm:h-10" src="/images/logo.png" alt="SaaSgear" />
               </a>
             </Link>
           </div>

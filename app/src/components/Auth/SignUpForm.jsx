@@ -1,13 +1,15 @@
 import React from 'react';
 import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
+import TheLockSvg from '@/assets/images/svg/the-lock.svg';
 
 function SignUpForm({
   onSubmit,
   register,
-  errorsForm,
-  errorAPI,
+  formErrors,
+  apiError,
   isSubmitting,
+  submitText = 'Submit',
 }) {
   return (
     <form className="mt-8" onSubmit={onSubmit}>
@@ -24,9 +26,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.name && (
+        {formErrors?.name && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.name.message}
+            {formErrors.name.message}
           </p>
         )}
       </div>
@@ -43,9 +45,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.email && (
+        {formErrors?.email && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.email.message}
+            {formErrors.email.message}
           </p>
         )}
       </div>
@@ -63,9 +65,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.password && (
+        {formErrors?.password && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.password.message}
+            {formErrors.password.message}
           </p>
         )}
       </div>
@@ -83,9 +85,9 @@ function SignUpForm({
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           ref={register}
         />
-        {errorsForm && errorsForm.passwordConfirmation && (
+        {formErrors?.passwordConfirmation && (
           <p className="text-red-500 text-xs italic mt-1">
-            {errorsForm.passwordConfirmation.message}
+            {formErrors.passwordConfirmation.message}
           </p>
         )}
       </div>
@@ -108,7 +110,7 @@ function SignUpForm({
 
         <div className="text-sm leading-5">
           <Link
-            to="/signin"
+            to="/auth/signin"
             className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
           >
             Already account?
@@ -116,16 +118,14 @@ function SignUpForm({
         </div>
       </div>
 
-      {errorsForm && errorsForm.agreement && (
+      {formErrors?.agreement && (
         <p className="text-red-500 text-xs italic mt-1">
-          {errorsForm.agreement.message}
+          {formErrors.agreement.message}
         </p>
       )}
 
-      {errorAPI && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">
-          {errorAPI}
-        </p>
+      {apiError && (
+        <p className="text-red-500 text-xs italic mt-4 text-center">{apiError}</p>
       )}
 
       <div className="mt-6">
@@ -135,19 +135,13 @@ function SignUpForm({
           disabled={isSubmitting}
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-            <svg
+            <img
               className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                clipRule="evenodd"
-              />
-            </svg>
+              src={TheLockSvg}
+              alt="the-lock"
+            />
           </span>
-          {isSubmitting ? 'Please wait' : 'Sign up'}
+          {isSubmitting ? 'Please wait' : submitText}
         </button>
       </div>
     </form>
@@ -157,9 +151,10 @@ function SignUpForm({
 SignUpForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
-  errorsForm: PropsType.object,
-  errorAPI: PropsType.string,
+  formErrors: PropsType.object,
+  apiError: PropsType.string,
   isSubmitting: PropsType.bool.isRequired,
+  submitText: PropsType.string,
 };
 
 export default SignUpForm;

@@ -1,45 +1,62 @@
 import union from 'lodash/union';
 import database from '~/config/database.config';
-import { userTokenTable, usersTable } from '~/constants/table-name.constant';
+import { userTokenColumns } from './user_tokens.repository';
+import { TABLES } from '~/constants/table-name.constant';
+import { insertUserPlan } from './user_plans.repository';
 
-const TABLE = 'users';
+const TABLE = TABLES.users;
 
-async function getUserByEmail(email) {
-  return database(TABLE).where({ email }).first();
+export const usersColumns = {
+  id: 'users.id',
+  name: 'users.name',
+  email: 'users.email',
+  createAt: 'users.created_at',
+  updatedAt: 'users.updated_at',
+  isActive: 'users.is_active',
+  avatarUrl: 'users.avatar_url',
+  provider: 'users.provider',
+  providerId: 'users.provider_id',
+};
+
+export async function findUser(condition) {
+  return database(TABLE).where(condition).first();
 }
 
-async function getUserById(id) {
-  return database(TABLE).where({ id }).first();
+export async function createUser(userData, userPlanData = null) {
+  let t;
+  try {
+    t = await database.transaction();
+    const [userId] = await database(TABLE).transacting(t).insert(userData);
+
+    if (userPlanData) {
+      await insertUserPlan({
+        ...userPlanData,
+        user_id: userId,
+      }, t);
+    }
+
+    await t.commit();
+    return userId;
+  } catch (error) {
+    if (t) t.rollback();
+    return new Error(error);
+  }
 }
 
-async function createUser(...arg) {
-  return database(TABLE).insert(...arg);
-}
-
-async function updateUser(id, data) {
+export async function updateUser(id, data) {
   return database(TABLE).where({ id }).update(data);
 }
 
-async function getUserByIdAndJoinUserToken(id, type) {
-  const tableJoin = 'user_token';
-  const users = Object.values(usersTable);
-  const userToken = Object.values(userTokenTable);
+export async function getUserByIdAndJoinUserToken(id, type) {
+  const users = Object.values(usersColumns);
+  const userToken = Object.values(userTokenColumns);
   return database(TABLE)
-    .join(tableJoin, usersTable.id, userTokenTable.userId)
+    .join(TABLES.userToken, usersColumns.id, userTokenColumns.userId)
     .select(union(users, userToken))
-    .where({ [usersTable.id]: id, [userTokenTable.type]: type })
+    .where({ [usersColumns.id]: id, [userTokenColumns.type]: type })
     .first();
 }
 
-async function activeUser(id) {
+export async function activeUser(id) {
   return database(TABLE).where({ id }).update({ is_active: true });
 }
-
-export {
-  getUserByEmail,
-  getUserById,
-  getUserByIdAndJoinUserToken,
-  updateUser,
-  activeUser,
-  createUser,
-};

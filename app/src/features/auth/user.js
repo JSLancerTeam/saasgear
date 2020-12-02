@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   data: {},
+  error: null,
   loading: false,
 };
 
@@ -11,13 +12,17 @@ const user = createSlice({
   reducers: {
     setProfileUser(state, action) {
       const { data, loading } = action.payload;
-      const dataUser = data ? data.profileUser : {};
+      const dataUser = data || {};
       state.data = dataUser;
       state.loading = loading;
+    },
+    toggleToastError(state, action) {
+      const { error } = action.payload;
+      state.error = error;
     },
   },
 });
 
-export const { setProfileUser } = user.actions;
+export const { setProfileUser, toggleToastError } = user.actions;
 
 export default user.reducer;

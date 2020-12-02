@@ -5,47 +5,34 @@ import {
   UserInputError,
 } from 'apollo-server-express';
 import dayjs from 'dayjs';
-import _ from 'lodash';
-import Validator from 'fastest-validator';
 import { updateUser } from '~/repository/user.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
-import {
-  findRecordByToken,
-  removeUserToken,
-} from '~/repository/user_token.repository';
+import { findToken, removeUserToken } from '~/repository/user_tokens.repository';
 import logger from '~/utils/logger';
+import { changePasswordValidation } from '~/utils/validations/authenticate.validation';
 
-function resetPasswordValidation(data) {
-  const validator = new Validator();
-  const schema = {
-    password: {
-      type: 'string',
-      min: 6,
-      max: 50,
-      optional: true,
-      empty: false,
-    },
-  };
-  return validator.validate(data, schema);
-}
+const { ApolloError, ValidationError, ForbiddenError, UserInputError } = pkg;
 
 export async function resetPasswordUser(token, password, confirmPassword) {
   try {
-    const isValidInput = resetPasswordValidation({ password });
-    if (_.isArray(isValidInput)) {
-      throw new UserInputError(isValidInput.map((it) => it.message).join(','), {
-        invalidArgs: isValidInput.map((it) => it.field).join(','),
-      });
+    const validateResult = changePasswordValidation({ password });
+    if (validateResult.length) {
+      return new UserInputError(
+        validateResult.map((it) => it.message).join(','),
+        {
+          invalidArgs: validateResult.map((it) => it.field).join(','),
+        },
+      );
     }
     if (password !== confirmPassword) {
       return new ValidationError('Password and confirm password do not match');
     }
-    const session = await findRecordByToken(token);
+    const session = await findToken(token);
     if (!session || !session.id) {
-      throw new ApolloError('Session not found');
+      return new ApolloError('Session not found');
     }
     if (dayjs(session.updated_at).add(15, 'm').diff(dayjs()) < 0) {
-      throw new ForbiddenError('Session expired');
+      return new ForbiddenError('Session expired');
     }
     const [newPassword] = await Promise.all([
       generatePassword(password),

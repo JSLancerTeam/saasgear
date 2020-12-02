@@ -5,6 +5,9 @@ export function up(knex) {
     t.string('email').notNullable();
     t.string('password').notNullable();
     t.boolean('is_active').defaultTo(false);
+    t.string('avatar_url');
+    t.string('provider');
+    t.integer('provider_id', 20);
     t.dateTime('created_at')
       .notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));

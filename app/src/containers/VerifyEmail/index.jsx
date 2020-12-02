@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import classnames from 'classnames';
 
 import logo from '@/assets/images/logo.png';
@@ -11,24 +11,24 @@ export default function VerifyEmail() {
   const query = getQueryParam();
   const token = query.get('token');
   const history = useHistory();
-  const { data, loading } = useQuery(verifyEmailQuery, {
-    variables: { token },
-  });
+  const [verifyEmailMutation, { error, loading }] = useMutation(
+    verifyEmailQuery,
+  );
+  const [verifyResult, setVerifyResult] = useState(null);
 
   useEffect(() => {
     if (!token) {
       history.replace('/');
     }
-    let timeOut = null;
-    if (data && data.verify.verified) {
-      timeOut = setTimeout(() => {
-        history.replace('/');
-      }, 2000);
-    }
-    return () => {
-      if (timeOut) clearTimeout(timeOut);
-    };
-  }, [token, data, loading]);
+    verify();
+  }, []);
+
+  async function verify() {
+    const { data } = await verifyEmailMutation({
+      variables: { token },
+    });
+    if (data) setVerifyResult(data);
+  }
 
   return (
     <div>
@@ -48,16 +48,16 @@ export default function VerifyEmail() {
                 className={classnames(
                   'text-white px-6 py-4 border-0 rounded relative mb-4',
                   {
-                    'bg-green-500': data.verify.verified,
-                    'bg-gray-500': !data.verify.verified,
+                    'bg-green-500': verifyResult,
+                    'bg-gray-500': !verifyResult,
                   },
                 )}
               >
                 <span className="inline-block align-middle mr-8">
                   <b className="capitalize">
-                    {data.verify.verified
+                    {verifyResult !== null
                       ? 'Verify email success'
-                      : 'Token not exist or has expired'}
+                      : error?.message}
                   </b>
                 </span>
               </div>

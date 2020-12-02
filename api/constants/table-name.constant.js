@@ -1,15 +1,10 @@
-const usersTable = {
-  id: 'users.id',
-  name: 'users.name',
-  email: 'users.email',
-  createAt: 'user.created_at',
+const TABLES = {
+  users: 'users',
+  userTokens: 'user_tokens',
+  userPlans: 'user_plans',
+  userPermissions: 'user_permissions',
+  products: 'products',
+  prices: 'prices',
 };
 
-const userTokenTable = {
-  token: 'user_token.token',
-  type: 'user_token.type',
-  id: 'user_token.id',
-  userId: 'user_token.user_id',
-};
-
-export { userTokenTable, usersTable };
+export { TABLES };

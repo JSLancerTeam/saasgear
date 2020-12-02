@@ -1,50 +1,92 @@
-import { ApolloError } from 'apollo-server-express';
+import pkg from 'apollo-server-express';
+import dayjs from 'dayjs';
 import {
-  findRecordByToken,
-  activeUserToken,
-} from '~/repository/user_token.repository';
+  findToken,
+  changeTokenStatus,
+  createToken,
+} from '~/repository/user_tokens.repository';
 import { activeUser } from '~/repository/user.repository';
-import { sendMailToVerifyEmail } from '~/email-template/verifyEmail';
+import generateRandomKey from '~/helpers/genarateRandomkey';
+import compileEmailTemplate from '~/helpers/compile-email-template';
+import sendMail from '~/libs/mail';
+import logger from '~/utils/logger';
+import { lowerCaseAndTrim } from '~/helpers/string.helper';
+import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 function isValidDate(createdAt) {
-  const tokenDate = new Date(createdAt);
-  const now = new Date().getTime();
-  const limitDate = tokenDate.setDate(tokenDate.getDate() + 7);
-  return limitDate - now > 0;
+  return dayjs(createdAt).add(15, 'minute').diff(dayjs()) > 0;
 }
 
-export async function verifyEmail(token) {
-  const record = await findRecordByToken(token);
-  if (record) {
-    if (isValidDate(record.created_at)) {
-      await activeUserToken(record.id);
-      await activeUser(record.user_id);
-      return {
-        verified: true,
-      };
+export async function verifyEmail(authToken) {
+  try {
+    const token = await findToken(authToken);
+
+    if (!token || !token.is_active || token.type !== SEND_MAIL_TYPE.VERIFY_EMAIL) {
+      return new ApolloError('Invalid token');
     }
-    throw new ApolloError('Token has expired');
-  } else {
-    return {
-      verified: false,
-    };
+
+    if (!isValidDate(token.created_at)) {
+      return new ApolloError('Token had expired');
+    }
+
+    await Promise.all([changeTokenStatus(token.id, token.type, false), activeUser(token.user_id)]);
+
+    return true;
+  } catch (error) {
+    logger.error(error);
+    throw error;
   }
 }
 
-export async function resendVerifyEmail({ email, name }) {
+export async function resendEmailAction(user, type) {
   try {
-    console.log(email);
-    await sendMailToVerifyEmail({
-      email: 'tmtzminhtri@gmail.com',
-      name,
-      subject: 'Resend your email address',
-    });
-    return {
-      status: true,
-    };
+    let template;
+    let subject;
+    const token = await generateRandomKey();
+    switch (type) {
+      case SEND_MAIL_TYPE.VERIFY_EMAIL:
+        if (user.is_active === 1) {
+          throw new ApolloError('Account verified');
+        }
+        subject = 'Resend confirm your email address';
+        template = await compileEmailTemplate({
+          fileName: 'verifyEmail.mjml',
+          data: {
+            name: user.name,
+            url: `${process.env.FRONTEND_URL}/verify-email?token=${token}`,
+          },
+        });
+        break;
+
+      case SEND_MAIL_TYPE.FORGOT_PASSWORD:
+        subject = 'Resend reset password';
+        template = await compileEmailTemplate({
+          fileName: 'forgotPassword.mjml',
+          data: {
+            name: user.name,
+            url: `${process.env.FRONTEND_URL}/auth/reset-password?token=${token}`,
+          },
+        });
+        break;
+
+      default:
+        subject = 'Resend confirm your email address';
+        template = await compileEmailTemplate({
+          fileName: 'verifyEmail.mjml',
+          data: {
+            name: user.name,
+            url: `${process.env.FRONTEND_URL}/verify-email?token=${token}`,
+          },
+        });
+        break;
+    }
+
+    await changeTokenStatus(null, type, false);
+    await Promise.all([createToken(user.id, token, type), sendMail(lowerCaseAndTrim(user.email), subject, template)]);
+
+    return true;
   } catch (error) {
-    return {
-      status: false,
-    };
+    logger.error(error);
+    throw error;
   }
 }

@@ -7,16 +7,16 @@ import { Transition } from '@headlessui/react';
 import routes from '@/routes';
 import logo from '@/assets/images/logo.png';
 
-function AdminLayout({ signout, infoUser }) {
+function AdminLayout({ signout, user }) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    if (infoUser && !infoUser.is_active) {
+    if (user && !user.isActive) {
       setShowAlert(true);
     }
-  }, [infoUser]);
+  }, [user]);
 
   function renderSidebar() {
     return routes
@@ -98,7 +98,11 @@ function AdminLayout({ signout, infoUser }) {
                     >
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={
+                          user?.avatarUrl
+                            ? user.avatarUrl
+                            : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                        }
                         alt=""
                       />
                     </button>
@@ -141,7 +145,7 @@ function AdminLayout({ signout, infoUser }) {
                           </Link>
 
                           <Link
-                            to="/signin"
+                            to="/auth/signin"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
                             onClick={signout}
@@ -208,7 +212,11 @@ function AdminLayout({ signout, infoUser }) {
                 <Link to="/">
                   <img
                     className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src={
+                      user?.avatarUrl
+                        ? user.avatarUrl
+                        : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                    }
                     alt=""
                   />
                 </Link>
@@ -239,7 +247,7 @@ function AdminLayout({ signout, infoUser }) {
               </Link>
 
               <Link
-                to="/signin"
+                to="/auth/signin"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                 onClick={signout}
               >
@@ -259,7 +267,7 @@ function AdminLayout({ signout, infoUser }) {
             <span className="inline-block align-middle mr-8">
               A verification link has been sent to your email account. Please
               check email
-              <b>{` ${infoUser.email} `}</b>
+              <b>{` ${user.email} `}</b>
               to verify your account
             </span>
             <button
@@ -292,7 +300,7 @@ function AdminLayout({ signout, infoUser }) {
 
 AdminLayout.propTypes = {
   signout: PropTypes.func.isRequired,
-  infoUser: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default AdminLayout;

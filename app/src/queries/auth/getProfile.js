@@ -6,7 +6,8 @@ export default gql`
       id
       email
       name
-      is_active
+      isActive
+      avatarUrl
     }
   }
 `;

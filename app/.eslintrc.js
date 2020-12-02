@@ -1,14 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-
-const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
-);
-
 module.exports = {
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', 'lodash'],
   env: {
     browser: true,
     node: true,
@@ -33,7 +26,6 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,
     'import/imports-first': 1,
@@ -69,7 +61,7 @@ module.exports = {
     'max-len': 0,
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
-    'no-console': 1,
+    'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
     'no-unused-vars': 2,
     'no-param-reassign': 0,
     'no-use-before-define': 0,
@@ -92,5 +84,6 @@ module.exports = {
         custom: 'ignore',
       },
     ],
+    'lodash/import-scope': [2, 'method'],
   },
 };

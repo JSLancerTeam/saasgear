@@ -19,4 +19,18 @@ function registerValidation(data) {
   return validator.validate(data, schema);
 }
 
-export { loginValidation, registerValidation };
+function changePasswordValidation(data) {
+  const validator = new Validator();
+  const schema = {
+    password: {
+      type: 'string',
+      min: 6,
+      max: 50,
+      optional: true,
+      empty: false,
+    },
+  };
+  return validator.validate(data, schema);
+}
+
+export { loginValidation, registerValidation, changePasswordValidation };

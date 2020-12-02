@@ -1,6 +1,6 @@
 import { AuthenticationError } from 'apollo-server-express';
 import { verify } from '~/helpers/jwt.helper';
-import { getUserByEmail } from '~/repository/user.repository';
+import { findUser } from '~/repository/user.repository';
 
 export default async function getUserLogined(bearerToken) {
   if (bearerToken) {
@@ -10,12 +10,13 @@ export default async function getUserLogined(bearerToken) {
         return null;
       }
       const { user } = verify(token[1]);
-      const userInfo = await getUserByEmail(user.email);
+      const userInfo = await findUser({ email: user.email });
       return {
         id: userInfo.id,
         email: userInfo.email,
         name: userInfo.name,
-        is_active: userInfo.is_active,
+        isActive: userInfo.is_active,
+        avatarUrl: userInfo.avatar_url,
       };
     } catch (error) {
       throw new AuthenticationError('Authentication failure');

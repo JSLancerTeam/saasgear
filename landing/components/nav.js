@@ -8,7 +8,7 @@ export default function Nav() {
           <div className="lg:w-0 lg:flex-1">
             <Link href="/">
               <a className="flex">
-                <img className="h-8 w-auto sm:h-10" src="/images/logo.png" alt="Saasgear" />
+                <img className="h-8 w-auto sm:h-10" src="/images/logo.png" alt="SaaSgear" />
               </a>
             </Link>
           </div>
@@ -32,10 +32,10 @@ export default function Nav() {
             </Link>
           </nav>
           <div className="hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0">
-            <a onClick={() => window.location.href = `${process.env.appUrl}/signin`} className="cursor-pointer whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900">
+            <a onClick={() => window.location.href = `${process.env.appUrl}/auth/signin`} className="cursor-pointer whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900">
               Sign in
             </a>
-            <a onClick={() => window.location.href = `${process.env.appUrl}/signup`} className="cursor-pointer whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900">
+            <a onClick={() => window.location.href = `${process.env.appUrl}/auth/signup`} className="cursor-pointer whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900">
               Sign up
             </a>
           </div>

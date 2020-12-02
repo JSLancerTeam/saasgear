@@ -7,7 +7,7 @@ import { loginValidation } from '~/utils/validations/authenticate.validation';
 
 const { AuthenticationError, ValidationError } = pkg;
 
-async function loginUser(email, password) {
+export async function loginUser(email, password) {
   const validateResult = loginValidation({ email, password });
   if (validateResult.length) {
     throw new ValidationError(
@@ -35,5 +35,3 @@ async function loginUser(email, password) {
     }),
   };
 }
-
-export { loginUser };

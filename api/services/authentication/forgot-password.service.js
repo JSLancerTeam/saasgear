@@ -32,7 +32,7 @@ export async function forgotPasswordUser(email) {
       },
     });
 
-    await sendMail(session.email, ' Reset Password from SaaSgear', template);
+    await sendMail(session.email, 'Reset Password from SaaSgear', template);
     return true;
   } catch (error) {
     logger.error(error);

@@ -53,7 +53,7 @@ All code in this repository is provided under the MIT
   + 3.1. Build all Dockerfile
     + Run ```docker-compose build```
   + 3.2. Start docker containers
-    + Run ```docker-compose up -d``` to start all container
+    + Run ```docker-compose up -d``` to start all containers
 
 ### 4. Setup hosts
   + 4.1 Open `hosts` file to edit  
@@ -67,7 +67,7 @@ All code in this repository is provided under the MIT
     + In the lower-right corner, just above the `Open` button, click the drop-down menu to change the file type to `All Files`.
     + Choose `hosts` file to edit
   + 4.2 Update `hosts` file  
-    > Please paste this to your `host` file
+    > Please paste this to your `hosts` file
     ```
     127.0.0.1	saasgear.local
     127.0.0.1	api-saasgear.local

@@ -1,4 +1,4 @@
-import pkg from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 import dayjs from 'dayjs';
 import {
   findToken,

@@ -1,4 +1,4 @@
-import pkg from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 import { findUser, getUserByIdAndJoinUserToken } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import {

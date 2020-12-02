@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14
 RUN mkdir -p /var/www/app/api
 
 WORKDIR /var/www/app/api
@@ -7,8 +7,10 @@ COPY ./api/package*.json ./
 
 RUN npm install
 
+RUN npm install -g knex
+
 COPY ./api ./
 
-EXPOSE 3001
+EXPOSE 5000
 
 CMD ["npm", "run", "dev"] 

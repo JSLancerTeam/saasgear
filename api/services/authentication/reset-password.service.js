@@ -11,8 +11,6 @@ import { findToken, removeUserToken } from '~/repository/user_tokens.repository'
 import logger from '~/utils/logger';
 import { changePasswordValidation } from '~/utils/validations/authenticate.validation';
 
-const { ApolloError, ValidationError, ForbiddenError, UserInputError } = pkg;
-
 export async function resetPasswordUser(token, password, confirmPassword) {
   try {
     const validateResult = changePasswordValidation({ password });

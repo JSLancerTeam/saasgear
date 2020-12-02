@@ -1,4 +1,4 @@
-import pkg from 'apollo-server-express';
+import { ValidationError, AuthenticationError } from 'apollo-server-express';
 
 import { comparePassword } from '~/helpers/hashing.helper';
 import { sign } from '~/helpers/jwt.helper';

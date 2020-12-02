@@ -1,3 +1,3 @@
-export function lowerCaseAndTrim(text) {
+export function normalizeEmail(text) {
   return text.toLowerCase().trim();
 }

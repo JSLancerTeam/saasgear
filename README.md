@@ -26,9 +26,9 @@ Introduction: https://www.notion.so/Saas-Gear-9f791fb27d3b440584e4a5408e19c8d4
 - redis
 - knex
 
-### Database
+### Support databases
 - mysql
-- mongoose
+- mongodb
 
 ### Payment
 - stripe
@@ -39,14 +39,14 @@ All code in this repository is provided under the MIT
   
 ## Set up with Docker
 ### 1. Create env  
-  + Create two .env files and copy sample in .env-example file to each .env file in `api` and `app` folder.  
+  + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
 ### 2. Install dependencies  
   + 2.1. Install dependencies for API  
     + RUN ```cd api && npm install```  
     + if it fail. Run ```npm install``` again for link module alias.  
-  + Install dependencies for React App  
+  + 2.2 Install dependencies for React App  
     + Run ```cd app && npm install```.
-  + Install dependencies for Landing Page  
+  + 2.3 Install dependencies for Landing Page  
     + Run ```cd landing && npm install```.
 ### 3. Build Docker
     > You must be in root source
@@ -86,6 +86,15 @@ All code in this repository is provided under the MIT
       + For Back-end: `http://localhost:5001/graphql`
       + For Landing page: `http://localhost:4001`
 
+### 6. Custom domain
+  + If you want to custom domain to your favorite, You can:
+    + Go to `systems/docker-services/nginx/conf`
+    + Choose your app you want to custom domain
+    + Open it and change `server_name` option to your domain.
+    + Save and run
+      + `docker-compose build nginx`
+      + `docker-compose restart nginx`
+      + Change `hosts` file and add `127.0.0.1 YOUR_DOMAIN_HERE`
 ### 6. Backend Knex
   + Knex is installed in `api` containers
   + So if you want to create migrate or anything. You can access to docker container:

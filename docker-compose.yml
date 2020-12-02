@@ -31,7 +31,7 @@ services:
       dockerfile: ./systems/docker-services/api/Dockerfile
     tty: true
     ports:
-      - "3005:3001"
+      - "5001:5000"
     depends_on:
       - db
       - adminer
@@ -39,7 +39,9 @@ services:
       - DB_HOST=db
       - DB_NAME=saas
       - DB_USER=root
-      - DB_PASSWORD=root 
+      - DB_PASSWORD=root
+    volumes:
+      - ./api:/var/www/app/api
     networks:
       - saas-network
   frontend:
@@ -50,6 +52,20 @@ services:
     tty: true
     ports:
       - "3002:3000"
+    volumes:
+      - ./app:/var/www/app/fe
+    networks:
+      - saas-network
+  landing:
+    container_name: saas_landing
+    build:
+      context: .
+      dockerfile: ./systems/docker-services/landing/Dockerfile
+    tty: true
+    ports:
+      - "4001:4000"
+    volumes:
+      - ./landing:/var/www/app/landing
     networks:
       - saas-network
   nginx:
@@ -60,6 +76,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - ./systems/docker-services/nginx/conf:/etc/nginx/site-availables
     networks:
       - saas-network
 

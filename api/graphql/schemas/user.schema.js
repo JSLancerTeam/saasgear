@@ -1,6 +1,4 @@
-import pkg from 'apollo-server-express';
-
-const { gql } = pkg;
+import { gql } from 'apollo-server-express';
 
 export const UserSchema = gql`
   enum BillingType {

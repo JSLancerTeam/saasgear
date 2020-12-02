@@ -24,7 +24,7 @@ const corsOptions = {
 };
 
 (function startServer() {
-  app.use(morgan('short', { stream: accessLogStream }));
+  app.use(morgan('combined', { stream: accessLogStream }));
   app.use(cors(corsOptions));
   app.get('/', (req, res) => {
     res.send('Hello World!');

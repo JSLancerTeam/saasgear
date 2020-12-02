@@ -1,4 +1,4 @@
-import pkg from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 import dayjs from 'dayjs';
 import {
   findToken,
@@ -12,8 +12,6 @@ import sendMail from '~/libs/mail';
 import logger from '~/utils/logger';
 import { lowerCaseAndTrim } from '~/helpers/string.helper';
 import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
-
-const { ApolloError } = pkg;
 
 function isValidDate(createdAt) {
   return dayjs(createdAt).add(15, 'minute').diff(dayjs()) > 0;

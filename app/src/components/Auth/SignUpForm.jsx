@@ -124,6 +124,10 @@ function SignUpForm({
         </p>
       )}
 
+      {apiError && (
+        <p className="text-red-500 text-xs italic mt-4 text-center">{apiError}</p>
+      )}
+
       <div className="mt-6">
         <button
           type="submit"
@@ -140,10 +144,6 @@ function SignUpForm({
           {isSubmitting ? 'Please wait' : submitText}
         </button>
       </div>
-
-      {apiError && (
-        <p className="text-red-500 text-xs italic mt-1">{apiError}</p>
-      )}
     </form>
   );
 }

@@ -1,3 +1,6 @@
+import { combineResolvers } from 'graphql-resolvers';
+
+import { isAuthenticated } from './authorization.resolver';
 import { registerUser } from '~/services/authentication/register.service';
 import { loginUser } from '~/services/authentication/login.service';
 import { verifyEmail, resendEmailAction } from '~/services/authentication/verify-email.service';
@@ -14,14 +17,17 @@ const resolvers = {
     loginBySocial: (_, { provider, code }) => loginSocial(provider, code),
   },
   Mutation: {
-    register(_, { email, password, name, planName, billingType }) {
-      return registerUser(lowerCaseAndTrim(email), password, name, planName, billingType);
+    register(_, { email, password, name, paymentMethodToken, planName, billingType }) {
+      return registerUser(lowerCaseAndTrim(email), password, name, paymentMethodToken, planName, billingType);
     },
     login(_, { email, password }) {
       return loginUser(lowerCaseAndTrim(email), password);
     },
     forgotPassword: async (_, { email }) => forgotPasswordUser(lowerCaseAndTrim(email)),
-    changePassword: async (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword),
+    changePassword: combineResolvers(
+      isAuthenticated,
+      (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword),
+    ),
     resetPassword: async (_, { token, password, confirmPassword }) => resetPasswordUser(token, password, confirmPassword),
     verify: (_, { token }) => verifyEmail(token),
     resendEmail: (_, { type }, { user }) => resendEmailAction(user, lowerCaseAndTrim(type)),

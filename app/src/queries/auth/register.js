@@ -5,6 +5,7 @@ export default gql`
     $email: String!
     $password: String!
     $name: String!
+    $paymentMethodToken: String,
     $planName: String
     $billingType: BillingType
   ) {
@@ -12,6 +13,7 @@ export default gql`
       email: $email
       password: $password
       name: $name
+      paymentMethodToken: $paymentMethodToken
       planName: $planName
       billingType: $billingType
     ) {

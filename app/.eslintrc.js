@@ -1,7 +1,7 @@
 module.exports = {
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', 'lodash'],
   env: {
     browser: true,
     node: true,
@@ -84,5 +84,6 @@ module.exports = {
         custom: 'ignore',
       },
     ],
+    'lodash/import-scope': [2, 'method'],
   },
 };

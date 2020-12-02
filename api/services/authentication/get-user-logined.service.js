@@ -1,8 +1,6 @@
-import pkg from 'apollo-server-express';
+import { AuthenticationError } from 'apollo-server-express';
 import { verify } from '~/helpers/jwt.helper';
 import { findUser } from '~/repository/user.repository';
-
-const { AuthenticationError } = pkg;
 
 export default async function getUserLogined(bearerToken) {
   if (bearerToken) {

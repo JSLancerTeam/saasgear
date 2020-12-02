@@ -1,11 +1,8 @@
-import pkg from 'apollo-server-express';
-
+import { ValidationError, AuthenticationError } from 'apollo-server-express';
 import { comparePassword } from '~/helpers/hashing.helper';
 import { sign } from '~/helpers/jwt.helper';
 import { findUser } from '~/repository/user.repository';
 import { loginValidation } from '~/utils/validations/authenticate.validation';
-
-const { AuthenticationError, ValidationError } = pkg;
 
 export async function loginUser(email, password) {
   const validateResult = loginValidation({ email, password });

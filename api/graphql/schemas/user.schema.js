@@ -1,6 +1,4 @@
-import pkg from 'apollo-server-express';
-
-const { gql } = pkg;
+import { gql } from 'apollo-server-express';
 
 export const UserSchema = gql`
   enum BillingType {
@@ -50,7 +48,7 @@ export const UserSchema = gql`
   }
 
   extend type Mutation {
-    register(email: String!, password: String!, name: String!, planName: String, billingType: BillingType): ResponseUserLogin!
+    register(email: String!, password: String!, name: String!, paymentMethodToken: String, planName: String, billingType: BillingType): ResponseUserLogin!
 
     login(email: String!, password: String!): ResponseUserLogin!
 

@@ -2,8 +2,8 @@ import Apollo from 'apollo-server-express';
 
 import { createUser, findUser } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
+import { createToken } from '~/repository/user_tokens.repository';
 import compileEmailTemplate from '~/helpers/compile-email-template';
-import { createToken } from '~/repository/user_token.repository';
 import sendMail from '~/libs/mail';
 import { sign } from '~/helpers/jwt.helper';
 import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';

@@ -27,34 +27,47 @@ const SignUpSchema = yup.object().shape({
     .required(),
 });
 
-function SignUp() {
+const SignUp = () => {
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignUpSchema),
+    shouldUnregister: false,
   });
   const [registerMutation, { error, loading }] = useMutation(registerQuery);
   const [showStripeForm, setShowStripeForm] = useState(false);
+  const [formData, setFormData] = useState({});
   const history = useHistory();
   const query = getQueryParam();
   const planName = query.get('plan');
 
-  async function onSubmit(params) {
-    if (planName) {
-      params = {
-        ...params,
-        planName,
-        billingType: query.get('isYearly') === '1' ? 'YEARLY' : 'MONTHLY',
-      };
-    }
+  async function signup(params) {
     const { data } = await registerMutation({ variables: params });
     if (data?.register?.token) {
       localStorage.setItem(JWT_STORAGE_KEY, data.register.token);
-
-      if (planName) {
-        setShowStripeForm(true);
-      } else {
-        history.push('/');
-      }
+      history.push('/');
     }
+  }
+
+  async function onSubmit(params) {
+    if (planName) {
+      setShowStripeForm(true);
+      setFormData(params);
+    } else {
+      signup(params);
+    }
+  }
+
+  function createPaymentMethodSuccess(token) {
+    const data = {
+      ...formData,
+      paymentMethodToken: token,
+      planName,
+      billingType: query.get('isYearly') === '1' ? 'YEARLY' : 'MONTHLY',
+    }
+    signup(data);
+  }
+
+  function handleGoBack() {
+    setShowStripeForm(false);
   }
 
   return (
@@ -65,7 +78,13 @@ function SignUp() {
           : 'Sign up to connect with us'}
       </h2>
       {showStripeForm ? (
-        <StripeContainer planName={planName} />
+        <StripeContainer 
+          onSubmitSuccess={createPaymentMethodSuccess}
+          className="mt-8 shadow overflow-hidden sm:rounded-md px-4 bg-white sm:p-6"
+          onGoBack={handleGoBack}
+          apiLoading={loading} 
+          apiError={error?.message}
+        />
       ) : (
         <SignUpForm
           onSubmit={handleSubmit(onSubmit)}

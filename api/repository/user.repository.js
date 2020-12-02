@@ -1,7 +1,8 @@
 import union from 'lodash/union';
 import database from '~/config/database.config';
-import { userTokenColumns } from './user_token.repository';
+import { userTokenColumns } from './user_tokens.repository';
 import { TABLES } from '~/constants/table-name.constant';
+import { insertUserPlan } from './user_plans.repository';
 
 const TABLE = TABLES.users;
 
@@ -17,22 +18,29 @@ export const usersColumns = {
   providerId: 'users.provider_id',
 };
 
-export async function findUser({ id, email, provider_id, provider }) {
-  const condition = {};
-  if (id) condition.id = id;
-  if (email) condition.email = email;
-  if (provider_id) condition.provider_id = provider_id;
-  if (provider) condition.provider = provider;
+export async function findUser(condition) {
   return database(TABLE).where(condition).first();
 }
 
-export async function createUser({ name, email, password = 'null', provider, provider_id, is_active, avatar_url }) {
-  const data = { name, email, password };
-  if (is_active) data.is_active = is_active;
-  if (provider) data.provider = provider;
-  if (provider_id) data.provider_id = provider_id;
-  if (avatar_url) data.avatar_url = avatar_url;
-  return database(TABLE).insert(data);
+export async function createUser(userData, userPlanData = null) {
+  let t;
+  try {
+    t = await database.transaction();
+    const [userId] = await database(TABLE).transacting(t).insert(userData);
+
+    if (userPlanData) {
+      await insertUserPlan({
+        ...userPlanData,
+        user_id: userId,
+      }, t);
+    }
+
+    await t.commit();
+    return userId;
+  } catch (error) {
+    if (t) t.rollback();
+    return new Error(error);
+  }
 }
 
 export async function updateUser(id, data) {

@@ -40,23 +40,15 @@ All code in this repository is provided under the MIT
 ## Set up with Docker
 ### 1. Create env  
   + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
-### 2. Install dependencies  
-  + 2.1. Install dependencies for API  
-    + RUN ```cd api && npm install```  
-    + if it fail. Run ```npm install``` again for link module alias.  
-  + 2.2 Install dependencies for React App  
-    + Run ```cd app && npm install```.
-  + 2.3 Install dependencies for Landing Page  
-    + Run ```cd landing && npm install```.
-### 3. Build Docker
+### 2. Build Docker
     > You must be in root source
-  + 3.1. Build all Dockerfile
+  + 2.1. Build all Dockerfile
     + Run ```docker-compose build```
-  + 3.2. Start docker containers
-    + Run ```docker-compose up -d``` to start all containers
+  + 2.2. Start docker containers
+    + Run ```docker-compose up -d``` to start all container
 
-### 4. Setup hosts
-  + 4.1 Open `hosts` file to edit  
+### 3. Setup hosts
+  + 3.1 Open `hosts` file to edit  
     > If you are using Linux or MacOS
     + Run command ```sudo nano /etc/hosts```  
 
@@ -66,16 +58,16 @@ All code in this repository is provided under the MIT
     + Navigate to `c:\windows\system32\drivers\etc`
     + In the lower-right corner, just above the `Open` button, click the drop-down menu to change the file type to `All Files`.
     + Choose `hosts` file to edit
-  + 4.2 Update `hosts` file  
-    > Please paste this to your `hosts` file
+  + 3.2 Update `hosts` file  
+    > Please paste this to your `host` file
     ```
     127.0.0.1	saasgear.local
     127.0.0.1	api-saasgear.local
     127.0.0.1	landing-saasgear.local
     ```
-  + 4.3 Save and exit
+  + 3.3 Save and exit
 
-### 5. Run in browser
+### 4. Run in browser
   + Open your browser and type
     + For Front-end: `http://saasgear.local`
     + For Back-end: `http://api-saasgear.local/graphql`
@@ -86,7 +78,7 @@ All code in this repository is provided under the MIT
       + For Back-end: `http://localhost:5001/graphql`
       + For Landing page: `http://localhost:4001`
 
-### 6. Custom domain
+### 5. Custom domain
   + If you want to custom domain to your favorite, You can:
     + Go to `systems/docker-services/nginx/conf`
     + Choose your app you want to custom domain

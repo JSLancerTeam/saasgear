@@ -6,6 +6,7 @@ WORKDIR /var/www/app/api
 COPY ./api/package*.json ./
 
 RUN npm install
+RUN npm run postinstall
 
 RUN npm install -g knex
 

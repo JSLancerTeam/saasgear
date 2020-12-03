@@ -1,7 +1,7 @@
 import React from 'react';
 import PropsType from 'prop-types';
 
-function AccountForm({ onSubmit, register, errors }) {
+function AccountForm({ onSubmit, register, errors, openPopupDeleteAccount }) {
   return (
     <form className="form flex flex-wrap w-full" onSubmit={onSubmit}>
       <div className="w-full">
@@ -99,12 +99,23 @@ function AccountForm({ onSubmit, register, errors }) {
           </p>
         )}
       </div>
-      <button
-        type="submit"
-        className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded py-2 px-4 mt-4"
-      >
-        Submit
-      </button>
+      <div className="w-full mt-4 flex flex-row justify-between items-center">
+        <button
+          type="submit"
+          className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded py-2 px-4"
+        >
+          Submit
+        </button>
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyDown={openPopupDeleteAccount}
+          className="hover:underline hover:text-blue-800 cursor-pointer text-blue-500"
+          onClick={openPopupDeleteAccount}
+        >
+          I &apos;d like to delete my account
+        </div>
+      </div>
     </form>
   );
 }
@@ -113,6 +124,7 @@ AccountForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
   errors: PropsType.object,
+  openPopupDeleteAccount: PropsType.func,
 };
 
 export default AccountForm;

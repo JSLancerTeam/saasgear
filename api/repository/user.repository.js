@@ -16,9 +16,17 @@ export const usersColumns = {
   avatarUrl: 'users.avatar_url',
   provider: 'users.provider',
   providerId: 'users.provider_id',
+  deletedAt: 'users.deleted_at',
 };
 
-export async function findUser(condition) {
+export async function findUser({ id, email, provider_id, provider, deleted_at = null }) {
+  const condition = {
+    deleted_at,
+  };
+  if (id) condition.id = id;
+  if (email) condition.email = email;
+  if (provider_id) condition.provider_id = provider_id;
+  if (provider) condition.provider = provider;
   return database(TABLE).where(condition).first();
 }
 
@@ -29,16 +37,19 @@ export async function createUser(userData, userPlanData = null) {
     const [userId] = await database(TABLE).transacting(t).insert(userData);
 
     if (userPlanData) {
-      await insertUserPlan({
-        ...userPlanData,
-        user_id: userId,
-      }, t);
+      await insertUserPlan(
+        {
+          ...userPlanData,
+          user_id: userId,
+        },
+        t,
+      );
     }
 
     await t.commit();
     return userId;
   } catch (error) {
-    if (t) t.rollback();
+    if (error) t.rollback();
     return new Error(error);
   }
 }
@@ -51,7 +62,7 @@ export async function getUserByIdAndJoinUserToken(id, type) {
   const users = Object.values(usersColumns);
   const userToken = Object.values(userTokenColumns);
   return database(TABLE)
-    .join(TABLES.userToken, usersColumns.id, userTokenColumns.userId)
+    .join(TABLES.userTokens, usersColumns.id, userTokenColumns.userId)
     .select(union(users, userToken))
     .where({ [usersColumns.id]: id, [userTokenColumns.type]: type })
     .first();

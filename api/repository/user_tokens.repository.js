@@ -33,3 +33,7 @@ export async function changeTokenStatus(id, type, isActive = true) {
 export async function removeUserToken(id) {
   return database(TABLE).where({ id }).delete();
 }
+
+export async function getToken({ user_id }) {
+  return database(TABLE).where({ user_id });
+}

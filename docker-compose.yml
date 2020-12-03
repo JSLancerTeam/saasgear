@@ -81,6 +81,7 @@ services:
       - "443:443"
     volumes:
       - ./systems/docker-services/nginx/conf:/etc/nginx/site-availables
+    restart: always
     networks:
       - saas-network
 

@@ -44,6 +44,7 @@ services:
     volumes:
       - ./api:/var/www/app/api
       - /var/www/app/api/node_modules
+    command: bash -c "/usr/wait-for-it.sh --timeout=0 db:3306 && npm run db:migrate && npm run db:seed"
     networks:
       - saas-network
   frontend:

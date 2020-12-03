@@ -36,10 +36,11 @@ services:
       - db
       - adminer
     environment:
-      - DB_HOST=db
-      - DB_NAME=saas
-      - DB_USER=root
-      - DB_PASSWORD=root
+      - DATABASE_HOST=saas_mysql_db
+      - DATABASE_NAME=saas
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_PORT=3306
     volumes:
       - ./api:/var/www/app/api
       - /var/www/app/api/node_modules

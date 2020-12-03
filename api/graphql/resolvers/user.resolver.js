@@ -9,7 +9,8 @@ import { resetPasswordUser } from '~/services/authentication/reset-password.serv
 import { changePasswordUser } from '~/services/authentication/change-password.service';
 import { loginSocial } from '~/services/authentication/social-login.service';
 import { registerAccountBySocial } from '~/services/authentication/register-social.service';
-import { lowerCaseAndTrim } from '~/helpers/string.helper';
+import { deleteUser } from '~/services/user/delete-user.service';
+import { normalizeEmail } from '~/helpers/string.helper';
 
 const resolvers = {
   Query: {
@@ -18,20 +19,18 @@ const resolvers = {
   },
   Mutation: {
     register(_, { email, password, name, paymentMethodToken, planName, billingType }) {
-      return registerUser(lowerCaseAndTrim(email), password, name, paymentMethodToken, planName, billingType);
+      return registerUser(normalizeEmail(email), password, name, paymentMethodToken, planName, billingType);
     },
     login(_, { email, password }) {
-      return loginUser(lowerCaseAndTrim(email), password);
+      return loginUser(normalizeEmail(email), password);
     },
-    forgotPassword: async (_, { email }) => forgotPasswordUser(lowerCaseAndTrim(email)),
-    changePassword: combineResolvers(
-      isAuthenticated,
-      (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword),
-    ),
+    forgotPassword: async (_, { email }) => forgotPasswordUser(normalizeEmail(email)),
+    changePassword: combineResolvers(isAuthenticated, (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword)),
     resetPassword: async (_, { token, password, confirmPassword }) => resetPasswordUser(token, password, confirmPassword),
     verify: (_, { token }) => verifyEmail(token),
-    resendEmail: (_, { type }, { user }) => resendEmailAction(user, lowerCaseAndTrim(type)),
-    registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, lowerCaseAndTrim(email), name, avatarUrl, providerId),
+    resendEmail: (_, { type }, { user }) => resendEmailAction(user, normalizeEmail(type)),
+    registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, normalizeEmail(email), name, avatarUrl, providerId),
+    deleteAccount: async (_, a, { user }) => deleteUser(user),
   },
 };
 

@@ -3,17 +3,18 @@ export function up(knex) {
     t.increments('id');
     t.string('name').notNullable();
     t.string('email').notNullable();
-    t.string('password').notNullable();
+    t.string('password');
     t.boolean('is_active').defaultTo(false);
     t.string('avatar_url');
     t.string('provider');
-    t.integer('provider_id', 20);
+    t.string('provider_id', 30);
     t.dateTime('created_at')
       .notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     t.dateTime('updated_at')
       .notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+    t.dateTime('deleted_at');
     t.unique('email');
   });
 }

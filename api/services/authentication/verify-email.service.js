@@ -10,7 +10,7 @@ import generateRandomKey from '~/helpers/genarateRandomkey';
 import compileEmailTemplate from '~/helpers/compile-email-template';
 import sendMail from '~/libs/mail';
 import logger from '~/utils/logger';
-import { lowerCaseAndTrim } from '~/helpers/string.helper';
+import { normalizeEmail } from '~/helpers/string.helper';
 import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 
 function isValidDate(createdAt) {
@@ -82,7 +82,7 @@ export async function resendEmailAction(user, type) {
     }
 
     await changeTokenStatus(null, type, false);
-    await Promise.all([createToken(user.id, token, type), sendMail(lowerCaseAndTrim(user.email), subject, template)]);
+    await Promise.all([createToken(user.id, token, type), sendMail(normalizeEmail(user.email), subject, template)]);
 
     return true;
   } catch (error) {

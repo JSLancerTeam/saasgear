@@ -11,10 +11,14 @@ const { ApolloError } = Apollo;
  * Create new subcription
  *
  * @param {string} token
+ * @param {string} email
+ * @param {string} name
+ * @param {string} priceId
+ * @param {boolean} isTrial
  *
  * @returns {Promise<any>}
  */
-export async function createNewSubcription(token, email, name, price_id) {
+export async function createNewSubcription(token, email, name, priceId, isTrial = false) {
   if (!token) {
     throw new ApolloError('Invalid token');
   }
@@ -26,26 +30,39 @@ export async function createNewSubcription(token, email, name, price_id) {
       source: token,
     });
 
-    const result = await stripe.subscriptions.create({
+    const dataSubcription = {
       customer: customer.id,
-      items: [{ price: price_id }],
-      trial_end: dayjs().add(14, 'day').unix(),
-    });
+      items: [{ price: priceId }],
+    };
+    if (isTrial) {
+      dataSubcription.trial_end = dayjs().add(14, 'd').unix();
+    }
 
-    return result.id;
+    const result = await stripe.subscriptions.create(dataSubcription);
+
+    return {
+      customer_id: customer.id,
+      subcription_id: result.id,
+    };
   } catch (error) {
     logger.error(error);
-    throw new ApolloError('Something went wrong!');
+    throw new ApolloError('Payment failed! Please check your card.');
   }
 }
 
+/**
+ * Update subcription
+ *
+ * @param {string} subId
+ * @param {string} priceId
+ *
+ * @returns {Promise<any>}
+ */
 export async function updateSubcription(subId, priceId) {
   try {
     const subscription = await stripe.subscriptions.retrieve(subId);
 
     await stripe.subscriptions.update(subId, {
-      cancel_at_period_end: false,
-      proration_behavior: 'create_prorations',
       items: [{
         id: subscription.items.data[0].id,
         price: priceId,
@@ -55,13 +72,20 @@ export async function updateSubcription(subId, priceId) {
     return true;
   } catch (error) {
     logger.error(error);
-    throw new ApolloError('Something went wrong!');
+    throw new ApolloError('Payment failed! Please check your card.');
   }
 }
 
-export async function cancelSubcription(subId) {
+/**
+ * Cancel subcription
+ *
+ * @param {string} customerId
+ *
+ * @returns {Promise<any>}
+ */
+export async function cancelSubcription(customerId) {
   try {
-    await stripe.subscriptions.del(subId);
+    await stripe.customers.del(customerId);
 
     return true;
   } catch (error) {

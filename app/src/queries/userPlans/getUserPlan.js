@@ -11,6 +11,8 @@ export default gql`
       amount
       productType
       priceType
+      expiredAt
+      deletedAt
     }
   }
 `;

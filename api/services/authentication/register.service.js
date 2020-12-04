@@ -1,4 +1,5 @@
-import pkg from 'apollo-server-express';
+import { ValidationError, ApolloError } from 'apollo-server-express';
+import dayjs from 'dayjs';
 
 import { findUser, createUser } from '~/repository/user.repository';
 import { createToken } from '~/repository/user_tokens.repository';
@@ -11,11 +12,8 @@ import logger from '~/utils/logger';
 import { sign } from '~/helpers/jwt.helper';
 import { findProductAndPriceByType } from '~/repository/products.repository';
 import { createNewSubcription } from '~/services/stripe/subcription.service';
-import { addMultiPermissions } from '~/services/user/permission.service';
-import { PERMISSION_PLAN } from '~/constants/billing.constant';
 import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
-
-const { ValidationError, ApolloError } = pkg;
+import formatDateDB from '~/utils/format-date-db';
 
 async function registerUser(email, password, name, paymentMethodToken, planName, billingType) {
   const validateResult = registerValidation({ email, password, name });
@@ -49,15 +47,19 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
         return new ApolloError('Can not find any plan');
       }
 
-      const subscriptionId = await createNewSubcription(paymentMethodToken, email, name, product.price_stripe_id);
+      const { subcription_id, customer_id } = await createNewSubcription(paymentMethodToken, email, name, product.price_stripe_id, true);
 
-      if (subscriptionId) {
+      if (subcription_id && customer_id) {
         const userPlanData = {
           product_id: product.id,
           price_id: product.price_id,
-          subcription_id: subscriptionId,
+          customer_id,
+          subcription_id,
+          is_trial: true,
+          expired_at: formatDateDB(dayjs().add(14, 'd')),
         };
-        newUserId = await createUser(userData, userPlanData);
+
+        newUserId = await createUser(userData, userPlanData, product.type);
       }
     } else {
       newUserId = await createUser(userData);
@@ -72,17 +74,13 @@ async function registerUser(email, password, name, paymentMethodToken, planName,
       },
     });
 
-    const pms = [
+    await Promise.all([
       sendMail(email, 'Confirm your email address', template),
       createToken(newUserId, tokenVerifyEmail, SEND_MAIL_TYPE.VERIFY_EMAIL),
-    ];
-    if (planName && PERMISSION_PLAN[planName]) {
-      pms.push(addMultiPermissions(newUserId, PERMISSION_PLAN[planName]));
-    }
-
-    await Promise.all(pms);
+    ]);
 
     const token = sign({ email, name });
+
     return { token };
   } catch (error) {
     logger.error(error);

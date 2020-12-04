@@ -22,6 +22,7 @@
     "apollo-server-express": "^2.19.0",
     "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "bunyan": "^1.8.14",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",

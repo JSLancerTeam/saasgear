@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 
 import Apollo from 'apollo-server-express';
 import Sentry from '@sentry/node';
@@ -11,6 +12,7 @@ import accessLogStream from './middlewares/logger.middleware';
 import RootSchema from './graphql/root.schema';
 import RootResolver from './graphql/root.resolver';
 import getUserLogined from './services/authentication/get-user-logined.service';
+import stripeHooks from './services/stripe/webhooks.servive';
 
 dotenv.config();
 
@@ -29,6 +31,7 @@ const corsOptions = {
   app.get('/', (req, res) => {
     res.send('Hello World!');
   });
+  app.post('/stripe-hooks', bodyParser.raw({ type: 'application/json' }), stripeHooks);
 
   const serverGraph = new Apollo.ApolloServer({
     schema: Apollo.makeExecutableSchema({

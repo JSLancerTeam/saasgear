@@ -11,6 +11,7 @@ import updateUserPlanQuery from '@/queries/userPlans/updateUserPlan';
 import createUserPlanQuery from '@/queries/userPlans/createUserPlan';
 import getUserPlanQuery from '@/queries/userPlans/getUserPlan';
 import { setUserPlan } from '@/features/auth/userPlan';
+import dayjs from 'dayjs';
 
 const plans = [
   {
@@ -66,9 +67,7 @@ const PlanSetting = ({ isActive }) => {
     await deleteUserPlanMutation({
       variables: { userPlanId: currentPlan.id }
     });
-    setIsYearly(false);
-    setSelectedPlan('');
-    dispatch(setUserPlan({}));
+    fetchUserPlan();
   }
 
   async function createPaymentMethodSuccess(token) {
@@ -144,9 +143,9 @@ const PlanSetting = ({ isActive }) => {
                 )}
               </div>
               {checkIsCurrentPlan(plan.id) ? (
-                <button disabled className="w-full cursor-default bg-blue-200 text-gray-600 py-2 rounded-md mt-8" type="button">Current plan</button>
+                <button disabled className="w-full cursor-default bg-blue-200 text-gray-600 text-sm py-2 rounded-md mt-8" type="button">Current plan</button>
               ) : (
-                <button className="w-full bg-blue-500 text-white py-2 rounded-md mt-8" type="button" onClick={() => changePlan(plan.id)}>Get started</button>
+                <button className="w-full bg-blue-500 text-white text-sm py-2 rounded-md mt-8" type="button" onClick={() => changePlan(plan.id)}>Get started</button>
               )}
             </div>
           ))}
@@ -159,12 +158,16 @@ const PlanSetting = ({ isActive }) => {
       {planChanged && (
         checkIsCurrentPlan(planChanged.id) ? (
           <div className="border-t border-gray-300 mt-10 pt-10 flex justify-center">
-            <button 
-              type="button" 
-              className="w-4/12 py-2 px-4 text-sm leading-5 font-medium rounded-md text-white bg-red-500"
-              disabled={isDeletingUserPlan}
-              onClick={handleCancelSubscription}
-            >Cancel Subcription</button>
+            {currentPlan.deletedAt ? (
+              <p>Plan will expire on <b>{dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm')}</b></p>
+            ) : (
+              <button 
+                type="button" 
+                className="w-4/12 py-2 px-4 text-sm leading-5 font-medium rounded-md text-white bg-red-500"
+                disabled={isDeletingUserPlan}
+                onClick={handleCancelSubscription}
+              >Cancel Subcription</button>
+            )}
           </div>
         ) : (
           <div className="border-t border-gray-300 mt-10 pt-10 grid grid-cols-3">
@@ -183,11 +186,12 @@ const PlanSetting = ({ isActive }) => {
               </div>
             </div>
             <div className="col-span-2 border-l border-gray-300 flex justify-center items-center">
-              {isEmpty(currentPlan) ? (
+              {(isEmpty(currentPlan) || (currentPlan && currentPlan.deletedAt)) ? (
                 <StripeContainer 
                   onSubmitSuccess={createPaymentMethodSuccess}
                   apiLoading={isCreatingUserPlan}
                   className="w-6/12 mx-auto"
+                  submitText={currentPlan && currentPlan.deletedAt && 'Change plan'}
                 />
               ) : (
                 <button 

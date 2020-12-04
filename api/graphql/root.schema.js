@@ -1,7 +1,6 @@
 import Apollo from 'apollo-server-express';
 import { UserSchema } from './schemas/user.schema';
 import { UserPlanSchema } from './schemas/user-plan.schema';
-import { StripeSchema } from './schemas/stripe.schema';
 
 const { gql } = Apollo;
 const rootSchema = gql`
@@ -21,4 +20,4 @@ const rootSchema = gql`
   }
 `;
 
-export default [rootSchema, UserSchema, UserPlanSchema, StripeSchema];
+export default [rootSchema, UserSchema, UserPlanSchema];

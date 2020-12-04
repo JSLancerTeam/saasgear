@@ -13,6 +13,8 @@ export const UserPlanSchema = gql`
     amount: Float!
     productType: String!
     priceType: String!
+    expiredAt: Date
+    deletedAt: Date
   }
 
   extend type Query {

@@ -3,6 +3,8 @@ import database from '~/config/database.config';
 import { userTokenColumns } from './user_tokens.repository';
 import { TABLES } from '~/constants/table-name.constant';
 import { insertUserPlan } from './user_plans.repository';
+import { insertMultiPermission } from './user_permission.repository';
+import { PERMISSION_PLAN } from '~/constants/billing.constant';
 
 const TABLE = TABLES.users;
 
@@ -30,20 +32,29 @@ export async function findUser({ id, email, provider_id, provider, deleted_at = 
   return database(TABLE).where(condition).first();
 }
 
-export async function createUser(userData, userPlanData = null) {
+export async function createUser(userData, userPlanData = null, planType = null) {
   let t;
   try {
     t = await database.transaction();
     const [userId] = await database(TABLE).transacting(t).insert(userData);
 
     if (userPlanData) {
-      await insertUserPlan(
+      const [userPlanId] = await insertUserPlan(
         {
           ...userPlanData,
           user_id: userId,
         },
         t,
       );
+
+      if (planType && PERMISSION_PLAN[planType]) {
+        const userPermissionData = PERMISSION_PLAN[planType].map((permission) => ({
+          user_id: userId,
+          user_plan_id: userPlanId,
+          permission,
+        }));
+        await insertMultiPermission(userPermissionData, t);
+      }
     }
 
     await t.commit();

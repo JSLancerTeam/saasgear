@@ -7,14 +7,15 @@ import StripeForm from '@/components/Stripe/StripeForm';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const StripeContainer = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError }) => (
+const StripeContainer = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError, submitText }) => (
   <Elements stripe={stripePromise}>
     <StripeForm 
       onSubmitSuccess={onSubmitSuccess}
       className={className}
       onGoBack={onGoBack} 
       apiLoading={apiLoading} 
-      apiError={apiError} 
+      apiError={apiError}
+      submitText={submitText}
     />
   </Elements>
 )
@@ -25,6 +26,7 @@ StripeContainer.propTypes = {
   onGoBack: PropsType.func,
   apiLoading: PropsType.bool,
   apiError: PropsType.string,
+  submitText: PropsType.string,
 };
 
 export default StripeContainer;

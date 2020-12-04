@@ -8,54 +8,98 @@ const products = [
   { name: 'Professional', amount: 295 },
 ];
 
-async function createProductItem(item) {
-  const product = await stripe.products.create({ name: item.name });
-  if (!product) {
-    return false;
+async function createProductItem(item, dataStripe) {
+  const productStripe = dataStripe.find((pro) => pro.name === item.name);
+
+  let productData = null;
+  let priceData = [];
+  if (productStripe) {
+    productData = {
+      name: item.name,
+      type: item.name.toLowerCase(),
+      stripe_id: productStripe.id,
+    };
+    priceData = [
+      {
+        amount: item.amount,
+        type: 'monthly',
+        stripe_id: productStripe.prices.find((pri) => pri.type === 'month').id,
+      },
+      {
+        amount: item.amount * 9,
+        type: 'yearly',
+        stripe_id: productStripe.prices.find((pri) => pri.type === 'year').id,
+      },
+    ];
+  } else {
+    const product = await stripe.products.create({ name: item.name });
+    if (!product) {
+      return false;
+    }
+
+    const [priceMonth, priceYear] = await Promise.all([
+      stripe.prices.create({
+        unit_amount: item.amount * 100,
+        currency: 'usd',
+        recurring: { interval: 'month' },
+        product: product.id,
+      }),
+      stripe.prices.create({
+        unit_amount: item.amount * 9 * 100,
+        currency: 'usd',
+        recurring: { interval: 'year' },
+        product: product.id,
+      }),
+    ]);
+
+    if (!priceMonth || !priceYear) {
+      return false;
+    }
+
+    productData = {
+      name: item.name,
+      type: item.name.toLowerCase(),
+      stripe_id: product.id,
+    };
+
+    priceData = [
+      {
+        amount: item.amount,
+        type: 'monthly',
+        stripe_id: priceMonth.id,
+      },
+      {
+        amount: item.amount * 9,
+        type: 'yearly',
+        stripe_id: priceYear.id,
+      },
+    ];
   }
 
-  const [priceMonth, priceYear] = await Promise.all([
-    stripe.prices.create({
-      unit_amount: item.amount * 100,
-      currency: 'usd',
-      recurring: { interval: 'month' },
-      product: product.id,
-    }),
-    stripe.prices.create({
-      unit_amount: item.amount * 9 * 100,
-      currency: 'usd',
-      recurring: { interval: 'year' },
-      product: product.id,
-    }),
-  ]);
-
-  if (!priceMonth || !priceYear) {
-    return false;
+  if (productData && priceData.length) {
+    return insertProduct(productData, priceData);
   }
 
-  const productData = {
-    name: item.name,
-    type: item.name.toLowerCase(),
-    stripe_id: product.id,
+  return true;
+}
+
+async function getProductAndPriceStripe(pro) {
+  const { data: dataPrices } = await stripe.prices.list({ product: pro.id });
+  const prices = dataPrices?.map((pri) => ({ id: pri.id, type: pri.recurring.interval }));
+  return {
+    id: pro.id,
+    name: pro.name,
+    prices,
   };
-
-  const priceData = [
-    {
-      amount: item.amount,
-      type: 'monthly',
-      stripe_id: priceMonth.id,
-    },
-    {
-      amount: item.amount * 9,
-      type: 'yearly',
-      stripe_id: priceYear.id,
-    },
-  ];
-
-  return insertProduct(productData, priceData);
 }
 
 async function run() {
+  const { data: stripeProducts } = await stripe.products.list();
+  let data = [];
+  if (stripeProducts.length) {
+    data = await Promise.all(stripeProducts.map((pro) => getProductAndPriceStripe(pro)));
+  }
+
   const productTypes = products.map((product) => product.name.toLowerCase());
   const listProducts = await findProductInType(productTypes);
   let newProducts = products;
@@ -64,7 +108,7 @@ async function run() {
     newProducts = products.filter((product) => !typesExist.includes(product.name.toLowerCase()));
   }
   if (newProducts.length > 0) {
-    return Promise.all(newProducts.map((productItem) => createProductItem(productItem)));
+    return Promise.all(newProducts.map((productItem) => createProductItem(productItem, data)));
   }
   return true;
 }

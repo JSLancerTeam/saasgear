@@ -137,6 +137,15 @@ function AdminLayout({ signout, user }) {
                           </Link>
 
                           <Link
+                            to="/teams"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            role="menuitem"
+                            onClick={toggleOpenDropdown}
+                          >
+                            Teams
+                          </Link>
+
+                          <Link
                             to="/setting"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"

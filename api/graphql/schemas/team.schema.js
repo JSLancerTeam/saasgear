@@ -11,4 +11,9 @@ export const TeamSchema = gql`
     teams: [Team],
     getTeamById(teamId: Int!): Team
   }
+
+  extend type Mutation {
+    createTeam(name: String!, alias: String!): Team,
+    inviteMember(email: String!, teamId: Int!): Boolean
+  }
 `;

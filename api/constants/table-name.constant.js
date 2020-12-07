@@ -5,6 +5,9 @@ const TABLES = {
   userPermissions: 'user_permissions',
   products: 'products',
   prices: 'prices',
+  teams: 'teams',
+  teamInvitations: 'team_invitations',
+  teamMembers: 'team_members',
 };
 
 export { TABLES };

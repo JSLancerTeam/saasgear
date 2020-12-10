@@ -16,23 +16,21 @@ export const teamsColumns = {
 /**
  * Function to create Team
  *
- * @param object      data        Object contains data of team. Example: {name, alias, createdBy}
+ * @param object      data        Object contains data of team. Example: {name, alias, created_by}
  * @param Transaction transaction Transaction object want to use within query
  *
  */
-export async function createTeam(data, transaction = null) {
-  const query = database(TABLE).insert(data);
-  if (!transaction) {
-    return query;
-  }
-  return query.transacting(transaction);
+export async function insertTeam(data) {
+  const res = await database(TABLE).returning(['id', 'name', 'alias', 'createdBy']).insert(data);
+  const newId = res.shift();
+  return getTeam({ id: newId });
 }
 
 /**
  * Function to update team
  *
  * @param int         teamId      Id of team want to update
- * @param object      data        Object contains update data of team. Example: {name, alias, createdBy}
+ * @param object      data        Object contains update data of team. Example: {name, alias, create_by}
  * @param Transaction transaction Transaction object want to use within query
  *
  */
@@ -54,31 +52,10 @@ export async function getAllTeam() {
 }
 
 /**
- * Function to get team by Id
+ * This function is used to get team by search data
  *
- * @param int id Id of team want to find
- *
+ * @param object searchData Object contains search data. Example: {name, alias, created_by}
  */
-export async function getTeamById(id) {
-  return database(TABLE).where({ id }).first();
-}
-
-/**
- * Function to get team by name
- *
- * @param string name Name of team want to get
- *
- */
-export async function getTeamByName(name) {
-  return database(TABLE).where({ name }).first();
-}
-
-/**
- * Function to get team by alias
- *
- * @param string alias Alias of team want to get
- *
- */
-export async function getTeamByAlias(alias) {
-  return database(TABLE).where({ alias }).first();
+export async function getTeam(searchData) {
+  return database(TABLE).where(searchData).first();
 }

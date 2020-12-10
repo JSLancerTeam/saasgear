@@ -3,6 +3,8 @@ import { TABLES } from '~/constants/table-name.constant';
 
 const TABLE = TABLES.teamInvitations;
 
+export const VALID_PERIOD_DAYS = 14;
+
 export const teamsColumns = {
   email: 'team_invitations.email',
   teamId: 'team_invitations.team_id',

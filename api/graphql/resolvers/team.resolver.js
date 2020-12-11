@@ -1,5 +1,5 @@
 import { combineResolvers } from 'graphql-resolvers';
-import { getAllTeams, findTeamById, createTeam, inviteTeamMember } from '~/services/teams/teams.service';
+import { getAllTeams, findTeamByAlias, createTeam, inviteTeamMember } from '~/services/teams/teams.service';
 import { isAuthenticated } from './authorization.resolver';
 
 const resolvers = {
@@ -8,9 +8,9 @@ const resolvers = {
       isAuthenticated,
       (_, arg, { user }) => getAllTeams(user),
     ),
-    getTeamById: combineResolvers(
+    getTeamDetail: combineResolvers(
       isAuthenticated,
-      (_, { teamId }, { user }) => findTeamById(user, teamId),
+      (_, { alias }, { user }) => findTeamByAlias(alias),
     ),
   },
   Mutation: {

@@ -1,16 +1,17 @@
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
+import { createTeamMember, teamMembersColumns } from './team_members.repository';
 
 const TABLE = TABLES.teams;
 
 export const teamsColumns = {
   id: 'teams.id',
-  userId: 'teams.created_by',
   name: 'teams.name',
   alias: 'teams.alias',
   createAt: 'teams.created_at',
   updatedAt: 'teams.updated_at',
   deletedAt: 'teams.deleted_at',
+  createdBy: 'teams.created_by',
 };
 
 /**
@@ -20,10 +21,12 @@ export const teamsColumns = {
  * @param Transaction transaction Transaction object want to use within query
  *
  */
-export async function insertTeam(data) {
-  const res = await database(TABLE).returning(['id', 'name', 'alias', 'createdBy']).insert(data);
-  const newId = res.shift();
-  return getTeam({ id: newId });
+export async function insertTeam(data, transaction = null) {
+  const query = database(TABLE).insert(data);
+  if (!transaction) {
+    return query;
+  }
+  return query.transacting(transaction);
 }
 
 /**
@@ -47,8 +50,14 @@ export async function updateTeam(teamId, data, transaction = null) {
  * Function to get all team
  *
  */
-export async function getAllTeam() {
-  return database(TABLE).select('*');
+export async function getAllTeam({ teamId, userId }) {
+  const condition = {};
+  if (teamId) condition[teamMembersColumns.teamId] = teamId;
+  if (userId) condition[teamMembersColumns.userId] = userId;
+
+  return database(TABLE)
+    .join(TABLES.teamMembers, teamsColumns.id, teamMembersColumns.teamId)
+    .where(condition);
 }
 
 /**
@@ -58,4 +67,18 @@ export async function getAllTeam() {
  */
 export async function getTeam(searchData) {
   return database(TABLE).where(searchData).first();
+}
+
+export async function createNewTeamAndMember({ name, alias, userid }) {
+  let transaction;
+  try {
+    transaction = await database.transaction();
+    const [teamId] = await insertTeam({ name, alias, created_by: userid }, transaction);
+    await createTeamMember({ user_id: userid, team_id: teamId, status: 'active' }, transaction);
+    await transaction.commit();
+    return teamId;
+  } catch (error) {
+    transaction.rollback();
+    return new Error(error);
+  }
 }

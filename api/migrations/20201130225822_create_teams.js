@@ -3,7 +3,6 @@ export function up(knex) {
     knex.schema.createTable('teams', (table) => {
       table.increments('id');
       table.string('name').notNullable();
-      table.unique('name');
       table.string('alias').notNullable();
       table.unique('alias');
       table.dateTime('created_at')
@@ -14,7 +13,6 @@ export function up(knex) {
         .defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
       table.dateTime('deleted_at');
       table.integer('created_by').unsigned().notNullable();
-      table.foreign('created_by').references('id').inTable('users');
     }),
     knex.schema.createTable('team_invitations', (table) => {
       table.string('email').notNullable();
@@ -45,7 +43,7 @@ export function up(knex) {
         .notNullable()
         .defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
       table.dateTime('deleted_at');
-      table.string('invitation_token').notNullable();
+      table.string('invitation_token');
       table.foreign('invitation_token').references('token').inTable('team_invitations');
     }),
   ]);
@@ -53,7 +51,7 @@ export function up(knex) {
 
 export function down(knex) {
   return Promise.all([
-    knex.schema.dropTable('team_invitation'),
+    knex.schema.dropTable('team_invitations'),
     knex.schema.dropTable('team_members'),
     knex.schema.dropTable('teams'),
   ]);

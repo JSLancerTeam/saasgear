@@ -1,14 +1,15 @@
 import { ApolloError } from 'apollo-server-express';
 import dayjs from 'dayjs';
 
-import { getAllTeam, getTeam, insertTeam } from '~/repository/team.repository';
+import { getAllTeam, createNewTeamAndMember, getTeam } from '~/repository/team.repository';
 import { createTeamInvitation, getTeamInvitation, VALID_PERIOD_DAYS } from '~/repository/team_invitations.repository';
 import formatDateDB from '~/utils/format-date-db';
 import compileEmailTemplate from '~/helpers/compile-email-template';
 import generateRandomKey from '~/helpers/genarateRandomkey';
-import { normalizeEmail } from '~/helpers/string.helper';
+import { normalizeEmail, stringToSlug } from '~/helpers/string.helper';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
+import { getListTeamMemberByAliasTeam } from '../../repository/team_members.repository';
 
 /**
  * Function to get all team
@@ -17,8 +18,7 @@ import sendMail from '~/libs/mail';
  *
  */
 export async function getAllTeams(user) {
-  console.log(user);
-  const allTeams = await getAllTeam();
+  const allTeams = await getAllTeam({ userId: user.id });
   return allTeams;
 }
 
@@ -29,15 +29,9 @@ export async function getAllTeams(user) {
  * @param int  teamId Id of team want to get
  *
  */
-export async function findTeamById(user, teamId) {
-  console.log(user);
-
-  if (!teamId) {
-    throw new ApolloError('teamId parameter is missing');
-  }
-
-  const team = await getTeam({ id: teamId });
-
+export async function findTeamByAlias(alias) {
+  const team = await getListTeamMemberByAliasTeam({ alias });
+  console.log(team)
   return team;
 }
 
@@ -49,24 +43,19 @@ export async function findTeamById(user, teamId) {
  * @param string teamAlias Alias of new team
  */
 export async function createTeam(user, teamName, teamAlias) {
-  console.log(user);
+  const alias = stringToSlug(teamAlias);
 
-  let team = await getTeam({ name: teamName });
-
+  const team = await getTeam({ alias });
   if (team) {
-    throw new ApolloError('Name is not available');
+    throw new ApolloError('TeamId is not available');
   }
+  const teamId = createNewTeamAndMember({ name: teamName, alias, userid: user.id });
 
-  team = await getTeam({ alias: teamAlias });
-
-  if (team) {
-    throw new ApolloError('Alias is not available');
-  }
-
-  // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
-
-  const newTeam = await insertTeam({ name: teamName, alias: teamAlias, created_by: 1 });
-  return newTeam;
+  return {
+    id: teamId,
+    name: teamName,
+    alias,
+  };
 }
 
 /**

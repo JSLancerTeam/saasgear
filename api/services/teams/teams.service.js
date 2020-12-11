@@ -1,14 +1,16 @@
 import { ApolloError } from 'apollo-server-express';
 import dayjs from 'dayjs';
 
-import { getAllTeam, getTeam, insertTeam } from '~/repository/team.repository';
+import { getAllTeam, createNewTeamAndMember, getTeam } from '~/repository/team.repository';
 import { createTeamInvitation, getTeamInvitation, VALID_PERIOD_DAYS } from '~/repository/team_invitations.repository';
 import formatDateDB from '~/utils/format-date-db';
 import compileEmailTemplate from '~/helpers/compile-email-template';
 import generateRandomKey from '~/helpers/genarateRandomkey';
-import { normalizeEmail } from '~/helpers/string.helper';
+import { normalizeEmail, stringToSlug } from '~/helpers/string.helper';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
+import { createMemberAndInviteToken, getListTeamMemberByAliasTeam } from '../../repository/team_members.repository';
+import { findUser } from '../../repository/user.repository';
 
 /**
  * Function to get all team
@@ -17,8 +19,7 @@ import sendMail from '~/libs/mail';
  *
  */
 export async function getAllTeams(user) {
-  console.log(user);
-  const allTeams = await getAllTeam();
+  const allTeams = await getAllTeam({ userId: user.id });
   return allTeams;
 }
 
@@ -29,16 +30,15 @@ export async function getAllTeams(user) {
  * @param int  teamId Id of team want to get
  *
  */
-export async function findTeamById(user, teamId) {
-  console.log(user);
-
-  if (!teamId) {
-    throw new ApolloError('teamId parameter is missing');
-  }
-
-  const team = await getTeam({ id: teamId });
-
-  return team;
+export async function findTeamByAlias(alias) {
+  const members = await getListTeamMemberByAliasTeam({ alias });
+  return members.map((member) => ({
+    userName: member.userName,
+    userId: member.userId,
+    email: member.email,
+    status: member.status,
+    isOwner: member.userId === member.owner,
+  }));
 }
 
 /**
@@ -49,52 +49,47 @@ export async function findTeamById(user, teamId) {
  * @param string teamAlias Alias of new team
  */
 export async function createTeam(user, teamName, teamAlias) {
-  console.log(user);
+  const alias = stringToSlug(teamAlias);
 
-  let team = await getTeam({ name: teamName });
-
+  const team = await getTeam({ alias });
   if (team) {
-    throw new ApolloError('Name is not available');
+    throw new ApolloError('Team exist');
   }
+  const teamId = createNewTeamAndMember({ name: teamName, alias, userid: user.id });
 
-  team = await getTeam({ alias: teamAlias });
-
-  if (team) {
-    throw new ApolloError('Alias is not available');
-  }
-
-  // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
-
-  const newTeam = await insertTeam({ name: teamName, alias: teamAlias, created_by: 1 });
-  return newTeam;
+  return {
+    id: teamId,
+    name: teamName,
+    alias,
+  };
 }
 
 /**
  * Function to invite team member
  *
  * @param User   user         User who create invitation
- * @param int    teamId       Id of team you want to invite to join
+ * @param int    alias       alias of team you want to invite to join
  * @param string inviteeEmail Email of who you want to send invitation to
  */
-export async function inviteTeamMember(user, teamId, inviteeEmail) {
-  console.log(user);
-
+export async function inviteTeamMember(user, alias, inviteeEmail) {
   // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
-  const invitation = await getTeamInvitation(inviteeEmail, teamId, 1);
+  // const invitation = await getTeamInvitation(inviteeEmail, teamId, 1);
 
-  if (invitation) {
-    throw new ApolloError(`You have send invitation to ${inviteeEmail} at ${formatDateDB(invitation.valid_until)} and it is still active`);
-  }
+  // if (invitation) {
+  //   throw new ApolloError(`You have send invitation to ${inviteeEmail} at ${formatDateDB(invitation.valid_until)} and it is still active`);
+  // }
 
-  // TODO: Find team member by email. Need to do later when check whether this email belong to any team's member
-
-  const team = await getTeam({ id: teamId });
-
-  if (!team) {
-    throw new ApolloError('Team not found');
-  }
+  // // TODO: Find team member by email. Need to do later when check whether this email belong to any team's member
 
   try {
+    let member = null;
+    const team = await getTeam({ alias });
+    if (!team) {
+      throw new ApolloError('Team not found');
+    }
+
+    member = await findUser({ email: inviteeEmail });
+
     const token = await generateRandomKey();
     const subject = 'Team invitation';
     const template = await compileEmailTemplate({
@@ -105,18 +100,30 @@ export async function inviteTeamMember(user, teamId, inviteeEmail) {
       },
     });
 
-    await sendMail(normalizeEmail(inviteeEmail), subject, template);
+    const queries = [sendMail(normalizeEmail(inviteeEmail), subject, template)];
+    if (member) {
+      queries.push(createMemberAndInviteToken({
+        email: inviteeEmail,
+        token,
+        teamId: team.id,
+        memberId: member.id,
+        userId: user.id,
+      }));
+    } else {
+      queries.push(createTeamInvitation({
+        email: inviteeEmail,
+        token,
+        invited_by: user.id,
+        team_id: team.id,
+        send_at: formatDateDB(),
+        valid_until: formatDateDB(dayjs().add(VALID_PERIOD_DAYS, 'days')),
+        status: 'active',
+      }));
+    }
+    //   await sendMail(normalizeEmail(inviteeEmail), subject, template);
 
-    // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
-    await createTeamInvitation({
-      email: inviteeEmail,
-      team_id: teamId,
-      invited_by: 1,
-      send_at: formatDateDB(),
-      valid_until: formatDateDB(dayjs().add(VALID_PERIOD_DAYS, 'days')),
-      token,
-    });
-
+    //   // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
+    await Promise.all(queries);
     return true;
   } catch (error) {
     logger.error(error);

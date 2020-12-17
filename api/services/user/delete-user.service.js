@@ -2,7 +2,7 @@ import { getUserPlanByUserId } from '~/repository/user_plans.repository';
 // import { cancelSubcription } from '~/services/stripe/subcription.service';
 import { getToken } from '~/repository/user_tokens.repository';
 import database from '~/config/database.config';
-import { TABLES } from '~/constants/table-name.constant';
+import { TABLES } from '~/constants/database.constant';
 
 export async function deleteUser(currentUser) {
   const tokens = await getToken({ user_id: currentUser.id });

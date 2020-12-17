@@ -5,7 +5,7 @@ import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
 import compileEmailTemplate from '~/helpers/compile-email-template';
 import { comparePassword, generatePassword } from '~/helpers/hashing.helper';
-import { changePasswordValidation } from '~/utils/validations/authenticate.validation';
+import { changePasswordValidation } from '~/validations/authenticate.validation';
 
 const { ApolloError, UserInputError } = pkg;
 

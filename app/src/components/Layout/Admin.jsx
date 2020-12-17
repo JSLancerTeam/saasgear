@@ -289,18 +289,17 @@ function AdminLayout({ signout, user }) {
           </div>
         )}
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="rounded-lg h-96">
-            <Switch>
-              {routes.map((route) => (
-                <Route
-                  path={route.path}
-                  component={route.component}
-                  key={route.path}
-                />
-              ))}
-              <Redirect from="*" to="/" />
-            </Switch>
-          </div>
+          <Switch>
+            {routes.map((route) => (
+              <Route
+                path={route.path}
+                component={route.component}
+                key={route.path}
+                exact={route.exact}
+              />
+            ))}
+            <Redirect from="*" to="/" />
+          </Switch>
         </div>
       </main>
     </div>

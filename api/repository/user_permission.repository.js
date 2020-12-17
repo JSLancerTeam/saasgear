@@ -1,5 +1,5 @@
 import database from '~/config/database.config';
-import { TABLES } from '~/constants/table-name.constant';
+import { TABLES } from '~/constants/database.constant';
 import formatDateDB from '~/utils/format-date-db';
 
 const TABLE = TABLES.userPermissions;

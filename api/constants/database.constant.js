@@ -1,4 +1,4 @@
-const TABLES = {
+export const TABLES = {
   users: 'users',
   userTokens: 'user_tokens',
   userPlans: 'user_plans',
@@ -8,6 +8,7 @@ const TABLES = {
   teams: 'teams',
   teamInvitations: 'team_invitations',
   teamMembers: 'team_members',
+  documents: 'documents',
 };
 
-export { TABLES };
+export const DEFAULT_LIMIT = 20;

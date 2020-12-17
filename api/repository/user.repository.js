@@ -1,7 +1,7 @@
 import union from 'lodash/union';
 import database from '~/config/database.config';
 import { userTokenColumns } from './user_tokens.repository';
-import { TABLES } from '~/constants/table-name.constant';
+import { TABLES } from '~/constants/database.constant';
 import { insertUserPlan } from './user_plans.repository';
 import { insertMultiPermission } from './user_permission.repository';
 import { PERMISSION_PLAN } from '~/constants/billing.constant';

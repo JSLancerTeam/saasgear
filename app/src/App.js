@@ -10,8 +10,9 @@ import AdminLayout from '@/containers/Layout/Admin';
 import VerifyEmail from '@/containers/VerifyEmail';
 import Social from '@/containers/Social';
 import { client } from '@/config/apollo';
-import '@/assets/css/main.css';
 import GlobalLoading from '@/components/Layout/GlobalLoading';
+import GlobalStyle from '@/theme/globalStyles';
+import '@/assets/css/main.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
+        <GlobalStyle />
         <GlobalLoading />
         <ToastContainer />
         <Switch>

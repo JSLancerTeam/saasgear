@@ -7,7 +7,7 @@ import { generatePassword } from '~/helpers/hashing.helper';
 import compileEmailTemplate from '~/helpers/compile-email-template';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import sendMail from '~/libs/mail';
-import { registerValidation } from '~/utils/validations/authenticate.validation';
+import { registerValidation } from '~/validations/authenticate.validation';
 import logger from '~/utils/logger';
 import { sign } from '~/helpers/jwt.helper';
 import { findProductAndPriceByType } from '~/repository/products.repository';

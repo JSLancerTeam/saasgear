@@ -1,5 +1,5 @@
 import database from '~/config/database.config';
-import { TABLES } from '~/constants/table-name.constant';
+import { TABLES } from '~/constants/database.constant';
 
 const TABLE = TABLES.prices;
 

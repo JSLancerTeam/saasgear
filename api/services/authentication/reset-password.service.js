@@ -9,7 +9,7 @@ import { updateUser } from '~/repository/user.repository';
 import { generatePassword } from '~/helpers/hashing.helper';
 import { findToken, removeUserToken } from '~/repository/user_tokens.repository';
 import logger from '~/utils/logger';
-import { changePasswordValidation } from '~/utils/validations/authenticate.validation';
+import { changePasswordValidation } from '~/validations/authenticate.validation';
 
 export async function resetPasswordUser(token, password, confirmPassword) {
   try {

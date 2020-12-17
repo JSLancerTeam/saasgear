@@ -14,7 +14,10 @@ import { normalizeEmail } from '~/helpers/string.helper';
 
 const resolvers = {
   Query: {
-    profileUser: (_, args, { user }) => user,
+    profileUser: combineResolvers(
+      isAuthenticated,
+      (_, args, { user }) => user,
+    ),
     loginBySocial: (_, { provider, code }) => loginSocial(provider, code),
   },
   Mutation: {
@@ -25,12 +28,21 @@ const resolvers = {
       return loginUser(normalizeEmail(email), password);
     },
     forgotPassword: async (_, { email }) => forgotPasswordUser(normalizeEmail(email)),
-    changePassword: combineResolvers(isAuthenticated, (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword)),
+    changePassword: combineResolvers(
+      isAuthenticated,
+      (_, { currentPassword, newPassword }, { user }) => changePasswordUser(user.id, currentPassword, newPassword),
+    ),
     resetPassword: async (_, { token, password, confirmPassword }) => resetPasswordUser(token, password, confirmPassword),
     verify: (_, { token }) => verifyEmail(token),
-    resendEmail: (_, { type }, { user }) => resendEmailAction(user, normalizeEmail(type)),
+    resendEmail: combineResolvers(
+      isAuthenticated,
+      (_, { type }, { user }) => resendEmailAction(user, normalizeEmail(type)),
+    ),
     registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, normalizeEmail(email), name, avatarUrl, providerId),
-    deleteAccount: async (_, a, { user }) => deleteUser(user),
+    deleteAccount: combineResolvers(
+      isAuthenticated,
+      (_, a, { user }) => deleteUser(user),
+    ),
   },
 };
 

@@ -96,7 +96,7 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
       fileName: 'inviteTeamMember.mjml',
       data: {
         teamName: team.name,
-        url: `${process.env.FRONTEND_URL}/team/join?token=${token}`,
+        url: `${process.env.FRONTEND_URL}/teams/invitation/{token}`,
       },
     });
 
@@ -115,18 +115,20 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
         token,
         invited_by: user.id,
         team_id: team.id,
-        send_at: formatDateDB(),
         valid_until: formatDateDB(dayjs().add(VALID_PERIOD_DAYS, 'days')),
         status: 'active',
       }));
     }
-    //   await sendMail(normalizeEmail(inviteeEmail), subject, template);
-
-    //   // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
     await Promise.all(queries);
-    return true;
+    return {
+      userName: member.name,
+      userId: member.id,
+      email: member.email,
+      status: 'pending',
+      isOwner: false,
+    };
   } catch (error) {
     logger.error(error);
-    throw error;
+    throw new ApolloError('Something went wrong!');
   }
 }

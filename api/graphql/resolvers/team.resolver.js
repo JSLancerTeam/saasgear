@@ -1,5 +1,7 @@
 import { combineResolvers } from 'graphql-resolvers';
 import { getAllTeams, findTeamByAlias, createTeam, inviteTeamMember } from '~/services/teams/teams.service';
+import { verifyInvitationToken } from '~/services/teams/verifyInvitationToken.service';
+import { acceptInvitation } from '~/services/teams/acceptInvitation';
 import { isAuthenticated } from './authorization.resolver';
 
 const resolvers = {
@@ -10,8 +12,9 @@ const resolvers = {
     ),
     getTeamDetail: combineResolvers(
       isAuthenticated,
-      (_, { alias }, { user }) => findTeamByAlias(alias),
+      (_, { alias }) => findTeamByAlias(alias),
     ),
+    verifyInvitationToken: (_, { invitationToken }) => verifyInvitationToken(invitationToken),
   },
   Mutation: {
     createTeam: combineResolvers(
@@ -21,6 +24,10 @@ const resolvers = {
     inviteMember: combineResolvers(
       isAuthenticated,
       (_, { email, alias }, { user }) => inviteTeamMember(user, alias, email),
+    ),
+    joinTeam: combineResolvers(
+      isAuthenticated,
+      (_, { token }, { user }) => acceptInvitation(token, user),
     ),
   },
 };

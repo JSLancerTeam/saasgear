@@ -23,6 +23,7 @@ export const UserSchema = gql`
     name: String!
     isActive: Boolean!
     avatarUrl: String
+    invitationToken: String
   }
 
   type ResponseUserLogin {

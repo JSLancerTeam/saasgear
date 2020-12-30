@@ -16,18 +16,19 @@ export function up(knex) {
     }),
     knex.schema.createTable('team_invitations', (table) => {
       table.string('email').notNullable();
-      table.integer('team_id').unsigned().notNullable();
+      table.integer('team_id').unsigned();
       table.foreign('team_id').references('id').inTable('teams');
       table.unique(['email', 'team_id']);
       table.unique('token');
       table.string('token').notNullable();
       table.enu('status', ['active', 'inactive']).notNullable();
-      table.dateTime('send_at')
-        .notNullable();
       table.dateTime('valid_until')
         .notNullable();
       table.integer('invited_by').unsigned().notNullable();
       table.foreign('invited_by').references('id').inTable('users');
+      table.dateTime('created_at')
+        .notNullable()
+        .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     }),
     knex.schema.createTable('team_members', (table) => {
       table.integer('user_id').unsigned().notNullable();
@@ -35,7 +36,7 @@ export function up(knex) {
       table.foreign('user_id').references('id').inTable('users');
       table.foreign('team_id').references('id').inTable('teams');
       table.unique(['user_id', 'team_id']);
-      table.enu('status', ['pending', 'active', 'inactive']).notNullable();
+      table.enu('status', ['pending', 'active', 'inactive', 'decline']).notNullable();
       table.dateTime('created_at')
         .notNullable()
         .defaultTo(knex.raw('CURRENT_TIMESTAMP'));

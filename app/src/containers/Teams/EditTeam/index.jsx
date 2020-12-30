@@ -38,6 +38,6 @@ export default function EditTeam() {
       <div className="text-xl">Team Members</div>
       <ListTeamMember teamMembers={currentTeam?.teamMembers.filter(it => it.status !== 'pending')} />
     </div>
-    <InviteMember alias={teamId} teamMembers={currentTeam?.teamMembers.filter(it => it.isActive === 'pending')} />
+    <InviteMember alias={teamId} teamMembers={currentTeam?.teamMembers.filter(it => it.status === 'pending')} />
   </> : null
 }

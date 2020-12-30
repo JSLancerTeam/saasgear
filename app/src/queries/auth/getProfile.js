@@ -8,6 +8,7 @@ export default gql`
       name
       isActive
       avatarUrl
+      invitationToken
     }
   }
 `;

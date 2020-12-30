@@ -35,16 +35,16 @@ function InviteMember({ teamMembers, alias }) {
 
   async function onSubmit({ emailMember }) {
     try {
-      await InviteMemberMutation({
+      const { data } = await InviteMemberMutation({
         variables: {
           email: emailMember,
           alias
         }
       })
-      dispatch(addTeamMember({ teamID: alias, data: [{ userName: '', email: emailMember, status: 'pending', isOwner: false }] }))
-      console.log(error)
-      console.log(loading)
-
+      if (data?.inviteMember) {
+        const member = data.inviteMember
+        dispatch(addTeamMember({ teamID: alias, data: [member] }))
+      }
     } catch (e) {
       console.log(e)
     }

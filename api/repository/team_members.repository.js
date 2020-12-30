@@ -5,7 +5,7 @@ import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
 import { teamsColumns } from './team.repository';
 import { usersColumns } from './user.repository';
-import { createTeamInvitation, VALID_PERIOD_DAYS } from "./team_invitations.repository";
+import { createTeamInvitation, VALID_PERIOD_DAYS } from './team_invitations.repository';
 
 const TABLE = TABLES.teamMembers;
 
@@ -46,20 +46,23 @@ export async function createMemberAndInviteToken({ userId, teamId, memberId, ema
   let transaction;
   try {
     transaction = await database.transaction();
-    await createTeamMember({ user_id: memberId, team_id: teamId, status: 'pending' }, transaction);
     await createTeamInvitation({
       email,
       invited_by: userId,
       team_id: teamId,
-      send_at: formatDateDB(),
       valid_until: formatDateDB(dayjs().add(VALID_PERIOD_DAYS, 'days')),
       status: 'active',
       token,
     }, transaction);
-
+    await createTeamMember({ user_id: memberId, team_id: teamId, status: 'pending', invitation_token: token }, transaction);
+    await transaction.commit();
     return true;
   } catch (error) {
     transaction.rollback();
-    return new Error(error);
+    throw new Error(error);
   }
+}
+
+export async function updateTeamMember(condition, data) {
+  return database(TABLE).where(condition).update(data);
 }

@@ -4,6 +4,13 @@ export const TeamSchema = gql`
   enum TeamMemberType {
     active
     inactive
+    pending
+    decline
+  }
+
+  enum JoinTeamType {
+    accept
+    decline
   }
 
   type Team {
@@ -20,13 +27,20 @@ export const TeamSchema = gql`
     status: TeamMemberType
   }
 
+  type VerifyTokenResponse{
+    teamName: String!
+    owner: String!
+  }
+
   extend type Query {
-    teams: [Team],
+    teams: [Team]
     getTeamDetail(alias: String!): [TeamMember]
+    verifyInvitationToken(invitationToken: String!): VerifyTokenResponse!
   }
 
   extend type Mutation {
     createTeam(name: String!, alias: String!): Team,
-    inviteMember(email: String!, alias: String!): Boolean
+    inviteMember(email: String!, alias: String!): TeamMember
+    joinTeam(type: JoinTeamType!, token: String!): Boolean!
   }
 `;

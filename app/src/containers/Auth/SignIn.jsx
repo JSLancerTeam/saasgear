@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import SignInForm from '@/components/Auth/SignInForm';
 import { JWT_STORAGE_KEY } from '@/constants';
 import loginQuery from '@/queries/auth/login';
+import getQueryParam from "@/utils/getQueryParam";
 
 import FaceBookSvg from '@/assets/images/svg/facebook.svg';
 import GoogleSvg from '@/assets/images/svg/google.svg';
@@ -58,6 +59,8 @@ function SignIn() {
   });
   const [loginMutation, { error, loading }] = useMutation(loginQuery);
   const history = useHistory();
+  const query = getQueryParam();
+  const invitationToken = query.get('invitation');
 
   const socialButton = useMemo(
     () => [

@@ -28,10 +28,12 @@ export default function NewTeam() {
     const { data, errors } = await createTeamMutation({
       variables: { name: teamName, alias: teamID }
     })
-    const { id, name, alias } = data.createTeam
-    dispatch(addNew({ data: { id, teamName: name, teamID: alias } }))
-    if (!errors) {
-      history.replace('/teams')
+    if (data?.createTeam) {
+      const { id, name, alias } = data.createTeam
+      dispatch(addNew({ data: { id, teamName: name, teamID: alias } }))
+      if (!errors) {
+        history.replace('/teams')
+      }
     }
   }
 

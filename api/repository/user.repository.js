@@ -5,6 +5,7 @@ import { TABLES } from '~/constants/database.constant';
 import { insertUserPlan } from './user_plans.repository';
 import { insertMultiPermission } from './user_permission.repository';
 import { PERMISSION_PLAN } from '~/constants/billing.constant';
+import { teamMembersColumns } from './team_members.repository';
 
 const TABLE = TABLES.users;
 
@@ -81,4 +82,17 @@ export async function getUserByIdAndJoinUserToken(id, type) {
 
 export async function activeUser(id) {
   return database(TABLE).where({ id }).update({ is_active: true });
+}
+
+export async function getUserAndTeamInfo({ email }) {
+  return database(TABLE)
+    .join(TABLES.teamMembers, usersColumns.id, teamMembersColumns.userId)
+    .where({ [usersColumns.email]: email })
+    .select({
+      id: usersColumns.id,
+      email: usersColumns.email,
+      name: usersColumns.name,
+      teamStatus: teamMembersColumns.status,
+    })
+    .first();
 }

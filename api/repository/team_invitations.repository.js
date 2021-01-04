@@ -56,8 +56,12 @@ export async function getDetailTeamInvitation(token) {
     });
 }
 
-export async function updateTeamInvitationByToken(token, data) {
-  return database(TABLE).where({ token }).update(data);
+export async function updateTeamInvitation(condition, data, transaction = null) {
+  const query = database(TABLE).where(condition).update(data);
+  if (!transaction) {
+    return query;
+  }
+  return query.transacting(transaction);
 }
 // select * from team_invitations
 // inner join teams

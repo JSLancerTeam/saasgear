@@ -3,6 +3,7 @@ import { getAllTeams, findTeamByAlias, createTeam, inviteTeamMember } from '~/se
 import { verifyInvitationToken } from '~/services/teams/verifyInvitationToken.service';
 import { acceptInvitation } from '~/services/teams/acceptInvitation';
 import { isAuthenticated } from './authorization.resolver';
+import { cancelInvitation } from '../../services/teams/cancelInvitation';
 
 const resolvers = {
   Query: {
@@ -28,6 +29,10 @@ const resolvers = {
     joinTeam: combineResolvers(
       isAuthenticated,
       (_, { token }, { user }) => acceptInvitation(token, user),
+    ),
+    cancelInvitation: combineResolvers(
+      isAuthenticated,
+      (_, { userId, teamId }) => cancelInvitation(userId, teamId),
     ),
   },
 };

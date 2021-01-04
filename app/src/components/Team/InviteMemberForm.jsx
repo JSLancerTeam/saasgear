@@ -6,9 +6,11 @@ InviteMemberForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   formErrors: PropTypes.object,
+  apiError: PropTypes.string,
+  loading: PropTypes.bool
 };
 
-function InviteMemberForm({ onSubmit, register, formErrors }) {
+function InviteMemberForm({ onSubmit, register, formErrors, apiError, loading }) {
   return (
     <form className="mt-8" onSubmit={onSubmit}>
       <div className="col-span-6 sm:col-span-3 flex items-center">
@@ -21,6 +23,7 @@ function InviteMemberForm({ onSubmit, register, formErrors }) {
         />
         <button
           type="submit"
+          disabled={loading}
           className="group flex items-center justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
         >
           <span className="flex items-center mr-3">
@@ -37,6 +40,9 @@ function InviteMemberForm({ onSubmit, register, formErrors }) {
         <p className="text-red-500 text-xs italic mt-1">
           {formErrors.emailMember.message}
         </p>
+      )}
+      {apiError && (
+        <p className="text-red-500 text-xs italic mt-1">{apiError}</p>
       )}
     </form>
   );

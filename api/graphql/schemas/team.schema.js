@@ -25,6 +25,7 @@ export const TeamSchema = gql`
     email: String
     isOwner: Boolean
     status: TeamMemberType
+    teamId: ID
   }
 
   type VerifyTokenResponse{
@@ -42,5 +43,6 @@ export const TeamSchema = gql`
     createTeam(name: String!, alias: String!): Team,
     inviteMember(email: String!, alias: String!): TeamMember
     joinTeam(type: JoinTeamType!, token: String!): Boolean!
+    cancelInvitation(userId: String!, teamId: String!): Boolean!
   }
 `;

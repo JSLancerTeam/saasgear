@@ -1,7 +1,59 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
-import TheLockSvg from '@/assets/images/svg/the-lock.svg';
+import {
+  SignUpFormContainer,
+  LogoHeader,
+  LogoHeaderName,
+  FormContent,
+  FormHeader,
+  FormGroup,
+  FormGroupLabel,
+  FormNote
+} from '@/components/Auth/AuthForm';
+import FormControl from '@/components/Common/FormControl/FormControl';
+import { COLOR } from '@/constants/style';
+import Input from '@/components/Common/Input/Input';
+import Checkbox from '@/components/Common/Input/InputCheckbox';
+import Button from '@/components/Common/Button/Button';
+
+const SignInContainer = styled(SignUpFormContainer)`
+  width: 300px;
+`
+const RembemberSection = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+`
+const RememberLabel = styled.label`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.5px;
+  color: ${COLOR.SAPPHIRE_BLUE};
+  margin-left: 5px;
+`
+const SubmitButton = styled(Button)`
+  width: 100%;
+  text-transform: uppercase;
+  margin-top: 32px;
+`
+const ForgotLink = styled.div`
+  & > a {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: ${COLOR.LIGHT_PRIMARY};
+    text-align: right;
+    display: block;
+    margin-top: 24px;
+  }
+`
+const TextHaveAccount = styled(FormNote)`
+  margin-top: 179px;
+  text-align: center;
+`
 
 function SignInForm({
   onSubmit,
@@ -11,95 +63,57 @@ function SignInForm({
   isSubmitting,
 }) {
   return (
-    <form className="mt-8" onSubmit={onSubmit}>
-      <div className="col-span-6 sm:col-span-3">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
-        {formErrors?.email && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {formErrors.email.message}
-          </p>
-        )}
-      </div>
-      <div className="col-span-6 sm:col-span-3 mt-6">
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Password
-        </label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
-        {formErrors?.password && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {formErrors.password.message}
-          </p>
-        )}
-      </div>
-
-      <div className="mt-6 flex items-center justify-between">
-        <div className="flex items-center">
-          <input
-            id="remember_me"
-            name="remember"
-            type="checkbox"
-            className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-            ref={register}
-          />
-          <label
-            htmlFor="remember_me"
-            className="ml-2 block text-sm leading-5 text-gray-900"
-          >
-            Remember me
-          </label>
+    <SignInContainer>
+      <LogoHeader>
+        <LogoHeaderName>SaaS</LogoHeaderName>
+        <span className="logo-header-title">gear</span>
+      </LogoHeader>
+      <FormContent onSubmit={onSubmit}>
+        <FormHeader>Welcome Back!</FormHeader>
+        <div>
+          <FormGroup>
+            <FormGroupLabel>
+              Email
+            </FormGroupLabel>
+            <FormControl>
+              <Input type="email" placeHolder="yourname@yourbusiness.com" name="email" ref={register} />
+              {formErrors?.email && (
+                <p className="text-red-500 text-xs italic mt-1">
+                  {formErrors.email.message}
+                </p>
+              )}
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <FormGroupLabel>
+              Password
+            </FormGroupLabel>
+            <FormControl>
+              <Input type="password" placeHolder="your password" name="password" ref={register} />
+              {formErrors?.password && (
+                <p className="text-red-500 text-xs italic mt-1">
+                  {formErrors.password.message}
+                </p>
+              )}
+            </FormControl>
+          </FormGroup>
+          <RembemberSection>
+            <Checkbox type="checkbox" name="rembemer" id="rembemer" />
+            <RememberLabel htmlFor="rembemer">Remember me</RememberLabel>
+          </RembemberSection>
+          <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Please wait' : 'Sign in'}
+          </SubmitButton>
+          <ForgotLink>
+            <Link to="/auth/forgot-password">Forgot Password?</Link>
+          </ForgotLink>
         </div>
-
-        <div className="text-sm leading-5">
-          <Link
-            to="/auth/forgot-password"
-            className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-          >
-            Forgot your password?
-          </Link>
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <button
-          type="submit"
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-          disabled={isSubmitting}
-        >
-          <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-            <img
-              className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
-              src={TheLockSvg}
-              alt="the-lock"
-            />
-          </span>
-          {isSubmitting ? 'Please wait' : 'Sign in'}
-        </button>
-      </div>
-
+      </FormContent>
       {apiError && (
-        <p className="text-red-500 text-xs italic mt-1">{apiError}</p>
+        <p className="text-red-500 text-xs italic mt-4 text-center">{apiError}</p>
       )}
-    </form>
+      <TextHaveAccount>Dont have account? <Link to="/auth/signup">Register</Link>.</TextHaveAccount>
+    </SignInContainer>
   );
 }
 

@@ -7,7 +7,64 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
+import { SignUpFormContainer } from '@/components/Auth/AuthForm';
+import { COLOR } from '@/constants/style';
+import styled from 'styled-components';
+import Button from '@/components/Common/Button/Button';
 
+const StripeFormContainer = styled(SignUpFormContainer)`
+  width: 300px;
+`
+const CardNumberEl = styled(CardNumberElement)`
+  padding: 11.6px 10px;
+  background: ${COLOR.LIGHT_GRAY};
+  border: 1px solid ${COLOR.WHITE_BLUE};
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: ${COLOR.WHITE_GRAY};
+`
+
+const CardExpiryElementEl = styled(CardExpiryElement)`
+  padding: 11.6px 10px;
+  background: ${COLOR.LIGHT_GRAY};
+  border: 1px solid ${COLOR.WHITE_BLUE};
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: ${COLOR.WHITE_GRAY};
+`
+
+const CardCvcElementEl = styled(CardCvcElement)`
+  padding: 11.6px 10px;
+  background: ${COLOR.LIGHT_GRAY};
+  border: 1px solid ${COLOR.WHITE_BLUE};
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: ${COLOR.WHITE_GRAY};
+`
+const CardLabel = styled.label`
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 2px;
+  color: ${COLOR.WHITE_BLUE};
+  mix-blend-mode: normal;
+  opacity: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 19px;
+  display: block;
+`
+const SubmitButton = styled(Button)`
+  width: 100%;
+`
 
 const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError, submitText = 'Submit' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,7 +100,7 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
   }
 
   return (
-    <form onSubmit={onSubmit} className={className}>
+    <StripeFormContainer onSubmit={onSubmit} className={className}>
       <div className="mb-5">
         {onGoBack && (
           <button className="mb-4 w-5" type="button" onClick={onGoBack}>
@@ -54,31 +111,30 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
         )}
         <div className="grid grid-cols-6 gap-6">
           <div className="col-span-6">
-            <label
+            <CardLabel
               htmlFor="street_address"
-              className="block text-sm font-medium leading-5 text-gray-700"
             >
               Card Number
-            </label>
-            <CardNumberElement className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+            </CardLabel>
+            <CardNumberEl className="card-el" />
           </div>
           <div className="col-span-6 sm:col-span-3">
-            <label
+            <CardLabel
               htmlFor="first_name"
               className="block text-sm font-medium leading-5 text-gray-700"
             >
               Expiration
-            </label>
-            <CardExpiryElement className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+            </CardLabel>
+            <CardExpiryElementEl className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
           </div>
           <div className="col-span-6 sm:col-span-3">
-            <label
+            <CardLabel
               htmlFor="last_name"
               className="block text-sm font-medium leading-5 text-gray-700"
             >
               CVC
-            </label>
-            <CardCvcElement className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+            </CardLabel>
+            <CardCvcElementEl className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
           </div>
         </div>
       </div>
@@ -87,14 +143,15 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
           {error}
         </p>
       )}
-      <button
+      <SubmitButton
         type="submit"
         disabled={isSubmitting}
-        className="py-2 px-4 w-full text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
+        color="primary"
+        width="100%"
       >
         {isSubmitting ? 'Please wait' : submitText}
-      </button>
-    </form>
+      </SubmitButton>
+    </StripeFormContainer>
   );
 }
 

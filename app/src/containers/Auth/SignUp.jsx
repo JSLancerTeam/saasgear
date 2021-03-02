@@ -6,10 +6,16 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
 import SignUpForm from '@/components/Auth/SignUpForm';
+import AuthAdsArea from '@/components/Auth/AuthAds';
 import registerQuery from '@/queries/auth/register';
 import getQueryParam from '@/utils/getQueryParam';
 import StripeContainer from '@/containers/Stripe';
 import { JWT_STORAGE_KEY } from '@/constants';
+import {
+  SignUpFormWrapper,
+  SignUpFormLeft,
+  SignUpAds
+} from '@/components/Auth/AuthForm';
 
 const SignUpSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -20,11 +26,8 @@ const SignUpSchema = yup.object().shape({
     .min(6, 'Password must be at least 6 characters'),
   passwordConfirmation: yup
     .string()
+    .required('Password confirm is required')
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
-  agreement: yup
-    .bool()
-    .oneOf([true], 'You must agree with our Privacy Policy')
-    .required(),
 });
 
 const SignUp = () => {
@@ -71,31 +74,29 @@ const SignUp = () => {
   }
 
   return (
-    <>
-      <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-        {showStripeForm
-          ? 'Enter payment information'
-          : 'Sign up to connect with us'}
-      </h2>
-      {showStripeForm ? (
-        <StripeContainer 
-          onSubmitSuccess={createPaymentMethodSuccess}
-          className="mt-8 shadow overflow-hidden sm:rounded-md px-4 bg-white sm:p-6"
-          onGoBack={handleGoBack}
-          apiLoading={loading} 
-          apiError={error?.message}
-        />
-      ) : (
-        <SignUpForm
-          onSubmit={handleSubmit(onSubmit)}
-          register={register}
-          formErrors={formErrors}
-          apiError={error?.message}
-          isSubmitting={loading}
-          submitText={planName ? 'Next' : 'Sign up'}
-        />
-      )}
-    </>
+    <SignUpFormWrapper>
+      <SignUpFormLeft>
+        {showStripeForm ? (
+          <StripeContainer 
+            onSubmitSuccess={createPaymentMethodSuccess}
+            onGoBack={handleGoBack}
+            apiLoading={loading} 
+            apiError={error?.message}
+          />
+        ) : (
+          <SignUpForm
+            onSubmit={handleSubmit(onSubmit)}
+            register={register}
+            formErrors={formErrors}
+            apiError={error?.message}
+            isSubmitting={loading}
+            submitText={planName ? 'Next' : 'Sign up'} />
+        )}
+      </SignUpFormLeft>
+      <SignUpAds>
+        <AuthAdsArea />
+      </SignUpAds>
+    </SignUpFormWrapper>
   );
 }
 

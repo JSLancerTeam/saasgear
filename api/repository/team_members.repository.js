@@ -3,8 +3,10 @@ import formatDateDB from '~/utils/format-date-db';
 
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
+// eslint-disable-next-line import/no-cycle
 import { teamsColumns } from './team.repository';
 import { usersColumns } from './user.repository';
+// eslint-disable-next-line import/no-cycle
 import { createTeamInvitation, VALID_PERIOD_DAYS } from './team_invitations.repository';
 
 const TABLE = TABLES.teamMembers;

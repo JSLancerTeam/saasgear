@@ -3,7 +3,7 @@ export function normalizeEmail(text) {
 }
 
 /**
- * Function to convert vietnamese string to slug 
+ * Function to convert vietnamese string to slug
  *
  * @param str string need to convert
  * Link https://gist.github.com/codeguy/6684588

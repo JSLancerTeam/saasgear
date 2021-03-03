@@ -5,8 +5,6 @@ import FormControl from '@/components/Common/FormControl/FormControl';
 import Input from '@/components/Common/Input/Input';
 import {
   SignUpFormContainer,
-  LogoHeader,
-  LogoHeaderName,
   FormContent,
   FormHeader,
   FormNote,
@@ -14,8 +12,9 @@ import {
 import styled from 'styled-components';
 import ErrorText from '@/components/Common/ErrorText';
 import Button from '@/components/Common/Button/Button';
-import { FormGroup } from '@/components/Common/FormGroup';
-import { FormGroupLabel } from '@/components/Common/FormGroupLabel';
+import Logo from '@/components/Common/Logo';
+import FormGroup from '@/components/Common/FormGroup';
+import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
 const FormSubmitButton = styled(Button)`
   width: 100%;
@@ -38,10 +37,7 @@ function SignUpForm({
 }) {
   return (
     <SignUpFormContainer>
-      <LogoHeader>
-        <LogoHeaderName>SaaS</LogoHeaderName>
-        <span>gear</span>
-      </LogoHeader>
+      <Logo />
       <FormContent onSubmit={onSubmit}>
         <FormHeader>Create Account</FormHeader>
         <div>

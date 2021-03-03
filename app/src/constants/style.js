@@ -9,7 +9,8 @@ export const COLOR = {
   WHITE_GRAY: '#636E95',
   LIGHT_GRAY: '#FAFCFE',
   LIGHT_WHITE_GRAY: '#DCE9F7',
-  RED: '#FA5087'
+  RED: '#FA5087',
+  GREEN: '#1FD0A3',
 }
 
 export const FONT = {

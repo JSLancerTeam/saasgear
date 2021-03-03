@@ -1,7 +1,7 @@
 import { COLOR } from "@/constants/style";
 import styled from "styled-components";
 
-export const FormGroupLabel = styled.label`
+export default styled.label`
   font-weight: bold;
   font-size: 12px;
   line-height: 15px;

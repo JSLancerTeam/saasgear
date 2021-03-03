@@ -4,8 +4,6 @@ import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   SignUpFormContainer,
-  LogoHeader,
-  LogoHeaderName,
   FormContent,
   FormHeader,
   FormNote
@@ -16,8 +14,9 @@ import Input from '@/components/Common/Input/Input';
 import Checkbox from '@/components/Common/Input/InputCheckbox';
 import Button from '@/components/Common/Button/Button';
 import ErrorText from '@/components/Common/ErrorText';
-import { FormGroup } from '@/components/Common/FormGroup';
-import { FormGroupLabel } from '@/components/Common/FormGroupLabel';
+import Logo from '@/components/Common/Logo';
+import FormGroup from '@/components/Common/FormGroup';
+import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
 const SignInContainer = styled(SignUpFormContainer)`
   width: 300px;
@@ -65,10 +64,7 @@ function SignInForm({
 }) {
   return (
     <SignInContainer>
-      <LogoHeader>
-        <LogoHeaderName>SaaS</LogoHeaderName>
-        <span>gear</span>
-      </LogoHeader>
+      <Logo />
       <FormContent onSubmit={onSubmit}>
         <FormHeader>Welcome Back!</FormHeader>
         <div>

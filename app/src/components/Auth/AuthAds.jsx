@@ -69,6 +69,7 @@ const SlideItemContainer = styled.div`
   max-width: 80%;
   display: block;
   margin: 0 auto;
+  text-align: center;
 `
 
 function AuthAdsArea() {

@@ -1,68 +1,77 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import TheLockSvg from '@/assets/images/svg/the-lock.svg';
+import GoBack from '@/components/Common/GoBack';
+import Logo from '@/components/Common/Logo';
+import {
+  ForgotPasswordText,
+  ForgotPasswordDescription,
+  ForgotPasswordFormWrapper,
+  ForgotPasswordButton,
+  TextNote,
+} from '@/components/Auth/AuthForm';
+import FormGroup from '@/components/Common/FormGroup';
+import FormGroupLabel from '@/components/Common/FormGroupLabel';
+import FormControl from '@/components/Common/FormControl/FormControl';
+import ErrorText from '@/components/Common/ErrorText';
+import Input from '@/components/Common/Input/Input';
+import Button from '@/components/Common/Button/Button';
+import Badge from '@/components/Common/Badge';
 
-function ResetPasswordForm({ onSubmit, register, errors, apiError }) {
-  return apiError ? (
-    <h3 className="mt-6 text-base leading-9 font-extrabold text-gray-900 text-center">
-      {apiError}
-    </h3>
-  ) : (
-    <form className="mt-8" onSubmit={onSubmit}>
-      <div className="col-span-6 sm:col-span-3">
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          New password
-        </label>
-        <input
-          id="password"
-          name="password"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
-        {errors?.password && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.password.message}
-          </p>
-        )}
+function ResetPasswordForm({ onSubmit, register, errors, apiError, isSubmiting }) {
+  return (
+    <>
+      <GoBack link="/auth/signin">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 7H1" stroke="#7C88B1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7 13L1 7L7 1" stroke="#7C88B1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </GoBack>
+      <div>
+        <Logo />
       </div>
-      <div className="col-span-6 sm:col-span-3 mt-6">
-        <label
-          htmlFor="passwordConfirmation"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Re-enter Password
-        </label>
-        <input
-          id="passwordConfirmation"
-          name="passwordConfirmation"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
-        {errors?.passwordConfirmation && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.passwordConfirmation.message}
-          </p>
-        )}
-      </div>
-      <div className="mt-6">
-        <button
-          type="submit"
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-        >
-          <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-            <img
-              className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
-              src={TheLockSvg}
-              alt="the-lock"
-            />
-          </span>
-          Reset Password
-        </button>
-      </div>
-    </form>
+      <ForgotPasswordText>
+        Reset Password
+      </ForgotPasswordText>
+      <ForgotPasswordDescription>
+        Enter your Spotify username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.
+      </ForgotPasswordDescription>
+      <ForgotPasswordFormWrapper onSubmit={onSubmit}>
+        <FormGroup>
+          <FormGroupLabel>
+            Password
+          </FormGroupLabel>
+          <FormControl>
+            <Input type="password" placeHolder="your password" name="password" ref={register} />
+            {errors?.password && (
+              <ErrorText message={errors.password.message} />
+            )}
+          </FormControl>
+        </FormGroup>
+        <FormGroup>
+          <FormGroupLabel>
+            Confirm Password
+          </FormGroupLabel>
+          <FormControl>
+            <Input type="password" placeHolder="confirm your password" name="passwordConfirmation" ref={register} />
+            {errors?.passwordConfirmation && (
+              <ErrorText message={errors.passwordConfirmation.message} />
+            )}
+          </FormControl>
+        </FormGroup>
+        <FormGroup>
+          <ForgotPasswordButton>
+            <Button color="primary" type="submit">
+              {isSubmiting ? 'Please wait ...' : 'Reset Password'}
+            </Button>
+          </ForgotPasswordButton>
+          {apiError && (
+            <Badge type="error">{apiError}</Badge>
+          )}
+          <TextNote>If you still need help, contact <Link to="##">Saasgear Support</Link></TextNote>
+        </FormGroup>
+      </ForgotPasswordFormWrapper>
+    </>
   );
 }
 
@@ -71,6 +80,7 @@ ResetPasswordForm.propTypes = {
   register: PropTypes.func.isRequired,
   errors: PropTypes.object,
   apiError: PropTypes.string,
+  isSubmiting: PropTypes.bool
 };
 
 export default ResetPasswordForm;

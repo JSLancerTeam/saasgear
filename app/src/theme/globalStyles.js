@@ -11,7 +11,13 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
   a {
-    color: ${COLOR.PRIMARY}
+    color: ${COLOR.PRIMARY};
+    text-decoration: none;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    position: relative;
   }
 `;
  

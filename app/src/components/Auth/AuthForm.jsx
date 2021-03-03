@@ -27,22 +27,6 @@ export const FormHeader = styled.div`
   color: ${COLOR.SAPPHIRE_BLUE};
   margin-bottom: 34px;
 `;
-export const FormGroup = styled.div`
-  margin-bottom: 16px;
-`;
-
-export const FormGroupLabel = styled.label`
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 2px;
-  color: ${COLOR.WHITE_BLUE};
-  mix-blend-mode: normal;
-  opacity: 0.9;
-  display: block;
-  margin-bottom: 19px;
-  text-transform: uppercase;
-`
 export const FormNote = styled.div`
   font-size: 14px;
   line-height: 24px;

@@ -9,6 +9,7 @@ export const COLOR = {
   WHITE_GRAY: '#636E95',
   LIGHT_GRAY: '#FAFCFE',
   LIGHT_WHITE_GRAY: '#DCE9F7',
+  RED: '#FA5087'
 }
 
 export const FONT = {

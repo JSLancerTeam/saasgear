@@ -10,6 +10,7 @@ const InputWrapper = styled.span`
   display: inline-block;
   border-radius: 4px;
   overflow: hidden;
+  border: 1px solid ${COLOR.LIGHT_WHITE_GRAY};
 `;
 
 const CheckMark = styled.label`
@@ -19,8 +20,6 @@ const CheckMark = styled.label`
   height: 24px;
   width: 24px;
   background-color: ${COLOR.WHITE};
-  border: 1px solid ${COLOR.LIGHT_WHITE_GRAY};
-  border-radius: 3px;
   &::after {
     content: "";
     position: absolute;

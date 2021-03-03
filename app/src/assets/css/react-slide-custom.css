@@ -13,6 +13,7 @@
   background: #FFFFFF;
   mix-blend-mode: normal;
   opacity: 0.45;
+  padding: 0;
 }
 .react-slideshow-container+ul.indicators .each-slideshow-indicator:before {
   background: #ffffff;

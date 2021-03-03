@@ -8,8 +8,6 @@ import {
   LogoHeaderName,
   FormContent,
   FormHeader,
-  FormGroup,
-  FormGroupLabel,
   FormNote
 } from '@/components/Auth/AuthForm';
 import FormControl from '@/components/Common/FormControl/FormControl';
@@ -17,6 +15,9 @@ import { COLOR } from '@/constants/style';
 import Input from '@/components/Common/Input/Input';
 import Checkbox from '@/components/Common/Input/InputCheckbox';
 import Button from '@/components/Common/Button/Button';
+import ErrorText from '@/components/Common/ErrorText';
+import { FormGroup } from '@/components/Common/FormGroup';
+import { FormGroupLabel } from '@/components/Common/FormGroupLabel';
 
 const SignInContainer = styled(SignUpFormContainer)`
   width: 300px;
@@ -78,9 +79,7 @@ function SignInForm({
             <FormControl>
               <Input type="email" placeHolder="yourname@yourbusiness.com" name="email" ref={register} />
               {formErrors?.email && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {formErrors.email.message}
-                </p>
+                <ErrorText message={formErrors.email.message} />
               )}
             </FormControl>
           </FormGroup>
@@ -91,9 +90,7 @@ function SignInForm({
             <FormControl>
               <Input type="password" placeHolder="your password" name="password" ref={register} />
               {formErrors?.password && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {formErrors.password.message}
-                </p>
+                <ErrorText message={formErrors.password.message} />
               )}
             </FormControl>
           </FormGroup>
@@ -110,7 +107,7 @@ function SignInForm({
         </div>
       </FormContent>
       {apiError && (
-        <p className="text-red-500 text-xs italic mt-4 text-center">{apiError}</p>
+        <ErrorText message={apiError} position="center" />
       )}
       <TextHaveAccount>Dont have account? <Link to="/auth/signup">Register</Link>.</TextHaveAccount>
     </SignInContainer>

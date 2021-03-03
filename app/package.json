@@ -44,13 +44,11 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "build:css": "postcss src/assets/css/tailwind.css -o src/assets/css/main.css",
-    "watch:css": "postcss src/assets/css/tailwind.css -o src/assets/css/main.css",
     "lint": "stylelint **/*.{js,jsx} && eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "lint:staged": "lint-staged",
     "lint:prod": "NODE_ENV=production npm run lint",
-    "start": "npm run watch:css && craco start",
+    "start": "craco start",
     "build": "npm run lint:prod && npm run build:css && craco build",
     "eject": "craco eject"
   },
@@ -87,7 +85,6 @@
     }
   },
   "devDependencies": {
-    "@tailwindcss/ui": "^0.7.2",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
@@ -110,7 +107,6 @@
     "stylelint": "^13.7.2",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.10.0",
-    "tailwindcss": "^1.9.6"
+    "stylelint-processor-styled-components": "^1.10.0"
   }
 }

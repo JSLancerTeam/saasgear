@@ -4,7 +4,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const ButtonWrapper = styled.button`
-  background: ${COLOR.PRIMARY};
+  background: ${COLOR.LIGHT_PRIMARY};
   border-radius: 8px;
   padding: 10.5px 20px;
   outline: none;
@@ -13,6 +13,7 @@ const ButtonWrapper = styled.button`
   line-height: 19px;
   text-align: center;
   letter-spacing: 0.5px;
+  border: 1px solid ${COLOR.LIGHT_PRIMARY};
   &:focus {
     outline: none;
   }
@@ -27,7 +28,7 @@ const ButtonWrapper = styled.button`
       }
       default: {
         return css`
-          border: 1px solid ${COLOR.LIGHT_PRIMARY};
+          border-color: ${COLOR.LIGHT_PRIMARY};
           background: #fff;
           color: ${COLOR.LIGHT_PRIMARY};
         `

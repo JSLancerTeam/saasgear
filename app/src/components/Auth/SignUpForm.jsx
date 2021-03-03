@@ -9,12 +9,13 @@ import {
   LogoHeaderName,
   FormContent,
   FormHeader,
-  FormGroup,
-  FormGroupLabel,
   FormNote,
 } from '@/components/Auth/AuthForm';
 import styled from 'styled-components';
-import Button from '../Common/Button/Button';
+import ErrorText from '@/components/Common/ErrorText';
+import Button from '@/components/Common/Button/Button';
+import { FormGroup } from '@/components/Common/FormGroup';
+import { FormGroupLabel } from '@/components/Common/FormGroupLabel';
 
 const FormSubmitButton = styled(Button)`
   width: 100%;
@@ -51,9 +52,7 @@ function SignUpForm({
             <FormControl>
               <Input type="text" placeHolder="David" name="name" ref={register} />
               {formErrors?.name && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {formErrors.name.message}
-                </p>
+                <ErrorText message={formErrors.name.message} />
               )}
             </FormControl>
           </FormGroup>
@@ -64,9 +63,7 @@ function SignUpForm({
             <FormControl>
               <Input type="email" placeHolder="yourname@yourbusiness.com" name="email" ref={register} />
               {formErrors?.email && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {formErrors.email.message}
-                </p>
+                <ErrorText message={formErrors.email.message} />
               )}
             </FormControl>
           </FormGroup>
@@ -77,9 +74,7 @@ function SignUpForm({
             <FormControl>
               <Input type="password" placeHolder="Your password" name="password" ref={register} />
               {formErrors?.password && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {formErrors.password.message}
-                </p>
+                <ErrorText message={formErrors.password.message} />
               )}
             </FormControl>
           </FormGroup>
@@ -90,9 +85,7 @@ function SignUpForm({
             <FormControl>
               <Input type="password" placeHolder="Confirm your password" name="passwordConfirmation" ref={register} />
               {formErrors?.passwordConfirmation && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {formErrors.passwordConfirmation.message}
-                </p>
+                <ErrorText message={formErrors.passwordConfirmation.message} />
               )}
             </FormControl>
           </FormGroup>
@@ -102,7 +95,7 @@ function SignUpForm({
         </div>
       </FormContent>
       {apiError && (
-        <p className="text-red-500 text-xs italic mt-4 text-center">{apiError}</p>
+        <ErrorText message={apiError} position="center" />
       )}
       <FormNote>
         By clicking Sign Up, you agree to our <a href="##">Terms</a>, <a href="##">Data Policy</a> and <a href="##">Cookie Policy</a>.

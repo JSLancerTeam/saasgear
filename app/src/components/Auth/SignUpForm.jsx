@@ -40,7 +40,7 @@ function SignUpForm({
     <SignUpFormContainer>
       <LogoHeader>
         <LogoHeaderName>SaaS</LogoHeaderName>
-        <span className="logo-header-title">gear</span>
+        <span>gear</span>
       </LogoHeader>
       <FormContent onSubmit={onSubmit}>
         <FormHeader>Create Account</FormHeader>

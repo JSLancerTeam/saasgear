@@ -67,7 +67,7 @@ function SignInForm({
     <SignInContainer>
       <LogoHeader>
         <LogoHeaderName>SaaS</LogoHeaderName>
-        <span className="logo-header-title">gear</span>
+        <span>gear</span>
       </LogoHeader>
       <FormContent onSubmit={onSubmit}>
         <FormHeader>Welcome Back!</FormHeader>

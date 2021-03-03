@@ -97,28 +97,28 @@ function AuthAdsArea() {
         </svg>
       </AdsBigBlock>
       <SlideCustom easing="ease" arrows={false} canSwipe={false} duration={3000} indicators>
-        <div className="each-slide">
+        <div>
           <SlideItemContainer>
             <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
             <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>
             <SlideItemDescription>Aziest Jordan is one of the biggest superstars to have immerged from the professional designer in world.</SlideItemDescription>
           </SlideItemContainer>
         </div>
-        <div className="each-slide">
+        <div>
           <SlideItemContainer>
             <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
             <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>
             <SlideItemDescription>Aziest Jordan is one of the biggest superstars to have immerged from the professional designer in world.</SlideItemDescription>
           </SlideItemContainer>
         </div>
-        <div className="each-slide">
+        <div>
           <SlideItemContainer>
             <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
             <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>
             <SlideItemDescription>Aziest Jordan is one of the biggest superstars to have immerged from the professional designer in world.</SlideItemDescription>
           </SlideItemContainer>
         </div>
-        <div className="each-slide">
+        <div>
           <SlideItemContainer>
             <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
             <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>

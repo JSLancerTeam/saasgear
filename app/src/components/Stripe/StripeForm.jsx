@@ -8,7 +8,7 @@ import {
   CardCvcElement,
 } from '@stripe/react-stripe-js';
 import { SignUpFormContainer } from '@/components/Auth/AuthForm';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 import styled from 'styled-components';
 import Button from '@/components/Common/Button/Button';
 import FormGroup from '@/components/Common/FormGroup';
@@ -19,14 +19,14 @@ const StripeFormContainer = styled(SignUpFormContainer)`
 `
 const CardNumberEl = styled(CardNumberElement)`
   padding: 11.6px 10px;
-  background: ${COLOR.LIGHT_GRAY};
-  border: 1px solid ${COLOR.WHITE_BLUE};
+  background: ${COLORS.LIGHT_GRAY};
+  border: 1px solid ${COLORS.WHITE_BLUE};
   border-radius: 10px;
   font-size: 16px;
   line-height: 19px;
   text-align: center;
   letter-spacing: 0.5px;
-  color: ${COLOR.WHITE_GRAY};
+  color: ${COLORS.WHITE_GRAY};
   box-sizing: border-box;
 `
 
@@ -39,28 +39,28 @@ const FormGroupCardCvc = styled(FormGroup)`
 
 const CardExpiryElementEl = styled(CardExpiryElement)`
   padding: 11.6px 10px;
-  background: ${COLOR.LIGHT_GRAY};
-  border: 1px solid ${COLOR.WHITE_BLUE};
+  background: ${COLORS.LIGHT_GRAY};
+  border: 1px solid ${COLORS.WHITE_BLUE};
   border-radius: 10px;
   font-size: 16px;
   line-height: 19px;
   text-align: center;
   letter-spacing: 0.5px;
-  color: ${COLOR.WHITE_GRAY};
+  color: ${COLORS.WHITE_GRAY};
   width: 100%;
   box-sizing: border-box;
 `
 
 const CardCvcElementEl = styled(CardCvcElement)`
   padding: 11.6px 10px;
-  background: ${COLOR.LIGHT_GRAY};
-  border: 1px solid ${COLOR.WHITE_BLUE};
+  background: ${COLORS.LIGHT_GRAY};
+  border: 1px solid ${COLORS.WHITE_BLUE};
   border-radius: 10px;
   font-size: 16px;
   line-height: 19px;
   text-align: center;
   letter-spacing: 0.5px;
-  color: ${COLOR.WHITE_GRAY};
+  color: ${COLORS.WHITE_GRAY};
   width: 100%;
   box-sizing: border-box;
 `
@@ -73,7 +73,7 @@ const BackButton = styled(Button)`
   margin-bottom: 20px;
   cursor: pointer;
   & > svg {
-    color: ${COLOR.RED};
+    color: ${COLORS.RED};
     width: 20px;
   }
 `
@@ -120,11 +120,7 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
     <StripeFormContainer onSubmit={onSubmit} className={className}>
       <div>
         {onGoBack && (
-          <BackButton type="button" onClick={onGoBack}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-          </BackButton>
+          <BackButton type="button" onClick={onGoBack} />
         )}
         <div>
           <FormGroup>

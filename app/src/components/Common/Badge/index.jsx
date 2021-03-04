@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import propTypes from 'prop-types';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 
 const BadgeWrapper = styled.div`
   padding: 15px;
@@ -13,14 +13,14 @@ const BadgeWrapper = styled.div`
     switch (type) {
       case 'error': {
         return css`
-          background: ${COLOR.RED};
-          color: ${COLOR.WHITE};
+          background: ${COLORS.RED};
+          color: ${COLORS.WHITE};
         `;
       }
       default: {
         return css`
-          background: ${COLOR.GREEN};
-          color: ${COLOR.WHITE};
+          background: ${COLORS.GREEN};
+          color: ${COLORS.WHITE};
         `;
       }
     }

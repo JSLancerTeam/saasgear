@@ -11,4 +11,4 @@ function Logo() {
   )
 }
 
-export default React.memo(Logo);
+export default Logo;

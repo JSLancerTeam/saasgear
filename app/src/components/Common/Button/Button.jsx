@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
 const ButtonWrapper = styled.button`
-  background: ${COLOR.LIGHT_PRIMARY};
+  background: ${COLORS.LIGHT_PRIMARY};
   border-radius: 8px;
   padding: 10.5px 20px;
   outline: none;
@@ -13,7 +13,7 @@ const ButtonWrapper = styled.button`
   line-height: 19px;
   text-align: center;
   letter-spacing: 0.5px;
-  border: 1px solid ${COLOR.LIGHT_PRIMARY};
+  border: 1px solid ${COLORS.LIGHT_PRIMARY};
   &:focus {
     outline: none;
   }
@@ -21,16 +21,16 @@ const ButtonWrapper = styled.button`
     switch (color) {
       case 'primary': {
         return css`
-          background: ${COLOR.LIGHT_PRIMARY};
+          background: ${COLORS.LIGHT_PRIMARY};
           border-radius: 8px;
           color: #fff;
         `
       }
       default: {
         return css`
-          border-color: ${COLOR.LIGHT_PRIMARY};
+          border-color: ${COLORS.LIGHT_PRIMARY};
           background: #fff;
-          color: ${COLOR.LIGHT_PRIMARY};
+          color: ${COLORS.LIGHT_PRIMARY};
         `
       }
     }

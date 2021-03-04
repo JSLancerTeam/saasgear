@@ -1,4 +1,4 @@
-import { COLOR } from "@/constants/style";
+import { COLORS } from "@/constants/style";
 import styled from "styled-components";
 
 export default styled.label`
@@ -6,7 +6,7 @@ export default styled.label`
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 2px;
-  color: ${COLOR.WHITE_BLUE};
+  color: ${COLORS.WHITE_BLUE};
   mix-blend-mode: normal;
   opacity: 0.9;
   display: block;

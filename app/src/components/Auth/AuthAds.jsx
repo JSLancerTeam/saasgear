@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import '@/assets/css/react-slide-custom.css';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
+import squareGrid from '@/assets/images/svg/square-grid.svg';
+import squareRadiusPrimary from '@/assets/images/svg/square-radius-primary.svg';
+import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';
 
 const AuthAdsWrapper = styled.div`
   display: flex;
@@ -28,7 +31,7 @@ const AdsCircleIcon = styled.div`
   position: absolute;
   left: 38px;
   bottom: 110px;
-  border: 1px solid ${COLOR.LIGHT_BLUE};
+  border: 1px solid ${COLORS.LIGHT_BLUE};
   border-radius: 50%;
   width: 58px;
   height: 58px;
@@ -54,7 +57,7 @@ const SlideItemTitle = styled.h4`
   line-height: 36px;
   text-align: center;
   letter-spacing: 0.5px;
-  color: ${COLOR.WHITE};
+  color: ${COLORS.WHITE};
   margin-top: 82px;
   margin-bottom: 12px;
 `
@@ -63,7 +66,7 @@ const SlideItemDescription = styled.div`
   line-height: 24px;
   text-align: center;
   letter-spacing: 0.5px;
-  color: ${COLOR.WHITE};
+  color: ${COLORS.WHITE};
 `
 const SlideItemContainer = styled.div`
   max-width: 80%;
@@ -76,26 +79,15 @@ function AuthAdsArea() {
   return (
     <AuthAdsWrapper>
       <AdsIconGrid>
-        <svg width="131" height="123" viewBox="0 0 131 123" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g opacity="0.5">
-            <path d="M129.844 121.5H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1 40"/>
-            <path d="M129.844 81.5H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1 40"/>
-            <path d="M129.844 41.5H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1 40"/>
-            <path d="M129.844 1.5H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1 40"/>
-          </g>
-        </svg>
+        <img src={squareGrid} alt=""/>
       </AdsIconGrid>
       <AdsIconBlock>
-        <svg width="337" height="327" viewBox="0 0 337 327" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0H287C314.614 0 337 22.3858 337 50V327H50C22.3858 327 0 304.614 0 277V0Z" fill="#0075E8"/>
-        </svg>
+        <img src={squareRadiusPrimary} alt=""/>
       </AdsIconBlock>
       <AdsCircleIcon>
       </AdsCircleIcon>
       <AdsBigBlock>
-        <svg width="594" height="523" viewBox="0 0 594 523" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1H544C571.614 1 594 23.3858 594 51V529H51C23.3858 529 1 506.614 1 479V1Z" stroke="#2291FF"/>
-        </svg>
+        <img src={squareRadiusTopBig} alt=""/>
       </AdsBigBlock>
       <SlideCustom easing="ease" arrows={false} canSwipe={false} duration={3000} indicators>
         <div>

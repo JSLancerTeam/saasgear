@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
  
 const GlobalStyle = createGlobalStyle`
   .public-DraftEditor-content {
@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
   a {
-    color: ${COLOR.PRIMARY};
+    color: ${COLORS.PRIMARY};
     text-decoration: none;
   }
   html, body {

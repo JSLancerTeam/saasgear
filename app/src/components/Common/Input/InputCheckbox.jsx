@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 
 const InputWrapper = styled.span`
   position: relative;
@@ -10,7 +10,7 @@ const InputWrapper = styled.span`
   display: inline-block;
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid ${COLOR.LIGHT_WHITE_GRAY};
+  border: 1px solid ${COLORS.LIGHT_WHITE_GRAY};
 `;
 
 const CheckMark = styled.label`
@@ -19,7 +19,7 @@ const CheckMark = styled.label`
   left: 0;
   height: 24px;
   width: 24px;
-  background-color: ${COLOR.WHITE};
+  background-color: ${COLORS.WHITE};
   &::after {
     content: "";
     position: absolute;
@@ -28,7 +28,7 @@ const CheckMark = styled.label`
     top: 5px;
     width: 5px;
     height: 10px;
-    border: 1px solid ${COLOR.WHITE};
+    border: 1px solid ${COLORS.WHITE};
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
@@ -40,7 +40,7 @@ const Input = styled.input`
   height: 0;
   width: 0;
   &:checked ~ ${/* sc-selector */ CheckMark} {
-    background-color: ${COLOR.SEMI_PRIMARY};
+    background-color: ${COLORS.SEMI_PRIMARY};
   }
   &:checked ~ ${/* sc-selector */ CheckMark}::after {
     display: block;
@@ -78,4 +78,4 @@ Checkbox.defaultProps = {
   placeHolder: null
 }
 
-export default Checkbox;
+export default React.memo(Checkbox);

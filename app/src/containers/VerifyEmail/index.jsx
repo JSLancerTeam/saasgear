@@ -60,7 +60,7 @@ export default function VerifyEmail() {
           Verify Account
         </ForgotPasswordText>
         <ForgotPasswordDescription>
-          Enter your Spotify username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.
+          Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.
         </ForgotPasswordDescription>
         <Badge type={verifyResult !== null ? 'success' : 'error'}>{verifyResult !== null ? 'Verify email success' : error?.message}</Badge>
         <SquareIconTop>

@@ -1,22 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 
 const InputWrapper = styled.input`
-  background: ${COLOR.LIGHT_GRAY};
-  border: 1px solid ${COLOR.WHITE_BLUE};
+  background: ${COLORS.LIGHT_GRAY};
+  border: 1px solid ${COLORS.WHITE_BLUE};
   border-radius: 10px;
   padding: 10.5px 10px;
   
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 0.5px;
-  color: ${COLOR.WHITE_GRAY};
+  color: ${COLORS.WHITE_GRAY};
   width: 100%;
   &:focus,
   &:active {
-    border-color: ${COLOR.LIGHT_PRIMARY};
+    border-color: ${COLORS.LIGHT_PRIMARY};
     outline: none;
   }
 `

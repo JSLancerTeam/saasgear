@@ -9,7 +9,7 @@ import {
   FormNote
 } from '@/components/Auth/AuthForm';
 import FormControl from '@/components/Common/FormControl/FormControl';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 import Input from '@/components/Common/Input/Input';
 import Checkbox from '@/components/Common/Input/InputCheckbox';
 import Button from '@/components/Common/Button/Button';
@@ -31,7 +31,7 @@ const RememberLabel = styled.label`
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 0.5px;
-  color: ${COLOR.SAPPHIRE_BLUE};
+  color: ${COLORS.SAPPHIRE_BLUE};
   margin-left: 5px;
 `
 const SubmitButton = styled(Button)`
@@ -44,7 +44,7 @@ const ForgotLink = styled.div`
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0.5px;
-    color: ${COLOR.LIGHT_PRIMARY};
+    color: ${COLORS.LIGHT_PRIMARY};
     text-align: right;
     display: block;
     margin-top: 24px;

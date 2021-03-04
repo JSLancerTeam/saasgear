@@ -1,4 +1,4 @@
-export const COLOR = {
+export const COLORS = {
   PRIMARY: '#0080FF',
   LIGHT_PRIMARY: '#369AFE',
   SEMI_PRIMARY: '#2196F3',
@@ -11,8 +11,4 @@ export const COLOR = {
   LIGHT_WHITE_GRAY: '#DCE9F7',
   RED: '#FA5087',
   GREEN: '#1FD0A3',
-}
-
-export const FONT = {
-  DEFAULT: 'Inter'
 }

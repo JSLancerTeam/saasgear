@@ -21,12 +21,7 @@ import Badge from '@/components/Common/Badge';
 function ResetPasswordForm({ onSubmit, register, errors, apiError, isSubmiting }) {
   return (
     <>
-      <GoBack link="/auth/signin">
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17 7H1" stroke="#7C88B1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M7 13L1 7L7 1" stroke="#7C88B1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </GoBack>
+      <GoBack link="/auth/signin" />
       <div>
         <Logo />
       </div>
@@ -34,7 +29,7 @@ function ResetPasswordForm({ onSubmit, register, errors, apiError, isSubmiting }
         Reset Password
       </ForgotPasswordText>
       <ForgotPasswordDescription>
-        Enter your Spotify username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.
+        Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.
       </ForgotPasswordDescription>
       <ForgotPasswordFormWrapper onSubmit={onSubmit}>
         <FormGroup>

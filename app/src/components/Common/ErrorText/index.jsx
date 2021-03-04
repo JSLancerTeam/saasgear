@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { COLOR } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 
 const Error = styled.p`
   font-size: 12px;
-  color: ${COLOR.RED};
+  color: ${COLORS.RED};
   margin: 5px 0 7px;
   display: block;
   ${({ position }) => css`

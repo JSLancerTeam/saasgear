@@ -1,8 +1,8 @@
-const { COLOR } = require("@/constants/style");
+const { COLORS } = require("@/constants/style");
 const { default: styled } = require("styled-components");
 
 export const SignUpFormContainer = styled.div`
-  background: ${COLOR.WHITE};
+  background: ${COLORS.WHITE};
   max-width: 300px;
 `;
 export const FormContent = styled.form`
@@ -13,14 +13,14 @@ export const FormHeader = styled.div`
   font-size: 26px;
   line-height: 36px;
   letter-spacing: 0.5px;
-  color: ${COLOR.SAPPHIRE_BLUE};
+  color: ${COLORS.SAPPHIRE_BLUE};
   margin-bottom: 34px;
 `;
 export const FormNote = styled.div`
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0.5px;
-  color: ${COLOR.SAPPHIRE_BLUE};
+  color: ${COLORS.SAPPHIRE_BLUE};
 `
 export const SignUpFormWrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ export const SignUpFormLeft = styled.div`
 `;
 export const SignUpAds = styled.div`
   width: 55%;
-  background: ${COLOR.PRIMARY};
+  background: ${COLORS.PRIMARY};
   overflow: hidden;
 `;
 
@@ -71,8 +71,8 @@ export const TextNote = styled(FormNote)`
   margin-top: 69px;
 `
 export const ConfirmationText = styled(ForgotPasswordDescription)`
-  background: ${COLOR.GREEN};
-  color: ${COLOR.WHITE};
+  background: ${COLORS.GREEN};
+  color: ${COLORS.WHITE};
   padding: 14px 15px;
   border-radius: 3px;
   font-size: 16px;
@@ -91,7 +91,7 @@ export const ForgotPasswordContainer = styled.div`
   width: 762px;
   margin: 0 auto;
   text-align: center;
-  background: ${COLOR.WHITE};
+  background: ${COLORS.WHITE};
   padding: 40px;
   border-radius: 5px;
   position: relative;
@@ -148,6 +148,6 @@ export const Overlay = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  background: ${COLOR.PRIMARY};
+  background: ${COLORS.PRIMARY};
   z-index: -2;
 `

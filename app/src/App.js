@@ -13,7 +13,7 @@ import AcceptInvitation from '@/containers/Teams/AcceptInvitation'
 import { client } from '@/config/apollo';
 import GlobalLoading from '@/components/Layout/GlobalLoading';
 import GlobalStyle from '@/theme/globalStyles';
-import '@/assets/css/main.css';
+// import '@/assets/css/main.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {

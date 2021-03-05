@@ -7,7 +7,81 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
+import { SignUpFormContainer } from '@/components/Auth/AuthForm';
+import { COLORS } from '@/constants/style';
+import styled from 'styled-components';
+import Button from '@/components/Common/Button/Button';
+import FormGroup from '@/components/Common/FormGroup';
+import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
+const StripeFormContainer = styled(SignUpFormContainer)`
+  width: 300px;
+`
+const CardNumberEl = styled(CardNumberElement)`
+  padding: 11.6px 10px;
+  background: ${COLORS.LIGHT_GRAY};
+  border: 1px solid ${COLORS.WHITE_BLUE};
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: ${COLORS.WHITE_GRAY};
+  box-sizing: border-box;
+`
+
+const FormGroupCardExpire = styled(FormGroup)`
+  margin-right: 10px;
+`
+const FormGroupCardCvc = styled(FormGroup)`
+  margin-left: 10px;
+`
+
+const CardExpiryElementEl = styled(CardExpiryElement)`
+  padding: 11.6px 10px;
+  background: ${COLORS.LIGHT_GRAY};
+  border: 1px solid ${COLORS.WHITE_BLUE};
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: ${COLORS.WHITE_GRAY};
+  width: 100%;
+  box-sizing: border-box;
+`
+
+const CardCvcElementEl = styled(CardCvcElement)`
+  padding: 11.6px 10px;
+  background: ${COLORS.LIGHT_GRAY};
+  border: 1px solid ${COLORS.WHITE_BLUE};
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: ${COLORS.WHITE_GRAY};
+  width: 100%;
+  box-sizing: border-box;
+`
+const SubmitButton = styled(Button)`
+  width: 100%;
+`
+const BackButton = styled(Button)`
+  border-color: transparent;
+  padding: 0;
+  margin-bottom: 20px;
+  cursor: pointer;
+  & > svg {
+    color: ${COLORS.RED};
+    width: 20px;
+  }
+`
+const RowGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
 
 const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError, submitText = 'Submit' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,43 +117,34 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
   }
 
   return (
-    <form onSubmit={onSubmit} className={className}>
-      <div className="mb-5">
+    <StripeFormContainer onSubmit={onSubmit} className={className}>
+      <div>
         {onGoBack && (
-          <button className="mb-4 w-5" type="button" onClick={onGoBack}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-          </button>
+          <BackButton type="button" onClick={onGoBack} />
         )}
-        <div className="grid grid-cols-6 gap-6">
-          <div className="col-span-6">
-            <label
+        <div>
+          <FormGroup>
+            <FormGroupLabel
               htmlFor="street_address"
-              className="block text-sm font-medium leading-5 text-gray-700"
             >
               Card Number
-            </label>
-            <CardNumberElement className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-          </div>
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="first_name"
-              className="block text-sm font-medium leading-5 text-gray-700"
-            >
-              Expiration
-            </label>
-            <CardExpiryElement className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-          </div>
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="last_name"
-              className="block text-sm font-medium leading-5 text-gray-700"
-            >
-              CVC
-            </label>
-            <CardCvcElement className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-          </div>
+            </FormGroupLabel>
+            <CardNumberEl className="card-el" />
+          </FormGroup>
+          <RowGroup>
+            <FormGroupCardExpire>
+              <FormGroupLabel htmlFor="first_name">
+                Expiration
+              </FormGroupLabel>
+              <CardExpiryElementEl/>
+            </FormGroupCardExpire>
+            <FormGroupCardCvc>
+              <FormGroupLabel htmlFor="last_name">
+                CVC
+              </FormGroupLabel>
+              <CardCvcElementEl />
+            </FormGroupCardCvc>
+          </RowGroup>
         </div>
       </div>
       {error && (
@@ -87,14 +152,15 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
           {error}
         </p>
       )}
-      <button
+      <SubmitButton
         type="submit"
         disabled={isSubmitting}
-        className="py-2 px-4 w-full text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
+        color="primary"
+        width="100%"
       >
         {isSubmitting ? 'Please wait' : submitText}
-      </button>
-    </form>
+      </SubmitButton>
+    </StripeFormContainer>
   );
 }
 

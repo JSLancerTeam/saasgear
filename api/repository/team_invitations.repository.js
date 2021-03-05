@@ -1,5 +1,6 @@
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
+// eslint-disable-next-line import/no-cycle
 import { teamsColumns } from './team.repository';
 import { usersColumns } from './user.repository';
 

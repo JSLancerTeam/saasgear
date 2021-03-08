@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 const FormControlWrapper = styled.div`
   width: 100%;
   display: block;
-`
+`;
 
 function FormControl({
   className,

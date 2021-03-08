@@ -25,7 +25,6 @@ const CardNumberEl = styled(CardNumberElement)`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  letter-spacing: 0.5px;
   color: ${COLORS.WHITE_GRAY};
   box-sizing: border-box;
 `
@@ -45,7 +44,6 @@ const CardExpiryElementEl = styled(CardExpiryElement)`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  letter-spacing: 0.5px;
   color: ${COLORS.WHITE_GRAY};
   width: 100%;
   box-sizing: border-box;
@@ -59,7 +57,6 @@ const CardCvcElementEl = styled(CardCvcElement)`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  letter-spacing: 0.5px;
   color: ${COLORS.WHITE_GRAY};
   width: 100%;
   box-sizing: border-box;

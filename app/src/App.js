@@ -28,7 +28,7 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <GlobalStyle />
-        <GlobalLoading />
+        {/* <GlobalLoading /> */}
         <ToastContainer />
         <Switch>
           <Route path="/auth" component={Auth} />

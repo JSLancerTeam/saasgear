@@ -30,7 +30,6 @@ const RememberLabel = styled.label`
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  letter-spacing: 0.5px;
   color: ${COLORS.SAPPHIRE_BLUE};
   margin-left: 5px;
 `
@@ -43,7 +42,6 @@ const ForgotLink = styled.div`
   & > a {
     font-size: 14px;
     line-height: 24px;
-    letter-spacing: 0.5px;
     color: ${COLORS.LIGHT_PRIMARY};
     text-align: right;
     display: block;
@@ -73,7 +71,7 @@ function SignInForm({
               Email
             </FormGroupLabel>
             <FormControl>
-              <Input type="email" placeHolder="yourname@yourbusiness.com" name="email" ref={register} />
+              <Input type="email" placeholder="yourname@yourbusiness.com" name="email" ref={register} />
               {formErrors?.email && (
                 <ErrorText message={formErrors.email.message} />
               )}
@@ -84,7 +82,7 @@ function SignInForm({
               Password
             </FormGroupLabel>
             <FormControl>
-              <Input type="password" placeHolder="your password" name="password" ref={register} />
+              <Input type="password" placeholder="your password" name="password" ref={register} />
               {formErrors?.password && (
                 <ErrorText message={formErrors.password.message} />
               )}

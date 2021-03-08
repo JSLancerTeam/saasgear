@@ -5,21 +5,17 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from "react-redux";
 import { useMutation } from '@apollo/react-hooks';
+import styled from 'styled-components';
 
 import { addTeamMember } from "@/features/admin/team";
 import InviteMemberForm from "@/components/Team/InviteMemberForm";
 import ListTeamMember from "@/components/Team/ListTeamMember";
 import InviteMemberQuery from "@/queries/teams/inviteMember";
+import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
 
-InviteMember.propTypes = {
-  alias: PropsType.string.isRequired,
-  teamMembers: PropsType.arrayOf(
-    PropsType.shape({
-      teamName: PropsType.string,
-      teamID: PropsType.string
-    })
-  ),
-}
+const ListInvitation = styled.div`
+  margin-top: 32px;
+`;
 
 const inviteMemberSchema = yup.object().shape({
   emailMember: yup.string().required('Email is required').email('Email invalid')
@@ -51,23 +47,32 @@ function InviteMember({ teamMembers, alias }) {
   }
   function onActionInlistMember(params) {
     console.log(params)
-
   }
 
   return (
-    <div className="border-2 p-8 rounded shadow-md my-4">
-      <div className="text-xl">Invite Team Members</div>
+    <ContentPage>
+      <TitleContent>Invite Team Members</TitleContent>
       <InviteMemberForm
         register={register}
         onSubmit={handleSubmit(onSubmit)}
         formErrors={formErrors}
       />
-      <div className="mt-4">
-        <div className="text-xl mb-2">Pending Invitations</div>
+      <ListInvitation>
+        <TitleContent>Pending Invitations</TitleContent>
         <ListTeamMember handleAction={onActionInlistMember} teamMembers={teamMembers} />
-      </div>
-    </div>
+      </ListInvitation>
+    </ContentPage>
   );
+}
+
+InviteMember.propTypes = {
+  alias: PropsType.string.isRequired,
+  teamMembers: PropsType.arrayOf(
+    PropsType.shape({
+      teamName: PropsType.string,
+      teamID: PropsType.string
+    })
+  ),
 }
 
 export default InviteMember;

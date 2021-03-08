@@ -37,7 +37,7 @@ function ResetPasswordForm({ onSubmit, register, errors, apiError, isSubmiting }
             Password
           </FormGroupLabel>
           <FormControl>
-            <Input type="password" placeHolder="your password" name="password" ref={register} />
+            <Input type="password" placeholder="your password" name="password" ref={register} />
             {errors?.password && (
               <ErrorText message={errors.password.message} />
             )}
@@ -48,7 +48,7 @@ function ResetPasswordForm({ onSubmit, register, errors, apiError, isSubmiting }
             Confirm Password
           </FormGroupLabel>
           <FormControl>
-            <Input type="password" placeHolder="confirm your password" name="passwordConfirmation" ref={register} />
+            <Input type="password" placeholder="confirm your password" name="passwordConfirmation" ref={register} />
             {errors?.passwordConfirmation && (
               <ErrorText message={errors.passwordConfirmation.message} />
             )}

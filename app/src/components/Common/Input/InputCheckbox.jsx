@@ -50,12 +50,12 @@ const Input = styled.input`
 const Checkbox = React.forwardRef(({
   type,
   defaultChecked,
-  placeHolder,
+  placeholder,
   id,
   ...props
 }, ref) => (
   <InputWrapper>
-    <Input type={type} defaultChecked={defaultChecked} placeholder={placeHolder} {...props} ref={ref} id={id} />
+    <Input type={type} defaultChecked={defaultChecked} placeholder={placeholder} {...props} ref={ref} id={id} />
     <CheckMark htmlFor={id} />
   </InputWrapper>
 ));
@@ -66,7 +66,7 @@ Checkbox.propTypes = {
     PropTypes.bool,
   ]),
   type: PropTypes.oneOf(['checkbox', 'radio']),
-  placeHolder: PropTypes.string,
+  placeholder: PropTypes.string,
   id: PropTypes.string
 }
 
@@ -75,7 +75,7 @@ Checkbox.displayName = 'Input';
 Checkbox.defaultProps = {
   defaultChecked: false,
   type: 'text',
-  placeHolder: null
+  placeholder: null
 }
 
 export default React.memo(Checkbox);

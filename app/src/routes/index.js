@@ -4,8 +4,6 @@ import Document from '@/containers/Document';
 import ActionDocument from '@/containers/Document/Action';
 import ViewDocument from '@/containers/Document/View';
 import Teams from '@/containers/Teams';
-import NewTeam from '@/containers/Teams/NewTeam';
-import EditTeam from '@/containers/Teams/EditTeam';
 
 const routes = [
   {
@@ -53,20 +51,8 @@ const routes = [
   {
     path: '/teams',
     name: 'Teams',
-    exact: true,
+    exact: false,
     component: Teams,
-    isSidebar: false,
-  },
-  {
-    path: '/teams/new',
-    name: 'New Team',
-    component: NewTeam,
-    isSidebar: false,
-  },
-  {
-    path: '/teams/edit/:teamId',
-    name: 'Edit Team',
-    component: EditTeam,
     isSidebar: false,
   },
 ];

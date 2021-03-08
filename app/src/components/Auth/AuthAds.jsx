@@ -65,7 +65,6 @@ const SlideItemDescription = styled.div`
   font-size: 14px;
   line-height: 24px;
   text-align: center;
-  letter-spacing: 0.5px;
   color: ${COLORS.WHITE};
 `
 const SlideItemContainer = styled.div`

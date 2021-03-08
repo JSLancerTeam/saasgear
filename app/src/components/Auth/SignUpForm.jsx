@@ -46,7 +46,7 @@ function SignUpForm({
               Your Name
             </FormGroupLabel>
             <FormControl>
-              <Input type="text" placeHolder="David" name="name" ref={register} />
+              <Input type="text" placeholder="David" name="name" ref={register} />
               {formErrors?.name && (
                 <ErrorText message={formErrors.name.message} />
               )}
@@ -57,7 +57,7 @@ function SignUpForm({
               Email
             </FormGroupLabel>
             <FormControl>
-              <Input type="email" placeHolder="yourname@yourbusiness.com" name="email" ref={register} />
+              <Input type="email" placeholder="yourname@yourbusiness.com" name="email" ref={register} />
               {formErrors?.email && (
                 <ErrorText message={formErrors.email.message} />
               )}
@@ -68,7 +68,7 @@ function SignUpForm({
               Password
             </FormGroupLabel>
             <FormControl>
-              <Input type="password" placeHolder="Your password" name="password" ref={register} />
+              <Input type="password" placeholder="Your password" name="password" ref={register} />
               {formErrors?.password && (
                 <ErrorText message={formErrors.password.message} />
               )}
@@ -79,7 +79,7 @@ function SignUpForm({
               Confirm password
             </FormGroupLabel>
             <FormControl>
-              <Input type="password" placeHolder="Confirm your password" name="passwordConfirmation" ref={register} />
+              <Input type="password" placeholder="Confirm your password" name="passwordConfirmation" ref={register} />
               {formErrors?.passwordConfirmation && (
                 <ErrorText message={formErrors.passwordConfirmation.message} />
               )}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import PropsType from 'prop-types';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
@@ -46,7 +45,7 @@ function ForgotPasswordForm({
               Your Email
             </FormGroupLabel>
             <FormControl>
-              <Input type="email" placeHolder="yourname@yourbusiness.com" name="email" ref={register} />
+              <Input type="email" placeholder="yourname@yourbusiness.com" name="email" ref={register} />
               {errors?.email && (
                 <ErrorText message={errors.email.message} />
               )}

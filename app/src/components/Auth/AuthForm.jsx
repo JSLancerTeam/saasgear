@@ -12,14 +12,12 @@ export const FormHeader = styled.div`
   font-weight: bold;
   font-size: 26px;
   line-height: 36px;
-  letter-spacing: 0.5px;
   color: ${COLORS.SAPPHIRE_BLUE};
   margin-bottom: 34px;
 `;
 export const FormNote = styled.div`
   font-size: 14px;
   line-height: 24px;
-  letter-spacing: 0.5px;
   color: ${COLORS.SAPPHIRE_BLUE};
 `
 export const SignUpFormWrapper = styled.div`
@@ -43,14 +41,12 @@ export const ForgotPasswordText = styled.div`
   font-weight: bold;
   font-size: 26px;
   line-height: 36px;
-  letter-spacing: 0.5px;
   color: #242F57;
   margin-top: 3px;
 `
 export const ForgotPasswordDescription = styled.p`
   font-size: 14px;
   line-height: 24px;
-  letter-spacing: 0.5px;
   color: #242F57;
   max-width: 567px;
   margin: 24px auto 40px;

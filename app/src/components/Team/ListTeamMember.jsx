@@ -1,33 +1,42 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropsType from 'prop-types';
+import { Table } from '../Common/Table';
+import Button from '../Common/Button/Button';
+
+const ActionTd = styled.td`
+  width: 20%;
+
+  button:first-child {
+    margin-right: 20px;
+  }
+`;
 
 export default function ListTeamMember({ teamMembers, handleAction }) {
   return (
-    <table width="100%">
+    <Table>
       <thead>
         <tr>
-          <th style={{ textAlign: "left" }}>Member</th>
-          <th style={{ textAlign: "left" }}>Role</th>
+          <th>Member</th>
+          <th>Role</th>
         </tr>
       </thead>
       <tbody>
-        {teamMembers ? teamMembers.map(it => <tr key={it.userId} className="border-t-2">
-          <td width="70%" className="py-2">{it.email}</td>
-          <td width="10%" className="py-2">
+        {teamMembers ? teamMembers.map(it => <tr key={it.userId}>
+          <td width="70%">{it.email}</td>
+          <td width="10%">
             {it.isOwner ? 'admin' : 'member'}
           </td>
-          {handleAction && <td width="20%">
-            <div className="flex">
-              <button type="button" className="mr-4 hover:underline hover:text-blue-800 cursor-pointer text-blue-500">Cancle</button>
-              <button type="button" className="hover:underline hover:text-blue-800 cursor-pointer text-blue-500">Invitation</button>
-            </div>
-          </td>}
+          {handleAction && <ActionTd>
+            <Button>Cancle</Button>
+            <Button color="primary">Invitation</Button>
+          </ActionTd>}
         </tr>) :
           <tr>
-            <td colSpan={2} className="text-center border-t-2 py-2">Trống</td>
+            <td colSpan={2}>No result</td>
           </tr>}
       </tbody>
-    </table>
+    </Table>
   );
 }
 

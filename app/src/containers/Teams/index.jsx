@@ -1,24 +1,20 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect } from 'react';
-import EmptyTeams from 'components/Team/EmptyTeams';
-import ListTeam from 'components/Team/ListTeam';
-import { useSelector, useDispatch } from 'react-redux';
-import { useQuery } from '@apollo/react-hooks';
-import { setTeams } from "@/features/admin/team";
-
-import getTeamsQuery from "@/queries/teams/getTeams";
+import React from 'react';
+import { TitlePage } from '@/components/Layout/blockStyle';
+import { Route, Switch } from 'react-router-dom';
+import TeamDetail from './TeamDetail';
+import EditTeam from './EditTeam';
+import ListTeam from './ListTeam';
 
 export default function Teams() {
-  const { teams } = useSelector((state) => state.team);
-  const { data, loading } = useQuery(getTeamsQuery);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!loading)
-      dispatch(setTeams({ teams: data?.teams }))
-  }, [data, loading])
-
-  return teams.length === 0
-    ? <EmptyTeams />
-    : <ListTeam teams={teams} />
+  return (
+    <div>
+      <TitlePage>Teams</TitlePage>
+      <Switch>
+        <Route path="/teams/new" exact component={TeamDetail} />
+        <Route path="/teams/edit/:teamId" exact component={EditTeam} />
+        <Route component={ListTeam} />
+      </Switch>
+    </div>
+  )
 }

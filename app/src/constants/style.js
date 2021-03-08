@@ -1,5 +1,6 @@
 export const COLORS = {
   PRIMARY: '#0080FF',
+  REGULAR_PRIMARY: '#F4FAFF',
   LIGHT_PRIMARY: '#369AFE',
   SEMI_PRIMARY: '#2196F3',
   WHITE: '#FFFFFF',
@@ -11,4 +12,6 @@ export const COLORS = {
   LIGHT_WHITE_GRAY: '#DCE9F7',
   RED: '#FA5087',
   GREEN: '#1FD0A3',
+  GRAY: '#ECEFF8',
+  BODY: '#F4F7FC',
 }

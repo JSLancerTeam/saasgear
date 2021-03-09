@@ -1,5 +1,22 @@
 import React from 'react';
 import PropsType from 'prop-types';
+import styled from 'styled-components';
+import ErrorText from '../Common/ErrorText';
+import FormGroup from '../Common/FormGroup';
+import FormGroupLabel from '../Common/FormGroupLabel';
+import Input from '../Common/Input/Input';
+import Button from '../Common/Button/Button';
+
+const Form = styled.form`
+  margin: 24px 0;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 32px;
+`;
 
 function SecurityForm({ 
   onSubmit, 
@@ -9,80 +26,37 @@ function SecurityForm({
   isSubmitting, 
 }) {
   return (
-    <form className="form flex flex-wrap w-full" onSubmit={onSubmit}>
-      <div className="w-full">
-        <label
-          htmlFor="currentPassword"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Current password
-        </label>
-        <input
-          id="currentPassword"
-          name="currentPassword"
-          type="password"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
+    <Form onSubmit={onSubmit}>
+      <FormGroup>
+        <FormGroupLabel>Current password</FormGroupLabel>
+        <Input type="password" name="currentPassword" ref={register} />
         {formErrors?.currentPassword && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {formErrors.currentPassword.message}
-          </p>
+          <ErrorText message={formErrors.currentPassword.message} />
         )}
-      </div>
-      <div className="w-full mt-4">
-        <label
-          htmlFor="newPassword"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          New password
-        </label>
-        <input
-          id="newPassword"
-          name="newPassword"
-          type="password"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
+      </FormGroup>
+      <FormGroup>
+        <FormGroupLabel>New password</FormGroupLabel>
+        <Input type="password" name="newPassword" ref={register} />
         {formErrors?.newPassword && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {formErrors.newPassword.message}
-          </p>
+          <ErrorText message={formErrors.newPassword.message} />
         )}
-      </div>
-      <div className="w-full mt-4">
-        <label
-          htmlFor="confirmPassword"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Confirm new password
-        </label>
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
+      </FormGroup>
+      <FormGroup>
+        <FormGroupLabel>Confirm new password</FormGroupLabel>
+        <Input type="password" name="confirmPassword" ref={register} />
         {formErrors?.confirmPassword && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {formErrors.confirmPassword.message}
-          </p>
+          <ErrorText message={formErrors.confirmPassword.message} />
         )}
-      </div>
-      <div className="w-full mt-4">
-        {apiError && (
-          <p className="text-red-500 text-sm text-left italic">{apiError}</p>
-        )}
-        <button
-          type="submit"
-          className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded py-2 px-4 mt-4"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Please wait' : 'Submit'}
-        </button>
-      </div>
-    </form>
+      </FormGroup>
+      <ButtonGroup>
+        <Button type="submit" color="primary" disabled={isSubmitting}>
+          {isSubmitting ? 'Please wait' : 'Update Password'}
+        </Button>
+      </ButtonGroup>
+      {apiError && (
+        <ErrorText message={apiError} />
+      )}
+    </Form>
   );
 }
 

@@ -1,122 +1,90 @@
 import React from 'react';
 import PropsType from 'prop-types';
+import styled from 'styled-components';
+
+import { COLORS } from '@/constants/style';
+import FormGroup from '../Common/FormGroup';
+import FormGroupLabel from '../Common/FormGroupLabel';
+import Input from '../Common/Input/Input';
+import ErrorText from '../Common/ErrorText';
+import Button from '../Common/Button/Button';
+
+const Form = styled.form`
+  margin: 24px 0;
+`;
+
+const FormGroupWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  ${FormGroup} {
+    &:first-child {
+      margin-right: 25px;
+    }
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 32px;
+`;
+
+const DeleteLink = styled.div`
+  font-size: 14px;
+  line-height: 24px;
+  color: ${COLORS.LIGHT_PRIMARY};
+  margin-right: 25px;
+  cursor: pointer;
+`;
 
 function AccountForm({ onSubmit, register, errors, openPopupDeleteAccount }) {
+
   return (
-    <form className="form flex flex-wrap w-full" onSubmit={onSubmit}>
-      <div className="w-full">
-        <label
-          htmlFor="firstName"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          First name
-        </label>
-        <input
-          id="firstName"
-          name="firstName"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
-        {errors?.firstName && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.firstName.message}
-          </p>
-        )}
-      </div>
-      <div className="w-full mt-4">
-        <label
-          htmlFor="lastName"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Last name
-        </label>
-        <input
-          id="lastName"
-          name="lastName"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
-        {errors?.lastName && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.lastName.message}
-          </p>
-        )}
-      </div>
-      <div className="w-full mt-4">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Email address
-        </label>
-        <input
-          id="email"
-          name="email"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
+    <Form onSubmit={onSubmit}>
+      <FormGroupWrapper>
+        <FormGroup>
+          <FormGroupLabel>First Name</FormGroupLabel>
+          <Input name="firstName" ref={register} />
+          {errors?.firstName && (
+            <ErrorText message={errors.firstName.message} />
+          )}
+        </FormGroup>
+        <FormGroup>
+          <FormGroupLabel>Last Name</FormGroupLabel>
+          <Input name="lastName" ref={register} />
+          {errors?.lastName && (
+            <ErrorText message={errors.lastName.message} />
+          )}
+        </FormGroup>
+      </FormGroupWrapper>
+      <FormGroup>
+        <FormGroupLabel>Email</FormGroupLabel>
+        <Input type="email" name="email" ref={register} />
         {errors?.email && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.email.message}
-          </p>
+          <ErrorText message={errors.email.message} />
         )}
-      </div>
-      <div className="w-full mt-4">
-        <label
-          htmlFor="company"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Company
-        </label>
-        <input
-          id="company"
-          name="company"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
+      </FormGroup>
+      <FormGroup>
+        <FormGroupLabel>Company</FormGroupLabel>
+        <Input name="company" ref={register} />
         {errors?.company && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.company.message}
-          </p>
+          <ErrorText message={errors.company.message} />
         )}
-      </div>
-      <div className="w-full mt-4">
-        <label
-          htmlFor="position"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Position
-        </label>
-        <input
-          id="position"
-          name="position"
-          className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          ref={register}
-        />
+      </FormGroup>
+      <FormGroup>
+        <FormGroupLabel>Position</FormGroupLabel>
+        <Input name="position" ref={register} />
         {errors?.position && (
-          <p className="text-red-500 text-xs italic mt-1">
-            {errors.position.message}
-          </p>
+          <ErrorText message={errors.position.message} />
         )}
-      </div>
-      <div className="w-full mt-4 flex flex-row justify-between items-center">
-        <button
-          type="submit"
-          className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded py-2 px-4"
-        >
-          Submit
-        </button>
-        <div
-          role="button"
-          tabIndex={0}
-          onKeyDown={openPopupDeleteAccount}
-          className="hover:underline hover:text-blue-800 cursor-pointer text-blue-500"
-          onClick={openPopupDeleteAccount}
-        >
-          I &apos;d like to delete my account
-        </div>
-      </div>
-    </form>
+      </FormGroup>
+      <ButtonGroup>
+        <DeleteLink onClick={openPopupDeleteAccount}>I &apos;d like to delete my account</DeleteLink>
+        <Button type="submit" color="primary">Save and Update</Button>
+      </ButtonGroup>
+    </Form>
   );
 }
 

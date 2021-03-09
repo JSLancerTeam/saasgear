@@ -28,7 +28,7 @@ const plans = [
   },
 ]
 
-const PlanSetting = ({ isActive }) => {
+const PlanSetting = () => {
   const [isYearly, setIsYearly] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState('');
   const { data: currentPlan } = useSelector((state) => state.userPlan);
@@ -95,8 +95,8 @@ const PlanSetting = ({ isActive }) => {
   const amountNew = planChanged ? planChanged.price : 0;
 
   return (
-    <div className={cn('p-4', isActive ? 'block' : 'hidden')}>
-      <div className="py-4 w-full">
+    <div>
+      <div>
         <div className="flex justify-center">
           <p className="font-bold mr-4">Bill Yearly</p>
           <div 
@@ -117,7 +117,7 @@ const PlanSetting = ({ isActive }) => {
             </label>
           </div>
         </div>
-        <div className="flex justify-center mt-8">
+        <div>
           {plans.map((plan, index) => (
             <div
               className={cn("border border-gray-30 rounded-md pt-8 pb-4 px-4 w-full md:w-3/12 text-center cursor-pointer", 
@@ -221,9 +221,5 @@ const PlanSetting = ({ isActive }) => {
     </div>
   );
 }
-
-PlanSetting.propTypes = {
-  isActive: PropTypes.bool.isRequired,
-};
 
 export default PlanSetting;

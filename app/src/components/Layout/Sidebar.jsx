@@ -97,7 +97,7 @@ const Sidebar = () => (
     <MenuWrapper>
       <MenuList>
         {routes.filter(route => route.isSidebar).map(route => (
-          <MenuItem>
+          <MenuItem key={route.path}>
             <NavLinkStyle to={route.path} activeClassName="active">
               {route.icon}
               <MenuText>{route.name}</MenuText>

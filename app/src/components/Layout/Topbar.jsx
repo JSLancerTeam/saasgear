@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Avatar from '@/assets/images/avatar.png';
 import { COLORS } from '@/constants/style';
@@ -93,19 +95,38 @@ const ProfileList = styled.ul`
 const ProfileItem = styled.li`
   list-style-type: none;
   height: 36px;
+`;
+
+const NavLinkStyle = styled(NavLink)`
   font-size: 14px;
   color: ${COLORS.SAPPHIRE_BLUE};
   padding-left: 24px;
   overflow: hidden;
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100%;
 
-  ${props => props.active && css`
+  &.active {
     background-color: ${COLORS.REGULAR_PRIMARY};
-  `}
+  }
 `;
 
-const Topbar = () => {
+const SignoutBtn = styled.button`
+  font-size: 14px;
+  color: ${COLORS.SAPPHIRE_BLUE};
+  padding-left: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+`;
+
+const Topbar = ({ signout, user }) => {
   const [isShowMenu, setIsShowMenu] = useState(false);
   const profileRef = useRef(null);
 
@@ -131,21 +152,32 @@ const Topbar = () => {
           <AvatarWrapper>
             <img src={Avatar} alt="avatar" />
           </AvatarWrapper>
-          <Name>Kinanthi Ayani </Name>
+          <Name>{user?.name}</Name>
           <ArrowDownIcon />
         </Profile>
       </RightContent>
       {isShowMenu && (
         <ProfileMenu>
           <ProfileList>
-            <ProfileItem>Profile</ProfileItem>
-            <ProfileItem active>Account Settings</ProfileItem>
-            <ProfileItem>Sign Out</ProfileItem>
+            <ProfileItem>
+              <NavLinkStyle to="/profile" activeClassName="active">Profle</NavLinkStyle>
+            </ProfileItem>
+            <ProfileItem>
+              <NavLinkStyle to="/account-settings" activeClassName="active">Accout Settings</NavLinkStyle>
+            </ProfileItem>
+            <ProfileItem>
+              <SignoutBtn onClick={signout}>Sign Out</SignoutBtn>
+            </ProfileItem>
           </ProfileList>
         </ProfileMenu>
       )}
     </Wrapper>
   );
-} 
+}
+
+Topbar.propTypes = {
+  signout: PropTypes.func,
+  user: PropTypes.object,
+}
 
 export default Topbar;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -26,11 +27,11 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const AdminLayout = () => (
+const AdminLayout = ({ signout, user }) => (
   <LayoutWrapper>
     <Sidebar />
     <ContentWrapper>
-      <Topbar />
+      <Topbar signout={signout} user={user} />
       <Content>
         <Switch>
           {routes.map((route) => (
@@ -47,5 +48,10 @@ const AdminLayout = () => (
     </ContentWrapper>
   </LayoutWrapper>
 );
+
+AdminLayout.propTypes = {
+  signout: PropTypes.func,
+  user: PropTypes.object,
+}
 
 export default AdminLayout;

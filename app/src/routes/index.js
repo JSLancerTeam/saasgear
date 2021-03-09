@@ -1,9 +1,13 @@
+import React from 'react';
 import Dashborad from '@/containers/Dashboard';
 import Profile from '@/containers/Profile';
 import Document from '@/containers/Document';
 import ActionDocument from '@/containers/Document/Action';
 import ViewDocument from '@/containers/Document/View';
 import Teams from '@/containers/Teams';
+import { ReactComponent as DashboardIcon } from '@/assets/images/svg/dashboard.svg';
+import { ReactComponent as DocumentIcon } from '@/assets/images/svg/document.svg';
+import { ReactComponent as UserIcon } from '@/assets/images/svg/user.svg';
 
 const routes = [
   {
@@ -11,6 +15,7 @@ const routes = [
     name: 'Dashboard',
     exact: false,
     component: Dashborad,
+    icon: <DashboardIcon />,
     isSidebar: true,
   },
   {
@@ -18,6 +23,15 @@ const routes = [
     name: 'Document',
     exact: true,
     component: Document,
+    icon: <DocumentIcon />,
+    isSidebar: true,
+  },
+  {
+    path: '/teams',
+    name: 'Teams',
+    exact: false,
+    component: Teams,
+    icon: <UserIcon />,
     isSidebar: true,
   },
   {
@@ -46,13 +60,6 @@ const routes = [
     name: 'Profile',
     exact: false,
     component: Profile,
-    isSidebar: false,
-  },
-  {
-    path: '/teams',
-    name: 'Teams',
-    exact: false,
-    component: Teams,
     isSidebar: false,
   },
 ];

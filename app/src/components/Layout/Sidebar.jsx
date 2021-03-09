@@ -1,9 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
 import { ReactComponent as LogoIcon } from '@/assets/images/svg/logo.svg';
-import { ReactComponent as DashboardIcon } from '@/assets/images/svg/dashboard.svg';
-import { ReactComponent as DocumentIcon } from '@/assets/images/svg/document.svg';
 import { COLORS } from '@/constants/style';
+import routes from '@/routes';
 
 const Wrapper = styled.div`
   width: 235px;
@@ -46,10 +47,24 @@ const MenuItem = styled.li`
   height: 60px;
   display: flex;
   align-items: center;
+`;
+
+const MenuText = styled.span`
+  font-size: 18px;
+  line-height: 22px;
+  color: ${COLORS.WHITE_BLUE};
+  margin-left: 10px;
+`;
+
+const NavLinkStyle = styled(NavLink)`
+  width: 100%;
+  height: 100%;
   padding-left: 27px;
   border-left: 2px solid transparent;
-
-  ${(props) => props.active && css`
+  display: flex;
+  align-items: center;
+  
+  &.active {
     border-radius: 0px 10px 10px 0px;
     background-color: ${COLORS.REGULAR_PRIMARY};
     border-left-color: ${COLORS.PRIMARY};
@@ -67,14 +82,7 @@ const MenuItem = styled.li`
         stroke: ${COLORS.PRIMARY};
       }
     }
-  `}
-`;
-
-const MenuText = styled.span`
-  font-size: 18px;
-  line-height: 22px;
-  color: ${COLORS.WHITE_BLUE};
-  margin-left: 10px;
+  }
 `;
 
 const Sidebar = () => (
@@ -88,14 +96,14 @@ const Sidebar = () => (
     </LogoWrapper>
     <MenuWrapper>
       <MenuList>
-        <MenuItem active>
-          <DashboardIcon />
-          <MenuText>Dashboard</MenuText>
-        </MenuItem>
-        <MenuItem>
-          <DocumentIcon />
-          <MenuText>Document</MenuText>
-        </MenuItem>
+        {routes.filter(route => route.isSidebar).map(route => (
+          <MenuItem>
+            <NavLinkStyle to={route.path} activeClassName="active">
+              {route.icon}
+              <MenuText>{route.name}</MenuText>
+            </NavLinkStyle>
+          </MenuItem>
+        ))}
       </MenuList>
     </MenuWrapper>
   </Wrapper>

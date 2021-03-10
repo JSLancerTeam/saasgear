@@ -28,11 +28,7 @@ const Profile = () => {
             <InformationSetting user={data} />
             <PasswordSetting />
           </ContentPageStyle>
-          <ContentPage>
-            <TitleContentStyle>Plan</TitleContentStyle>
-            <DescContent>This is your subscription</DescContent>
-            <PlanSetting />
-          </ContentPage>
+          <PlanSetting />
         </>
       )}
     </div>

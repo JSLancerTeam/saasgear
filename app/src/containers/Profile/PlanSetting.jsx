@@ -1,9 +1,10 @@
 import React,  { useState, useEffect } from 'react';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
+import styled from 'styled-components';
 
 import StripeContainer from '@/containers/Stripe';
 import deleteUserPlanQuery from '@/queries/userPlans/deleteUserPlan';
@@ -11,7 +12,73 @@ import updateUserPlanQuery from '@/queries/userPlans/updateUserPlan';
 import createUserPlanQuery from '@/queries/userPlans/createUserPlan';
 import getUserPlanQuery from '@/queries/userPlans/getUserPlan';
 import { setUserPlan } from '@/features/auth/userPlan';
-import dayjs from 'dayjs';
+import Plans from '@/components/Plans';
+import Toggle from '@/components/Common/Input/Toggle';
+import { ContentPage, DescContent, TitleContent } from '@/components/Layout/blockStyle';
+import { COLORS } from '@/constants/style';
+import ErrorText from '@/components/Common/ErrorText';
+
+const TitleContentStyle = styled(TitleContent)`
+  margin-bottom: 4px;
+`;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ToggleYearly = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+
+  label {
+    margin: 0 auto;
+  }
+`;
+
+const LeftContent = styled.div``;
+const RightContent = styled.div`
+  padding-left: 24px;
+  padding-top: 74px;
+  display: flex;
+`;
+
+const PaymentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SummaryTitle = styled.div`
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 30px;
+  color: ${COLORS.SAPPHIRE_BLUE};
+  margin-bottom: 24px;
+`;
+
+const AmountList = styled.ul`
+  flex-grow: 1;
+`;
+const AmountItem = styled.li`
+  list-style-type: none;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const AmoutText = styled.p`
+  font-size: 16px;
+  line-height: 26px;
+  color: ${COLORS.WHITE_GRAY};
+  flex-grow: 1;
+`;
+const Amount = styled.span`
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  color: ${COLORS.SAPPHIRE_BLUE};
+`;
 
 const plans = [
   {
@@ -19,14 +86,29 @@ const plans = [
     name: 'Starter',
     price: 75,
     desc: 'Kickstart your project with all features and code',
+    features: [
+      'Save weeks of development time.',
+      'Full source code download.',
+      'Self-service documentation.',
+      'Slack community support',
+      'One year of product updates',
+    ]
   },
   {
     id: 'professional',
     name: 'Professional',
     price: 295,
     desc: 'We help you get up and running even faster',
+    features: [
+      'Everything in the Starter plan.',
+      'One-on-one onboarding and setup.',
+      'Design consulting session with you/your team.',
+      'Customized code working towards your MVP',
+      'Production deployment to a VPS of your choice',
+      'Automated server setup and deploy scripts',
+    ]
   },
-]
+];
 
 const PlanSetting = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -90,135 +172,90 @@ const PlanSetting = () => {
     fetchUserPlan();
   }
 
-  const planChanged = !!selectedPlan && plans.find(item => item.id === selectedPlan);
+  const planChanged = !!selectedPlan && plans.find(item => item.id === selectedPlan) || {};
   const amountCurrent = currentPlan.amount || 0;
   const amountNew = planChanged ? planChanged.price : 0;
 
   return (
-    <div>
-      <div>
-        <div className="flex justify-center">
-          <p className="font-bold mr-4">Bill Yearly</p>
-          <div 
-            className={cn("relative rounded-full w-12 h-6 cursor-pointer transition duration-200 ease-linear", isYearly ? 'bg-blue-500' : ' bg-gray-400')} 
-            onClick={toggle} 
-            aria-hidden
-          >
-            <label 
-              htmlFor="toggle" 
-              className={cn("absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer translate-x-0 border-gray-400", 
-                isYearly ? 'translate-x-full border-blue-500' : 'translate-x-0 border-gray-400'
-              )}
-            >
-              <input
-                type="checkbox" id="toggle" name="toggle"
-                className="appearance-none w-full h-full cursor-pointer active:outline-none focus:outline-none"
-              />
-            </label>
-          </div>
-        </div>
-        <div>
-          {plans.map((plan, index) => (
-            <div
-              className={cn("border border-gray-30 rounded-md pt-8 pb-4 px-4 w-full md:w-3/12 text-center cursor-pointer", 
-                {
-                  'bg-gray-50': planChanged && plan.id === planChanged.id,
-                  'ml-8': index > 0,
-                }
-              )} 
-              key={plan.id}
-              aria-hidden
-              onClick={() => changePlan(plan.id)}
-            >
-              <h2 className="text-2xl font-semibold">{plan.name}</h2>
-              <p className="text-gray-700 mt-2">{plan.desc}</p>
-              <div className="mt-8">
-                {plan.price > 0 ? (
-                  <>
-                    <span className="font-bold text-4xl">${isYearly ? plan.price * 9 : plan.price}</span>
-                    <span>/{isYearly ? 'year' : 'month'}</span>
-                  </>
+    <ContentPage>
+      <TitleContentStyle>Plan</TitleContentStyle>
+      <DescContent>This is your subscription</DescContent>
+      <Content>
+        <LeftContent>
+          <ToggleYearly>
+            <Toggle onChange={toggle} label="Bill Yearly" />
+          </ToggleYearly>
+          <Plans
+            plans={plans}
+            onChange={changePlan}
+            planChanged={planChanged}
+            isYearly={isYearly}
+            checkIsCurrentPlan={checkIsCurrentPlan}
+          />
+        </LeftContent>
+        <RightContent>
+          {planChanged && (
+            checkIsCurrentPlan(planChanged.id) ? (
+              <div>
+                {currentPlan.deletedAt ? (
+                  <p>Plan will expire on <b>{dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm')}</b></p>
                 ) : (
-                  <span className="font-bold text-4xl">Free</span>
+                  <button 
+                    type="button" 
+                    disabled={isDeletingUserPlan}
+                    onClick={handleCancelSubscription}
+                  >Cancel Subcription</button>
                 )}
               </div>
-              {checkIsCurrentPlan(plan.id) ? (
-                <button disabled className="w-full cursor-default bg-blue-200 text-gray-600 text-sm py-2 rounded-md mt-8" type="button">Current plan</button>
-              ) : (
-                <button className="w-full bg-blue-500 text-white text-sm py-2 rounded-md mt-8" type="button" onClick={() => changePlan(plan.id)}>Get started</button>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="text-center font-semibold mt-4">
-          <p>See plan details on <a className="text-blue-700" href={`${process.env.REACT_APP_LANDING_PAGE}/pricing`} target="_blank">Pricing page</a></p>
-        </div>
-      </div>
-
-      {planChanged && (
-        checkIsCurrentPlan(planChanged.id) ? (
-          <div className="border-t border-gray-300 mt-10 pt-10 flex justify-center">
-            {currentPlan.deletedAt ? (
-              <p>Plan will expire on <b>{dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm')}</b></p>
             ) : (
-              <button 
-                type="button" 
-                className="w-4/12 py-2 px-4 text-sm leading-5 font-medium rounded-md text-white bg-red-500"
-                disabled={isDeletingUserPlan}
-                onClick={handleCancelSubscription}
-              >Cancel Subcription</button>
-            )}
-          </div>
-        ) : (
-          <div className="border-t border-gray-300 mt-10 pt-10 grid grid-cols-3">
-            <div className="w-full">
-              <div className="mb-4">
-                <p>Current subcription</p>
-                <span className="font-semibold">${amountCurrent}</span>
-              </div>
-              <div className="mb-4">
-                <p>New subcription</p>
-                <span className="font-semibold">${isYearly ? amountNew * 9 : amountNew}</span>
-              </div>
-              <div className="mb-4">
-                <p>Balance due right now</p>
-                <span className="font-semibold">${Math.max((isYearly ? amountNew * 9 : amountNew) - amountCurrent, 0)}</span>
-              </div>
-            </div>
-            <div className="col-span-2 border-l border-gray-300 flex justify-center items-center">
-              {(isEmpty(currentPlan) || (currentPlan && currentPlan.deletedAt)) ? (
-                <StripeContainer 
-                  onSubmitSuccess={createPaymentMethodSuccess}
-                  apiLoading={isCreatingUserPlan}
-                  className="w-6/12 mx-auto"
-                  submitText={currentPlan && currentPlan.deletedAt && 'Change plan'}
-                />
-              ) : (
-                <button 
-                  type="button" 
-                  className="w-6/12 py-2 px-4 text-sm leading-5 font-medium rounded-md text-white bg-indigo-600"
-                  onClick={handleChangeSubcription}
-                  disabled={isUpdatingUserPlan}
-                >{isUpdatingUserPlan ? 'Please wait' : 'Change Subcription'}</button>
-              )}
-            </div>
-          </div>
-        )
-      )}
+              <PaymentWrapper>
+                <SummaryTitle>Order Summary</SummaryTitle>
+                <AmountList>
+                  <AmountItem>
+                    <AmoutText>Current subcription</AmoutText>
+                    <Amount>${amountCurrent}</Amount>
+                  </AmountItem>
+                  <AmountItem>
+                    <AmoutText>New subcription</AmoutText>
+                    <Amount>${isYearly ? amountNew * 9 : amountNew}</Amount>
+                  </AmountItem>
+                  <AmountItem>
+                    <AmoutText>Balance due right now</AmoutText>
+                    <Amount>${Math.max((isYearly ? amountNew * 9 : amountNew) - amountCurrent, 0)}</Amount>
+                  </AmountItem>
+                </AmountList>
+                {(isEmpty(currentPlan) || (currentPlan && currentPlan.deletedAt)) ? (
+                  <StripeContainer 
+                    onSubmitSuccess={createPaymentMethodSuccess}
+                    apiLoading={isCreatingUserPlan}
+                    submitText={currentPlan && currentPlan.deletedAt && 'Change plan'}
+                  />
+                ) : (
+                  <button 
+                    type="button"
+                    onClick={handleChangeSubcription}
+                    disabled={isUpdatingUserPlan}
+                  >{isUpdatingUserPlan ? 'Please wait' : 'Change Subcription'}</button>
+                )}
+              </PaymentWrapper>
+            )
+          )}
 
-      {errorCreate?.message && (
-        <p className="text-red-500 text-center italic mt-4">{errorCreate.message}</p>
-      )}
+          {errorCreate?.message && (
+            <ErrorText message={errorCreate.message} />
+          )}
 
-      {errorUpdate?.message && (
-        <p className="text-red-500 text-center italic mt-4">{errorUpdate.message}</p>
-      )}
+          {errorUpdate?.message && (
+            <ErrorText message={errorUpdate.message} />
+          )}
 
-      {errorDelete?.message && (
-        <p className="text-red-500 text-center italic mt-4">{errorDelete.message}</p>
-      )}
-
-    </div>
+          {errorDelete?.message && (
+            <ErrorText message={errorDelete.message} />
+          )}
+        </RightContent>
+        
+      </Content>
+    </ContentPage>
   );
 }
 

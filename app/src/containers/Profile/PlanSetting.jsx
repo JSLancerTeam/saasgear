@@ -193,9 +193,9 @@ const PlanSetting = () => {
             checkIsCurrentPlan={checkIsCurrentPlan}
           />
         </LeftContent>
-        <RightContent>
-          {planChanged && (
-            checkIsCurrentPlan(planChanged.id) ? (
+        {!isEmpty(planChanged) && (
+          <RightContent>
+            {checkIsCurrentPlan(planChanged.id) ? (
               <div>
                 {currentPlan.deletedAt ? (
                   <p>Plan will expire on <b>{dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm')}</b></p>
@@ -238,22 +238,21 @@ const PlanSetting = () => {
                   >{isUpdatingUserPlan ? 'Please wait' : 'Change Subcription'}</button>
                 )}
               </PaymentWrapper>
-            )
-          )}
+            )}
 
-          {errorCreate?.message && (
-            <ErrorText message={errorCreate.message} />
-          )}
+            {errorCreate?.message && (
+              <ErrorText message={errorCreate.message} />
+            )}
 
-          {errorUpdate?.message && (
-            <ErrorText message={errorUpdate.message} />
-          )}
+            {errorUpdate?.message && (
+              <ErrorText message={errorUpdate.message} />
+            )}
 
-          {errorDelete?.message && (
-            <ErrorText message={errorDelete.message} />
-          )}
-        </RightContent>
-        
+            {errorDelete?.message && (
+              <ErrorText message={errorDelete.message} />
+            )}
+          </RightContent>
+        )}
       </Content>
     </ContentPage>
   );

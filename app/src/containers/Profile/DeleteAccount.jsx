@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Components from '@/components/Common';
+import Portal from '@/components/Common/Portal';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -41,7 +41,7 @@ export default function DeleteAccount({ closeModal, isOpen }) {
   }
 
   return (
-    <Components.Portal id="delete-account">
+    <Portal id="delete-account">
       <DeleteAccountModal
         closeModal={closeModal}
         isOpen={isOpen}
@@ -51,7 +51,7 @@ export default function DeleteAccount({ closeModal, isOpen }) {
         isValid={formState.isValid && watchEmail !== ''}
         onSubmit={handleSubmit(onSubmit)}
       />
-    </Components.Portal>
+    </Portal>
   );
 }
 

@@ -45,7 +45,7 @@ export function usePortal(id) {
   return getRootElem();
 }
 
-export function Portal({ id, children }) {
+export default function Portal({ id, children }) {
   const target = usePortal(id);
   return createPortal(children, target);
 }

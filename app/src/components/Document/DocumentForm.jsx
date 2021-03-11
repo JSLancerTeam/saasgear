@@ -1,58 +1,52 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
+import styled from 'styled-components';
+
 import WYSIWYGEditor from './WYSIWYG';
+import FormGroup from '../Common/FormGroup';
+import FormGroupLabel from '../Common/FormGroupLabel';
+import ErrorText from '../Common/ErrorText';
+import Button from '../Common/Button/Button';
+import Input from '../Common/Input/Input';
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const SaveBtn = styled(Button)`
+  width: 264px;
+`;
 
 const DocumentForm = ({ editorContent, onSubmit, register, control, formErrors, apiError, isSubmitting }) => (
   <form onSubmit={onSubmit}>
-    <div className="col-span-6 sm:col-span-3">
-      <label
-        htmlFor="name"
-        className="block text-sm font-medium leading-5 text-gray-700"
-      >
-        Name
-      </label>
-      <input
-        id="name"
-        name="name"
-        className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-        ref={register}
-      />
+    <FormGroup>
+      <FormGroupLabel>Name</FormGroupLabel>
+      <Input name="name" ref={register} />
       {formErrors?.name && (
-        <p className="text-red-500 text-xs italic mt-1">
-          {formErrors.name.message}
-        </p>
+        <ErrorText message={formErrors.name.message} />
       )}
-    </div>
-    <div className="col-span-6 sm:col-span-3 mt-6">
-      <label
-        htmlFor="body"
-        className="block text-sm font-medium leading-5 text-gray-700"
-      >
-        Body
-      </label>
+    </FormGroup>
+    <FormGroup>
+      <FormGroupLabel>Body</FormGroupLabel>
       <Controller
         name="body"
         control={control}
         defaultValue=''
-        render={({ onChange }) => <WYSIWYGEditor editorContent={editorContent} onChange={onChange} className="mt-4" />}
+        render={({ onChange }) => <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />}
       />
       {formErrors?.body && (
-        <p className="text-red-500 text-xs italic mt-1">
-          {formErrors.body.message}
-        </p>
+        <ErrorText message={formErrors.body.message} />
       )}
-    </div>
-
+    </FormGroup>
     {apiError && (
-      <p className="text-red-500 text-xs italic mt-4 text-center">{apiError}</p>
+      <ErrorText message={apiError} />
     )}
 
-    <div className="my-4 flex justify-end">
-      <button disabled={isSubmitting} type="submit" className="px-5 py-2 border-green-500 border text-green-500 rounded transition duration-300 hover:bg-green-700 hover:text-white focus:outline-none">
-        {isSubmitting ? 'Please wait' : 'Save'}
-      </button>
-    </div>
+    <ButtonGroup>
+      <SaveBtn color="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Please wait' : 'Save'}</SaveBtn>
+    </ButtonGroup>
   </form>
 )
 

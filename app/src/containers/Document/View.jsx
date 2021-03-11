@@ -4,6 +4,7 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { useRouteMatch } from 'react-router-dom';
 
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
+import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
 
 const ViewDocument = () => {
   const match = useRouteMatch();
@@ -24,18 +25,20 @@ const ViewDocument = () => {
   }
 
   return (
-    <section>
+    <div>
       {loading && (
         <div>Loading...</div>
       )}
 
       {!loading && documentData?.getDocumentDetail && (
         <>
-          <h1 className="mb-4 font-bold">{documentData.getDocumentDetail.name}</h1>
-          <div className="preview" dangerouslySetInnerHTML={createMarkup(documentData.getDocumentDetail.body)}></div>
+          <TitlePage>{documentData.getDocumentDetail.name}</TitlePage>
+          <ContentPage>
+            <div dangerouslySetInnerHTML={createMarkup(documentData.getDocumentDetail.body)}></div>
+          </ContentPage>
         </>
       )}
-    </section>
+    </div>
   );
 }
 

@@ -26,7 +26,7 @@ export const Table = styled.table`
 
   tbody {
     tr {
-      &:nth-child(odd) {
+      &:nth-child(even) {
         background: ${COLORS.LIGHT_GRAY};
       }
 

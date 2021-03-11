@@ -4,11 +4,29 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import styled from 'styled-components';
 
 import DocumentForm from '@/components/Document/DocumentForm';
 import createDocumentQuery from '@/queries/document/createDocument';
 import updateDocumentQuery from '@/queries/document/updateDocument';
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
+import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
+import Button from '@/components/Common/Button/Button';
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+`;
+
+const TitlePageStyle = styled(TitlePage)`
+  margin-bottom: 0;
+`;
+
+const SaveBtn = styled(Button)`
+  width: 264px;
+`;
 
 const ActionDocumentSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -58,20 +76,27 @@ const ActionDocument = () => {
   }
 
   return (
-    <section>
-      {documentData?.getDocumentDetail?.name && (
-        <h1 className="mb-4 font-bold">{documentData.getDocumentDetail.name}</h1>
-      )}
-      <DocumentForm
-        editorContent={editorContent}
-        onSubmit={handleSubmit(onSubmit)} 
-        control={control} 
-        register={register} 
-        isSubmitting={isCreating || isUpdating}
-        formErrors={errors}
-        apiError={createError?.message || updateError?.message}
-      />
-    </section>
+    <div>
+      <Header>
+        <TitlePageStyle>
+          {documentData?.getDocumentDetail?.name ? documentData.getDocumentDetail.name : 'New Document'}
+        </TitlePageStyle>
+        <SaveBtn color="primary" onClick={handleSubmit(onSubmit)} disabled={isCreating || isUpdating}>
+          {isCreating || isUpdating ? 'Please wait' : 'Save'}
+        </SaveBtn>
+      </Header>
+      <ContentPage>
+        <DocumentForm
+          editorContent={editorContent}
+          onSubmit={handleSubmit(onSubmit)} 
+          control={control} 
+          register={register} 
+          isSubmitting={isCreating || isUpdating}
+          formErrors={errors}
+          apiError={createError?.message || updateError?.message}
+        />
+      </ContentPage>
+    </div>
   );
 }
 

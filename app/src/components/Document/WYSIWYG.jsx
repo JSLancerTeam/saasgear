@@ -1,11 +1,31 @@
 import React, { memo, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from 'html-to-draftjs';
-
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+import { COLORS } from "@/constants/style";
+
+const Wrapper = styled.div`
+  .editor-wrapper {
+    background: ${COLORS.LIGHT_GRAY};
+    border: 1px solid ${COLORS.WHITE_BLUE};
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .editor {
+    padding: 10px;
+  }
+
+  .toolbar {
+    border: none;
+    border-bottom: 1px solid ${COLORS.WHITE_BLUE};
+  }
+`;
 
 const WYSIWYGEditor = ({ editorContent = '', onChange, className }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -31,13 +51,15 @@ const WYSIWYGEditor = ({ editorContent = '', onChange, className }) => {
   }, [editorContent])
 
   return (
-    <Editor
-      editorState={editorState}
-      wrapperClassName={`p-4 border ${className}`}
-      editorClassName="bg-gray-100 p-4 border"
-      toolbarClassName="border"
-      onEditorStateChange={onEditorStateChange}
-    />
+    <Wrapper>
+      <Editor
+        editorState={editorState}
+        wrapperClassName="editor-wrapper"
+        editorClassName="editor"
+        toolbarClassName="toolbar"
+        onEditorStateChange={onEditorStateChange}
+      />
+    </Wrapper>
   );
 };
 

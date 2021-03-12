@@ -7,6 +7,8 @@ export default gql`
       email
       name
       isActive
+      company
+      position
       avatarUrl
       invitationToken
     }

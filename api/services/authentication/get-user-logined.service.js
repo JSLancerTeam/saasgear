@@ -18,6 +18,8 @@ export default async function getUserLogined(bearerToken) {
         email: userInfo.email,
         name: userInfo.name,
         isActive: userInfo.is_active,
+        position: userInfo.position,
+        company: userInfo.company,
         avatarUrl: userInfo.avatar_url,
         invitationToken: invitationToken ? invitationToken.token : null,
       };

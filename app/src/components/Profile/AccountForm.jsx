@@ -39,7 +39,7 @@ const DeleteLink = styled.div`
   cursor: pointer;
 `;
 
-function AccountForm({ onSubmit, register, errors, openPopupDeleteAccount }) {
+function AccountForm({ onSubmit, register, errors, loading, apiError, openPopupDeleteAccount }) {
 
   return (
     <Form onSubmit={onSubmit}>
@@ -61,10 +61,7 @@ function AccountForm({ onSubmit, register, errors, openPopupDeleteAccount }) {
       </FormGroupWrapper>
       <FormGroup>
         <FormGroupLabel>Email</FormGroupLabel>
-        <Input type="email" name="email" ref={register} />
-        {errors?.email && (
-          <ErrorText message={errors.email.message} />
-        )}
+        <Input type="email" name="email" ref={register} disabled />
       </FormGroup>
       <FormGroup>
         <FormGroupLabel>Company</FormGroupLabel>
@@ -82,8 +79,9 @@ function AccountForm({ onSubmit, register, errors, openPopupDeleteAccount }) {
       </FormGroup>
       <ButtonGroup>
         <DeleteLink onClick={openPopupDeleteAccount}>I &apos;d like to delete my account</DeleteLink>
-        <Button type="submit" color="primary">Save and Update</Button>
+        <Button type="submit" color="primary" disabled={loading}>{loading ? 'Please wait' : 'Save and Update'}</Button>
       </ButtonGroup>
+      {apiError && <ErrorText message={apiError} />}
     </Form>
   );
 }
@@ -92,6 +90,8 @@ AccountForm.propTypes = {
   onSubmit: PropsType.func.isRequired,
   register: PropsType.func.isRequired,
   errors: PropsType.object,
+  loading: PropsType.bool,
+  apiError: PropsType.string,
   openPopupDeleteAccount: PropsType.func,
 };
 

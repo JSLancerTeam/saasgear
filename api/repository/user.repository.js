@@ -15,6 +15,8 @@ export const usersColumns = {
   createAt: 'users.created_at',
   updatedAt: 'users.updated_at',
   isActive: 'users.is_active',
+  position: 'users.position',
+  company: 'users.company',
   avatarUrl: 'users.avatar_url',
   provider: 'users.provider',
   providerId: 'users.provider_id',

@@ -4,6 +4,10 @@ import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useMutation } from '@apollo/react-hooks';
+import { toast } from 'react-toastify';
+
+import updateProfileQuery from '@/queries/user/updateProfile';
 import AccountForm from '@/components/Profile/AccountForm';
 import AvatarIcon from '@/assets/images/avatar.png';
 import { COLORS } from '@/constants/style';
@@ -93,19 +97,38 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)`
 const AccountSchema = yup.object().shape({
   firstName: yup.string().required('First name is required'),
   lastName: yup.string().required('Last name is required'),
-  email: yup.string().required('Email is required').email('Email invalid'),
 });
 
 const InformationSetting = ({ user }) => {
+  const userName = user?.name?.split(' ');
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(AccountSchema),
-    defaultValues: user,
+    defaultValues: {
+      ...user,
+      firstName: userName?.[0],
+      lastName: userName?.[1],
+    },
   });
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModalDeleteAccount, setIsOpenModalDeleteAccount] = useState(false);
+  const [updateProfileMutation, { error, loading }] = useMutation(updateProfileQuery);
 
-  function onSubmit(data) {
-    console.log(data);
+  async function onSubmit(dataForm) {
+    const { firstName, lastName, company, position } = dataForm;
+    const params = {
+      name: `${firstName} ${lastName}`,
+      company,
+      position,
+    }
+
+    try {
+      const { data } = await updateProfileMutation({ variables: params });
+      if (data?.updateProfile) {
+        toast.success('Update profile successfully!')
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -128,7 +151,9 @@ const InformationSetting = ({ user }) => {
       <AccountForm
         onSubmit={handleSubmit(onSubmit)}
         register={register}
+        loading={loading}
         errors={errors}
+        apiError={error?.message}
         openPopupDeleteAccount={() => setIsOpenModalDeleteAccount(true)}
       />
       <DeleteAccount

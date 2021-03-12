@@ -22,6 +22,8 @@ export const UserSchema = gql`
     email: String!
     name: String!
     isActive: Boolean!
+    position: String
+    company: String
     avatarUrl: String
     invitationToken: String
   }
@@ -66,5 +68,7 @@ export const UserSchema = gql`
     resendEmail(type: SendMailType!): Boolean!
 
     deleteAccount: Boolean!
+
+    updateProfile(name: String, company: String, position: String): Boolean!
   }
 `;

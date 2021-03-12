@@ -10,6 +10,7 @@ import { changePasswordUser } from '~/services/authentication/change-password.se
 import { loginSocial } from '~/services/authentication/social-login.service';
 import { registerAccountBySocial } from '~/services/authentication/register-social.service';
 import { deleteUser } from '~/services/user/delete-user.service';
+import { updateProfile } from '~/services/user/update-user.service';
 import { normalizeEmail } from '~/helpers/string.helper';
 
 const resolvers = {
@@ -42,6 +43,10 @@ const resolvers = {
     deleteAccount: combineResolvers(
       isAuthenticated,
       (_, a, { user }) => deleteUser(user),
+    ),
+    updateProfile: combineResolvers(
+      isAuthenticated,
+      (_, { name, company, position }, { user }) => updateProfile(user.id, name, company, position),
     ),
   },
 };

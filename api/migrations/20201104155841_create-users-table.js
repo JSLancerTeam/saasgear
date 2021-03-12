@@ -5,6 +5,8 @@ export function up(knex) {
     t.string('email').notNullable();
     t.string('password');
     t.boolean('is_active').defaultTo(false);
+    t.string('position');
+    t.string('company');
     t.string('avatar_url');
     t.string('provider');
     t.string('provider_id', 30);

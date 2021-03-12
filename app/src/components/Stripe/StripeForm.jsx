@@ -7,14 +7,13 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
-import { SignUpFormContainer } from '@/components/Auth/AuthForm';
 import { COLORS } from '@/constants/style';
 import styled from 'styled-components';
 import Button from '@/components/Common/Button/Button';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
-const StripeFormContainer = styled(SignUpFormContainer)`
+const StripeFormContainer = styled.form`
   width: 300px;
 `
 const CardNumberEl = styled(CardNumberElement)`

@@ -42,7 +42,7 @@ const AdminLayout = ({ signout, user }) => (
               exact={route.exact}
             />
           ))}
-          <Redirect from="*" to="/" />
+          <Redirect from="*" to="/dashboard" />
         </Switch>
       </Content>
     </ContentWrapper>

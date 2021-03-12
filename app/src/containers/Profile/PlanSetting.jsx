@@ -17,6 +17,7 @@ import Toggle from '@/components/Common/Input/Toggle';
 import { ContentPage, DescContent, TitleContent } from '@/components/Layout/blockStyle';
 import { COLORS } from '@/constants/style';
 import ErrorText from '@/components/Common/ErrorText';
+import Button from '@/components/Common/Button/Button';
 
 const TitleContentStyle = styled(TitleContent)`
   margin-bottom: 4px;
@@ -44,9 +45,18 @@ const RightContent = styled.div`
   display: flex;
 `;
 
+const CurrentPlanWrapper = styled.div`
+  min-width: 300px;
+
+  button {
+    width: 100%;
+  }
+`;
+
 const PaymentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 300px;
 `;
 
 const SummaryTitle = styled.div`
@@ -196,17 +206,17 @@ const PlanSetting = () => {
         {!isEmpty(planChanged) && (
           <RightContent>
             {checkIsCurrentPlan(planChanged.id) ? (
-              <div>
+              <CurrentPlanWrapper>
                 {currentPlan.deletedAt ? (
                   <p>Plan will expire on <b>{dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm')}</b></p>
                 ) : (
-                  <button 
-                    type="button" 
+                  <Button
+                    color="primary"
                     disabled={isDeletingUserPlan}
                     onClick={handleCancelSubscription}
-                  >Cancel Subcription</button>
+                  >Cancel Subcription</Button>
                 )}
-              </div>
+              </CurrentPlanWrapper>
             ) : (
               <PaymentWrapper>
                 <SummaryTitle>Order Summary</SummaryTitle>
@@ -231,11 +241,11 @@ const PlanSetting = () => {
                     submitText={currentPlan && currentPlan.deletedAt && 'Change plan'}
                   />
                 ) : (
-                  <button 
-                    type="button"
+                  <Button 
+                    color="primary"
                     onClick={handleChangeSubcription}
                     disabled={isUpdatingUserPlan}
-                  >{isUpdatingUserPlan ? 'Please wait' : 'Change Subcription'}</button>
+                  >{isUpdatingUserPlan ? 'Please wait' : 'Change Subcription'}</Button>
                 )}
               </PaymentWrapper>
             )}

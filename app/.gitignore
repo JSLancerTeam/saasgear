@@ -69,5 +69,4 @@ yarn-debug.log*
 yarn-error.log*
 
 #src
-/src/assets/css/main.css
 .env

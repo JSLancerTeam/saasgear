@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SaaSgear",
+  "name": "ReactJS & NodeJS boilerplate to speed up your SaaS development",
   "icons": [
     {
       "src": "favicon.ico",

@@ -3,14 +3,15 @@ import { useForm } from 'react-hook-form';
 import PropsType from 'prop-types';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/react-hooks';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
-import { addTeamMember } from "@/features/admin/team";
-import InviteMemberForm from "@/components/Team/InviteMemberForm";
-import ListTeamMember from "@/components/Team/ListTeamMember";
-import InviteMemberQuery from "@/queries/teams/inviteMember";
+import { addTeamMember } from '@/features/admin/team';
+import InviteMemberForm from '@/components/Team/InviteMemberForm';
+import ListTeamMember from '@/components/Team/ListTeamMember';
+import InviteMemberQuery from '@/queries/teams/inviteMember';
 import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
 
 const ListInvitation = styled.div`
@@ -18,35 +19,42 @@ const ListInvitation = styled.div`
 `;
 
 const inviteMemberSchema = yup.object().shape({
-  emailMember: yup.string().required('Email is required').email('Email invalid')
+  emailMember: yup
+    .string()
+    .required('Email is required')
+    .email('Email invalid'),
 });
-
 
 function InviteMember({ teamMembers, alias }) {
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(inviteMemberSchema),
   });
-  const dispatch = useDispatch()
-  const [InviteMemberMutation, { loading, error }] = useMutation(InviteMemberQuery);
+  const dispatch = useDispatch();
+  const [InviteMemberMutation, { loading, error }] = useMutation(
+    InviteMemberQuery,
+  );
 
   async function onSubmit({ emailMember }) {
     try {
       const { data } = await InviteMemberMutation({
         variables: {
           email: emailMember,
-          alias
-        }
-      })
+          alias,
+        },
+      });
       if (data?.inviteMember) {
-        const member = data.inviteMember
-        dispatch(addTeamMember({ teamID: alias, data: [member] }))
+        const member = data.inviteMember;
+        dispatch(addTeamMember({ teamID: alias, data: [member] }));
       }
     } catch (e) {
-      console.log(e)
+      console.log(error);
+      setTimeout(() => console.log(error), 50);
+      toast.error(e.message);
+      console.log(JSON.stringify(e, null, 2));
     }
   }
   function onActionInlistMember(params) {
-    console.log(params)
+    console.log(params);
   }
 
   return (
@@ -59,10 +67,15 @@ function InviteMember({ teamMembers, alias }) {
         isSubmiting={loading}
         apiError={error?.message}
       />
-      <ListInvitation>
-        <TitleContent>Pending Invitations</TitleContent>
-        <ListTeamMember handleAction={onActionInlistMember} teamMembers={teamMembers} />
-      </ListInvitation>
+      {teamMembers && teamMembers.length > 0 && (
+        <ListInvitation>
+          <TitleContent>Pending Invitations</TitleContent>
+          <ListTeamMember
+            handleAction={onActionInlistMember}
+            teamMembers={teamMembers}
+          />
+        </ListInvitation>
+      )}
     </ContentPage>
   );
 }
@@ -72,9 +85,9 @@ InviteMember.propTypes = {
   teamMembers: PropsType.arrayOf(
     PropsType.shape({
       teamName: PropsType.string,
-      teamID: PropsType.string
-    })
+      teamID: PropsType.string,
+    }),
   ),
-}
+};
 
 export default InviteMember;

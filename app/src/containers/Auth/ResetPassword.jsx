@@ -25,6 +25,7 @@ import squareRadiusTopPrimarySmall from '@/assets/images/svg/square-radius-top-p
 import squareGrid from '@/assets/images/svg/square-grid.svg';
 import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';
 import circleSmall from '@/assets/images/svg/circle-small.svg';
+import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ResetPasswordSchema = yup.object().shape({
   password: yup.string().required('Password is required'),
@@ -35,6 +36,7 @@ const ResetPasswordSchema = yup.object().shape({
 });
 
 function ResetPassword() {
+  useDocumentHeader({ title: 'Reset password' });
   const query = getQueryParam();
   const history = useHistory();
   const token = query.get('token');
@@ -77,19 +79,19 @@ function ResetPassword() {
             <img src={squareRadiusTop} alt="" />
           </SquareIconTop>
           <SmallSquareBottom>
-            <img src={squareRadiusTopPrimary} alt=""/>
+            <img src={squareRadiusTopPrimary} alt="" />
           </SmallSquareBottom>
           <SmallSquareTop>
-            <img src={squareRadiusTopPrimarySmall} alt=""/>
+            <img src={squareRadiusTopPrimarySmall} alt="" />
           </SmallSquareTop>
           <SmallSquareGrid>
-            <img src={squareGrid} alt=""/>
+            <img src={squareGrid} alt="" />
           </SmallSquareGrid>
           <SquareIconBottom>
-            <img src={squareRadiusTopBig} alt=""/>
+            <img src={squareRadiusTopBig} alt="" />
           </SquareIconBottom>
           <CircleIcon>
-            <img src={circleSmall} alt=""/>
+            <img src={circleSmall} alt="" />
           </CircleIcon>
         </ForgotPasswordContainer>
       </ForgotPasswordWrapper>

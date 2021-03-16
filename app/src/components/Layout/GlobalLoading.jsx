@@ -9,19 +9,19 @@ const loading = keyframes`
 	}
 
 	100% {
-		width: 70%
+		width: 80%
 	}
 `;
 
 const completing = keyframes`
   100% {
-    width: 70%;
+    width: 80%;
   }
 `;
 
 const completed = keyframes`
   0% {
-		width: 70%;
+		width: 80%;
 	}
 
 	100% {

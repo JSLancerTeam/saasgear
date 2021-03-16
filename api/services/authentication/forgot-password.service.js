@@ -14,7 +14,7 @@ export async function forgotPasswordUser(email) {
   try {
     const user = await findUser({ email });
     if (!user || !user.id) {
-      return new ApolloError('Can not find any user');
+      return true;
     }
     const session = await getUserByIdAndJoinUserToken(user.id, SEND_MAIL_TYPE.FORGOT_PASSWORD);
     const tokenGenerated = await generateRandomKey();

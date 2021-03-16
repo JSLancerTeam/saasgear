@@ -22,12 +22,14 @@ import squareRadiusTopPrimarySmall from '@/assets/images/svg/square-radius-top-p
 import squareGrid from '@/assets/images/svg/square-grid.svg';
 import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';
 import circleSmall from '@/assets/images/svg/circle-small.svg';
+import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ForgotPasswordSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Email is invalid'),
 });
 
 function ForgotPassword() {
+  useDocumentHeader({ title: 'Forget password ' });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(ForgotPasswordSchema),

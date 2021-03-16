@@ -4,11 +4,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 import SignInForm from '@/components/Auth/SignInForm';
 import { JWT_STORAGE_KEY } from '@/constants';
 import loginQuery from '@/queries/auth/login';
-import { SignUpFormWrapper, SignUpFormLeft, SignUpAds } from '@/components/Auth/AuthForm';
+import {
+  SignUpFormWrapper,
+  SignUpFormLeft,
+  SignUpAds,
+} from '@/components/Auth/AuthForm';
 import AuthAdsArea from '@/components/Auth/AuthAds';
+import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignInSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Email invalid'),
@@ -16,6 +23,7 @@ const SignInSchema = yup.object().shape({
 });
 
 function SignIn() {
+  useDocumentHeader({ title: 'Sign In' });
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignInSchema),
   });
@@ -37,20 +45,22 @@ function SignIn() {
   }
 
   return (
-    <SignUpFormWrapper>
-      <SignUpFormLeft>
-        <SignInForm
-          onSubmit={handleSubmit(onSubmit)}
-          register={register}
-          formErrors={formErrors}
-          apiError={error?.message}
-          isSubmitting={loading}
-        />
-      </SignUpFormLeft>
-      <SignUpAds>
-        <AuthAdsArea />
-      </SignUpAds>
-    </SignUpFormWrapper>
+    <>
+      <SignUpFormWrapper>
+        <SignUpFormLeft>
+          <SignInForm
+            onSubmit={handleSubmit(onSubmit)}
+            register={register}
+            formErrors={formErrors}
+            apiError={error?.message}
+            isSubmitting={loading}
+          />
+        </SignUpFormLeft>
+        <SignUpAds>
+          <AuthAdsArea />
+        </SignUpAds>
+      </SignUpFormWrapper>
+    </>
   );
 }
 

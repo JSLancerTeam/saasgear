@@ -86,13 +86,16 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
   }
 
   try {
-    let member = null;
     const team = await getTeam({ alias });
     if (!team) {
       throw new ApolloError('Team not found');
     }
 
-    member = await findUser({ email: inviteeEmail });
+    if (user.email === inviteeEmail) {
+      throw new ApolloError('Can\'t invite yourself');
+    }
+
+    const member = await findUser({ email: inviteeEmail });
 
     const token = await generateRandomKey();
     const subject = 'Team invitation';
@@ -133,6 +136,6 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
     };
   } catch (error) {
     logger.error(error);
-    throw new ApolloError('Something went wrong!');
+    throw new ApolloError(error);
   }
 }

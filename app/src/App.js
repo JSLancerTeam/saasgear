@@ -9,7 +9,7 @@ import PrivateRoute from '@/routes/PrivateRoute';
 import AdminLayout from '@/containers/Layout/Admin';
 import VerifyEmail from '@/containers/VerifyEmail';
 import Social from '@/containers/Social';
-import AcceptInvitation from '@/containers/Teams/AcceptInvitation'
+import AcceptInvitation from '@/containers/Teams/AcceptInvitation';
 import { client } from '@/config/apollo';
 import GlobalLoading from '@/components/Layout/GlobalLoading';
 import GlobalStyle from '@/theme/globalStyles';
@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { error } = useSelector((state) => state.user);
+  document.title = 'SaaSgear';
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -27,13 +28,16 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <GlobalStyle />
-        {/* <GlobalLoading /> */}
+        <GlobalLoading />
         <ToastContainer />
         <Switch>
           <Route path="/auth" component={Auth} />
           <Route path="/verify-email" component={VerifyEmail} />
           <Route path="/social/:provider/callback" component={Social} />
-          <Route path="/teams/invitation/:invitationToken" component={AcceptInvitation} />
+          <Route
+            path="/teams/invitation/:invitationToken"
+            component={AcceptInvitation}
+          />
           <PrivateRoute render={(props) => <AdminLayout {...props} />} />
           <Redirect from="*" to="/" />
         </Switch>

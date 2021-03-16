@@ -24,7 +24,6 @@ const Content = styled.div`
   overflow-y: auto;
   padding: 32px 24px;
   max-height: calc(100vh - 80px);
-  overflow-y: auto;
 `;
 
 const AdminLayout = ({ signout, user }) => (

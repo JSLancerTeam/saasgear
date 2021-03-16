@@ -12,12 +12,11 @@ export async function loginGithub(code) {
   const { access_token, token_type } = response.data;
   const userInfoResponse = await getProfile(`${token_type} ${access_token}`);
   const { name, email, avatar_url, id } = userInfoResponse.data;
-  if (email) {
-    const userByEmail = await findUser({ email });
-    if (userByEmail?.provider === SOCIAL_PROVIDER.github && parseInt(userByEmail?.provider_id, 10) === id) {
-      return { token: sign({ email, name }) };
-    }
-    if (userByEmail) {
+
+  const user = await findUser({ provider_id: id, provider: SOCIAL_PROVIDER.github });
+
+  if (user) {
+    if (!email || (email && user.email === email)) {
       return {
         user: {
           name,
@@ -28,21 +27,6 @@ export async function loginGithub(code) {
         },
       };
     }
-
-    await createUser({
-      provider: SOCIAL_PROVIDER.github,
-      email,
-      name,
-      provider_id: id,
-      avatar_url,
-      is_active: true,
-    });
-
-    return { token: sign({ email, name }) };
-  }
-
-  const user = await findUser({ provider_id: id, provider: SOCIAL_PROVIDER.github });
-  if (user) {
     return {
       token: sign({
         email: user.email,
@@ -51,15 +35,26 @@ export async function loginGithub(code) {
       }),
     };
   }
-  return {
-    user: {
-      name,
-      email,
-      avatarUrl: avatar_url,
-      providerId: id,
-      provider: SOCIAL_PROVIDER.github,
-    },
-  };
+  if (!email) {
+    return {
+      user: {
+        name,
+        email,
+        avatarUrl: avatar_url,
+        providerId: id,
+        provider: SOCIAL_PROVIDER.github,
+      },
+    };
+  }
+  await createUser({
+    provider: SOCIAL_PROVIDER.github,
+    email,
+    name,
+    provider_id: id,
+    avatar_url,
+    is_active: true,
+  });
+  return { token: sign({ email, name }) };
 }
 
 async function getAccessTokenFromGithub(code) {

@@ -51,7 +51,9 @@ export async function updateTeam(teamId, data, transaction = null) {
  *
  */
 export async function getAllTeam({ teamId, userId }) {
-  const condition = {};
+  const condition = {
+    [teamMembersColumns.status]: 'active',
+  };
   if (teamId) condition[teamMembersColumns.teamId] = teamId;
   if (userId) condition[teamMembersColumns.userId] = userId;
 

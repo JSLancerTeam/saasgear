@@ -56,13 +56,10 @@ export async function getDetailTeamInvitation(token) {
     });
 }
 
-export async function updateTeamInvitationByToken(token, data) {
-  return database(TABLE).where({ token }).update(data);
+export async function updateTeamInvitation(condition, data, transaction = null) {
+  const query = database(TABLE).where(condition).update(data);
+  if (!transaction) {
+    return query;
+  }
+  return query.transacting(transaction);
 }
-// select * from team_invitations
-// inner join teams
-// on teams.id = team_invitations.team_id
-// inner join users on users.id = team_invitations.invited_by
-// where team_invitations.token = '3235f68696b46196c00e5aa359273c909613b3514ce9fe819f594f0033421a6c'
-
-// AND(team_invitations.token = '3235f68696b46196c00e5aa359273c909613b3514ce9fe819f594f0033421a6c')

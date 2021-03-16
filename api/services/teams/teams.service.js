@@ -2,15 +2,15 @@ import { ApolloError } from 'apollo-server-express';
 import dayjs from 'dayjs';
 
 import { getAllTeam, createNewTeamAndMember, getTeam } from '~/repository/team.repository';
-import { createTeamInvitation, getTeamInvitation, VALID_PERIOD_DAYS } from '~/repository/team_invitations.repository';
+import { createTeamInvitation, VALID_PERIOD_DAYS } from '~/repository/team_invitations.repository';
 import formatDateDB from '~/utils/format-date-db';
 import compileEmailTemplate from '~/helpers/compile-email-template';
 import generateRandomKey from '~/helpers/genarateRandomkey';
 import { normalizeEmail, stringToSlug } from '~/helpers/string.helper';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
-import { createMemberAndInviteToken, getListTeamMemberByAliasTeam } from '../../repository/team_members.repository';
-import { findUser } from '../../repository/user.repository';
+import { createMemberAndInviteToken, getListTeamMemberByAliasTeam, reInviteMemberHasDecline } from '../../repository/team_members.repository';
+import { getUserAndTeamInfo } from '../../repository/user.repository';
 
 /**
  * Function to get all team
@@ -38,6 +38,7 @@ export async function findTeamByAlias(alias) {
     email: member.email,
     status: member.status,
     isOwner: member.userId === member.owner,
+    teamId: member.teamId,
   }));
 }
 
@@ -88,7 +89,10 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
       throw new ApolloError('Team not found');
     }
 
-    member = await findUser({ email: inviteeEmail });
+    member = await getUserAndTeamInfo({ email: inviteeEmail });
+    if (member.id === team.created_by) {
+      throw new ApolloError('Invalid Email');
+    }
 
     const token = await generateRandomKey();
     const subject = 'Team invitation';
@@ -96,19 +100,41 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
       fileName: 'inviteTeamMember.mjml',
       data: {
         teamName: team.name,
-        url: `${process.env.FRONTEND_URL}/teams/invitation/{token}`,
+        url: `${process.env.FRONTEND_URL}/teams/invitation/${token}`,
       },
     });
-
     const queries = [sendMail(normalizeEmail(inviteeEmail), subject, template)];
     if (member) {
-      queries.push(createMemberAndInviteToken({
-        email: inviteeEmail,
-        token,
-        teamId: team.id,
-        memberId: member.id,
-        userId: user.id,
-      }));
+      switch (member.teamStatus) {
+        case 'decline':
+          queries.push(reInviteMemberHasDecline({
+            teamId: team.id,
+            memberId: member.id,
+            email: member.email,
+            token,
+            userId: user.id,
+          }));
+          break;
+
+        case 'active':
+          throw new ApolloError('Account have been actived');
+
+        case 'inactive':
+          throw new ApolloError('Account has deactived');
+
+        case 'pending':
+          throw new ApolloError('Account have been invited');
+
+        default:
+          queries.push(createMemberAndInviteToken({
+            email: inviteeEmail,
+            token,
+            teamId: team.id,
+            memberId: member.id,
+            userId: user.id,
+          }));
+          break;
+      }
     } else {
       queries.push(createTeamInvitation({
         email: inviteeEmail,
@@ -129,6 +155,6 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
     };
   } catch (error) {
     logger.error(error);
-    throw new ApolloError('Something went wrong!');
+    throw new ApolloError(error);
   }
 }

@@ -18,7 +18,10 @@ export default function ListTeamMember({ teamMembers, handleAction }) {
           </td>
           {handleAction && <td width="20%">
             <div className="flex">
-              <button type="button" className="mr-4 hover:underline hover:text-blue-800 cursor-pointer text-blue-500">Cancle</button>
+              <button
+                type="button"
+                onClick={() => handleAction({ type: 'cancel', member: it })}
+                className="mr-4 hover:underline hover:text-blue-800 cursor-pointer text-blue-500">Cancle</button>
               <button type="button" className="hover:underline hover:text-blue-800 cursor-pointer text-blue-500">Invitation</button>
             </div>
           </td>}

@@ -8,6 +8,7 @@ export default gql`
       email
       isOwner
       status
+      teamId
     }
   }
 `;

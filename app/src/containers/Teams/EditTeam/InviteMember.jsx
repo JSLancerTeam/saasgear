@@ -6,10 +6,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from "react-redux";
 import { useMutation } from '@apollo/react-hooks';
 
-import { addTeamMember } from "@/features/admin/team";
+import { addTeamMember, removeTeamMember } from "@/features/admin/team";
 import InviteMemberForm from "@/components/Team/InviteMemberForm";
 import ListTeamMember from "@/components/Team/ListTeamMember";
 import InviteMemberQuery from "@/queries/teams/inviteMember";
+import CancelInvitationQuery from "@/queries/teams/cancelInvitation";
 
 InviteMember.propTypes = {
   alias: PropsType.string.isRequired,
@@ -32,6 +33,7 @@ function InviteMember({ teamMembers, alias }) {
   });
   const dispatch = useDispatch()
   const [InviteMemberMutation, { loading, error }] = useMutation(InviteMemberQuery);
+  const [CancelInvitationMutation] = useMutation(CancelInvitationQuery);
 
   async function onSubmit({ emailMember }) {
     try {
@@ -49,8 +51,11 @@ function InviteMember({ teamMembers, alias }) {
       console.log(e)
     }
   }
-  function onActionInlistMember(params) {
-    console.log(params)
+  async function onActionInlistMember({ type, member }) {
+    if (type === 'cancel') {
+      await CancelInvitationMutation({ variables: { userId: member.userId, teamId: member.teamId } })
+      dispatch(removeTeamMember({ teamId: alias, memberId: member.userId }))
+    }
 
   }
 
@@ -61,6 +66,8 @@ function InviteMember({ teamMembers, alias }) {
         register={register}
         onSubmit={handleSubmit(onSubmit)}
         formErrors={formErrors}
+        apiError={error?.message}
+        loading={loading}
       />
       <div className="mt-4">
         <div className="text-xl mb-2">Pending Invitations</div>

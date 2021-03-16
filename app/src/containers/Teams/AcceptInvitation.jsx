@@ -36,9 +36,9 @@ function AcceptInvitation() {
   }, [data, error, loading])
 
 
-  async function handleUserJoinTeam() {
+  async function handleUserJoinTeam(type) {
     try {
-      await joinTeam({ variables: { token: invitationToken } })
+      await joinTeam({ variables: { token: invitationToken, type } })
       history.replace('/')
     } catch (e) {
       console.error(e)
@@ -55,13 +55,22 @@ function AcceptInvitation() {
           <div className="text-gray-400 mb-4">
             You&apos; ve been invitated to join <strong>{teamInfo?.teamName}</strong> by <strong>{teamInfo?.owner}</strong>
           </div>
-          <button
-            type="button"
-            onClick={handleUserJoinTeam}
-            className="group flex items-center justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-          >
-            Accept
-          </button>
+          <div className="flex">
+            <button
+              type="button"
+              onClick={() => handleUserJoinTeam('accept')}
+              className="group flex items-center justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+            >
+              Accept
+            </button>
+            <button
+              type="button"
+              onClick={() => handleUserJoinTeam('decline')}
+              className="group flex items-center justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-indigo active:bg-red-700 transition duration-150 ease-in-out ml-2"
+            >
+              Decline
+            </button>
+          </div>
         </div>
       </div>
     </div>

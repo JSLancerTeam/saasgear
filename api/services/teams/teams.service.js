@@ -81,6 +81,10 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
 
   // // TODO: Find team member by email. Need to do later when check whether this email belong to any team's member
 
+  if (inviteeEmail === user.email) {
+    throw new ApolloError('Email invalid');
+  }
+
   try {
     let member = null;
     const team = await getTeam({ alias });

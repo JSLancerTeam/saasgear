@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 import updateProfileQuery from '@/queries/user/updateProfile';
 import AccountForm from '@/components/Profile/AccountForm';
-import AvatarIcon from '@/assets/images/avatar.png';
+import AvatarIcon from '@/assets/images/avatar.jpg';
 import { COLORS } from '@/constants/style';
 import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-down-24.svg';
 import DeleteAccount from './DeleteAccount';

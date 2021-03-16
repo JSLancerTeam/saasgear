@@ -29,6 +29,7 @@ function AdminLayoutContainer() {
 
   function signout() {
     localStorage.removeItem(JWT_STORAGE_KEY);
+    history.push('/auth/signin');
   }
 
   return <AdminLayout signout={signout} user={data?.profileUser} />;

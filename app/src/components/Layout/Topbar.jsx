@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Avatar from '@/assets/images/avatar.png';
+import Avatar from '@/assets/images/avatar.jpg';
 import { COLORS } from '@/constants/style';
 import { ReactComponent as ArrowDownIcon } from '@/assets/images/svg/arrow-down-18.svg';
 import Input from '../Common/Input/Input';
@@ -41,6 +41,7 @@ const AvatarWrapper = styled.div`
   align-items: center;
 
   img {
+    width: 100%;
     border-radius: 100%;
   }
 `;
@@ -84,11 +85,11 @@ const ProfileList = styled.ul`
     content: '';
     display: block;  
     position: absolute;
-    left: 36px;
+    left: 38px;
     bottom: 100%;
     width: 0;
     height: 0;
-    border: 12px solid transparent;
+    border: 10px solid transparent;
     border-bottom-color: #FFFFFF;
   }
 `;
@@ -124,6 +125,7 @@ const SignoutBtn = styled.button`
   border: none;
   outline: none;
   background: transparent;
+  cursor: pointer;
 `;
 
 const Topbar = ({ signout, user }) => {

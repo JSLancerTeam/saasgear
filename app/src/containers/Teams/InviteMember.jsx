@@ -56,6 +56,8 @@ function InviteMember({ teamMembers, alias }) {
         register={register}
         onSubmit={handleSubmit(onSubmit)}
         formErrors={formErrors}
+        isSubmiting={loading}
+        apiError={error?.message}
       />
       <ListInvitation>
         <TitleContent>Pending Invitations</TitleContent>

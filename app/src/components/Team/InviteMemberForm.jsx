@@ -38,13 +38,13 @@ const InviteBtn = styled(Button)`
   }
 `;
 
-function InviteMemberForm({ onSubmit, register, formErrors }) {
+function InviteMemberForm({ onSubmit, register, formErrors, apiError, isSubmiting }) {
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
         <FormControlStyle>
           <InviteInput type="text" placeholder="david@jslancer.com" name="emailMember" ref={register} />
-          <InviteBtn type="submit" color="primary">
+          <InviteBtn type="submit" color="primary" disabled={isSubmiting}>
             <EnvelopeIcon />
             <span>Invite</span>
           </InviteBtn>
@@ -52,6 +52,7 @@ function InviteMemberForm({ onSubmit, register, formErrors }) {
         {formErrors?.emailMember && (
           <ErrorText message={formErrors.emailMember.message} />
         )}
+        {apiError && <ErrorText message={apiError} />}
       </FormGroup>
     </form>
   );
@@ -61,6 +62,8 @@ InviteMemberForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   formErrors: PropTypes.object,
+  apiError: PropTypes.string,
+  isSubmiting: PropTypes.bool,
 };
 
 export default InviteMemberForm;

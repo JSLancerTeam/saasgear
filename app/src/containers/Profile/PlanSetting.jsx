@@ -14,7 +14,7 @@ import getUserPlanQuery from '@/queries/userPlans/getUserPlan';
 import { setUserPlan } from '@/features/auth/userPlan';
 import Plans from '@/components/Plans';
 import Toggle from '@/components/Common/Input/Toggle';
-import { ContentPage, DescContent, TitleContent } from '@/components/Layout/blockStyle';
+import { ContentPage, Description, TitleContent } from '@/components/Layout/blockStyle';
 import { COLORS } from '@/constants/style';
 import ErrorText from '@/components/Common/ErrorText';
 import Button from '@/components/Common/Button/Button';
@@ -129,7 +129,7 @@ const PlanSetting = () => {
   const [createUserPlanMutation, { error: errorCreate, loading: isCreatingUserPlan }] = useMutation(createUserPlanQuery);
   const [fetchUserPlan, { data: userPlanData }] = useLazyQuery(getUserPlanQuery);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     if (!isEmpty(currentPlan)) {
       setSelectedPlan(currentPlan.productType);
@@ -189,7 +189,7 @@ const PlanSetting = () => {
   return (
     <ContentPage>
       <TitleContentStyle>Plan</TitleContentStyle>
-      <DescContent>This is your subscription</DescContent>
+      <Description>This is your subscription</Description>
       <Content>
         <LeftContent>
           <ToggleYearly>
@@ -235,13 +235,13 @@ const PlanSetting = () => {
                   </AmountItem>
                 </AmountList>
                 {(isEmpty(currentPlan) || (currentPlan && currentPlan.deletedAt)) ? (
-                  <StripeContainer 
+                  <StripeContainer
                     onSubmitSuccess={createPaymentMethodSuccess}
                     apiLoading={isCreatingUserPlan}
                     submitText={currentPlan && currentPlan.deletedAt && 'Change plan'}
                   />
                 ) : (
-                  <Button 
+                  <Button
                     color="primary"
                     onClick={handleChangeSubcription}
                     disabled={isUpdatingUserPlan}

@@ -26,7 +26,7 @@ export const TitleContent = styled.h5`
   margin-bottom: 32px;
 `;
 
-export const DescContent = styled.p`
+export const Description = styled.p`
   font-size: 16px;
   line-height: 26px;
   color: ${COLORS.WHITE_GRAY};

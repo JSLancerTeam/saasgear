@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { ContentPage, DescContent, TitleContent, TitlePage } from '@/components/Layout/blockStyle';
+import { ContentPage, Description, TitleContent, TitlePage } from '@/components/Layout/blockStyle';
 import InformationSetting from './InformationSetting';
 import PasswordSetting from './PasswordSetting';
 import PlanSetting from './PlanSetting';
@@ -24,7 +24,7 @@ const Profile = () => {
         <>
           <ContentPageStyle>
             <TitleContentStyle>Account</TitleContentStyle>
-            <DescContent>This information can be edited from your profile page</DescContent>
+            <Description>This information can be edited from your profile page</Description>
             <InformationSetting user={data} />
             <PasswordSetting />
           </ContentPageStyle>

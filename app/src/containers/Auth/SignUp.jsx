@@ -14,8 +14,9 @@ import { JWT_STORAGE_KEY } from '@/constants';
 import {
   SignUpFormWrapper,
   SignUpFormLeft,
-  SignUpAds
+  SignUpAds,
 } from '@/components/Auth/AuthForm';
+import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -31,6 +32,7 @@ const SignUpSchema = yup.object().shape({
 });
 
 const SignUp = () => {
+  useDocumentHeader({ title: 'Sign Up' });
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignUpSchema),
     shouldUnregister: false,
@@ -65,7 +67,7 @@ const SignUp = () => {
       paymentMethodToken: token,
       planName,
       billingType: query.get('isYearly') === '1' ? 'YEARLY' : 'MONTHLY',
-    }
+    };
     signup(data);
   }
 
@@ -74,30 +76,33 @@ const SignUp = () => {
   }
 
   return (
-    <SignUpFormWrapper>
-      <SignUpFormLeft>
-        {showStripeForm ? (
-          <StripeContainer 
-            onSubmitSuccess={createPaymentMethodSuccess}
-            onGoBack={handleGoBack}
-            apiLoading={loading} 
-            apiError={error?.message}
-          />
-        ) : (
-          <SignUpForm
-            onSubmit={handleSubmit(onSubmit)}
-            register={register}
-            formErrors={formErrors}
-            apiError={error?.message}
-            isSubmitting={loading}
-            submitText={planName ? 'Next' : 'Sign up'} />
-        )}
-      </SignUpFormLeft>
-      <SignUpAds>
-        <AuthAdsArea />
-      </SignUpAds>
-    </SignUpFormWrapper>
+    <>
+      <SignUpFormWrapper>
+        <SignUpFormLeft>
+          {showStripeForm ? (
+            <StripeContainer
+              onSubmitSuccess={createPaymentMethodSuccess}
+              onGoBack={handleGoBack}
+              apiLoading={loading}
+              apiError={error?.message}
+            />
+          ) : (
+            <SignUpForm
+              onSubmit={handleSubmit(onSubmit)}
+              register={register}
+              formErrors={formErrors}
+              apiError={error?.message}
+              isSubmitting={loading}
+              submitText={planName ? 'Next' : 'Sign up'}
+            />
+          )}
+        </SignUpFormLeft>
+        <SignUpAds>
+          <AuthAdsArea />
+        </SignUpAds>
+      </SignUpFormWrapper>
+    </>
   );
-}
+};
 
 export default SignUp;

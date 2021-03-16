@@ -24,7 +24,6 @@ const InviteBtn = styled(Button)`
   display: flex;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  display: flex;
   align-items: center;
 
   svg {

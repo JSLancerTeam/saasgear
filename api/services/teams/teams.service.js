@@ -72,23 +72,17 @@ export async function createTeam(user, teamName, teamAlias) {
  * @param string inviteeEmail Email of who you want to send invitation to
  */
 export async function inviteTeamMember(user, alias, inviteeEmail) {
-  // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
-  // const invitation = await getTeamInvitation(inviteeEmail, teamId, 1);
-
-  // if (invitation) {
-  //   throw new ApolloError(`You have send invitation to ${inviteeEmail} at ${formatDateDB(invitation.valid_until)} and it is still active`);
-  // }
-
-  // // TODO: Find team member by email. Need to do later when check whether this email belong to any team's member
-
   try {
-    let member = null;
     const team = await getTeam({ alias });
     if (!team) {
       throw new ApolloError('Team not found');
     }
 
-    member = await findUser({ email: inviteeEmail });
+    if (user.email === inviteeEmail) {
+      throw new ApolloError('Can\'t invite yourself');
+    }
+
+    const member = await findUser({ email: inviteeEmail });
 
     const token = await generateRandomKey();
     const subject = 'Team invitation';
@@ -129,6 +123,6 @@ export async function inviteTeamMember(user, alias, inviteeEmail) {
     };
   } catch (error) {
     logger.error(error);
-    throw new ApolloError('Something went wrong!');
+    throw new ApolloError(error);
   }
 }

@@ -72,19 +72,6 @@ export async function createTeam(user, teamName, teamAlias) {
  * @param string inviteeEmail Email of who you want to send invitation to
  */
 export async function inviteTeamMember(user, alias, inviteeEmail) {
-  // TODO: Hardcode here created_by is 1, later need to take from user when implement frontend
-  // const invitation = await getTeamInvitation(inviteeEmail, teamId, 1);
-
-  // if (invitation) {
-  //   throw new ApolloError(`You have send invitation to ${inviteeEmail} at ${formatDateDB(invitation.valid_until)} and it is still active`);
-  // }
-
-  // // TODO: Find team member by email. Need to do later when check whether this email belong to any team's member
-
-  if (inviteeEmail === user.email) {
-    throw new ApolloError('Email invalid');
-  }
-
   try {
     const team = await getTeam({ alias });
     if (!team) {

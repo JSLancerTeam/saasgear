@@ -35,20 +35,19 @@ Introduction: https://www.notion.so/Saas-Gear-9f791fb27d3b440584e4a5408e19c8d4
 
 ## Set up
 ### 1. Create env
-  + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
+  + You should create `.env` in `app` and `api` folder and copy content from `.env.example` file in each.
 ### 2. Run migrations
   + `npm run db:migrate`
   + `npm run db:seed`
-  + `npm run db:create-products`
 ### 3. Start scripts
-  + For backend: `npm run dev`
-  + For app: `npm run start`
-  + For landing: `npm run dev`
+  + For backend:
+    `cd api`
+    `npm run dev`
+  + For app:
+    `cd app`
+    `npm run start`
 ### 4. Run in browser
-  + Open your browser and type
-    + For Front-end: `http://localhost:3000`
-    + For Back-end: `http://localhost:5000`
-    + For Landing page: `http://localhost:4000`
+  + Open your browser and go `http://localhost:3000`
 
 
 ## License

@@ -9,7 +9,6 @@ Introduction: https://www.notion.so/Saas-Gear-9f791fb27d3b440584e4a5408e19c8d4
 ### Front-end
 - nextjs
 - react
-- tailwind
 - styled-component
 - react-apollo
 - react-router-dom

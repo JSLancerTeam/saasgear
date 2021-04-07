@@ -4,10 +4,10 @@ import PropsType from 'prop-types';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
-import FormControl from '@/components/Common/FormControl/FormControl';
+import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';
 import ErrorText from '@/components/Common/ErrorText';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 import GoBack from '@/components/Common/GoBack';
 import {
   ForgotPasswordText,

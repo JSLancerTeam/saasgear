@@ -17,7 +17,7 @@ import Toggle from '@/components/Common/Input/Toggle';
 import { ContentPage, Description, TitleContent } from '@/components/Layout/blockStyle';
 import { COLORS } from '@/constants/style';
 import ErrorText from '@/components/Common/ErrorText';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 
 const TitleContentStyle = styled(TitleContent)`
   margin-bottom: 4px;

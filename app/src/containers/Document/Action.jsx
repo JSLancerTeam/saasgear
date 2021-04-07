@@ -11,7 +11,7 @@ import createDocumentQuery from '@/queries/document/createDocument';
 import updateDocumentQuery from '@/queries/document/updateDocument';
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
 import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 
 const Header = styled.div`
   display: flex;

@@ -7,7 +7,7 @@ import DocumentTable from '@/components/Document/DocumentTable';
 import getDocumentListQuery from '@/queries/document/getDocumentList';
 import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
 import Input from '@/components/Common/Input/Input';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 
 const Header = styled.div`
   display: flex;

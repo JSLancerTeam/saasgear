@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { ContentPage, TitleContent } from '../Layout/blockStyle';
 import { Table } from '../Common/Table';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 
 const ActionTd = styled.td`
   width: 20%;

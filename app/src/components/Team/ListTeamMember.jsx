@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropsType from 'prop-types';
 import { Table } from '../Common/Table';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 
 const ActionTd = styled.td`
   width: 20%;

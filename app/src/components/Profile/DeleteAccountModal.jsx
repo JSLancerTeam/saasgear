@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { COLORS } from '@/constants/style';
 import Modal, { ModalHeader, ModalContent, ModalFooter } from '../Common/Modal';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import FormGroup from '../Common/FormGroup';
 import Input from '../Common/Input/Input';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { COLORS } from '@/constants/style';
 import { ReactComponent as CheckCircleIcon } from '@/assets/images/svg/check-circle.svg';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 
 const Wrapper = styled.div`
   display: flex;

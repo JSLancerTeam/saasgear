@@ -7,7 +7,7 @@ import WYSIWYGEditor from './WYSIWYG';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 import Input from '../Common/Input/Input';
 
 const ButtonGroup = styled.div`

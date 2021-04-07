@@ -12,10 +12,10 @@ import {
 } from '@/components/Auth/AuthForm';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
-import FormControl from '@/components/Common/FormControl/FormControl';
+import FormControl from '@/components/Common/FormControl';
 import ErrorText from '@/components/Common/ErrorText';
 import Input from '@/components/Common/Input/Input';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 import Badge from '@/components/Common/Badge';
 
 function ResetPasswordForm({

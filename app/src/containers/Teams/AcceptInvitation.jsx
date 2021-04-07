@@ -19,7 +19,7 @@ import {
   SquareIconBottom,
   CircleIcon,
 } from '@/components/Auth/AuthForm';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 
 const ButtonGroup = styled.div`
   display: flex;

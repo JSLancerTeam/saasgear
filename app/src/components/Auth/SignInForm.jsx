@@ -8,11 +8,11 @@ import {
   FormHeader,
   FormNote,
 } from '@/components/Auth/AuthForm';
-import FormControl from '@/components/Common/FormControl/FormControl';
+import FormControl from '@/components/Common/FormControl';
 import { COLORS } from '@/constants/style';
 import Input from '@/components/Common/Input/Input';
 import Checkbox from '@/components/Common/Input/InputCheckbox';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 import ErrorText from '@/components/Common/ErrorText';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';

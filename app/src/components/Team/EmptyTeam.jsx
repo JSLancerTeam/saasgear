@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 import { Description, TitleContent } from '../Layout/blockStyle';
 
 const Content = styled.div`

@@ -6,8 +6,8 @@ import PropsType from 'prop-types';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
-import Button from '../Common/Button/Button';
-import FormControl from '../Common/FormControl/FormControl';
+import Button from '../Common/Button';
+import FormControl from '../Common/FormControl';
 import Input from '../Common/Input/Input';
 
 const ButtonGroup = styled.div`

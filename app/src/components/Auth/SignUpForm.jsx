@@ -1,7 +1,7 @@
 import React from 'react';
 import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
-import FormControl from '@/components/Common/FormControl/FormControl';
+import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';
 import {
   SignUpFormContainer,
@@ -11,7 +11,7 @@ import {
 } from '@/components/Auth/AuthForm';
 import styled from 'styled-components';
 import ErrorText from '@/components/Common/ErrorText';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';

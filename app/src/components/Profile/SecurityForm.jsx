@@ -5,7 +5,7 @@ import ErrorText from '../Common/ErrorText';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import Input from '../Common/Input/Input';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 
 const Form = styled.form`
   margin: 24px 0;

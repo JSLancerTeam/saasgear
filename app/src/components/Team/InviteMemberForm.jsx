@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import { ReactComponent as EnvelopeIcon } from '@/assets/images/svg/envelope.svg';
 import FormGroup from '../Common/FormGroup';
-import FormControl from '../Common/FormControl/FormControl';
+import FormControl from '../Common/FormControl';
 import ErrorText from '../Common/ErrorText';
 import Input from '../Common/Input/Input';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 
 const FormControlStyle = styled(FormControl)`
   display: flex;

@@ -47,14 +47,24 @@ const ListDocument = () => {
         <TitlePageStyle>Document</TitlePageStyle>
         <RightHeader>
           <SearchInput placeholder="Search.." />
-          <CreateBtn color="primary" onClick={() => history.push('/document/create')}>Create New Document</CreateBtn>
+          <CreateBtn
+            color="primary"
+            onClick={() => history.push('/document/create')}
+          >
+            Create New Document
+          </CreateBtn>
         </RightHeader>
       </Header>
       <ContentPage>
-        <DocumentTable data={data?.getDocuments?.documents} total={data?.getDocuments?.count} loading={loading} onFetch={onFetchDocuments} />
+        <DocumentTable
+          data={data?.getDocuments?.documents}
+          total={data?.getDocuments?.count}
+          loading={loading}
+          onFetch={onFetchDocuments}
+        />
       </ContentPage>
     </div>
-  )
-}
+  );
+};
 
 export default ListDocument;

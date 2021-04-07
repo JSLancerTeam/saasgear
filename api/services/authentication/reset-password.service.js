@@ -27,10 +27,10 @@ export async function resetPasswordUser(token, password, confirmPassword) {
     }
     const session = await findToken(token);
     if (!session || !session.id) {
-      return new ApolloError('Session not found');
+      return new ApolloError('Your reset password link is expired');
     }
     if (dayjs(session.updated_at).add(15, 'm').diff(dayjs()) < 0) {
-      return new ForbiddenError('Session expired');
+      return new ForbiddenError('Your reset password link is expired');
     }
     const [newPassword] = await Promise.all([
       generatePassword(password),

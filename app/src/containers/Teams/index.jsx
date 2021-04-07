@@ -16,5 +16,5 @@ export default function Teams() {
         <Route component={ListTeam} />
       </Switch>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { COLORS } from "@/constants/style";
-import styled from "styled-components";
+import { COLORS } from '@/constants/style';
+import styled from 'styled-components';
 
 export default styled.label`
   font-weight: bold;
@@ -12,4 +12,4 @@ export default styled.label`
   display: block;
   margin-bottom: 19px;
   text-transform: uppercase;
-`
+`;

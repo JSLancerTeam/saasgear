@@ -25,24 +25,19 @@ const BadgeWrapper = styled.div`
       }
     }
   }}
-`
+`;
 
-function Badge({
-  children,
-  type
-}) {
-  return (
-    <BadgeWrapper type={type}>{children}</BadgeWrapper>
-  )
+function Badge({ children, type }) {
+  return <BadgeWrapper type={type}>{children}</BadgeWrapper>;
 }
 
 Badge.propTypes = {
   children: propTypes.node,
-  type: propTypes.oneOf(['success', 'error', 'info'])
-}
+  type: propTypes.oneOf(['success', 'error', 'info']),
+};
 
 Badge.defaultProps = {
   type: 'success',
-}
+};
 
 export default React.memo(Badge);

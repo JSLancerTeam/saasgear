@@ -57,8 +57,8 @@ const Name = styled.span`
 const ProfileMenu = styled.div`
   position: absolute;
   top: calc(100% + 17px);
-  right: 0;
-  width: 272px;
+  right: 10px;
+  width: 200px;
 `;
 
 const ProfileList = styled.ul`
@@ -71,10 +71,11 @@ const ProfileList = styled.ul`
 
   &:before {
     content: '';
-    display: block;  
+    display: block;
     position: absolute;
-    left: 36px;
+    left: 50%;
     bottom: 100%;
+    transform: translate(-50%, 0);
     width: 0;
     height: 0;
     border: 12px solid transparent;
@@ -83,10 +84,11 @@ const ProfileList = styled.ul`
 
   &:after {
     content: '';
-    display: block;  
+    display: block;
     position: absolute;
-    left: 38px;
+    left: calc(50%);
     bottom: 100%;
+    transform: translate(-50%, 0);
     width: 0;
     height: 0;
     border: 10px solid transparent;
@@ -162,10 +164,7 @@ const Topbar = ({ signout, user }) => {
         <ProfileMenu>
           <ProfileList>
             <ProfileItem>
-              <NavLinkStyle to="/profile" activeClassName="active">Profle</NavLinkStyle>
-            </ProfileItem>
-            <ProfileItem>
-              <NavLinkStyle to="/account-settings" activeClassName="active">Accout Settings</NavLinkStyle>
+              <NavLinkStyle to="/profile">Profle</NavLinkStyle>
             </ProfileItem>
             <ProfileItem>
               <SignoutBtn onClick={signout}>Sign Out</SignoutBtn>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -39,18 +39,26 @@ const ActionDocument = () => {
   const documentId = parseInt(match.params.id, 10);
   const { handleSubmit, control, register, errors, setValue } = useForm({
     resolver: yupResolver(ActionDocumentSchema),
-    mode: "onChange"
+    mode: 'onChange',
   });
-  const [createDocumentMutation, { loading: isCreating, error: createError }] = useMutation(createDocumentQuery);
-  const [updateDocumentMutation, { loading: isUpdating, error: updateError }] = useMutation(updateDocumentQuery);
-  const [fetchDocumentDetail, { data: documentData }] = useLazyQuery(getDocumentDetailQuery);
+  const [
+    createDocumentMutation,
+    { loading: isCreating, error: createError },
+  ] = useMutation(createDocumentQuery);
+  const [
+    updateDocumentMutation,
+    { loading: isUpdating, error: updateError },
+  ] = useMutation(updateDocumentQuery);
+  const [fetchDocumentDetail, { data: documentData }] = useLazyQuery(
+    getDocumentDetailQuery,
+  );
   const [editorContent, setEditorContent] = useState('');
 
   useEffect(() => {
     if (documentId) {
-      fetchDocumentDetail({ variables: { id: documentId }})
+      fetchDocumentDetail({ variables: { id: documentId } });
     }
-  }, [documentId])
+  }, [documentId]);
 
   useEffect(() => {
     if (documentData?.getDocumentDetail) {
@@ -58,14 +66,16 @@ const ActionDocument = () => {
       setValue('name', values.name);
       setEditorContent(values.body);
     }
-  }, [documentData])
+  }, [documentData]);
 
   async function onSubmit(data) {
     if (documentId) {
-      await updateDocumentMutation({ variables: {
-        ...data,
-        id: documentId
-      }});
+      await updateDocumentMutation({
+        variables: {
+          ...data,
+          id: documentId,
+        },
+      });
     } else {
       await createDocumentMutation({ variables: data });
     }
@@ -79,18 +89,24 @@ const ActionDocument = () => {
     <div>
       <Header>
         <TitlePageStyle>
-          {documentData?.getDocumentDetail?.name ? documentData.getDocumentDetail.name : 'New Document'}
+          {documentData?.getDocumentDetail?.name
+            ? documentData.getDocumentDetail.name
+            : 'New Document'}
         </TitlePageStyle>
-        <SaveBtn color="primary" onClick={handleSubmit(onSubmit)} disabled={isCreating || isUpdating}>
+        <SaveBtn
+          color="primary"
+          onClick={handleSubmit(onSubmit)}
+          disabled={isCreating || isUpdating}
+        >
           {isCreating || isUpdating ? 'Please wait' : 'Save'}
         </SaveBtn>
       </Header>
       <ContentPage>
         <DocumentForm
           editorContent={editorContent}
-          onSubmit={handleSubmit(onSubmit)} 
-          control={control} 
-          register={register} 
+          onSubmit={handleSubmit(onSubmit)}
+          control={control}
+          register={register}
           isSubmitting={isCreating || isUpdating}
           formErrors={errors}
           apiError={createError?.message || updateError?.message}
@@ -98,6 +114,6 @@ const ActionDocument = () => {
       </ContentPage>
     </div>
   );
-}
+};
 
 export default ActionDocument;

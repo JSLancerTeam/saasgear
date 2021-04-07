@@ -7,25 +7,27 @@ const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
-  background:rgba(39, 50, 89, 0.42);
+  background: rgba(39, 50, 89, 0.42);
   display: none;
 
-  ${(props) => props.isOpen && css`
-    display: block;
-  `}
+  ${(props) =>
+    props.isOpen &&
+    css`
+      display: block;
+    `}
 `;
 
 const Wrapper = styled.div`
-  position:fixed;
+  position: fixed;
   background: white;
   width: 765px;
   max-width: 70%;
   height: auto;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 10px;
 `;
 
@@ -57,7 +59,7 @@ const Modal = ({ isOpen, children }) => (
   <Overlay isOpen={isOpen}>
     <Wrapper>{children}</Wrapper>
   </Overlay>
-)
+);
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
@@ -65,6 +67,6 @@ Modal.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-}
+};
 
 export default Modal;

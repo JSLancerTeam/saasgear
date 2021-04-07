@@ -25,7 +25,7 @@ const FormSubmitButton = styled(Button)`
 const TextHaveAccount = styled(FormNote)`
   margin-top: 92px;
   text-align: center;
-`
+`;
 
 function SignUpForm({
   onSubmit,
@@ -42,44 +42,56 @@ function SignUpForm({
         <FormHeader>Create Account</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>
-              Your Name
-            </FormGroupLabel>
+            <FormGroupLabel>Your Name</FormGroupLabel>
             <FormControl>
-              <Input type="text" placeholder="David" name="name" ref={register} />
+              <Input
+                type="text"
+                placeholder="David"
+                name="name"
+                ref={register}
+              />
               {formErrors?.name && (
                 <ErrorText message={formErrors.name.message} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>
-              Email
-            </FormGroupLabel>
+            <FormGroupLabel>Email</FormGroupLabel>
             <FormControl>
-              <Input type="email" placeholder="yourname@yourbusiness.com" name="email" ref={register} />
+              <Input
+                type="email"
+                placeholder="yourname@yourbusiness.com"
+                name="email"
+                ref={register}
+              />
               {formErrors?.email && (
                 <ErrorText message={formErrors.email.message} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>
-              Password
-            </FormGroupLabel>
+            <FormGroupLabel>Password</FormGroupLabel>
             <FormControl>
-              <Input type="password" placeholder="Your password" name="password" ref={register} />
+              <Input
+                type="password"
+                placeholder="Your password"
+                name="password"
+                ref={register}
+              />
               {formErrors?.password && (
                 <ErrorText message={formErrors.password.message} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>
-              Confirm password
-            </FormGroupLabel>
+            <FormGroupLabel>Confirm password</FormGroupLabel>
             <FormControl>
-              <Input type="password" placeholder="Confirm your password" name="passwordConfirmation" ref={register} />
+              <Input
+                type="password"
+                placeholder="Confirm your password"
+                name="passwordConfirmation"
+                ref={register}
+              />
               {formErrors?.passwordConfirmation && (
                 <ErrorText message={formErrors.passwordConfirmation.message} />
               )}
@@ -90,13 +102,14 @@ function SignUpForm({
           </FormSubmitButton>
         </div>
       </FormContent>
-      {apiError && (
-        <ErrorText message={apiError} position="center" />
-      )}
+      {apiError && <ErrorText message={apiError} position="center" />}
       <FormNote>
-        By clicking Sign Up, you agree to our <a href="##">Terms</a>, <a href="##">Data Policy</a> and <a href="##">Cookie Policy</a>.
+        By clicking Sign Up, you agree to our <a href="##">Terms</a>,{' '}
+        <a href="##">Data Policy</a> and <a href="##">Cookie Policy</a>.
       </FormNote>
-      <TextHaveAccount>Already have account? <Link to="/auth/signin">Sign In</Link>.</TextHaveAccount>
+      <TextHaveAccount>
+        Already have account? <Link to="/auth/signin">Sign In</Link>.
+      </TextHaveAccount>
     </SignUpFormContainer>
   );
 }

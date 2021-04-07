@@ -19,7 +19,13 @@ const ButtonGroup = styled.div`
   }
 `;
 
-export default function TeamForm({ onSubmit, register, formErrors, isEdit, loading }) {
+export default function TeamForm({
+  onSubmit,
+  register,
+  formErrors,
+  isEdit,
+  loading,
+}) {
   const history = useHistory();
 
   return (
@@ -27,7 +33,12 @@ export default function TeamForm({ onSubmit, register, formErrors, isEdit, loadi
       <FormGroup>
         <FormGroupLabel>Team name</FormGroupLabel>
         <FormControl>
-          <Input type="text" placeholder="Your team name" name="teamName" ref={register} />
+          <Input
+            type="text"
+            placeholder="Your team name"
+            name="teamName"
+            ref={register}
+          />
           {formErrors?.teamName && (
             <ErrorText message={formErrors.teamName.message} />
           )}
@@ -36,18 +47,25 @@ export default function TeamForm({ onSubmit, register, formErrors, isEdit, loadi
       <FormGroup>
         <FormGroupLabel>Team ID</FormGroupLabel>
         <FormControl>
-          <Input type="text" placeholder="A unique ID for your team" name="teamID" ref={register} />
+          <Input
+            type="text"
+            placeholder="A unique ID for your team"
+            name="teamID"
+            ref={register}
+          />
           {formErrors?.teamID && (
             <ErrorText message={formErrors.teamID.message} />
           )}
         </FormControl>
       </FormGroup>
       <ButtonGroup>
-        <Button color="primary" type="submit" disabled={loading}>{isEdit ? "Save Team" : "Add Team"}</Button>
+        <Button color="primary" type="submit" disabled={loading}>
+          {isEdit ? 'Save Team' : 'Add Team'}
+        </Button>
         <Button onClick={() => history.push('/teams')}>Cancel</Button>
       </ButtonGroup>
     </form>
-  )
+  );
 }
 
 TeamForm.propTypes = {
@@ -56,4 +74,4 @@ TeamForm.propTypes = {
   formErrors: PropsType.object,
   isEdit: PropsType.bool,
   loading: PropsType.bool,
-}
+};

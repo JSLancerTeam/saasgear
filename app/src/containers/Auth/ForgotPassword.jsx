@@ -29,7 +29,8 @@ const ForgotPasswordSchema = yup.object().shape({
 });
 
 function ForgotPassword() {
-  useDocumentHeader({ title: 'Forget password ' });
+  useDocumentHeader({ title: 'Forgot password' });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(ForgotPasswordSchema),

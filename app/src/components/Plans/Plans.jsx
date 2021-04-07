@@ -47,7 +47,7 @@ const Unit = styled.span`
 const FeatureList = styled.ul`
   padding-top: 24px;
   padding-bottom: 32px;
-  border-top: 1px solid #7C88B1;
+  border-top: 1px solid #7c88b1;
   flex-grow: 1;
 `;
 
@@ -75,7 +75,7 @@ const PlanWrapper = styled.div`
   width: 430px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #7C88B1;
+  border: 1px solid #7c88b1;
   border-radius: 10px;
   padding: 24px;
   cursor: pointer;
@@ -84,44 +84,57 @@ const PlanWrapper = styled.div`
     margin-right: 25px;
   }
 
-  ${(props) => props.active && css`
-    background: ${COLORS.PRIMARY};
-    border-color: rgba(255, 255, 255, 0.2);
-    
-    ${Name}, ${Desc}, ${Price}, ${Unit}, ${FeatureText}, ${GetStartedBtn} {
-      color: ${COLORS.WHITE};
-    }
-
-    ${Desc} {
-      opacity: 0.7;
-    }
-
-    ${FeatureList} {
+  ${(props) =>
+    props.active &&
+    css`
+      background: ${COLORS.PRIMARY};
       border-color: rgba(255, 255, 255, 0.2);
-    }
 
-    ${FeatureItem} {
-      svg {
-        circle, path {
-          stroke: #8DEAD2;
+      ${Name}, ${Desc}, ${Price}, ${Unit}, ${FeatureText}, ${GetStartedBtn} {
+        color: ${COLORS.WHITE};
+      }
+
+      ${Desc} {
+        opacity: 0.7;
+      }
+
+      ${FeatureList} {
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      ${FeatureItem} {
+        svg {
+          circle,
+          path {
+            stroke: #8dead2;
+          }
         }
       }
-    }
 
-    ${GetStartedBtn} {
-      border-color: ${COLORS.WHITE};
-      background: ${COLORS.PRIMARY};
-    }
-  `}
+      ${GetStartedBtn} {
+        border-color: ${COLORS.WHITE};
+        background: ${COLORS.PRIMARY};
+      }
+    `}
 `;
 
-const Plans = ({ plans, onChange, planChanged, isYearly, checkIsCurrentPlan }) => {
+const Plans = ({
+  plans,
+  onChange,
+  planChanged,
+  isYearly,
+  checkIsCurrentPlan,
+}) => {
   const [test, setTest] = useState(false);
 
   return (
     <Wrapper>
-      {plans.map(plan => (
-        <PlanWrapper onClick={() => onChange(plan.id)} active={planChanged && plan.id === planChanged.id} key={plan.id}>
+      {plans.map((plan) => (
+        <PlanWrapper
+          onClick={() => onChange(plan.id)}
+          active={planChanged && plan.id === planChanged.id}
+          key={plan.id}
+        >
           <Name>{plan.name}</Name>
           <Desc>{plan.desc}</Desc>
           <PriceWrapper>
@@ -129,7 +142,7 @@ const Plans = ({ plans, onChange, planChanged, isYearly, checkIsCurrentPlan }) =
             <Unit>/{isYearly ? 'year' : 'month'}</Unit>
           </PriceWrapper>
           <FeatureList>
-            {plan.features.map(feature => (
+            {plan.features.map((feature) => (
               <FeatureItem key={feature}>
                 <CheckCircleIcon />
                 <FeatureText>{feature}</FeatureText>
@@ -144,8 +157,8 @@ const Plans = ({ plans, onChange, planChanged, isYearly, checkIsCurrentPlan }) =
         </PlanWrapper>
       ))}
     </Wrapper>
-  )
-}
+  );
+};
 
 Plans.propTypes = {
   plans: PropTypes.array.isRequired,
@@ -153,6 +166,6 @@ Plans.propTypes = {
   checkIsCurrentPlan: PropTypes.func.isRequired,
   planChanged: PropTypes.object,
   isYearly: PropTypes.bool,
-}
+};
 
 export default Plans;

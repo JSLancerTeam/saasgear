@@ -9,17 +9,6 @@ const Content = styled.div`
   display: flex;
 `;
 
-const Avatar = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    width: 100%;
-    border-radius: 100%;
-  }
-`;
-
 const MainContent = styled.div`
   flex-grow: 1;
 `;

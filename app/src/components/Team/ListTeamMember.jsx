@@ -22,19 +22,24 @@ export default function ListTeamMember({ teamMembers, handleAction }) {
         </tr>
       </thead>
       <tbody>
-        {teamMembers ? teamMembers.map(it => <tr key={it.userId}>
-          <td width="70%">{it.email}</td>
-          <td width="10%">
-            {it.isOwner ? 'admin' : 'member'}
-          </td>
-          {handleAction && <ActionTd>
-            <Button>Cancle</Button>
-            <Button color="primary">Invitation</Button>
-          </ActionTd>}
-        </tr>) :
+        {teamMembers ? (
+          teamMembers.map((it) => (
+            <tr key={it.userId}>
+              <td width="70%">{it.email}</td>
+              <td width="10%">{it.isOwner ? 'admin' : 'member'}</td>
+              {handleAction && (
+                <ActionTd>
+                  <Button>Cancle</Button>
+                  <Button color="primary">Invitation</Button>
+                </ActionTd>
+              )}
+            </tr>
+          ))
+        ) : (
           <tr>
             <td colSpan={2}>No result</td>
-          </tr>}
+          </tr>
+        )}
       </tbody>
     </Table>
   );
@@ -44,8 +49,8 @@ ListTeamMember.propTypes = {
   teamMembers: PropsType.arrayOf(
     PropsType.shape({
       teamName: PropsType.string,
-      teamID: PropsType.string
-    })
+      teamID: PropsType.string,
+    }),
   ),
-  handleAction: PropsType.func
+  handleAction: PropsType.func,
 };

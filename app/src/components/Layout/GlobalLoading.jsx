@@ -73,7 +73,6 @@ function GlobalLoading() {
 
   useEffect(() => {
     updateStatus();
-
   }, [status]);
 
   async function updateStatus() {

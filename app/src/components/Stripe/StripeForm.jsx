@@ -15,7 +15,8 @@ import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
 const StripeFormContainer = styled.form`
   width: 300px;
-`
+`;
+
 const CardNumberEl = styled(CardNumberElement)`
   padding: 11.6px 10px;
   background: ${COLORS.LIGHT_GRAY};
@@ -26,14 +27,15 @@ const CardNumberEl = styled(CardNumberElement)`
   text-align: center;
   color: ${COLORS.WHITE_GRAY};
   box-sizing: border-box;
-`
+`;
 
 const FormGroupCardExpire = styled(FormGroup)`
   margin-right: 10px;
-`
+`;
+
 const FormGroupCardCvc = styled(FormGroup)`
   margin-left: 10px;
-`
+`;
 
 const CardExpiryElementEl = styled(CardExpiryElement)`
   padding: 11.6px 10px;
@@ -46,7 +48,7 @@ const CardExpiryElementEl = styled(CardExpiryElement)`
   color: ${COLORS.WHITE_GRAY};
   width: 100%;
   box-sizing: border-box;
-`
+`;
 
 const CardCvcElementEl = styled(CardCvcElement)`
   padding: 11.6px 10px;
@@ -59,10 +61,12 @@ const CardCvcElementEl = styled(CardCvcElement)`
   color: ${COLORS.WHITE_GRAY};
   width: 100%;
   box-sizing: border-box;
-`
+`;
+
 const SubmitButton = styled(Button)`
   width: 100%;
-`
+`;
+
 const BackButton = styled(Button)`
   border-color: transparent;
   padding: 0;
@@ -72,26 +76,34 @@ const BackButton = styled(Button)`
     color: ${COLORS.RED};
     width: 20px;
   }
-`
+`;
+
 const RowGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
-const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError, submitText = 'Submit' }) => {
+const StripeForm = ({
+  onSubmitSuccess,
+  className,
+  onGoBack,
+  apiLoading,
+  apiError,
+  submitText = 'Submit',
+}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const stripe = useStripe();
   const elements = useElements();
 
   useEffect(() => {
-    setIsSubmitting(apiLoading)
-  }, [apiLoading])
+    setIsSubmitting(apiLoading);
+  }, [apiLoading]);
 
   useEffect(() => {
-    setError(apiError)
-  }, [apiError])
+    setError(apiError);
+  }, [apiError]);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -115,38 +127,28 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
   return (
     <StripeFormContainer onSubmit={onSubmit} className={className}>
       <div>
-        {onGoBack && (
-          <BackButton type="button" onClick={onGoBack} />
-        )}
+        {onGoBack && <BackButton type="button" onClick={onGoBack} />}
         <div>
           <FormGroup>
-            <FormGroupLabel
-              htmlFor="street_address"
-            >
+            <FormGroupLabel htmlFor="street_address">
               Card Number
             </FormGroupLabel>
             <CardNumberEl className="card-el" />
           </FormGroup>
           <RowGroup>
             <FormGroupCardExpire>
-              <FormGroupLabel htmlFor="first_name">
-                Expiration
-              </FormGroupLabel>
-              <CardExpiryElementEl/>
+              <FormGroupLabel htmlFor="first_name">Expiration</FormGroupLabel>
+              <CardExpiryElementEl />
             </FormGroupCardExpire>
             <FormGroupCardCvc>
-              <FormGroupLabel htmlFor="last_name">
-                CVC
-              </FormGroupLabel>
+              <FormGroupLabel htmlFor="last_name">CVC</FormGroupLabel>
               <CardCvcElementEl />
             </FormGroupCardCvc>
           </RowGroup>
         </div>
       </div>
       {error && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">
-          {error}
-        </p>
+        <p className="text-red-500 text-xs italic mt-1 text-center">{error}</p>
       )}
       <SubmitButton
         type="submit"
@@ -158,7 +160,7 @@ const StripeForm = ({ onSubmitSuccess, className, onGoBack, apiLoading, apiError
       </SubmitButton>
     </StripeFormContainer>
   );
-}
+};
 
 StripeForm.propTypes = {
   onSubmitSuccess: PropsType.func.isRequired,

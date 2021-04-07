@@ -18,12 +18,12 @@ const ButtonGroup = styled.div`
   margin-top: 32px;
 `;
 
-function SecurityForm({ 
-  onSubmit, 
-  register, 
+function SecurityForm({
+  onSubmit,
+  register,
   formErrors,
   apiError,
-  isSubmitting, 
+  isSubmitting,
 }) {
   return (
     <Form onSubmit={onSubmit}>
@@ -53,9 +53,7 @@ function SecurityForm({
           {isSubmitting ? 'Please wait' : 'Update Password'}
         </Button>
       </ButtonGroup>
-      {apiError && (
-        <ErrorText message={apiError} />
-      )}
+      {apiError && <ErrorText message={apiError} />}
     </Form>
   );
 }

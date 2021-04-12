@@ -72,7 +72,7 @@ function ForgotPasswordForm({
             check your email so create new password
           </ConfirmationText>
           <TextNote>
-            Already! Go to <Link to="/auth/signin">Sign In</Link>
+            Go to <Link to="/auth/signin">Sign In</Link>
           </TextNote>
         </>
       )}

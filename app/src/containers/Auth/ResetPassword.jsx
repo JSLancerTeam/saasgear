@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
+import { toast } from 'react-toastify';
 
 import ResetPasswordForm from '@/components/Auth/ResetPasswordForm';
 import getQueryParam from '@/utils/getQueryParam';
@@ -59,7 +60,8 @@ function ResetPassword() {
         confirmPassword: passwordConfirmation,
       },
     });
-    if (data?.ResetPassword) {
+    if (data?.resetPassword) {
+      toast.success('Change password successfully!')
       history.push('/auth/signin');
     }
   }

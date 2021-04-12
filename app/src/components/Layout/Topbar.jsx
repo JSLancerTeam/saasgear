@@ -142,9 +142,8 @@ const Topbar = ({ signout, user }) => {
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
-
     return () => document.removeEventListener('click', handleClickOutside);
-  })
+  }, []);
 
   return (
     <Wrapper>

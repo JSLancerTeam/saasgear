@@ -17,6 +17,7 @@ import ErrorText from '@/components/Common/ErrorText';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
+import SocialAuth from '@/containers/Auth/SocialAuth';
 
 const SignInContainer = styled(SignUpFormContainer)`
   width: 300px;
@@ -104,6 +105,7 @@ function SignInForm({
           <ForgotLink>
             <Link to="/auth/forgot-password">Forgot Password?</Link>
           </ForgotLink>
+          <SocialAuth />
         </div>
       </FormContent>
       {apiError && <ErrorText message={apiError} position="center" />}

@@ -10,7 +10,7 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 ## Technology stack
 
 ### Front-end
-![Frontend Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/front-end-stack.png)
+![Frontend Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/front-end-stack2.png)
 
 ### Back-end
 ![API Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/backend-stack.png)

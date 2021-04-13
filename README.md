@@ -28,23 +28,23 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 <br />
   
 ## Details
-[:loudspeaker: Introduction](https://www.notion.so/1b80e32f72664f888ad72938dda0e655)
-
-[:watermelon: Prerequisite services](https://www.notion.so/4c0262f5369f45c9a73ef7f874111685)
-
-[:oncoming_automobile: Setup project](https://www.notion.so/8d1e7f8ccd82481e9dd7a9a1948dabb6)
-
-[:blue_square: Database & migration](https://www.notion.so/19542c8def044cbbacce7ea35935b748)
-
-[:globe_with_meridians: GraphQL](https://www.notion.so/37c7124e19d54286bc88cd2073af0763)
-
-[:closed_lock_with_key: Authentication](https://www.notion.so/7730e672a5134823aa62066c52033669)
-
-[:envelope: Email](https://www.notion.so/b7a7f355cad14f5e971b32c322462372)
-
-[:credit_card: Stripe subscriptions](https://www.notion.so/9dd1cc634f03439a8b8a3ba01030f7f9)
-
-[:ear_of_rice: Redux toolkit](https://www.notion.so/9f873e9d7b7d474d856ec511e184e9b6)
+[:loudspeaker: Introduction](https://github.com/JSLancerTeam/saasgear/docs/introduction.md)
+  
+[:watermelon: Prerequisite services](https://github.com/JSLancerTeam/saasgear/docs/prerequisite.md)
+  
+[:oncoming_automobile: Setup project](https://github.com/JSLancerTeam/saasgear/docs/)
+  
+[:blue_square: Database & migration](https://github.com/JSLancerTeam/saasgear/docs/database.md)
+  
+[:globe_with_meridians: GraphQL](https://github.com/JSLancerTeam/saasgear/docs/graphql.md)
+  
+[:closed_lock_with_key: Authentication](https://github.com/JSLancerTeam/saasgear/docs/authentication.md)
+  
+[:envelope: Email](https://github.com/JSLancerTeam/saasgear/docs/mail.md)
+  
+[:credit_card: Stripe subscriptions](https://github.com/JSLancerTeam/saasgear/docs/stripe.md)
+  
+[:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/docs/redux-toolkit.md)
   
 ## License
 All code in this repository is provided under the MIT  

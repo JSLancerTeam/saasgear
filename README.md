@@ -1,4 +1,4 @@
-[Saas Gear](https://github.com/JSLancerTeam/saasgear)  
+# [Saas Gear](https://github.com/JSLancerTeam/saasgear)  
   
 SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new SaaS project quickly.
 
@@ -24,10 +24,8 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 ## Developers
 - David Tran - [davidtran](http://github.com/davidtran)
 - Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
-- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)
-## License
-All code in this repository is provided under the MIT  
-<br>
+- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)  
+<br />
   
 ## Details
 [:loudspeaker: Introduction](https://www.notion.so/1b80e32f72664f888ad72938dda0e655)
@@ -47,3 +45,6 @@ All code in this repository is provided under the MIT
 [:credit_card: Stripe subscriptions](https://www.notion.so/9dd1cc634f03439a8b8a3ba01030f7f9)
 
 [:ear_of_rice: Redux toolkit](https://www.notion.so/9f873e9d7b7d474d856ec511e184e9b6)
+  
+## License
+All code in this repository is provided under the MIT  

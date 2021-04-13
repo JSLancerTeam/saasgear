@@ -3,30 +3,10 @@
 SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new SaaS project quickly.
 
 ## Table of contents
-- [Technology stack](#technology-stack)
-- [Developers](#developers)
 - [Details](#details)
+- [Developers](#developers)
+- [Technology stack](#technology-stack)
 
-## Technology stack
-
-### Front-end
-![Frontend Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/front-end-stack.png)
-
-### Back-end
-![API Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/backend-stack.png)
-
-### Support databases
-![Databasee Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/database-stack.png)
-
-### Payment
-![Payment Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/payment-stack.png)
-
-## Developers
-- David Tran - [davidtran](http://github.com/davidtran)
-- Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
-- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)  
-<br />
-  
 ## Details
 [:loudspeaker: Introduction](https://github.com/JSLancerTeam/saasgear/docs/introduction.md)
   
@@ -44,7 +24,27 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
   
 [:credit_card: Stripe subscriptions](https://github.com/JSLancerTeam/saasgear/docs/stripe.md)
   
-[:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/docs/redux-toolkit.md)
+[:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/docs/redux-toolkit.md)  
+  
+## Developers
+- David Tran - [davidtran](http://github.com/davidtran)
+- Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
+- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)  
+  
+## Technology stack
+
+### Front-end
+![Frontend Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/front-end-stack2.png)
+
+### Back-end
+![API Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/backend-stack.png)
+
+### Support databases
+![Databasee Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/database-stack.png)
+
+### Payment
+![Payment Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/payment-stack.png)  
+<br />
   
 ## License
 All code in this repository is provided under the MIT  

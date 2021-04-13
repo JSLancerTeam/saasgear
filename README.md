@@ -10,15 +10,7 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 ## Technology stack
 
 ### Front-end
-- nextjs
-- react
-- tailwind
-- styled-component
-- react-apollo
-- react-router-dom
-- react-hook-form
-- dayjs
-- webpack
+![Frontend Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/front-end-stack.png)
 
 ### Back-end
 - expressjs

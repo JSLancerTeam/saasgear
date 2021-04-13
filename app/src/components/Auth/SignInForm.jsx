@@ -6,13 +6,13 @@ import {
   SignUpFormContainer,
   FormContent,
   FormHeader,
-  FormNote
+  FormNote,
 } from '@/components/Auth/AuthForm';
-import FormControl from '@/components/Common/FormControl/FormControl';
+import FormControl from '@/components/Common/FormControl';
 import { COLORS } from '@/constants/style';
 import Input from '@/components/Common/Input/Input';
 import Checkbox from '@/components/Common/Input/InputCheckbox';
-import Button from '@/components/Common/Button/Button';
+import Button from '@/components/Common/Button';
 import ErrorText from '@/components/Common/ErrorText';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
@@ -20,24 +20,24 @@ import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
 const SignInContainer = styled(SignUpFormContainer)`
   width: 300px;
-`
+`;
 const RembemberSection = styled.div`
   display: flex;
   align-items: center;
   padding-top: 12px;
-`
+`;
 const RememberLabel = styled.label`
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
   color: ${COLORS.SAPPHIRE_BLUE};
   margin-left: 5px;
-`
+`;
 const SubmitButton = styled(Button)`
   width: 100%;
   text-transform: uppercase;
   margin-top: 32px;
-`
+`;
 const ForgotLink = styled.div`
   & > a {
     font-size: 14px;
@@ -47,11 +47,11 @@ const ForgotLink = styled.div`
     display: block;
     margin-top: 24px;
   }
-`
+`;
 const TextHaveAccount = styled(FormNote)`
   margin-top: 179px;
   text-align: center;
-`
+`;
 
 function SignInForm({
   onSubmit,
@@ -67,22 +67,28 @@ function SignInForm({
         <FormHeader>Welcome Back!</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>
-              Email
-            </FormGroupLabel>
+            <FormGroupLabel>Email</FormGroupLabel>
             <FormControl>
-              <Input type="email" placeholder="yourname@yourbusiness.com" name="email" ref={register} />
+              <Input
+                type="email"
+                placeholder="yourname@yourbusiness.com"
+                name="email"
+                ref={register}
+              />
               {formErrors?.email && (
                 <ErrorText message={formErrors.email.message} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>
-              Password
-            </FormGroupLabel>
+            <FormGroupLabel>Password</FormGroupLabel>
             <FormControl>
-              <Input type="password" placeholder="your password" name="password" ref={register} />
+              <Input
+                type="password"
+                placeholder="your password"
+                name="password"
+                ref={register}
+              />
               {formErrors?.password && (
                 <ErrorText message={formErrors.password.message} />
               )}
@@ -100,10 +106,10 @@ function SignInForm({
           </ForgotLink>
         </div>
       </FormContent>
-      {apiError && (
-        <ErrorText message={apiError} position="center" />
-      )}
-      <TextHaveAccount>Dont have account? <Link to="/auth/signup">Register</Link>.</TextHaveAccount>
+      {apiError && <ErrorText message={apiError} position="center" />}
+      <TextHaveAccount>
+        Dont have account? <Link to="/auth/signup">Register</Link>.
+      </TextHaveAccount>
     </SignInContainer>
   );
 }

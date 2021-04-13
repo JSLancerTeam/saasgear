@@ -7,15 +7,16 @@ const mailgun = mailgunFactory({
 });
 
 export default async function sendMail(to, subject, html) {
-  return new Promise((resolve) => {
+  try {
     mailgun.messages().send({
       from: process.env.MAIL_FROM,
       to,
       subject,
       html,
-    }).then(() => resolve()).catch((error) => {
-      Sentry.captureException(error);
-      resolve();
     });
-  });
+    return true;
+  } catch (e) {
+    Sentry.captureException(error);
+    return true;
+  }
 }

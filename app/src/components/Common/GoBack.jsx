@@ -8,11 +8,10 @@ const IconBack = styled.div`
   text-align: left;
   margin-bottom: 16px;
   display: block;
-`
+  cursor: pointer;
+`;
 
-function GoBack({
-  link,
-}) {
+function GoBack({ link }) {
   const history = useHistory();
 
   function goBack() {
@@ -24,17 +23,17 @@ function GoBack({
 
   return (
     <IconBack onClick={goBack}>
-      <img src={goBackIcon} alt=""/>
+      <img src={goBackIcon} alt="" />
     </IconBack>
-  )
+  );
 }
 
 GoBack.propTypes = {
-  link: PropTypes.string
-}
+  link: PropTypes.string,
+};
 
 GoBack.defaultProps = {
-  link: null
-}
+  link: null,
+};
 
 export default React.memo(GoBack);

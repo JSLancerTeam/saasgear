@@ -9,28 +9,26 @@ const Error = styled.p`
   margin: 5px 0 7px;
   display: block;
   ${({ position }) => css`
-      text-align: ${position}
-    `}
-`
+    text-align: ${position};
+  `}
+`;
 
-function ErrorText({
-  message,
-  position,
-  ...props
-}) {
+function ErrorText({ message, position, ...props }) {
   return (
-    <Error {...props} position={position}>{message}</Error>
-  )
+    <Error {...props} position={position}>
+      {message}
+    </Error>
+  );
 }
 
 ErrorText.propTypes = {
   message: PropTypes.string,
-  position: PropTypes.oneOf(['left', 'right', 'center'])
-}
+  position: PropTypes.oneOf(['left', 'right', 'center']),
+};
 
 ErrorText.defaultProps = {
   message: null,
-  position: 'left'
-}
+  position: 'left',
+};
 
 export default ErrorText;

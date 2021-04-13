@@ -7,25 +7,21 @@ const FormControlWrapper = styled.div`
   display: block;
 `;
 
-function FormControl({
-  className,
-  children,
-  ...props
-}) {
+function FormControl({ className, children, ...props }) {
   return (
     <FormControlWrapper className={className} {...props}>
       {children}
     </FormControlWrapper>
-  )
+  );
 }
 
 FormControl.propTypes = {
   className: propTypes.string,
-  children: propTypes.node
-}
+  children: propTypes.node,
+};
 
 FormControl.defaultProps = {
-  className: null
-}
+  className: null,
+};
 
 export default React.memo(FormControl);

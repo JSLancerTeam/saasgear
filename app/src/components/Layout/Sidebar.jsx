@@ -23,7 +23,7 @@ const LogoWrapper = styled.a`
 `;
 
 const LogoText = styled.div`
-  color: #0080FF;
+  color: #0080ff;
   font-size: 22px;
   line-height: 27px;
   font-weight: 500;
@@ -63,7 +63,7 @@ const NavLinkStyle = styled(NavLink)`
   border-left: 2px solid transparent;
   display: flex;
   align-items: center;
-  
+
   &.active {
     border-radius: 0px 10px 10px 0px;
     background-color: ${COLORS.REGULAR_PRIMARY};
@@ -96,14 +96,16 @@ const Sidebar = () => (
     </LogoWrapper>
     <MenuWrapper>
       <MenuList>
-        {routes.filter(route => route.isSidebar).map(route => (
-          <MenuItem key={route.path}>
-            <NavLinkStyle to={route.path} activeClassName="active">
-              {route.icon}
-              <MenuText>{route.name}</MenuText>
-            </NavLinkStyle>
-          </MenuItem>
-        ))}
+        {routes
+          .filter((route) => route.isSidebar)
+          .map((route) => (
+            <MenuItem key={route.path}>
+              <NavLinkStyle to={route.path} activeClassName="active">
+                {route.icon}
+                <MenuText>{route.name}</MenuText>
+              </NavLinkStyle>
+            </MenuItem>
+          ))}
       </MenuList>
     </MenuWrapper>
   </Wrapper>

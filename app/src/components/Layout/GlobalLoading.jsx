@@ -43,24 +43,27 @@ const Bar = styled.div`
 
 const Progress = styled.div`
   background: #0362fc;
-  padding: 1px;
+  padding: 0px;
   width: 0;
 
   ${(props) =>
     props.loading &&
     css`
+      padding: 1px;
       animation: ${loading} 4s ease;
     `}
 
   ${(props) =>
     props.completing &&
     css`
+      padding: 1px;
       animation: ${completing} 0.3s ease;
     `}
 
   ${(props) =>
     props.completed &&
     css`
+      padding: 1px;
       animation: ${completed} 0.3s ease;
     `}
 `;
@@ -73,7 +76,6 @@ function GlobalLoading() {
 
   useEffect(() => {
     updateStatus();
-
   }, [status]);
 
   async function updateStatus() {

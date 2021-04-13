@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { COLORS } from '@/constants/style';
 import Modal, { ModalHeader, ModalContent, ModalFooter } from '../Common/Modal';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import FormGroup from '../Common/FormGroup';
 import Input from '../Common/Input/Input';
@@ -39,25 +39,24 @@ export default function DeleteAccountModal({
       <ModalHeader>Delete Account</ModalHeader>
       <ModalContent>
         <DeleteText>
-          Are you sure you want to delete your account? All of
-          your data will be permanently removed. This action
-          cannot be undone.
+          Are you sure you want to delete your account? All of your data will be
+          permanently removed. This action cannot be undone.
         </DeleteText>
         <Form onSubmit={onSubmit}>
           <FormGroup>
-            <FormGroupLabel>Please enter{' '}
-              <EmailText>{email}</EmailText> to confirm
+            <FormGroupLabel>
+              Please enter <EmailText>{email}</EmailText> to confirm
             </FormGroupLabel>
             <Input type="email" name="email" ref={register} />
-            {errors?.email && (
-              <ErrorText message={errors.email.message} />
-            )}
+            {errors?.email && <ErrorText message={errors.email.message} />}
           </FormGroup>
         </Form>
       </ModalContent>
       <ModalFooter>
         <Button onClick={closeModal}>No</Button>
-        <Button type="submit" color="primary" disabled={!isValid}>Delete</Button>
+        <Button type="submit" color="primary" disabled={!isValid}>
+          Delete
+        </Button>
       </ModalFooter>
     </Modal>
   );

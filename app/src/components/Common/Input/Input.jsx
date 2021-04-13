@@ -8,7 +8,7 @@ const InputWrapper = styled.input`
   border: 1px solid ${COLORS.WHITE_BLUE};
   border-radius: 10px;
   padding: 10.5px 10px;
-  
+
   font-size: 16px;
   line-height: 19px;
   color: ${COLORS.WHITE_GRAY};
@@ -22,34 +22,34 @@ const InputWrapper = styled.input`
   &::placeholder {
     font-size: 16px;
     line-height: 19px;
-    color: #BFC7E0;
+    color: #bfc7e0;
   }
-`
+`;
 
-const Input = React.forwardRef(({
-  type,
-  defaultValue,
-  placeholder,
-  ...props
-}, ref) => (
-  <InputWrapper type={type} defaultValue={defaultValue} placeholder={placeholder} {...props} ref={ref} />
-));
+const Input = React.forwardRef(
+  ({ type, defaultValue, placeholder, ...props }, ref) => (
+    <InputWrapper
+      type={type}
+      defaultValue={defaultValue}
+      placeholder={placeholder}
+      {...props}
+      ref={ref}
+    />
+  ),
+);
 
 Input.propTypes = {
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.oneOf(['text', 'password', 'email', 'number']),
-  placeholder: PropTypes.string
-}
+  placeholder: PropTypes.string,
+};
 
 Input.displayName = 'Input';
 
 Input.defaultProps = {
   defaultValue: null,
   type: 'text',
-  placeholder: null
-}
+  placeholder: null,
+};
 
 export default Input;

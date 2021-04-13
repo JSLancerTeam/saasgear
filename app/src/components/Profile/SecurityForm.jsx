@@ -5,7 +5,7 @@ import ErrorText from '../Common/ErrorText';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import Input from '../Common/Input/Input';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 
 const Form = styled.form`
   margin: 24px 0;
@@ -18,12 +18,12 @@ const ButtonGroup = styled.div`
   margin-top: 32px;
 `;
 
-function SecurityForm({ 
-  onSubmit, 
-  register, 
+function SecurityForm({
+  onSubmit,
+  register,
   formErrors,
   apiError,
-  isSubmitting, 
+  isSubmitting,
 }) {
   return (
     <Form onSubmit={onSubmit}>
@@ -53,9 +53,7 @@ function SecurityForm({
           {isSubmitting ? 'Please wait' : 'Update Password'}
         </Button>
       </ButtonGroup>
-      {apiError && (
-        <ErrorText message={apiError} />
-      )}
+      {apiError && <ErrorText message={apiError} />}
     </Form>
   );
 }

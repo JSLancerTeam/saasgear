@@ -27,7 +27,11 @@ export const FormNote = styled.div`
 export const SignUpFormWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  @media screen and (max-width: 740px) {
+    flex-direction: column;
+    padding-top: 40px;
+  }
 `;
 
 export const SignUpFormLeft = styled.div`
@@ -35,12 +39,20 @@ export const SignUpFormLeft = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 740px) {
+    width: 100%;
+  }
 `;
 
 export const SignUpAds = styled.div`
   width: 55%;
   background: ${COLORS.PRIMARY};
   overflow: hidden;
+  @media screen and (max-width: 740px) {
+    width: 100%;
+    margin-top: 50px;
+    padding: 20px 0;
+  }
 `;
 
 export const ForgotPasswordText = styled.div`

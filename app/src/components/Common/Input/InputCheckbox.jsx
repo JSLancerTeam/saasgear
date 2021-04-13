@@ -24,12 +24,12 @@ const CheckMark = styled.label`
     content: '';
     position: absolute;
     display: none;
-    left: 9px;
-    top: 5px;
+    left: 8px;
+    top: 3px;
     width: 5px;
     height: 10px;
     border: 1px solid ${COLORS.WHITE};
-    border-width: 0 2px 2px 0;
+    border-width: 0 2px 2.3px 0;
     transform: rotate(45deg);
   }
 `;

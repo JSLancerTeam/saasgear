@@ -1,7 +1,7 @@
 import { createWriteStream } from 'fs';
 import { join } from 'path';
 import { ApolloError } from 'apollo-server-express';
-import { findUser, updateUser } from '../../repository/user.repository';
+import { findUser, updateUser } from '~/repository/user.repository';
 import logger from '~/utils/logger';
 import { FOLDER_PATHS } from '~/utils/folder-path';
 

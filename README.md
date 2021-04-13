@@ -1,8 +1,11 @@
+[Saas Gear](https://github.com/JSLancerTeam/saasgear)  
+  
+SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new SaaS project quickly.
 
-SaaS Gear is a React and NodeJS framework that help you build SaaS faster.
-
-
-Introduction: https://www.notion.so/Saas-Gear-9f791fb27d3b440584e4a5408e19c8d4
+## Table of contents
+- [Technology stack](#technology-stack)
+- [Developers](#developers)
+- [Details](#details)
 
 ## Technology stack
 
@@ -33,62 +36,29 @@ Introduction: https://www.notion.so/Saas-Gear-9f791fb27d3b440584e4a5408e19c8d4
 ### Payment
 - stripe
 
+## Developers
+- David Tran - [davidtran](http://github.com/davidtran)
+- Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
+- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)
 ## License
 All code in this repository is provided under the MIT  
 <br>
   
-## Set up with Docker
-### 1. Create env  
-  + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
-### 2. Build Docker
-    > You must be in root source
-  + 2.1. Build all Dockerfile
-    + Run ```docker-compose build```
-  + 2.2. Start docker containers
-    + Run ```docker-compose up -d``` to start all container
+## Details
+[:loudspeaker: Introduction](https://www.notion.so/1b80e32f72664f888ad72938dda0e655)
 
-### 3. Setup hosts
-  + 3.1 Open `hosts` file to edit  
-    > If you are using Linux or MacOS
-    + Run command ```sudo nano /etc/hosts```  
+[:watermelon: Prerequisite services](https://www.notion.so/4c0262f5369f45c9a73ef7f874111685)
 
-    > If you are using Window 10
-    + Open Notepad with `Administrator`
-    + In Notepad, click `File > Open`
-    + Navigate to `c:\windows\system32\drivers\etc`
-    + In the lower-right corner, just above the `Open` button, click the drop-down menu to change the file type to `All Files`.
-    + Choose `hosts` file to edit
-  + 3.2 Update `hosts` file  
-    > Please paste this to your `host` file
-    ```
-    127.0.0.1	saasgear.local
-    127.0.0.1	api-saasgear.local
-    127.0.0.1	landing-saasgear.local
-    ```
-  + 3.3 Save and exit
+[:oncoming_automobile: Setup project](https://www.notion.so/8d1e7f8ccd82481e9dd7a9a1948dabb6)
 
-### 4. Run in browser
-  + Open your browser and type
-    + For Front-end: `http://saasgear.local`
-    + For Back-end: `http://api-saasgear.local/graphql`
-    + For Landing page: `http://landing-saasgear.local`
-  + If you don't want to config `hosts` file  
-    + You can run into:
-      + For Front-end: `http://localhost:3002`
-      + For Back-end: `http://localhost:5001/graphql`
-      + For Landing page: `http://localhost:4001`
+[:blue_square: Database & migration](https://www.notion.so/19542c8def044cbbacce7ea35935b748)
 
-### 5. Custom domain
-  + If you want to custom domain to your favorite, You can:
-    + Go to `systems/docker-services/nginx/conf`
-    + Choose your app you want to custom domain
-    + Open it and change `server_name` option to your domain.
-    + Save and run
-      + `docker-compose build nginx`
-      + `docker-compose restart nginx`
-      + Change `hosts` file and add `127.0.0.1 YOUR_DOMAIN_HERE`
-### 6. Backend Knex
-  + Knex is installed in `api` containers
-  + So if you want to create migrate or anything. You can access to docker container:
-    > docker-compose exec api /bin/bash
-  + And run create migrate. Good luck!
+[:globe_with_meridians: GraphQL](https://www.notion.so/37c7124e19d54286bc88cd2073af0763)
+
+[:closed_lock_with_key: Authentication](https://www.notion.so/7730e672a5134823aa62066c52033669)
+
+[:envelope: Email](https://www.notion.so/b7a7f355cad14f5e971b32c322462372)
+
+[:credit_card: Stripe subscriptions](https://www.notion.so/9dd1cc634f03439a8b8a3ba01030f7f9)
+
+[:ear_of_rice: Redux toolkit](https://www.notion.so/9f873e9d7b7d474d856ec511e184e9b6)

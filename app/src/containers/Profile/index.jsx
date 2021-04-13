@@ -16,7 +16,6 @@ const ContentPageStyle = styled(ContentPage)`
 
 const Profile = () => {
   const { data, loading } = useSelector((state) => state.user);
-  console.log({ data });
 
   return (
     <div>

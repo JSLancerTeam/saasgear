@@ -27,20 +27,14 @@ export async function changeUserAvatar(fileData, user) {
     const stream = file.createReadStream();
     await new Promise((resolve, reject) => {
       const writeStream = createWriteStream(join(FOLDER_PATHS.avatarDir, fileName));
-      writeStream.on('finish', () => {
-        console.log('Go here');
-        return resolve();
-      });
-      writeStream.on('error', async (error) => {
-        reject(error);
-      });
-
-      // stream.on('error', (error) => writeStream.destroy(error));
+      writeStream.on('finish', () => resolve());
+      writeStream.on('error', async (error) => reject(error));
+      stream.on('error', (error) => writeStream.destroy(error));
       stream.pipe(writeStream);
     });
-    return { fileName };
+    await updateUser(user.id, { avatar_url: fileName });
+    return { url: fileName };
   } catch (error) {
-    console.log(error);
     logger.error(error);
     throw new ApolloError('Something went wrong!');
   }

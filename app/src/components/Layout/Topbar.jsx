@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { resolveAvatarPath } from '@/helpers/avatar.helper';
 import Avatar from '@/assets/images/avatar.jpg';
 import { COLORS } from '@/constants/style';
 import { ReactComponent as ArrowDownIcon } from '@/assets/images/svg/arrow-down-18.svg';
@@ -41,8 +43,10 @@ const AvatarWrapper = styled.div`
   align-items: center;
 
   img {
-    width: 100%;
     border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
   }
 `;
 
@@ -130,7 +134,10 @@ const SignoutBtn = styled.button`
   cursor: pointer;
 `;
 
-const Topbar = ({ signout, user }) => {
+const Topbar = ({ signout }) => {
+  const {
+    data: { avatarUrl, name },
+  } = useSelector((state) => state.user);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const profileRef = useRef(null);
 
@@ -153,9 +160,9 @@ const Topbar = ({ signout, user }) => {
       <RightContent>
         <Profile onClick={() => setIsShowMenu(!isShowMenu)} ref={profileRef}>
           <AvatarWrapper>
-            <img src={Avatar} alt="avatar" />
+            <img src={resolveAvatarPath(avatarUrl, Avatar)} alt="avatar" />
           </AvatarWrapper>
-          <Name>{user?.name}</Name>
+          <Name>{name}</Name>
           <ArrowDownIcon />
         </Profile>
       </RightContent>
@@ -177,7 +184,6 @@ const Topbar = ({ signout, user }) => {
 
 Topbar.propTypes = {
   signout: PropTypes.func,
-  user: PropTypes.object,
 }
 
 export default Topbar;

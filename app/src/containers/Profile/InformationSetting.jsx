@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -7,7 +8,12 @@ import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
+import { setProfileUser } from '@/features/auth/user';
+
+import { resolveAvatarPath } from '@/helpers/avatar.helper';
+
 import updateProfileQuery from '@/queries/user/updateProfile';
+import updateProfileAvatarQuery from '@/queries/user/updateUserAvatar';
 import AccountForm from '@/components/Profile/AccountForm';
 import AvatarIcon from '@/assets/images/avatar.jpg';
 import { COLORS } from '@/constants/style';
@@ -51,6 +57,9 @@ const Avatar = styled.label`
   img {
     border-radius: 100%;
     width: 100%;
+    width: 62px;
+    height: 62px;
+    object-fit: cover;
   }
 `;
 
@@ -103,7 +112,8 @@ const AccountSchema = yup.object().shape({
 });
 
 const InformationSetting = ({ user }) => {
-  const { register, handleSubmit, errors } = useForm({
+  const dispatch = useDispatch();
+  const { register, handleSubmit, errors, setValue, getValues, watch } = useForm({
     resolver: yupResolver(AccountSchema),
     defaultValues: user,
   });
@@ -114,6 +124,11 @@ const InformationSetting = ({ user }) => {
   const [updateProfileMutation, { error, loading }] = useMutation(
     updateProfileQuery,
   );
+  const [
+    updateProfileAvatarMutation,
+    { error: updateAvatarError, loading: isUpdatingAvatar },
+  ] = useMutation(updateProfileAvatarQuery);
+
 
   async function onSubmit(dataForm) {
     const { name, company, position } = dataForm;
@@ -133,24 +148,52 @@ const InformationSetting = ({ user }) => {
     }
   }
 
-  function changeProfile(e) {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.size > 2 * 1000 * 1000) {
-        toast.error('File is too big');
-        return;
+  async function changeProfile(e) {
+    try {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > 2 * 1000 * 1000) {
+          toast.error('File is too big');
+          return;
+        }
+        const { data } = await updateProfileAvatarMutation({
+          variables: {
+            file,
+          },
+        });
+        if (data && data.updateProfileAvatar && data.updateProfileAvatar.url) {
+          dispatch(setProfileUser({ data: {avatarUrl: data.updateProfileAvatar.url}, loading: isUpdatingAvatar }));
+          setValue('avatarUrl', data.updateProfileAvatar.url);
+          toast.success('Change avatar successfully');
+        }
       }
-      console.log({ file })
+    } catch (errorChangeProfile) {
+      toast.error('Can not update your avatar');
     }
   }
+
+  useEffect(() => {
+    register('avatarUrl');
+    watch('avatarUrl');
+  }, []);
+
+  useEffect(() => {
+    setValue('avatarUrl', user.avatarUrl);
+  }, [user.avatarUrl]);
 
   return (
     <Wrapper expand={isOpen}>
       <Header onClick={() => setIsOpen(!isOpen)}>
         <AvatarWrapper>
           <Avatar htmlFor="avatar">
-            <img src={AvatarIcon} alt="avatar" />
-            <input type="file" id="avatar" hidden onChange={changeProfile} accept="image/*" />
+            <img src={resolveAvatarPath(getValues('avatarUrl'), AvatarIcon)} alt="avatar" />
+            <input
+              type="file"
+              id="avatar"
+              hidden
+              onChange={changeProfile}
+              accept="image/*"
+            />
           </Avatar>
           <Info>
             <Name>{user.name}</Name>
@@ -165,9 +208,9 @@ const InformationSetting = ({ user }) => {
       <AccountForm
         onSubmit={handleSubmit(onSubmit)}
         register={register}
-        loading={loading}
+        loading={loading || isUpdatingAvatar}
         errors={errors}
-        apiError={error?.message}
+        apiError={error?.message || updateAvatarError?.message}
         openPopupDeleteAccount={() => setIsOpenModalDeleteAccount(true)}
       />
       <DeleteAccount

@@ -30,7 +30,7 @@ const AdminLayout = ({ signout, user }) => (
   <LayoutWrapper>
     <Sidebar />
     <ContentWrapper>
-      <Topbar signout={signout} user={user} />
+      <Topbar signout={signout} />
       <Content>
         <Switch>
           {routes.map((route) => (

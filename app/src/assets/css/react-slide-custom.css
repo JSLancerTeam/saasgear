@@ -18,3 +18,9 @@
 .react-slideshow-container+ul.indicators .each-slideshow-indicator:before {
   background: #ffffff;
 }
+
+@media screen and (max-width: 740px) {
+  .indicators {
+    bottom: -15px;
+  }
+}

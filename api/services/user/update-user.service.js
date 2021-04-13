@@ -1,4 +1,6 @@
+import { ApolloError } from 'apollo-server-errors';
 import { findUser, updateUser } from '../../repository/user.repository';
+import logger from '../../utils/logger';
 
 export async function updateProfile(id, name, company, position) {
   try {

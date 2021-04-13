@@ -1,4 +1,4 @@
-# [Stripe subscriptions](https://github.com/JSLancerTeam/saasgear/docs/stripe.md)
+# [:credit_card: Stripe subscriptions](https://github.com/JSLancerTeam/saasgear/docs/stripe.md)
 Subscription is the lifeblood for every SaaS. In SaaSgear, we use Stripe to handle subscription. In order to use Stripe, you need to have a Stripe account first and then copy and paste your Stripe API key to .env file. Follow this tutorial if you haven't done that.
 
 ## Create Stripe products and prices

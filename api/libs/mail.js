@@ -15,7 +15,7 @@ export default async function sendMail(to, subject, html) {
       html,
     });
     return true;
-  } catch (e) {
+  } catch (error) {
     Sentry.captureException(error);
     return true;
   }

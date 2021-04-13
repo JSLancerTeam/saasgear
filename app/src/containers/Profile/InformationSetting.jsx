@@ -41,7 +41,7 @@ const AvatarWrapper = styled.div`
   align-items: center;
 `;
 
-const Avatar = styled.div`
+const Avatar = styled.label`
   width: 62px;
   height: 62px;
   display: flex;
@@ -133,12 +133,24 @@ const InformationSetting = ({ user }) => {
     }
   }
 
+  function changeProfile(e) {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1000 * 1000) {
+        toast.error('File is too big');
+        return;
+      }
+      console.log({ file })
+    }
+  }
+
   return (
     <Wrapper expand={isOpen}>
       <Header onClick={() => setIsOpen(!isOpen)}>
         <AvatarWrapper>
-          <Avatar>
+          <Avatar htmlFor="avatar">
             <img src={AvatarIcon} alt="avatar" />
+            <input type="file" id="avatar" hidden onChange={changeProfile} accept="image/*" />
           </Avatar>
           <Info>
             <Name>{user.name}</Name>
@@ -149,7 +161,7 @@ const InformationSetting = ({ user }) => {
           <span>Edit Profile</span>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
-      </Header>
+      </Header>Avatar
       <AccountForm
         onSubmit={handleSubmit(onSubmit)}
         register={register}

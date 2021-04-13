@@ -13,9 +13,13 @@
     "db:create": "knex --esm migrate:make --knexfile config/knexfile.cjs",
     "db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
     "db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs",
-    "postinstall": "link-module-alias",
+    "postinstall": "link-module-alias && npx npm-force-resolutions",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --ext .js . --fix"
+  },
+  "resolutions": {
+    "**/**/fs-capacitor": "^6.2.0",
+    "**/graphql-upload": "^11.0.0"
   },
   "dependencies": {
     "@sentry/node": "^5.27.6",

@@ -8,6 +8,7 @@ const { gql } = Apollo;
 const rootSchema = gql`
   scalar Date
   scalar JSON
+  scalar Upload
 
   type Query {
     _: Boolean

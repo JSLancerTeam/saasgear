@@ -13,20 +13,13 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 ![Frontend Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/front-end-stack.png)
 
 ### Back-end
-- expressjs
-- jwt
-- apollo-server-express
-- dotenv
-- helmet
-- redis
-- knex
+![API Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/backend-stack.png)
 
 ### Support databases
-- mysql
-- mongodb
+![Databasee Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/database-stack.png)
 
 ### Payment
-- stripe
+![Payment Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/payment-stack.png)
 
 ## Developers
 - David Tran - [davidtran](http://github.com/davidtran)

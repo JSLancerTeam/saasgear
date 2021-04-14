@@ -2,6 +2,7 @@
 
 ## Set up
 This app required Node.js version >= 14. Because some features are not supported in older Node.js.  
+You can check your Node.js version by using command: `node -v`
 ### 1. Create env
   + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
 

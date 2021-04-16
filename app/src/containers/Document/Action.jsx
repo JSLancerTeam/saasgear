@@ -26,6 +26,9 @@ const TitlePageStyle = styled(TitlePage)`
 
 const SaveBtn = styled(Button)`
   width: 264px;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ActionDocumentSchema = yup.object().shape({

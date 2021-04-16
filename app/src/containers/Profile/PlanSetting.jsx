@@ -26,13 +26,18 @@ const TitleContentStyle = styled(TitleContent)`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const ToggleYearly = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 25px;
-
+  @media screen and (max-width: 768px) {
+    margin-top: 25px;
+  }
   label {
     margin: 0 auto;
   }
@@ -43,6 +48,10 @@ const RightContent = styled.div`
   padding-left: 24px;
   padding-top: 74px;
   display: flex;
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    flex-direction: column-reverse;
+  }
 `;
 
 const CurrentPlanWrapper = styled.div`

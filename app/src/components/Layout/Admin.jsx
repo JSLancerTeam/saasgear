@@ -22,11 +22,10 @@ const Content = styled.div`
   flex-grow: 1;
   background-color: ${COLORS.BODY};
   overflow-y: auto;
-  padding: 32px 24px;
-  max-height: calc(100vh - 80px);
+  padding: 32px 15px;
 `;
 
-const AdminLayout = ({ signout, user }) => (
+const AdminLayout = ({ signout }) => (
   <LayoutWrapper>
     <Sidebar />
     <ContentWrapper>
@@ -50,7 +49,6 @@ const AdminLayout = ({ signout, user }) => (
 
 AdminLayout.propTypes = {
   signout: PropTypes.func,
-  user: PropTypes.object,
 };
 
 export default AdminLayout;

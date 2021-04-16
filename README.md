@@ -8,23 +8,23 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 - [Technology stack](#technology-stack)
 
 ## Details
-[:loudspeaker: Introduction](https://github.com/JSLancerTeam/saasgear/docs/introduction.md)
+[:loudspeaker: Introduction](https://github.com/JSLancerTeam/saasgear/blob/master/docs/introduction.md)
   
-[:watermelon: Prerequisite services](https://github.com/JSLancerTeam/saasgear/docs/prerequisite.md)
+[:watermelon: Prerequisite services](https://github.com/JSLancerTeam/saasgear/blob/master/docs/prerequisite.md)
   
-[:oncoming_automobile: Setup project](https://github.com/JSLancerTeam/saasgear/docs/)
+[:oncoming_automobile: Setup project](https://github.com/JSLancerTeam/saasgear/blob/master/docs/)
   
-[:blue_square: Database & migration](https://github.com/JSLancerTeam/saasgear/docs/database.md)
+[:blue_square: Database & migration](https://github.com/JSLancerTeam/saasgear/blob/master/docs/database.md)
   
-[:globe_with_meridians: GraphQL](https://github.com/JSLancerTeam/saasgear/docs/graphql.md)
+[:globe_with_meridians: GraphQL](https://github.com/JSLancerTeam/saasgear/blob/master/docs/graphql.md)
   
-[:closed_lock_with_key: Authentication](https://github.com/JSLancerTeam/saasgear/docs/authentication.md)
+[:closed_lock_with_key: Authentication](https://github.com/JSLancerTeam/blob/master/saasgear/docs/authentication.md)
   
-[:envelope: Email](https://github.com/JSLancerTeam/saasgear/docs/mail.md)
+[:envelope: Email](https://github.com/JSLancerTeam/saasgear/blob/master/docs/mail.md)
   
-[:credit_card: Stripe subscriptions](https://github.com/JSLancerTeam/saasgear/docs/stripe.md)
+[:credit_card: Stripe subscriptions](https://github.com/JSLancerTeam/saasgear/blob/master/docs/stripe.md)
   
-[:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/docs/redux-toolkit.md)  
+[:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/blob/master/docs/redux-toolkit.md)  
   
 ## Developers
 - David Tran - [davidtran](http://github.com/davidtran)

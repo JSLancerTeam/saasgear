@@ -12,7 +12,7 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
   
 [:watermelon: Prerequisite services](https://github.com/JSLancerTeam/saasgear/blob/master/docs/prerequisite.md)
   
-[:oncoming_automobile: Setup project](https://github.com/JSLancerTeam/saasgear/blob/master/docs/)
+[:oncoming_automobile: Setup project](https://github.com/JSLancerTeam/saasgear/blob/master/docs/setup.md)
   
 [:blue_square: Database & migration](https://github.com/JSLancerTeam/saasgear/blob/master/docs/database.md)
   

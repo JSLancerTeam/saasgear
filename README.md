@@ -28,8 +28,8 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 
 ## Developers
 - David Tran - [davidtran](http://github.com/davidtran)
-- Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
 - Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)
+- Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
 
 ## Technology stack
 

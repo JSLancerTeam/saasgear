@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { COLORS } from '@/constants/style';
- 
+
 const GlobalStyle = createGlobalStyle`
   .public-DraftEditor-content {
     min-height: 500px;
@@ -27,5 +27,5 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 `;
- 
+
 export default GlobalStyle;

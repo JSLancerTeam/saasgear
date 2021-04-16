@@ -51,6 +51,6 @@ const AdminLayout = ({ signout, user }) => (
 AdminLayout.propTypes = {
   signout: PropTypes.func,
   user: PropTypes.object,
-}
+};
 
 export default AdminLayout;

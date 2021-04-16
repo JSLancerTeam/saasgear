@@ -7,7 +7,7 @@ import WYSIWYGEditor from './WYSIWYG';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 import Input from '../Common/Input/Input';
 
 const ButtonGroup = styled.div`
@@ -19,39 +19,45 @@ const SaveBtn = styled(Button)`
   width: 264px;
 `;
 
-const DocumentForm = ({ editorContent, onSubmit, register, control, formErrors, apiError, isSubmitting }) => (
+const DocumentForm = ({
+  editorContent,
+  onSubmit,
+  register,
+  control,
+  formErrors,
+  apiError,
+  isSubmitting,
+}) => (
   <form onSubmit={onSubmit}>
     <FormGroup>
       <FormGroupLabel>Name</FormGroupLabel>
       <Input name="name" ref={register} />
-      {formErrors?.name && (
-        <ErrorText message={formErrors.name.message} />
-      )}
+      {formErrors?.name && <ErrorText message={formErrors.name.message} />}
     </FormGroup>
     <FormGroup>
       <FormGroupLabel>Body</FormGroupLabel>
       <Controller
         name="body"
         control={control}
-        defaultValue=''
-        render={({ onChange }) => <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />}
+        defaultValue=""
+        render={({ onChange }) => (
+          <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />
+        )}
       />
-      {formErrors?.body && (
-        <ErrorText message={formErrors.body.message} />
-      )}
+      {formErrors?.body && <ErrorText message={formErrors.body.message} />}
     </FormGroup>
-    {apiError && (
-      <ErrorText message={apiError} />
-    )}
+    {apiError && <ErrorText message={apiError} />}
 
     <ButtonGroup>
-      <SaveBtn color="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Please wait' : 'Save'}</SaveBtn>
+      <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Please wait' : 'Save'}
+      </SaveBtn>
     </ButtonGroup>
   </form>
-)
+);
 
 DocumentForm.propTypes = {
-  editorContent : PropTypes.string,
+  editorContent: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   control: PropTypes.object.isRequired,

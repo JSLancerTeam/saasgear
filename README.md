@@ -1,5 +1,5 @@
-# [Saas Gear](https://github.com/JSLancerTeam/saasgear)  
-  
+# [Saas Gear](https://github.com/JSLancerTeam/saasgear)
+
 SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new SaaS project quickly.
 
 ## Table of contents
@@ -25,12 +25,12 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 [:credit_card: Stripe subscriptions](https://github.com/JSLancerTeam/saasgear/blob/master/docs/stripe.md)
   
 [:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/blob/master/docs/redux-toolkit.md)  
-  
+
 ## Developers
 - David Tran - [davidtran](http://github.com/davidtran)
 - Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
-- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)  
-  
+- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)
+
 ## Technology stack
 
 ### Front-end
@@ -43,28 +43,8 @@ SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new
 ![Databasee Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/database-stack.png)
 
 ### Payment
-![Payment Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/payment-stack.png)  
+![Payment Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/payment-stack.png)
 <br />
-  
-## License
-All code in this repository is provided under the MIT  
-=======
-- stripe
-
-## Set up
-### 1. Create env
-  + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
-
-### 2. Start scripts
-  + For backend: `npm run dev`
-  + For app: `npm run start`
-  + For landing: `npm run dev`
-### 3. Run in browser
-  + Open your browser and type
-    + For Front-end: `http://localhost:3000`
-    + For Back-end: `http://localhost:5000`
-    + For Landing page: `http://localhost:4000`
-
 
 ## License
 All code in this repository is provided under the MIT

@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { ReactComponent as EnvelopeIcon} from '@/assets/images/svg/envelope.svg';
+import { ReactComponent as EnvelopeIcon } from '@/assets/images/svg/envelope.svg';
 import FormGroup from '../Common/FormGroup';
-import FormControl from '../Common/FormControl/FormControl';
+import FormControl from '../Common/FormControl';
 import ErrorText from '../Common/ErrorText';
 import Input from '../Common/Input/Input';
-import Button from '../Common/Button/Button';
+import Button from '../Common/Button';
 
 const FormControlStyle = styled(FormControl)`
   display: flex;
@@ -29,20 +29,31 @@ const InviteBtn = styled(Button)`
   svg {
     margin-right: 10px;
     *[stroke] {
-      stroke: #FFFFFF;
+      stroke: #ffffff;
     }
     *[fill] {
-      fill: #FFFFFF;
+      fill: #ffffff;
     }
   }
 `;
 
-function InviteMemberForm({ onSubmit, register, formErrors, apiError, isSubmiting }) {
+function InviteMemberForm({
+  onSubmit,
+  register,
+  formErrors,
+  apiError,
+  isSubmiting,
+}) {
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
         <FormControlStyle>
-          <InviteInput type="text" placeholder="david@jslancer.com" name="emailMember" ref={register} />
+          <InviteInput
+            type="text"
+            placeholder="david@jslancer.com"
+            name="emailMember"
+            ref={register}
+          />
           <InviteBtn type="submit" color="primary" disabled={isSubmiting}>
             <EnvelopeIcon />
             <span>Invite</span>

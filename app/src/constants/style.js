@@ -14,4 +14,4 @@ export const COLORS = {
   GREEN: '#1FD0A3',
   GRAY: '#ECEFF8',
   BODY: '#F4F7FC',
-}
+};

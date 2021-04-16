@@ -15,15 +15,17 @@ import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-dow
 import DeleteAccount from './DeleteAccount';
 
 const Wrapper = styled.div`
-  border-bottom: 1px solid #EAEDF7;
+  border-bottom: 1px solid #eaedf7;
   box-shadow: 0px 2px 4px rgba(28, 41, 90, 0.0367952);
   max-height: 90px;
   transition: max-height 0.3s ease-in-out;
   overflow: hidden;
 
-  ${(props) => props.expand && css`
-    max-height: 1000px;
-  `}
+  ${(props) =>
+    props.expand &&
+    css`
+      max-height: 1000px;
+    `}
 `;
 
 const Header = styled.div`
@@ -89,42 +91,42 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)`
   transform: rotate(0);
   transition: transform 0.3s ease;
 
-  ${(props) => props.expand && css`
-    transform: rotate(-180deg);
-  `}
+  ${(props) =>
+    props.expand &&
+    css`
+      transform: rotate(-180deg);
+    `}
 `;
 
 const AccountSchema = yup.object().shape({
-  firstName: yup.string().required('First name is required'),
-  lastName: yup.string().required('Last name is required'),
+  name: yup.string().required('Name is required'),
 });
 
 const InformationSetting = ({ user }) => {
-  const userName = user?.name?.split(' ');
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(AccountSchema),
-    defaultValues: {
-      ...user,
-      firstName: userName?.[0],
-      lastName: userName?.[1],
-    },
+    defaultValues: user,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenModalDeleteAccount, setIsOpenModalDeleteAccount] = useState(false);
-  const [updateProfileMutation, { error, loading }] = useMutation(updateProfileQuery);
+  const [isOpenModalDeleteAccount, setIsOpenModalDeleteAccount] = useState(
+    false,
+  );
+  const [updateProfileMutation, { error, loading }] = useMutation(
+    updateProfileQuery,
+  );
 
   async function onSubmit(dataForm) {
-    const { firstName, lastName, company, position } = dataForm;
+    const { name, company, position } = dataForm;
     const params = {
-      name: `${firstName} ${lastName}`,
+      name,
       company,
       position,
-    }
+    };
 
     try {
       const { data } = await updateProfileMutation({ variables: params });
       if (data?.updateProfile) {
-        toast.success('Update profile successfully!')
+        toast.success('Update profile successfully!');
       }
     } catch (err) {
       console.log(err);
@@ -161,8 +163,8 @@ const InformationSetting = ({ user }) => {
         closeModal={() => setIsOpenModalDeleteAccount(false)}
       />
     </Wrapper>
-  )
-}
+  );
+};
 
 InformationSetting.propTypes = {
   user: PropTypes.object.isRequired,

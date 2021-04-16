@@ -24,19 +24,19 @@ const Input = styled.input`
 
   &:checked + label::after {
     left: calc(100% - 2px);
-	  transform: translateX(-100%);
+    transform: translateX(-100%);
   }
 `;
 
 const LabelInput = styled.label`
   cursor: pointer;
-	text-indent: -9999px;
-	width: 46px;
-	height: 24px;
-	background: ${COLORS.GRAY};
-	display: block;
-	border-radius: 8px;
-	position: relative;
+  text-indent: -9999px;
+  width: 46px;
+  height: 24px;
+  background: ${COLORS.GRAY};
+  display: block;
+  border-radius: 8px;
+  position: relative;
 
   &:active:after {
     width: 25px;
@@ -49,20 +49,22 @@ const LabelInput = styled.label`
     left: 2px;
     width: 20px;
     height: 20px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 6px;
     transition: 0.3s;
   }
 `;
 
-const Toggle = forwardRef(({
-  defaultChecked,
-  label,
-  ...props
-}, ref) => (
+const Toggle = forwardRef(({ defaultChecked, label, ...props }, ref) => (
   <InputWrapper>
     {label && <Label>{label}</Label>}
-    <Input type="checkbox" defaultChecked={defaultChecked} {...props} ref={ref} id="switch" />
+    <Input
+      type="checkbox"
+      defaultChecked={defaultChecked}
+      {...props}
+      ref={ref}
+      id="switch"
+    />
     <LabelInput htmlFor="switch" />
   </InputWrapper>
 ));
@@ -70,6 +72,6 @@ const Toggle = forwardRef(({
 Toggle.propTypes = {
   defaultChecked: PropTypes.bool,
   label: PropTypes.string,
-}
+};
 
 export default React.memo(Toggle);

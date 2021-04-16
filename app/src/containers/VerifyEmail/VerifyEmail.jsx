@@ -1,93 +1,88 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useParams, useHistory } from 'react-router-dom';
-import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
-import verifyTokenQuery from '@/queries/teams/verifyInviteToken';
-import getProfileQuery from '@/queries/auth/getProfile';
-import joinTeamQuery from '@/queries/teams/joinTeam';
-import Logo from '@/components/Common/Logo';
+import { useHistory } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
+import getQueryParam from '@/utils/getQueryParam';
+import verifyEmailQuery from '@/queries/auth/verifyEmail';
 import {
   ForgotPasswordWrapper,
   Overlay,
   ForgotPasswordContainer,
-  ForgotPasswordText,
-  ForgotPasswordDescription,
   SquareIconTop,
   SmallSquareBottom,
   SmallSquareTop,
   SmallSquareGrid,
   SquareIconBottom,
   CircleIcon,
+  ForgotPasswordText,
+  ForgotPasswordDescription,
 } from '@/components/Auth/AuthForm';
-import Button from '@/components/Common/Button';
+import GoBack from '@/components/Common/GoBack';
+import Logo from '@/components/Common/Logo';
+import Badge from '@/components/Common/Badge';
 
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-
-  button:first-child {
-    margin-right: 32px;
-  }
-`;
-
-function AcceptInvitation() {
-  const { invitationToken } = useParams();
-  const [teamInfo, setTeamInfo] = useState(null);
+export default function VerifyEmail() {
+  const query = getQueryParam();
+  const token = query.get('token');
   const history = useHistory();
-  const [verify, { data, loading, error }] = useLazyQuery(verifyTokenQuery);
-  const {
-    data: userInfo,
-    error: getProfileError,
-    loading: getProfileLoading,
-  } = useQuery(getProfileQuery);
-  const [joinTeam] = useMutation(joinTeamQuery);
+  const [verifyEmailMutation, { error, loading }] = useMutation(
+    verifyEmailQuery,
+  );
+  const [verifyResult, setVerifyResult] = useState(null);
 
   useEffect(() => {
-    if (!getProfileLoading && userInfo?.profileUser) {
-      if (userInfo?.profileUser) verify({ variables: { invitationToken } });
-      else history.replace(`/auth/signin?invitation=${invitationToken}`);
-    }
-  }, [getProfileError, userInfo]);
-
-  useEffect(() => {
-    if (!loading && data?.verifyInvitationToken) {
-      setTeamInfo(data.verifyInvitationToken);
-    }
-    if (error) {
-      history.push('/auth/signin');
-    }
-  }, [data, error, loading]);
-
-  async function handleUserJoinTeam(type) {
-    try {
-      await joinTeam({ variables: { token: invitationToken, type } });
+    if (!token) {
       history.replace('/');
-    } catch (e) {
-      console.error(e);
     }
+    verify();
+  }, []);
+
+  async function verify() {
+    const { data } = await verifyEmailMutation({
+      variables: { token },
+    });
+    if (data) setVerifyResult(data);
   }
 
-  return loading && getProfileLoading ? (
-    <div> Loading ....</div>
-  ) : (
+  return (
     <ForgotPasswordWrapper>
       <Overlay />
       <ForgotPasswordContainer>
+        <GoBack to="/auth/signin">
+          <svg
+            width="18"
+            height="14"
+            viewBox="0 0 18 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17 7H1"
+              stroke="#7C88B1"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M7 13L1 7L7 1"
+              stroke="#7C88B1"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </GoBack>
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>Accept Invitation?</ForgotPasswordText>
+        <ForgotPasswordText>Verify Account</ForgotPasswordText>
         <ForgotPasswordDescription>
-          You&apos; ve been invitated to join{' '}
-          <strong>{teamInfo?.teamName}</strong> by{' '}
-          <strong>{teamInfo?.owner}</strong>
+          Enter your username, or the email address you used to register. We
+          will send you an email containing your username and a link to reset
+          your password.
         </ForgotPasswordDescription>
-        <ButtonGroup>
-          <Button color="primary" onClick={() => handleUserJoinTeam('accept')}>
-            Accept
-          </Button>
-          <Button onClick={() => handleUserJoinTeam('decline')}>Decline</Button>
-        </ButtonGroup>
+        <Badge type={verifyResult !== null ? 'success' : 'error'}>
+          {verifyResult !== null ? 'Verify email success' : error?.message}
+        </Badge>
         <SquareIconTop>
           <svg
             width="496"
@@ -203,5 +198,3 @@ function AcceptInvitation() {
     </ForgotPasswordWrapper>
   );
 }
-
-export default AcceptInvitation;

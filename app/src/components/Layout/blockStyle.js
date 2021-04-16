@@ -10,8 +10,8 @@ export const TitlePage = styled.h3`
 `;
 
 export const ContentPage = styled.div`
-  background: #FFFFFF;
-  border: 1px solid #EAEDF7;
+  background: #ffffff;
+  border: 1px solid #eaedf7;
   box-shadow: 0px 2px 4px rgba(28, 41, 90, 0.0367952);
   border-radius: 10px;
   padding: 24px;

@@ -1,13 +1,13 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { EditorState, ContentState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import draftToHtml from "draftjs-to-html";
+import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-import { COLORS } from "@/constants/style";
+import { COLORS } from '@/constants/style';
 
 const Wrapper = styled.div`
   .editor-wrapper {
@@ -32,23 +32,20 @@ const WYSIWYGEditor = ({ editorContent = '', onChange, className }) => {
 
   function onEditorStateChange(state) {
     setEditorState(state);
-    return onChange(
-      draftToHtml(convertToRaw(state.getCurrentContent()))
-    );
-  };
+    return onChange(draftToHtml(convertToRaw(state.getCurrentContent())));
+  }
 
   useEffect(() => {
     if (editorContent === '') {
-      setEditorState(EditorState.createEmpty())
+      setEditorState(EditorState.createEmpty());
     } else {
       const contentState = EditorState.createWithContent(
-        ContentState.createFromBlockArray(
-          htmlToDraft(editorContent)
-        ))
+        ContentState.createFromBlockArray(htmlToDraft(editorContent)),
+      );
 
-      setEditorState(contentState)
+      setEditorState(contentState);
     }
-  }, [editorContent])
+  }, [editorContent]);
 
   return (
     <Wrapper>
@@ -67,6 +64,6 @@ WYSIWYGEditor.propTypes = {
   onChange: PropTypes.func,
   className: PropTypes.string,
   editorContent: PropTypes.string,
-}
+};
 
 export default memo(WYSIWYGEditor);

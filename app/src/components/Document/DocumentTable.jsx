@@ -43,8 +43,9 @@ const DocumentTable = ({ data, total, loading, onFetch }) => (
           </tr>
         )}
 
-        {!loading && data.length > 0 && (
-          data.map(item => (
+        {!loading &&
+          data.length > 0 &&
+          data.map((item) => (
             <tr key={item.id}>
               <td>#{item.id}</td>
               <td>{item.name}</td>
@@ -55,8 +56,7 @@ const DocumentTable = ({ data, total, loading, onFetch }) => (
                 <Link to={`/document/view/${item.id}`}>View</Link>
               </ActionTd>
             </tr>
-          ))
-        )}
+          ))}
       </tbody>
     </Table>
     {total > 0 && (
@@ -74,6 +74,6 @@ DocumentTable.propTypes = {
   total: PropTypes.number,
   loading: PropTypes.bool,
   onFetch: PropTypes.func.isRequired,
-}
+};
 
 export default memo(DocumentTable);

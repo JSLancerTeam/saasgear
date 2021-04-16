@@ -10,14 +10,14 @@ export default function TeamMember({ teamMembers }) {
       <TitleContent>Team Members</TitleContent>
       <ListTeamMember teamMembers={teamMembers} />
     </ContentPage>
-  )
+  );
 }
 
 TeamMember.propTypes = {
   teamMembers: PropsType.arrayOf(
     PropsType.shape({
       teamName: PropsType.string,
-      teamID: PropsType.string
-    })
+      teamID: PropsType.string,
+    }),
   ),
-}
+};

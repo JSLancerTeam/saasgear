@@ -21,18 +21,19 @@ const CheckMark = styled.label`
   width: 24px;
   background-color: ${COLORS.WHITE};
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     display: none;
-    left: 9px;
-    top: 5px;
+    left: 8px;
+    top: 3px;
     width: 5px;
     height: 10px;
     border: 1px solid ${COLORS.WHITE};
-    border-width: 0 2px 2px 0;
+    border-width: 0 2px 2.3px 0;
     transform: rotate(45deg);
   }
-`
+`;
+
 const Input = styled.input`
   position: absolute;
   opacity: 0;
@@ -45,37 +46,37 @@ const Input = styled.input`
   &:checked ~ ${/* sc-selector */ CheckMark}::after {
     display: block;
   }
-`
+`;
 
-const Checkbox = React.forwardRef(({
-  type,
-  defaultChecked,
-  placeholder,
-  id,
-  ...props
-}, ref) => (
-  <InputWrapper>
-    <Input type={type} defaultChecked={defaultChecked} placeholder={placeholder} {...props} ref={ref} id={id} />
-    <CheckMark htmlFor={id} />
-  </InputWrapper>
-));
+const Checkbox = React.forwardRef(
+  ({ type, defaultChecked, placeholder, id, ...props }, ref) => (
+    <InputWrapper>
+      <Input
+        type={type}
+        defaultChecked={defaultChecked}
+        placeholder={placeholder}
+        {...props}
+        ref={ref}
+        id={id}
+      />
+      <CheckMark htmlFor={id} />
+    </InputWrapper>
+  ),
+);
 
 Checkbox.propTypes = {
-  defaultChecked: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  defaultChecked: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   type: PropTypes.oneOf(['checkbox', 'radio']),
   placeholder: PropTypes.string,
-  id: PropTypes.string
-}
+  id: PropTypes.string,
+};
 
 Checkbox.displayName = 'Input';
 
 Checkbox.defaultProps = {
   defaultChecked: false,
   type: 'text',
-  placeholder: null
-}
+  placeholder: null,
+};
 
 export default React.memo(Checkbox);

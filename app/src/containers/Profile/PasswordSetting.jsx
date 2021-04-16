@@ -64,6 +64,7 @@ const ActionItem = styled.span`
 
   @media screen and (max-width: 768px) {
     margin-right: 0;
+    text-align: left;
     display: ${(props) => props.mobile ? 'block' : 'none'};
   }
 `;

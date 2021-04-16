@@ -3,6 +3,7 @@ import { COLORS } from '@/constants/style';
 
 export const Table = styled.table`
   width: 100%;
+  border-collapse: collapse;
 
   tr {
     height: 56px;

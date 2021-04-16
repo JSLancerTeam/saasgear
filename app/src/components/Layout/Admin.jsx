@@ -23,6 +23,9 @@ const Content = styled.div`
   background-color: ${COLORS.BODY};
   overflow-y: auto;
   padding: 32px 15px;
+  @media screen and (max-width: 768px) {
+    min-height: calc(100vh - 64px);
+  }
 `;
 
 const AdminLayout = ({ signout }) => (

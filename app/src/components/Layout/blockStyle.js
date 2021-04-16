@@ -16,6 +16,9 @@ export const ContentPage = styled.div`
   border-radius: 10px;
   padding: 24px;
   margin-bottom: 25px;
+  @media screen and (max-width: 768px) {
+    padding: 24px 10px;
+  }
 `;
 
 export const TitleContent = styled.h5`

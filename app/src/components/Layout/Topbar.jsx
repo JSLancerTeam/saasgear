@@ -110,6 +110,9 @@ const ProfileMenu = styled.div`
   top: calc(100% + 17px);
   right: 10px;
   width: 200px;
+  @media screen and (max-width: 768px) {
+    top: 100%;
+  }
 `;
 
 const ProfileList = styled.ul`
@@ -131,6 +134,10 @@ const ProfileList = styled.ul`
     height: 0;
     border: 12px solid transparent;
     border-bottom-color: #EAEDF7;
+    @media screen and (max-width: 768px) {
+      left: unset;
+      right: 4px;
+    }
   }
 
   &:after {
@@ -144,6 +151,10 @@ const ProfileList = styled.ul`
     height: 0;
     border: 10px solid transparent;
     border-bottom-color: #FFFFFF;
+    @media screen and (max-width: 768px) {
+      left: unset;
+      right: 8px;
+    }
   }
 `;
 const ProfileItem = styled.li`

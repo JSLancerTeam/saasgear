@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import Modal, { ModalHeader, ModalContent, ModalFooter } from '../Common/Modal';
 import Button from '../Common/Button';
 import FormGroupLabel from '../Common/FormGroupLabel';
@@ -26,7 +26,7 @@ const EmailText = styled.label`
 `;
 
 const NoteLabel = styled(FormGroupLabel)`
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     font-size: 11px;
   }
 `;

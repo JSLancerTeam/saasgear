@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 
 export const TitlePage = styled.h3`
   font-weight: bold;
@@ -16,7 +16,7 @@ export const ContentPage = styled.div`
   border-radius: 10px;
   padding: 24px;
   margin-bottom: 25px;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     padding: 24px 10px;
   }
 `;

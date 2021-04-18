@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 
 const Overlay = styled.div`
   position: fixed;
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     max-width: 90%;
   }
 `;

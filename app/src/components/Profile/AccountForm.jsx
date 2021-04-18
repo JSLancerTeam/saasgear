@@ -2,7 +2,7 @@ import React from 'react';
 import PropsType from 'prop-types';
 import styled from 'styled-components';
 
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import Input from '../Common/Input/Input';
@@ -23,7 +23,8 @@ const ButtonGroup = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 32px;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -35,7 +36,8 @@ const DeleteLink = styled.div`
   color: ${COLORS.RED};
   margin-right: 25px;
   cursor: pointer;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     margin-bottom: 10px;
   }
 `;

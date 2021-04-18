@@ -1,6 +1,8 @@
 import React from 'react';
 import PropsType from 'prop-types';
 import styled from 'styled-components';
+
+import { mobileQuery } from '@/constants/style';
 import ErrorText from '../Common/ErrorText';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
@@ -16,7 +18,8 @@ const ButtonGroup = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-top: 32px;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     justify-content: flex-start;
   }
 `;

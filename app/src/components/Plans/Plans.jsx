@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as CheckCircleIcon } from '@/assets/images/svg/check-circle.svg';
 import Button from '../Common/Button';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     flex-direction: column;
   }
 `;
@@ -90,12 +91,12 @@ const PlanWrapper = styled.div`
 
   &:first-child {
     margin-right: 25px;
-    @media screen and (max-width: 768px) {
+    ${mobileQuery} {
       margin-right: 0;
     }
   }
 
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     width: 100%;
     max-width: 100%;
     margin-right: 0;

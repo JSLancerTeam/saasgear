@@ -12,7 +12,8 @@ import Avatar from '@/assets/images/avatar.jpg';
 import { COLORS } from '@/constants/style';
 import { ReactComponent as ArrowDownIcon } from '@/assets/images/svg/arrow-down-18.svg';
 import { ReactComponent as MenuIcon } from '@/assets/images/svg/menu.svg';
-import Input from '../Common/Input/Input';
+import Input from '@/components/Common/Input';
+import { mobileQuery } from 'constants/style';
 
 const Wrapper = styled.div`
   height: 80px;
@@ -22,7 +23,8 @@ const Wrapper = styled.div`
   padding-left: 25px;
   padding-right: 32px;
   position: relative;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     padding: 0 15px;
     height: 64px;
   }
@@ -30,12 +32,14 @@ const Wrapper = styled.div`
 
 const LeftContent = styled.div`
   position: relative;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     width: 100%;
     margin-right: 15px;
   }
+
   & > input {
-    @media screen and (max-width: 768px) {
+    ${mobileQuery} {
       height: 38px;
       padding-left: 30px;
     }
@@ -49,7 +53,8 @@ const MenuMobile = styled.div`
   transform: translateY(-50%);
   left: 10px;
   z-index: 15;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     display: block;
   }
 `
@@ -59,7 +64,8 @@ const RightContent = styled.div``;
 const SearchInput = styled(Input)`
   width: 468px;
   border-color: #D2D5E1;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     width: 100%;
   }
 `;
@@ -69,7 +75,8 @@ const Profile = styled.div`
   align-items: center;
   cursor: pointer;
   & > svg {
-    @media screen and (max-width: 768px) {
+
+    ${mobileQuery} {
       display: none;
     }
   }
@@ -87,7 +94,8 @@ const AvatarWrapper = styled.div`
     width: 50px;
     height: 50px;
     object-fit: cover;
-    @media screen and (max-width: 768px) {
+
+    ${mobileQuery} {
       width: 33.33px;
       height: 33.33px;
     }
@@ -100,7 +108,8 @@ const Name = styled.span`
   line-height: 22px;
   color: ${COLORS.SAPPHIRE_BLUE};
   margin: 0 8px;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     display: none;
   }
 `;
@@ -110,7 +119,8 @@ const ProfileMenu = styled.div`
   top: calc(100% + 17px);
   right: 10px;
   width: 200px;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     top: 100%;
   }
 `;
@@ -134,7 +144,8 @@ const ProfileList = styled.ul`
     height: 0;
     border: 12px solid transparent;
     border-bottom-color: #EAEDF7;
-    @media screen and (max-width: 768px) {
+
+    ${mobileQuery} {
       left: unset;
       right: 4px;
     }
@@ -151,7 +162,8 @@ const ProfileList = styled.ul`
     height: 0;
     border: 10px solid transparent;
     border-bottom-color: #FFFFFF;
-    @media screen and (max-width: 768px) {
+
+    ${mobileQuery} {
       left: unset;
       right: 8px;
     }

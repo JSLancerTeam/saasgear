@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 import SecurityForm from '@/components/Profile/SecurityForm';
 import changePasswordQuery from '@/queries/auth/changePassword';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-down-24.svg';
 import { ReactComponent as SettingIcon } from '@/assets/images/svg/setting.svg';
 
@@ -62,7 +62,7 @@ const ActionItem = styled.span`
   color: ${COLORS.LIGHT_PRIMARY};
   max-height: 22px;
 
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     margin-right: 0;
     text-align: left;
     display: ${(props) => props.mobile ? 'block' : 'none'};

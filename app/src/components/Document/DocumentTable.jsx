@@ -12,22 +12,34 @@ const TdCenter = styled.td`
   pointer-events: none;
 `;
 
+const THead = styled.th`
+  width: ${(props) => props.width ?? 'auto'};
+`
+
 const ActionTd = styled.td`
   a + a {
     margin-left: 12px;
   }
 `;
 
+const TableResponsive = styled.div`
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+`
+
 const DocumentTable = ({ data, total, loading, onFetch }) => (
-  <div>
+  <TableResponsive>
     <Table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Created By</th>
-          <th>Created At</th>
-          <th>Action</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <THead scope="col" width="300px">Created By</THead>
+          <th scope="col">Created At</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -66,7 +78,7 @@ const DocumentTable = ({ data, total, loading, onFetch }) => (
         </div>
       </div>
     )}
-  </div>
+  </TableResponsive>
 );
 
 DocumentTable.propTypes = {

@@ -45,6 +45,10 @@ export const UserSchema = gql`
     user: UserSocial
   }
 
+  type ChangeAvatarResponse {
+    url: String
+  }
+
   extend type Query {
     profileUser: User!
     loginBySocial(provider: SocialProviderType!, code: String!): ResponseUserSocial!
@@ -70,5 +74,7 @@ export const UserSchema = gql`
     deleteAccount: Boolean!
 
     updateProfile(name: String, company: String, position: String): Boolean!
+
+    updateProfileAvatar(file: Upload!): ChangeAvatarResponse!
   }
 `;

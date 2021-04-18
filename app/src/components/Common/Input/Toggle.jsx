@@ -13,6 +13,9 @@ const Label = styled.div`
   color: ${COLORS.WHITE_BLUE};
   margin-bottom: 11px;
   text-transform: uppercase;
+  @media screen and (max-width: 768px) {
+    margin-top: 11px;
+  }
 `;
 
 const Input = styled.input`

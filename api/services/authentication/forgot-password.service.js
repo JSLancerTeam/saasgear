@@ -1,10 +1,7 @@
 import { ApolloError } from 'apollo-server-express';
 import { findUser, getUserByIdAndJoinUserToken } from '~/repository/user.repository';
 import generateRandomKey from '~/helpers/genarateRandomkey';
-import {
-  createToken,
-  updateUserTokenById,
-} from '~/repository/user_tokens.repository';
+import { createToken, updateUserTokenById } from '~/repository/user_tokens.repository';
 import logger from '~/utils/logger';
 import sendMail from '~/libs/mail';
 import compileEmailTemplate from '~/helpers/compile-email-template';
@@ -16,11 +13,15 @@ export async function forgotPasswordUser(email) {
     if (!user || !user.id) {
       return true;
     }
-    const session = await getUserByIdAndJoinUserToken(user.id, SEND_MAIL_TYPE.FORGOT_PASSWORD);
+    let session = await getUserByIdAndJoinUserToken(user.id, SEND_MAIL_TYPE.FORGOT_PASSWORD);
     const tokenGenerated = await generateRandomKey();
     const token = `${tokenGenerated}-${user.id}`;
     if (!session) {
       await createToken(user.id, token, SEND_MAIL_TYPE.FORGOT_PASSWORD);
+      session = {
+        name: user.name,
+        email: user.email,
+      };
     } else {
       await updateUserTokenById(session.id, token);
     }

@@ -25,6 +25,12 @@ const EmailText = styled.label`
   font-weight: bold;
 `;
 
+const NoteLabel = styled(FormGroupLabel)`
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+  }
+`;
+
 export default function DeleteAccountModal({
   closeModal,
   isOpen,
@@ -44,9 +50,9 @@ export default function DeleteAccountModal({
         </DeleteText>
         <Form onSubmit={onSubmit}>
           <FormGroup>
-            <FormGroupLabel>
+            <NoteLabel>
               Please enter <EmailText>{email}</EmailText> to confirm
-            </FormGroupLabel>
+            </NoteLabel>
             <Input type="email" name="email" ref={register} />
             {errors?.email && <ErrorText message={errors.email.message} />}
           </FormGroup>

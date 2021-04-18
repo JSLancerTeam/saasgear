@@ -22,15 +22,17 @@ const Content = styled.div`
   flex-grow: 1;
   background-color: ${COLORS.BODY};
   overflow-y: auto;
-  padding: 32px 24px;
-  max-height: calc(100vh - 80px);
+  padding: 32px 15px;
+  @media screen and (max-width: 768px) {
+    min-height: calc(100vh - 64px);
+  }
 `;
 
-const AdminLayout = ({ signout, user }) => (
+const AdminLayout = ({ signout }) => (
   <LayoutWrapper>
     <Sidebar />
     <ContentWrapper>
-      <Topbar signout={signout} user={user} />
+      <Topbar signout={signout} />
       <Content>
         <Switch>
           {routes.map((route) => (
@@ -50,7 +52,6 @@ const AdminLayout = ({ signout, user }) => (
 
 AdminLayout.propTypes = {
   signout: PropTypes.func,
-  user: PropTypes.object,
 };
 
 export default AdminLayout;

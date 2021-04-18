@@ -23,6 +23,10 @@ const ButtonGroup = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 32px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const DeleteLink = styled.div`
@@ -31,6 +35,9 @@ const DeleteLink = styled.div`
   color: ${COLORS.RED};
   margin-right: 25px;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 function AccountForm({ onSubmit, register, errors, loading, apiError, openPopupDeleteAccount }) {

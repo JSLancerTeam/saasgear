@@ -34,39 +34,28 @@ const SocialList = styled.div`
 `;
 
 const SocialAuth = () => {
-  const socialButton = useMemo(
-    () => [
-      process.env.REACT_APP_FACEBOOK_CLIENT_KEY ? {
-        name: 'Facebook',
-        logo: FaceBookSvg,
-        url: `https://www.facebook.com/v9.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/facebook/callback&scope=email`,
-      } : null,
-      process.env.REACT_APP_GOOGLE_CLIENT_KEY ? {
-        name: 'Google',
-        logo: GoogleSvg,
-        url: `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/google/callback&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}`,
-      } : null,
-      process.env.REACT_APP_GITHUB_CLIENT_KEY ? {
-        name: 'Github',
-        logo: GithubSvg,
-        url: `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&scope=user`,
-      } : null,
-    ],
-    [],
-  );
+  const facebookLoginUrl = `https://www.facebook.com/v9.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/facebook/callback&scope=email`;
+  const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/google/callback&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}`;
+  const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&scope=user`;
 
   return (
     <>
       <SocialList>
-        {socialButton.filter(item => item).map((btn) => (
-          <SocialButton
-            className="cursor-pointer hover:bg-gray-300"
-            key={`social-btn-${btn.name}`}
-            href={btn.url}
-          >
-            <img src={btn.logo} alt={`${btn.name}-icon`} />
+        {process.env.REACT_APP_FACEBOOK_CLIENT_KEY && (
+          <SocialButton href={facebookLoginUrl}>
+            <img src={FaceBookSvg} alt="Facebook icon" />
           </SocialButton>
-        ))}
+        )}
+        {process.env.REACT_APP_GOOGLE_CLIENT_KEY && (
+          <SocialButton href={googleLoginUrl}>
+            <img src={GoogleSvg} alt="Google icon" />
+          </SocialButton>
+        )}
+        {process.env.REACT_APP_GITHUB_CLIENT_KEY && (
+          <SocialButton href={githubUrl}>
+            <img src={GithubSvg} alt="Github icon" />
+          </SocialButton>
+        )}
       </SocialList>
     </>
   )

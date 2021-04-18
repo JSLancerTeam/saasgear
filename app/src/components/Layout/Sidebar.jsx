@@ -1,6 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import cn from 'classnames';
+
+// Actions
+import { toggleSidebar } from '@/features/admin/sidebar';
 
 import { ReactComponent as LogoIcon } from '@/assets/images/svg/logo.svg';
 import { COLORS } from '@/constants/style';
@@ -11,7 +16,32 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    left: -235px;
+    z-index: 0;
+    background: #fff;
+    z-index: 50;
+    transition: all .4s ease-in-out;
+    &.active {
+      left: 0;
+      z-index: 50;
+    }
+  }
 `;
+
+const WrapperOverlay = styled.div`
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .3);
+    left: 0;
+    top: 0;
+    z-index: 49;
+  }
+`
 
 const LogoWrapper = styled.a`
   display: flex;
@@ -85,30 +115,42 @@ const NavLinkStyle = styled(NavLink)`
   }
 `;
 
-const Sidebar = () => (
-  <Wrapper>
-    <LogoWrapper href="/">
-      <LogoIcon />
-      <LogoText>
-        <span>SaaS</span>
-        <span>gear</span>
-      </LogoText>
-    </LogoWrapper>
-    <MenuWrapper>
-      <MenuList>
-        {routes
-          .filter((route) => route.isSidebar)
-          .map((route) => (
-            <MenuItem key={route.path}>
-              <NavLinkStyle to={route.path} activeClassName="active">
-                {route.icon}
-                <MenuText>{route.name}</MenuText>
-              </NavLinkStyle>
-            </MenuItem>
-          ))}
-      </MenuList>
-    </MenuWrapper>
-  </Wrapper>
-);
+const Sidebar = () => {
+  const dispatch = useDispatch();
+  const { isOpen } = useSelector((state) => state.sidebar);
+
+  function closeSidebar() {
+    dispatch(toggleSidebar(false))
+  }
+
+  return (
+    <>
+      {isOpen && <WrapperOverlay onClick={closeSidebar} /> }
+      <Wrapper className={cn({ active: isOpen })}>
+        <LogoWrapper href="/">
+          <LogoIcon />
+          <LogoText>
+            <span>SaaS</span>
+            <span>gear</span>
+          </LogoText>
+        </LogoWrapper>
+        <MenuWrapper>
+          <MenuList>
+            {routes
+              .filter((route) => route.isSidebar)
+              .map((route) => (
+                <MenuItem key={route.path}>
+                  <NavLinkStyle to={route.path} activeClassName="active" onClick={closeSidebar}>
+                    {route.icon}
+                    <MenuText>{route.name}</MenuText>
+                  </NavLinkStyle>
+                </MenuItem>
+              ))}
+          </MenuList>
+        </MenuWrapper>
+      </Wrapper>
+    </>
+  );
+};
 
 export default Sidebar;

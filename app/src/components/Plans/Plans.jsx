@@ -8,6 +8,9 @@ import Button from '../Common/Button';
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Name = styled.h5`
@@ -60,6 +63,11 @@ const FeatureItem = styled.li`
   }
 `;
 
+const FeatureIcon = styled.span`
+  width: 16px;
+  height: 16px;
+`;
+
 const FeatureText = styled.span`
   font-size: 14px;
   line-height: 24px;
@@ -82,6 +90,16 @@ const PlanWrapper = styled.div`
 
   &:first-child {
     margin-right: 25px;
+    @media screen and (max-width: 768px) {
+      margin-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 15px;
   }
 
   ${(props) =>
@@ -124,41 +142,37 @@ const Plans = ({
   planChanged,
   isYearly,
   checkIsCurrentPlan,
-}) => {
-  const [test, setTest] = useState(false);
-
-  return (
-    <Wrapper>
-      {plans.map((plan) => (
-        <PlanWrapper
-          onClick={() => onChange(plan.id)}
-          active={planChanged && plan.id === planChanged.id}
-          key={plan.id}
-        >
-          <Name>{plan.name}</Name>
-          <Desc>{plan.desc}</Desc>
-          <PriceWrapper>
-            <Price>${isYearly ? plan.price * 9 : plan.price}</Price>
-            <Unit>/{isYearly ? 'year' : 'month'}</Unit>
-          </PriceWrapper>
-          <FeatureList>
-            {plan.features.map((feature) => (
-              <FeatureItem key={feature}>
-                <CheckCircleIcon />
-                <FeatureText>{feature}</FeatureText>
-              </FeatureItem>
-            ))}
-          </FeatureList>
-          {checkIsCurrentPlan(plan.id) ? (
-            <GetStartedBtn>Current Plan</GetStartedBtn>
-          ) : (
-            <GetStartedBtn color="primary">Get Started</GetStartedBtn>
-          )}
-        </PlanWrapper>
-      ))}
-    </Wrapper>
-  );
-};
+}) => (
+  <Wrapper>
+    {plans.map((plan) => (
+      <PlanWrapper
+        onClick={() => onChange(plan.id)}
+        active={planChanged && plan.id === planChanged.id}
+        key={plan.id}
+      >
+        <Name>{plan.name}</Name>
+        <Desc>{plan.desc}</Desc>
+        <PriceWrapper>
+          <Price>${isYearly ? plan.price * 9 : plan.price}</Price>
+          <Unit>/{isYearly ? 'year' : 'month'}</Unit>
+        </PriceWrapper>
+        <FeatureList>
+          {plan.features.map((feature) => (
+            <FeatureItem key={feature}>
+              <FeatureIcon><CheckCircleIcon /></FeatureIcon>
+              <FeatureText>{feature}</FeatureText>
+            </FeatureItem>
+          ))}
+        </FeatureList>
+        {checkIsCurrentPlan(plan.id) ? (
+          <GetStartedBtn>Current Plan</GetStartedBtn>
+        ) : (
+          <GetStartedBtn color="primary">Get Started</GetStartedBtn>
+        )}
+      </PlanWrapper>
+    ))}
+  </Wrapper>
+);
 
 Plans.propTypes = {
   plans: PropTypes.array.isRequired,

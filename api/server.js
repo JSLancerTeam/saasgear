@@ -1,5 +1,6 @@
 /* eslint-disable wrap-iife */
 import dotenv from 'dotenv';
+import { resolve, join } from 'path';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -28,6 +29,8 @@ const corsOptions = {
 (function startServer() {
   app.use(morgan('combined', { stream: accessLogStream }));
   app.use(cors(corsOptions));
+  app.use(express.static(join(resolve(), 'public', 'uploads')));
+
   app.get('/', (req, res) => {
     res.send('Hello World!');
   });

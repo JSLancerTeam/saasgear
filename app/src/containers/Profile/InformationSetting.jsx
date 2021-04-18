@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -7,9 +8,15 @@ import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
+import { setProfileUser } from '@/features/auth/user';
+
+import { resolveAvatarPath } from '@/helpers/avatar.helper';
+
 import updateProfileQuery from '@/queries/user/updateProfile';
+import updateProfileAvatarQuery from '@/queries/user/updateUserAvatar';
 import AccountForm from '@/components/Profile/AccountForm';
 import AvatarIcon from '@/assets/images/avatar.jpg';
+import { ReactComponent as SettingIcon } from '@/assets/images/svg/setting.svg';
 import { COLORS } from '@/constants/style';
 import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-down-24.svg';
 import DeleteAccount from './DeleteAccount';
@@ -41,16 +48,27 @@ const AvatarWrapper = styled.div`
   align-items: center;
 `;
 
-const Avatar = styled.div`
+const Avatar = styled.label`
   width: 62px;
   height: 62px;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    width: 35px;
+    height: 35px;
+  }
 
   img {
     border-radius: 100%;
     width: 100%;
+    width: 62px;
+    height: 62px;
+    object-fit: cover;
+    @media screen and (max-width: 768px) {
+      width: 35px;
+      height: 35px;
+    }
   }
 `;
 
@@ -58,6 +76,9 @@ const Info = styled.div`
   margin-left: 16px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    margin-left: 5px;
+  }
 `;
 
 const Name = styled.span`
@@ -77,13 +98,20 @@ const Email = styled.span`
 const ActionWrapper = styled.div`
   display: flex;
   align-items: center;
+`;
 
-  span {
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 22px;
-    margin-right: 14px;
-    color: ${COLORS.LIGHT_PRIMARY};
+const ActionItem = styled.span`
+  display: ${(props) => props.mobile ? 'none' : 'block'};
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 22px;
+  margin-right: 14px;
+  color: ${COLORS.LIGHT_PRIMARY};
+  max-height: 22px;
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+    display: ${(props) => props.mobile ? 'block' : 'none'};
   }
 `;
 
@@ -103,7 +131,8 @@ const AccountSchema = yup.object().shape({
 });
 
 const InformationSetting = ({ user }) => {
-  const { register, handleSubmit, errors } = useForm({
+  const dispatch = useDispatch();
+  const { register, handleSubmit, errors, setValue, getValues, watch } = useForm({
     resolver: yupResolver(AccountSchema),
     defaultValues: user,
   });
@@ -114,6 +143,11 @@ const InformationSetting = ({ user }) => {
   const [updateProfileMutation, { error, loading }] = useMutation(
     updateProfileQuery,
   );
+  const [
+    updateProfileAvatarMutation,
+    { error: updateAvatarError, loading: isUpdatingAvatar },
+  ] = useMutation(updateProfileAvatarQuery);
+
 
   async function onSubmit(dataForm) {
     const { name, company, position } = dataForm;
@@ -133,12 +167,52 @@ const InformationSetting = ({ user }) => {
     }
   }
 
+  async function changeProfile(e) {
+    try {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > 2 * 1000 * 1000) {
+          toast.error('File is too big');
+          return;
+        }
+        const { data } = await updateProfileAvatarMutation({
+          variables: {
+            file,
+          },
+        });
+        if (data && data.updateProfileAvatar && data.updateProfileAvatar.url) {
+          dispatch(setProfileUser({ data: {avatarUrl: data.updateProfileAvatar.url}, loading: isUpdatingAvatar }));
+          setValue('avatarUrl', data.updateProfileAvatar.url);
+          toast.success('Change avatar successfully');
+        }
+      }
+    } catch (errorChangeProfile) {
+      toast.error('Can not update your avatar');
+    }
+  }
+
+  useEffect(() => {
+    register('avatarUrl');
+    watch('avatarUrl');
+  }, []);
+
+  useEffect(() => {
+    setValue('avatarUrl', user.avatarUrl);
+  }, [user.avatarUrl]);
+
   return (
     <Wrapper expand={isOpen}>
       <Header onClick={() => setIsOpen(!isOpen)}>
         <AvatarWrapper>
-          <Avatar>
-            <img src={AvatarIcon} alt="avatar" />
+          <Avatar htmlFor="avatar">
+            <img src={resolveAvatarPath(getValues('avatarUrl'), AvatarIcon)} alt="avatar" />
+            <input
+              type="file"
+              id="avatar"
+              hidden
+              onChange={changeProfile}
+              accept="image/*"
+            />
           </Avatar>
           <Info>
             <Name>{user.name}</Name>
@@ -146,16 +220,17 @@ const InformationSetting = ({ user }) => {
           </Info>
         </AvatarWrapper>
         <ActionWrapper>
-          <span>Edit Profile</span>
+          <ActionItem mobile><SettingIcon /></ActionItem>
+          <ActionItem desktop>Edit Profile</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
-      </Header>
+      </Header>Avatar
       <AccountForm
         onSubmit={handleSubmit(onSubmit)}
         register={register}
-        loading={loading}
+        loading={loading || isUpdatingAvatar}
         errors={errors}
-        apiError={error?.message}
+        apiError={error?.message || updateAvatarError?.message}
         openPopupDeleteAccount={() => setIsOpenModalDeleteAccount(true)}
       />
       <DeleteAccount

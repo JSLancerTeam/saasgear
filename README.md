@@ -1,12 +1,25 @@
-# [Saas Gear](https://github.com/JSLancerTeam/saasgear)
+# [SaaSgear](https://github.com/JSLancerTeam/saasgear)
 
-SaaS gear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new SaaS project quickly.
+SaaSgear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new SaaS project quickly.
+
+## Features
+- **ReactJS:** High-performance and powerful interactive UI with React.
+- **GraphQL API:** Fetching all the data you need with a single API call using GraphQL. Multiple GraphQL is merged in a single request.
+- **Subscription payments:** We have integrated Stripe subscription payments to allow you to monetize your SaaS.
+- **Teams:** Your users are able to invite their teammates to their account.
+- **Roles and Permissions:** Your users are only able to access the data and perform the actions that are allowed within their roles and permissions.
+- **Authentication:** User authentication with email and password, or via Google, Github, Facebook. Signup, login, reset password are included out of the box.
+- **Cross-browsers and mobile responsiveness:** Every single components have been tested across many different browsers and devices to make sure it works every where.
+- **HTML Emails:** Send beautiful and responsive HTML emails to your customers with SendGrid and MJML.
+- **Easy to upgrade:** Easy release is planned and tailored carefully to make sure your upgrade experience smooth and painless.
 
 ## Requirements
 - NodeJS v14 or above
+- Yarn or NPM
 - MySQL
+
 ## Get started
-- Clone the repo: `git clone https://github.com/JSLancerTeam/saasgear`
+- Clone this repo: `git clone https://github.com/JSLancerTeam/saasgear`
 - Follow [this guide](https://github.com/JSLancerTeam/saasgear/blob/master/docs/prerequisite.md) to setup services and update .env file in `app` and `api` folder.
 - Install NodeJS dependencies in `app` and `api`
 - Follow [this guide](https://github.com/JSLancerTeam/saasgear/blob/master/docs/database.md) to setup MySQL database

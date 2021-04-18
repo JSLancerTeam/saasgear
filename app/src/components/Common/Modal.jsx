@@ -29,6 +29,9 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
+  @media screen and (max-width: 768px) {
+    max-width: 90%;
+  }
 `;
 
 export const ModalHeader = styled.h3`

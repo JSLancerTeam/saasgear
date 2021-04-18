@@ -17,6 +17,9 @@ const ButtonGroup = styled.div`
 
 const SaveBtn = styled(Button)`
   width: 264px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const DocumentForm = ({

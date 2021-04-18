@@ -16,6 +16,9 @@ const ButtonGroup = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-top: 32px;
+  @media screen and (max-width: 768px) {
+    justify-content: flex-start;
+  }
 `;
 
 function SecurityForm({

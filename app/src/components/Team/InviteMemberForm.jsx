@@ -18,6 +18,9 @@ const InviteInput = styled(Input)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: none;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const InviteBtn = styled(Button)`

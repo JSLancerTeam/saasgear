@@ -11,6 +11,7 @@ import SecurityForm from '@/components/Profile/SecurityForm';
 import changePasswordQuery from '@/queries/auth/changePassword';
 import { COLORS } from '@/constants/style';
 import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-down-24.svg';
+import { ReactComponent as SettingIcon } from '@/assets/images/svg/setting.svg';
 
 const Wrapper = styled.div`
   max-height: 90px;
@@ -50,13 +51,21 @@ const SubDesc = styled.span`
 const ActionWrapper = styled.div`
   display: flex;
   align-items: center;
+`;
 
-  span {
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 22px;
-    margin-right: 14px;
-    color: ${COLORS.LIGHT_PRIMARY};
+const ActionItem = styled.span`
+  display: ${(props) => props.mobile ? 'none' : 'block'};
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 22px;
+  margin-right: 14px;
+  color: ${COLORS.LIGHT_PRIMARY};
+  max-height: 22px;
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+    text-align: left;
+    display: ${(props) => props.mobile ? 'block' : 'none'};
   }
 `;
 
@@ -99,7 +108,8 @@ const PasswordSetting = () => {
           <SubDesc>Forgot your password, find back in seconds</SubDesc>
         </SubTitleWrapper>
         <ActionWrapper>
-          <span>Update Password</span>
+          <ActionItem mobile><SettingIcon /></ActionItem>
+          <ActionItem desktop>Update Password</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
       </Header>

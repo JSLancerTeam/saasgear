@@ -13,7 +13,7 @@ const user = createSlice({
     setProfileUser(state, action) {
       const { data, loading } = action.payload;
       const dataUser = data || {};
-      state.data = dataUser;
+      state.data = {...state.data, ...dataUser};
       state.loading = loading;
     },
     toggleToastError(state, action) {

@@ -17,6 +17,11 @@ const ButtonGroup = styled.div`
   button:first-child {
     margin-right: 16px;
   }
+  button {
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
 `;
 
 export default function TeamForm({

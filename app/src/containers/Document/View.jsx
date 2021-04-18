@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import DOMPurify from 'dompurify';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { useRouteMatch } from 'react-router-dom';
 
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
 import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
+
+const ContentDocument = styled.div`
+  min-height: calc(100vh - 64px);
+`
 
 const ViewDocument = () => {
   const match = useRouteMatch();
@@ -26,7 +31,7 @@ const ViewDocument = () => {
   }
 
   return (
-    <div>
+    <ContentDocument>
       {loading && <div>Loading...</div>}
 
       {!loading && documentData?.getDocumentDetail && (
@@ -41,7 +46,7 @@ const ViewDocument = () => {
           </ContentPage>
         </>
       )}
-    </div>
+    </ContentDocument>
   );
 };
 

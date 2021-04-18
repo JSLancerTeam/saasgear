@@ -39,7 +39,7 @@ function AdminLayoutContainer() {
     history.push('/auth/signin');
   }
 
-  return <AdminLayout signout={signout} user={data?.profileUser} />;
+  return <AdminLayout signout={signout} />;
 }
 
 export default AdminLayoutContainer;

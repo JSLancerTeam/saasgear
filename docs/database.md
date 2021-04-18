@@ -1,5 +1,5 @@
 # [:blue_square: Database & migration](https://github.com/JSLancerTeam/saasgear/docs/database.md)
-Our backend database uses MySQL which is the most popular and stable database management system at this moment. 
+Our backend database uses MySQL which is the most popular and stable database management system at this moment.
 
 In order to fetch and modify data in the database, we use the query builder - [Knex](http://knexjs.org/). Using a query builder helps us escape and sanitize data before putting data into database.
 
@@ -8,8 +8,8 @@ In order to fetch and modify data in the database, we use the query builder - [K
 First of all, we need to create a database for our project. You can open the terminal, login into database, and run the following commands:
 
 ```jsx
-mysql -uroot -p
-create database saasgear 
+mysql -uadmin -p
+create database saasgear
 ```
 
 ## Database config
@@ -19,17 +19,16 @@ Our config for database is stored in ./api/.env. You need to replace the value b
 ```jsx
 DATABASE_NAME=saasgear
 DATABASE_HOST=localhost
-DATABASE_PASSWORD=admin
-DATABASE_USER=root
+DATABASE_PASSWORD=[YourMySQLPassword]
+DATABASE_USER=admin
 DATABASE_PORT=3306
 ```
 
 ## Seed data and migration
-
-You can use fill your database with seed data from the boiderplate with this command:
+In order to create database structure you need to run this command
 
 ```jsx
-npm run db:seed
+npm run db:migrate
 ```
 
 ## Create a query
@@ -78,12 +77,4 @@ export function down(knex) {
     table.dropColumn('provider_id');
   });
 }
-```
-
-## Apply new migration
-
-In order to apply all new migrations, you can run this command:
-
-```jsx
-npm run db:migrate
 ```

@@ -4,3 +4,4 @@ Users can signup and signin to SaaSgear using *email* or social media accounts l
 Upon login successful, the backend will send a token back to frontend and the frontend will use that attach the access token in every request header.
 
 If user forget their password, they can use forgot password feature which send a reset password link to their email.
+

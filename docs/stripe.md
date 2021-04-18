@@ -5,7 +5,7 @@ Subscription is the lifeblood for every SaaS. In SaaSgear, we use Stripe to hand
 
 In the plan table of SaaSgear, we have 3 example products: freemium, standard, and premium. While freemium is totally free, the prices of standard and premium are $12 and $24 per month. If customer selects a yearly plan, the price is discounted by 10%.
 
-You can customize price and plan name for your own SaaS by editing the file **./api/data/product.json**
+You can customize price and plan name for your own SaaS by editing the file **./api/scripts/create-products.json**
 
 After that you need to run the command ***npm run stripe:make*** to create new Stripe products and prices. Stripe data is stored in stripe_products and stripe_prices tables.
 

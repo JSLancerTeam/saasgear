@@ -16,8 +16,6 @@ export default gql`
       paymentMethodToken: $paymentMethodToken
       planName: $planName
       billingType: $billingType
-    ) {
-      token
-    }
+    )
   }
 `;

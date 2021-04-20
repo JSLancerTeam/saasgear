@@ -33,8 +33,7 @@ function SignIn() {
   async function onSubmit(params) {
     try {
       const { data } = await loginMutation({ variables: params });
-      if (data?.login?.token) {
-        localStorage.setItem(JWT_STORAGE_KEY, data.login.token);
+      if (data?.login) {
         history.push('/');
       }
     } catch (e) {

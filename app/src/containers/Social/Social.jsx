@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 
 import getQueryParam from '@/utils/getQueryParam';
 import socialLoginQuery from '@/queries/auth/socialLogin';
-import { JWT_STORAGE_KEY } from '@/constants';
 import { toggleToastError } from '@/features/auth/user';
 import FormRegister from './FormRegister';
 
@@ -21,8 +20,7 @@ export default function Social() {
   });
 
   useEffect(() => {
-    if (!loading && data?.loginBySocial?.token) {
-      localStorage.setItem(JWT_STORAGE_KEY, data.loginBySocial.token);
+    if (!loading && data?.loginBySocial) {
       history.replace('/');
     }
   }, [data, loading, error]);

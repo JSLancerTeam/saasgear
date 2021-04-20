@@ -54,7 +54,14 @@ const resolvers = {
       isAuthenticated,
       (_, { type }, { user }) => resendEmailAction(user, normalizeEmail(type)),
     ),
-    registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, normalizeEmail(email), name, avatarUrl, providerId),
+    registerSocialAccount: async (_, { provider, email, name, avatarUrl, providerId }, { res }) => {
+      const result = await registerAccountBySocial(provider, normalizeEmail(email), name, avatarUrl, providerId);
+      if (result && result.token) {
+        setAuthenticationCookie(res, result.token);
+        return true;
+      }
+      return result;
+    },
     deleteAccount: combineResolvers(
       isAuthenticated,
       async (_, __, { user }, { res }) => {

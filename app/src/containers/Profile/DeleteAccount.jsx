@@ -35,7 +35,6 @@ export default function DeleteAccount({ closeModal, isOpen }) {
   async function onSubmit() {
     const { data } = await deleteAccountMutation();
     if (data?.deleteAccount) {
-      localStorage.removeItem(JWT_STORAGE_KEY);
       history.replace('/auth/signin');
     }
   }

@@ -3,10 +3,11 @@ import { verify } from '~/helpers/jwt.helper';
 import { findUser } from '~/repository/user.repository';
 import { getTeamInvitation } from '~/repository/team_invitations.repository';
 
-export default async function getUserLogined(bearerToken) {
+export default async function getUserLogined(bearerToken, res) {
   if (bearerToken) {
     try {
       const token = bearerToken.split(' ');
+      console.log({ token });
       if (!token[1] || token[0] !== 'Bearer') {
         return null;
       }
@@ -24,6 +25,7 @@ export default async function getUserLogined(bearerToken) {
         invitationToken: invitationToken ? invitationToken.token : null,
       };
     } catch (error) {
+      res.clearCookie('token');
       throw new AuthenticationError('Authentication failure');
     }
   }

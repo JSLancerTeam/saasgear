@@ -1,6 +1,6 @@
 # [Setup project](https://github.com/JSLancerTeam/saasgear/docs/setup.md)
 ## Set up
-### I. Without Docker (Skip this step if you want to using Docker)
+### I. Setup manually (Skip this step if you want to using Docker)
 #### 1. Create env
   + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
 
@@ -15,7 +15,7 @@
     + For Landing page: `http://localhost:4000`
 
 
-### II. With docker 
+### II. Setup with Docker 
 #### 1. Create env
   + You should create `.env` in `app` and `api` folder and copy content from `.env-example` file in each.
   + You must follow the `docker-compose.yml` file to ensure that you are using correctly port for each container

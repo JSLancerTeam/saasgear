@@ -10,7 +10,6 @@ import AuthAdsArea from '@/components/Auth/AuthAds';
 import registerQuery from '@/queries/auth/register';
 import getQueryParam from '@/utils/getQueryParam';
 import StripeContainer from '@/containers/Stripe';
-import { JWT_STORAGE_KEY } from '@/constants';
 import {
   SignUpFormWrapper,
   SignUpFormLeft,
@@ -46,8 +45,7 @@ const SignUp = () => {
 
   async function signup(params) {
     const { data } = await registerMutation({ variables: params });
-    if (data?.register?.token) {
-      localStorage.setItem(JWT_STORAGE_KEY, data.register.token);
+    if (data?.register) {
       history.push('/');
     }
   }

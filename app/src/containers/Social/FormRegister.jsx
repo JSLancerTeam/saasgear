@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import PropsType from 'prop-types';
 
 import { registerAccountBySocial } from '@/queries/auth/socialLogin';
-import { JWT_STORAGE_KEY } from '@/constants';
 import SignUpSocialForm from '@/components/Auth/SignUpSocialForm';
 
 const registerSchema = yup.object().shape({
@@ -31,11 +30,7 @@ export default function FormRegister({ data }) {
     };
     const registerResponse = await registerMutation({ variables: params });
 
-    if (registerResponse.data?.registerSocialAccount?.token) {
-      localStorage.setItem(
-        JWT_STORAGE_KEY,
-        registerResponse.data.registerSocialAccount.token,
-      );
+    if (registerResponse.data?.registerSocialAccount) {
       history.push('/');
     }
   }

@@ -28,10 +28,6 @@ export const UserSchema = gql`
     invitationToken: String
   }
 
-  type ResponseUserLogin {
-    token: String!
-  }
-
   type UserSocial {
     providerId: String!
     provider: String!
@@ -55,11 +51,11 @@ export const UserSchema = gql`
   }
 
   extend type Mutation {
-    register(email: String!, password: String!, name: String!, paymentMethodToken: String, planName: String, billingType: BillingType): ResponseUserLogin!
+    register(email: String!, password: String!, name: String!, paymentMethodToken: String, planName: String, billingType: BillingType): Boolean!
 
-    login(email: String!, password: String!): ResponseUserLogin!
+    login(email: String!, password: String!): Boolean!
 
-    registerSocialAccount(provider: SocialProviderType!, email: String!, name: String!, avatarUrl: String!, providerId: String!): ResponseUserLogin!
+    registerSocialAccount(provider: SocialProviderType!, email: String!, name: String!, avatarUrl: String!, providerId: String!): Boolean!
 
     forgotPassword(email: String!): Boolean!
 
@@ -76,5 +72,7 @@ export const UserSchema = gql`
     updateProfile(name: String, company: String, position: String): Boolean!
 
     updateProfileAvatar(file: Upload!): ChangeAvatarResponse!
+
+    logout: Boolean!
   }
 `;

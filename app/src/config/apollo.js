@@ -5,17 +5,10 @@ import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
 import { createNetworkStatusNotifier } from 'react-apollo-network-status';
-import { JWT_STORAGE_KEY } from '@/constants';
 
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem(JWT_STORAGE_KEY);
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
+const authLink = setContext((_, { headers }) => ({
+  headers
+}));
 
 const {
   link: networkStatusNotifierLink,
@@ -39,7 +32,6 @@ const client = new ApolloClient({
         switch (errors.extensions.code) {
           case 'UNAUTHENTICATED':
             if (!window.location.pathname.startsWith('/auth')) {
-              localStorage.removeItem(JWT_STORAGE_KEY);
               window.location.href = '/auth/signin';
             }
             break;
@@ -66,6 +58,7 @@ const client = new ApolloClient({
       errorPolicy: 'all',
     },
   },
+  credentials: "include"
 });
 
 export { client, useApolloNetworkStatus };

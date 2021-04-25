@@ -5,6 +5,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 import Apollo from 'apollo-server-express';
 import Sentry from '@sentry/node';
@@ -30,6 +31,7 @@ const corsOptions = {
   app.use(morgan('combined', { stream: accessLogStream }));
   app.use(cors(corsOptions));
   app.use(express.static(join(resolve(), 'public', 'uploads')));
+  app.use(cookieParser());
 
   app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -77,11 +79,13 @@ const corsOptions = {
         },
       },
     ],
-    context: async ({ req }) => {
-      const bearerToken = req.headers.authorization;
-      const user = await getUserLogined(bearerToken);
+    context: async ({ req, res }) => {
+      const { cookies } = req;
+      const bearerToken = cookies.token || null;
+      const user = await getUserLogined(bearerToken, res);
       return {
         user,
+        res,
       };
     },
   });

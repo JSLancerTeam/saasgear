@@ -12,6 +12,7 @@ import { registerAccountBySocial } from '~/services/authentication/register-soci
 import { deleteUser } from '~/services/user/delete-user.service';
 import { updateProfile, changeUserAvatar } from '~/services/user/update-user.service';
 import { normalizeEmail } from '~/helpers/string.helper';
+import { clearCookie, COOKIE_NAME, setAuthenticationCookie } from '~/utils/cookie';
 
 const resolvers = {
   Query: {
@@ -22,11 +23,25 @@ const resolvers = {
     loginBySocial: (_, { provider, code }) => loginSocial(provider, code),
   },
   Mutation: {
-    register(_, { email, password, name, paymentMethodToken, planName, billingType }) {
-      return registerUser(normalizeEmail(email), password, name, paymentMethodToken, planName, billingType);
+    register: async (_, { email, password, name, paymentMethodToken, planName, billingType }, { res }) => {
+      const result = await registerUser(normalizeEmail(email), password, name, paymentMethodToken, planName, billingType);
+      if (result && result.token) {
+        setAuthenticationCookie(res, result.token);
+        return true;
+      }
+      return result;
     },
-    login(_, { email, password }) {
-      return loginUser(normalizeEmail(email), password);
+    login: async (_, { email, password }, { res }) => {
+      const result = await loginUser(normalizeEmail(email), password, res);
+      if (result && result.token) {
+        setAuthenticationCookie(res, result.token);
+        return true;
+      }
+      return result;
+    },
+    logout: () => {
+      clearCookie(COOKIE_NAME.TOKEN);
+      return true;
     },
     forgotPassword: async (_, { email }) => forgotPasswordUser(normalizeEmail(email)),
     changePassword: combineResolvers(
@@ -39,10 +54,23 @@ const resolvers = {
       isAuthenticated,
       (_, { type }, { user }) => resendEmailAction(user, normalizeEmail(type)),
     ),
-    registerSocialAccount: (_, { provider, email, name, avatarUrl, providerId }) => registerAccountBySocial(provider, normalizeEmail(email), name, avatarUrl, providerId),
+    registerSocialAccount: async (_, { provider, email, name, avatarUrl, providerId }, { res }) => {
+      const result = await registerAccountBySocial(provider, normalizeEmail(email), name, avatarUrl, providerId);
+      if (result && result.token) {
+        setAuthenticationCookie(res, result.token);
+        return true;
+      }
+      return result;
+    },
     deleteAccount: combineResolvers(
       isAuthenticated,
-      (_, a, { user }) => deleteUser(user),
+      async (_, __, { user }, { res }) => {
+        const result = await deleteUser(user);
+        if (result === true) {
+          clearCookie(res, COOKIE_NAME.TOKEN);
+        }
+        return result;
+      },
     ),
     updateProfile: combineResolvers(
       isAuthenticated,

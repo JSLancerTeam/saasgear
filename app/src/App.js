@@ -14,10 +14,12 @@ import { client } from '@/config/apollo';
 import GlobalLoading from '@/components/Layout/GlobalLoading';
 import GlobalStyle from '@/theme/globalStyles';
 import 'react-toastify/dist/ReactToastify.css';
+import useDocumentHeader from './hooks/useDocumentTitle';
 
 function App() {
+  useDocumentHeader({ title: 'SaaSgear' });
   const { error } = useSelector((state) => state.user);
-  document.title = 'SaaSgear';
+
   useEffect(() => {
     if (error) {
       toast.error(error);

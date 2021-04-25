@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/react'],
@@ -17,7 +19,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: {
-        map: [['@', './src']],
+        map: [['@', path.resolve(__dirname, './src')]],
         extensions: ['.ts', '.js', '.jsx', '.json'],
       },
       node: {

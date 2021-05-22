@@ -45,22 +45,20 @@ function SignIn() {
   }
 
   return (
-    <>
-      <SignUpFormWrapper>
-        <SignUpFormLeft>
-          <SignInForm
-            onSubmit={handleSubmit(onSubmit)}
-            register={register}
-            formErrors={formErrors}
-            apiError={error?.message}
-            isSubmitting={loading}
-          />
-        </SignUpFormLeft>
-        <SignUpAds>
-          <AuthAdsArea />
-        </SignUpAds>
-      </SignUpFormWrapper>
-    </>
+    <SignUpFormWrapper>
+      <SignUpFormLeft>
+        <SignInForm
+          onSubmit={handleSubmit(onSubmit)}
+          register={register}
+          formErrors={formErrors}
+          apiError={error?.message}
+          isSubmitting={loading}
+        />
+      </SignUpFormLeft>
+      <SignUpAds>
+        <AuthAdsArea />
+      </SignUpAds>
+    </SignUpFormWrapper>
   );
 }
 

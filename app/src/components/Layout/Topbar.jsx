@@ -9,11 +9,10 @@ import { toggleSidebar } from '@/features/admin/sidebar';
 
 import { resolveAvatarPath } from '@/helpers/avatar.helper';
 import Avatar from '@/assets/images/avatar.jpg';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDownIcon } from '@/assets/images/svg/arrow-down-18.svg';
 import { ReactComponent as MenuIcon } from '@/assets/images/svg/menu.svg';
 import Input from '@/components/Common/Input';
-import { mobileQuery } from 'constants/style';
 
 const Wrapper = styled.div`
   height: 80px;
@@ -57,13 +56,13 @@ const MenuMobile = styled.div`
   ${mobileQuery} {
     display: block;
   }
-`
+`;
 
 const RightContent = styled.div``;
 
 const SearchInput = styled(Input)`
   width: 468px;
-  border-color: #D2D5E1;
+  border-color: #d2d5e1;
 
   ${mobileQuery} {
     width: 100%;
@@ -75,7 +74,6 @@ const Profile = styled.div`
   align-items: center;
   cursor: pointer;
   & > svg {
-
     ${mobileQuery} {
       display: none;
     }
@@ -128,10 +126,10 @@ const ProfileMenu = styled.div`
 const ProfileList = styled.ul`
   position: relative;
   padding: 0;
-  border: 1px solid #EAEDF7;
+  border: 1px solid #eaedf7;
   border-radius: 5px;
   box-shadow: 0px 4px 8px rgba(28, 41, 90, 0.0367952);
-  background: #FFFFFF;
+  background: #ffffff;
 
   &:before {
     content: '';
@@ -143,7 +141,7 @@ const ProfileList = styled.ul`
     width: 0;
     height: 0;
     border: 12px solid transparent;
-    border-bottom-color: #EAEDF7;
+    border-bottom-color: #eaedf7;
 
     ${mobileQuery} {
       left: unset;
@@ -161,7 +159,7 @@ const ProfileList = styled.ul`
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-bottom-color: #FFFFFF;
+    border-bottom-color: #ffffff;
 
     ${mobileQuery} {
       left: unset;
@@ -254,10 +252,10 @@ const Topbar = ({ signout }) => {
       )}
     </Wrapper>
   );
-}
+};
 
 Topbar.propTypes = {
   signout: PropTypes.func,
-}
+};
 
 export default Topbar;

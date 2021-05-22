@@ -39,26 +39,24 @@ const SocialAuth = () => {
   const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&scope=user`;
 
   return (
-    <>
-      <SocialList>
-        {process.env.REACT_APP_FACEBOOK_CLIENT_KEY && (
-          <SocialButton href={facebookLoginUrl}>
-            <img src={FaceBookSvg} alt="Facebook icon" />
-          </SocialButton>
-        )}
-        {process.env.REACT_APP_GOOGLE_CLIENT_KEY && (
-          <SocialButton href={googleLoginUrl}>
-            <img src={GoogleSvg} alt="Google icon" />
-          </SocialButton>
-        )}
-        {process.env.REACT_APP_GITHUB_CLIENT_KEY && (
-          <SocialButton href={githubUrl}>
-            <img src={GithubSvg} alt="Github icon" />
-          </SocialButton>
-        )}
-      </SocialList>
-    </>
-  )
+    <SocialList>
+      {process.env.REACT_APP_FACEBOOK_CLIENT_KEY && (
+        <SocialButton href={facebookLoginUrl}>
+          <img src={FaceBookSvg} alt="Facebook icon" />
+        </SocialButton>
+      )}
+      {process.env.REACT_APP_GOOGLE_CLIENT_KEY && (
+        <SocialButton href={googleLoginUrl}>
+          <img src={GoogleSvg} alt="Google icon" />
+        </SocialButton>
+      )}
+      {process.env.REACT_APP_GITHUB_CLIENT_KEY && (
+        <SocialButton href={githubUrl}>
+          <img src={GithubSvg} alt="Github icon" />
+        </SocialButton>
+      )}
+    </SocialList>
+  );
 };
 
 export default SocialAuth;

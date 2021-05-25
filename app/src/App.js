@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 import Auth from '@/containers/Auth/Auth';
 import PrivateRoute from '@/routes/PrivateRoute';
+import PublicRoute from '@/routes/PublicRoute';
 import AdminLayout from '@/containers/Layout/Admin';
 import VerifyEmail from '@/containers/VerifyEmail';
 import Social from '@/containers/Social';
@@ -33,13 +34,13 @@ function App() {
         <GlobalLoading />
         <ToastContainer />
         <Switch>
-          <Route path="/auth" component={Auth} />
           <Route path="/verify-email" component={VerifyEmail} />
           <Route path="/social/:provider/callback" component={Social} />
           <Route
             path="/teams/invitation/:invitationToken"
             component={AcceptInvitation}
           />
+          <PublicRoute path="/auth" component={Auth} />
           <PrivateRoute render={(props) => <AdminLayout {...props} />} />
           <Redirect from="*" to="/" />
         </Switch>

@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import SignInForm from '@/components/Auth/SignInForm';
-import { JWT_STORAGE_KEY } from '@/constants';
 import loginQuery from '@/queries/auth/login';
 import {
   SignUpFormWrapper,
@@ -44,22 +43,20 @@ function SignIn() {
   }
 
   return (
-    <>
-      <SignUpFormWrapper>
-        <SignUpFormLeft>
-          <SignInForm
-            onSubmit={handleSubmit(onSubmit)}
-            register={register}
-            formErrors={formErrors}
-            apiError={error?.message}
-            isSubmitting={loading}
-          />
-        </SignUpFormLeft>
-        <SignUpAds>
-          <AuthAdsArea />
-        </SignUpAds>
-      </SignUpFormWrapper>
-    </>
+    <SignUpFormWrapper>
+      <SignUpFormLeft>
+        <SignInForm
+          onSubmit={handleSubmit(onSubmit)}
+          register={register}
+          formErrors={formErrors}
+          apiError={error?.message}
+          isSubmitting={loading}
+        />
+      </SignUpFormLeft>
+      <SignUpAds>
+        <AuthAdsArea />
+      </SignUpAds>
+    </SignUpFormWrapper>
   );
 }
 

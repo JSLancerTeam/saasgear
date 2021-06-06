@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import DeleteAccountModal from '@/components/Profile/DeleteAccountModal';
-import { JWT_STORAGE_KEY } from '@/constants';
 import deleteAccountQuery from '@/queries/user/deleteAccount';
 
 export default function DeleteAccount({ closeModal, isOpen }) {

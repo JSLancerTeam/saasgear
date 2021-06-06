@@ -12,6 +12,7 @@ import updateDocumentQuery from '@/queries/document/updateDocument';
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
 import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
 import Button from '@/components/Common/Button';
+import { mobileQuery } from '@/constants/style';
 
 const Header = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ const TitlePageStyle = styled(TitlePage)`
 
 const SaveBtn = styled(Button)`
   width: 264px;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     display: none;
   }
 `;

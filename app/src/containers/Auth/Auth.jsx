@@ -6,14 +6,12 @@ import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 
 const Auth = () => (
-  <>
-    <Switch>
-      <Route path="/auth/signin" component={SignIn} />
-      <Route path="/auth/signup" component={SignUp} />
-      <Route path="/auth/forgot-password" component={ForgotPassword} />
-      <Route path="/auth/reset-password" component={ResetPassword} />
-    </Switch>
-  </>
+  <Switch>
+    <Route path="/auth/signin" component={SignIn} />
+    <Route path="/auth/signup" component={SignUp} />
+    <Route path="/auth/forgot-password" component={ForgotPassword} />
+    <Route path="/auth/reset-password" component={ResetPassword} />
+  </Switch>
 );
 
 export default Auth;

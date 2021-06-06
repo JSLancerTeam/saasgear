@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import PropsType from 'prop-types';
 
+import { mobileQuery } from '@/constants/style';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
 import FormControl from '../Common/FormControl';
 import Input from '../Common/Input/Input';
+
 
 const ButtonGroup = styled.div`
   display: flex;
@@ -18,7 +20,7 @@ const ButtonGroup = styled.div`
     margin-right: 16px;
   }
   button {
-    @media screen and (max-width: 768px) {
+    ${mobileQuery} {
       width: 100%;
     }
   }

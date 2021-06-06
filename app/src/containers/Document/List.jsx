@@ -10,13 +10,15 @@ import Input from '@/components/Common/Input/Input';
 import Button from '@/components/Common/Button';
 
 import { ReactComponent as AddIcon } from '@/assets/images/svg/add.svg';
+import { mobileQuery } from '@/constants/style';
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 26px;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -28,7 +30,8 @@ const TitlePageStyle = styled(TitlePage)`
 
 const RightHeader = styled.div`
   display: flex;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     margin-top: 15px;
     width: 100%;
   }
@@ -38,7 +41,8 @@ const SearchInput = styled(Input)`
   width: 284px;
   margin-right: 38px;
 
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     width: 100%;
     margin-right: 5px;
   }
@@ -46,14 +50,16 @@ const SearchInput = styled(Input)`
 
 const CreateBtn = styled(Button)`
   width: 264px;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     width: 30%;
   }
 `;
 
 const CreateBtnContent = styled.span`
   display: ${(props) => props.mobile ? 'none' : 'block'};
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     display: ${(props) => props.mobile ? 'block' : 'none'};
   }
 `

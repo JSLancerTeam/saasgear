@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import routes from '@/routes';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
@@ -23,7 +23,7 @@ const Content = styled.div`
   background-color: ${COLORS.BODY};
   overflow-y: auto;
   padding: 32px 15px;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     min-height: calc(100vh - 64px);
   }
 `;

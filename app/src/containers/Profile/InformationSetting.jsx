@@ -9,15 +9,13 @@ import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
 import { setProfileUser } from '@/features/auth/user';
-
 import { resolveAvatarPath } from '@/helpers/avatar.helper';
-
 import updateProfileQuery from '@/queries/user/updateProfile';
 import updateProfileAvatarQuery from '@/queries/user/updateUserAvatar';
 import AccountForm from '@/components/Profile/AccountForm';
 import AvatarIcon from '@/assets/images/avatar.jpg';
 import { ReactComponent as SettingIcon } from '@/assets/images/svg/setting.svg';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-down-24.svg';
 import DeleteAccount from './DeleteAccount';
 
@@ -54,7 +52,8 @@ const Avatar = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     width: 35px;
     height: 35px;
   }
@@ -65,7 +64,8 @@ const Avatar = styled.label`
     width: 62px;
     height: 62px;
     object-fit: cover;
-    @media screen and (max-width: 768px) {
+
+    ${mobileQuery} {
       width: 35px;
       height: 35px;
     }
@@ -76,7 +76,8 @@ const Info = styled.div`
   margin-left: 16px;
   display: flex;
   flex-direction: column;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     margin-left: 5px;
   }
 `;
@@ -109,7 +110,8 @@ const ActionItem = styled.span`
   color: ${COLORS.LIGHT_PRIMARY};
   max-height: 22px;
 
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     margin-right: 0;
     display: ${(props) => props.mobile ? 'block' : 'none'};
   }

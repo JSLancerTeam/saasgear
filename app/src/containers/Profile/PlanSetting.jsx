@@ -15,7 +15,7 @@ import { setUserPlan } from '@/features/auth/userPlan';
 import Plans from '@/components/Plans';
 import Toggle from '@/components/Common/Input/Toggle';
 import { ContentPage, Description, TitleContent } from '@/components/Layout/blockStyle';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import ErrorText from '@/components/Common/ErrorText';
 import Button from '@/components/Common/Button';
 
@@ -26,7 +26,8 @@ const TitleContentStyle = styled(TitleContent)`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     flex-direction: column-reverse;
   }
 `;
@@ -35,7 +36,7 @@ const ToggleYearly = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 25px;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     margin-top: 25px;
   }
   label {
@@ -48,7 +49,7 @@ const RightContent = styled.div`
   padding-left: 24px;
   padding-top: 74px;
   display: flex;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     padding: 0;
     flex-direction: column-reverse;
   }

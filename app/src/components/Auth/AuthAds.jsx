@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import '@/assets/css/react-slide-custom.css';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import squareGrid from '@/assets/images/svg/square-grid.svg';
 import squareRadiusPrimary from '@/assets/images/svg/square-radius-primary.svg';
 import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';
@@ -105,41 +105,28 @@ function AuthAdsArea() {
       >
         <div>
           <SlideItemContainer>
-            <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
-            <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>
+            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+            <SlideItemTitle>ReactJS</SlideItemTitle>
             <SlideItemDescription>
-              Aziest Jordan is one of the biggest superstars to have immerged
-              from the professional designer in world.
+              High-performance and powerful interactive UI with React.
             </SlideItemDescription>
           </SlideItemContainer>
         </div>
         <div>
           <SlideItemContainer>
-            <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
-            <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>
+            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+            <SlideItemTitle>Subscription payments</SlideItemTitle>
             <SlideItemDescription>
-              Aziest Jordan is one of the biggest superstars to have immerged
-              from the professional designer in world.
+              We have integrated Stripe subscription payments to allow you to monetize your SaaS.
             </SlideItemDescription>
           </SlideItemContainer>
         </div>
         <div>
           <SlideItemContainer>
-            <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
-            <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>
+            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+            <SlideItemTitle>Teams</SlideItemTitle>
             <SlideItemDescription>
-              Aziest Jordan is one of the biggest superstars to have immerged
-              from the professional designer in world.
-            </SlideItemDescription>
-          </SlideItemContainer>
-        </div>
-        <div>
-          <SlideItemContainer>
-            <SlideImage src="/images/auth/auth-ads.png" alt="asd" />
-            <SlideItemTitle>Connect and manage with your team!</SlideItemTitle>
-            <SlideItemDescription>
-              Aziest Jordan is one of the biggest superstars to have immerged
-              from the professional designer in world.
+              Your users are able to invite their teammates to their account.
             </SlideItemDescription>
           </SlideItemContainer>
         </div>

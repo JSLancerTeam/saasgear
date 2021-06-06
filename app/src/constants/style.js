@@ -15,3 +15,5 @@ export const COLORS = {
   GRAY: '#ECEFF8',
   BODY: '#F4F7FC',
 };
+
+export const mobileQuery = '@media screen and (max-width: 768px)';

@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { mobileQuery } from '@/constants/style';
 import WYSIWYGEditor from './WYSIWYG';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
 import Input from '../Common/Input/Input';
+
 
 const ButtonGroup = styled.div`
   display: flex;
@@ -17,7 +19,7 @@ const ButtonGroup = styled.div`
 
 const SaveBtn = styled(Button)`
   width: 264px;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     width: 100%;
   }
 `;

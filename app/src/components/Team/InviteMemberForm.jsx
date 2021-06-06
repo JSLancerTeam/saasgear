@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { mobileQuery } from '@/constants/style';
 import { ReactComponent as EnvelopeIcon } from '@/assets/images/svg/envelope.svg';
 import FormGroup from '../Common/FormGroup';
 import FormControl from '../Common/FormControl';
@@ -18,7 +19,7 @@ const InviteInput = styled(Input)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: none;
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     width: 100%;
   }
 `;

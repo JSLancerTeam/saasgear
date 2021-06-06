@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 
 const InputWrapper = styled.div``;
 
@@ -13,7 +13,8 @@ const Label = styled.div`
   color: ${COLORS.WHITE_BLUE};
   margin-bottom: 11px;
   text-transform: uppercase;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     margin-top: 11px;
   }
 `;

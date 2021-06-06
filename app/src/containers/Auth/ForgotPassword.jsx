@@ -51,39 +51,37 @@ function ForgotPassword() {
   }
 
   return (
-    <>
-      <ForgotPasswordWrapper>
-        <Overlay />
-        <ForgotPasswordContainer>
-          <ForgotPasswordForm
-            onSubmit={handleSubmit(onSubmit)}
-            register={register}
-            errors={errors}
-            isSubmitted={isSubmitted && !error}
-            isSubmitting={loading}
-            apiError={error?.message}
-          />
-          <SquareIconTop>
-            <img src={squareRadiusTop} alt="" />
-          </SquareIconTop>
-          <SmallSquareBottom>
-            <img src={squareRadiusTopPrimary} alt=""/>
-          </SmallSquareBottom>
-          <SmallSquareTop>
-            <img src={squareRadiusTopPrimarySmall} alt=""/>
-          </SmallSquareTop>
-          <SmallSquareGrid>
-            <img src={squareGrid} alt=""/>
-          </SmallSquareGrid>
-          <SquareIconBottom>
-            <img src={squareRadiusTopBig} alt=""/>
-          </SquareIconBottom>
-          <CircleIcon>
-            <img src={circleSmall} alt=""/>
-          </CircleIcon>
-        </ForgotPasswordContainer>
-      </ForgotPasswordWrapper>
-    </>
+    <ForgotPasswordWrapper>
+      <Overlay />
+      <ForgotPasswordContainer>
+        <ForgotPasswordForm
+          onSubmit={handleSubmit(onSubmit)}
+          register={register}
+          errors={errors}
+          isSubmitted={isSubmitted && !error}
+          isSubmitting={loading}
+          apiError={error?.message}
+        />
+        <SquareIconTop>
+          <img src={squareRadiusTop} alt="" />
+        </SquareIconTop>
+        <SmallSquareBottom>
+          <img src={squareRadiusTopPrimary} alt="" />
+        </SmallSquareBottom>
+        <SmallSquareTop>
+          <img src={squareRadiusTopPrimarySmall} alt="" />
+        </SmallSquareTop>
+        <SmallSquareGrid>
+          <img src={squareGrid} alt="" />
+        </SmallSquareGrid>
+        <SquareIconBottom>
+          <img src={squareRadiusTopBig} alt="" />
+        </SquareIconBottom>
+        <CircleIcon>
+          <img src={circleSmall} alt="" />
+        </CircleIcon>
+      </ForgotPasswordContainer>
+    </ForgotPasswordWrapper>
   );
 }
 

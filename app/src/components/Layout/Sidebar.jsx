@@ -4,11 +4,9 @@ import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-// Actions
 import { toggleSidebar } from '@/features/admin/sidebar';
-
 import { ReactComponent as LogoIcon } from '@/assets/images/svg/logo.svg';
-import { COLORS } from '@/constants/style';
+import { COLORS, mobileQuery } from '@/constants/style';
 import routes from '@/routes';
 
 const Wrapper = styled.div`
@@ -16,7 +14,8 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  @media screen and (max-width: 768px) {
+
+  ${mobileQuery} {
     position: fixed;
     left: -235px;
     z-index: 0;
@@ -31,7 +30,7 @@ const Wrapper = styled.div`
 `;
 
 const WrapperOverlay = styled.div`
-  @media screen and (max-width: 768px) {
+  ${mobileQuery} {
     position: fixed;
     height: 100vh;
     width: 100vw;

@@ -1,5 +1,5 @@
 # [:watermelon: Prerequisite services](https://github.com/JSLancerTeam/saasgear/docs/prerequisite.md)
-We use the following third-party services in SaaS gear. 
+We use the following third-party services in SaaSgear.
 
 - Mailgun
 - Stripe
@@ -21,7 +21,7 @@ STRIPE_PRIVATE_KEY=[YOUR_STRIPE_KEY]
 
 ## **Mailgun**
 
-Emails in SaaS gear are sent using mailgun. It's a cheap and reliable transaction email service.
+Emails in SaaSgear are sent using mailgun. It's a cheap and reliable transaction email service.
 
 Follow the guide at here to create an mailgun account: [https://www.mailgun.com/](https://www.mailgun.com/)
 

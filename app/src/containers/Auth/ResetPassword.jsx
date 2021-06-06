@@ -61,43 +61,41 @@ function ResetPassword() {
       },
     });
     if (data?.resetPassword) {
-      toast.success('Change password successfully!')
+      toast.success('Change password successfully!');
       history.push('/auth/signin');
     }
   }
   return (
-    <>
-      <ForgotPasswordWrapper>
-        <Overlay />
-        <ForgotPasswordContainer>
-          <ResetPasswordForm
-            onSubmit={handleSubmit(onSubmit)}
-            register={register}
-            errors={errors}
-            apiError={error?.message}
-            isSubmiting={loading}
-          />
-          <SquareIconTop>
-            <img src={squareRadiusTop} alt="" />
-          </SquareIconTop>
-          <SmallSquareBottom>
-            <img src={squareRadiusTopPrimary} alt="" />
-          </SmallSquareBottom>
-          <SmallSquareTop>
-            <img src={squareRadiusTopPrimarySmall} alt="" />
-          </SmallSquareTop>
-          <SmallSquareGrid>
-            <img src={squareGrid} alt="" />
-          </SmallSquareGrid>
-          <SquareIconBottom>
-            <img src={squareRadiusTopBig} alt="" />
-          </SquareIconBottom>
-          <CircleIcon>
-            <img src={circleSmall} alt="" />
-          </CircleIcon>
-        </ForgotPasswordContainer>
-      </ForgotPasswordWrapper>
-    </>
+    <ForgotPasswordWrapper>
+      <Overlay />
+      <ForgotPasswordContainer>
+        <ResetPasswordForm
+          onSubmit={handleSubmit(onSubmit)}
+          register={register}
+          errors={errors}
+          apiError={error?.message}
+          isSubmiting={loading}
+        />
+        <SquareIconTop>
+          <img src={squareRadiusTop} alt="" />
+        </SquareIconTop>
+        <SmallSquareBottom>
+          <img src={squareRadiusTopPrimary} alt="" />
+        </SmallSquareBottom>
+        <SmallSquareTop>
+          <img src={squareRadiusTopPrimarySmall} alt="" />
+        </SmallSquareTop>
+        <SmallSquareGrid>
+          <img src={squareGrid} alt="" />
+        </SmallSquareGrid>
+        <SquareIconBottom>
+          <img src={squareRadiusTopBig} alt="" />
+        </SquareIconBottom>
+        <CircleIcon>
+          <img src={circleSmall} alt="" />
+        </CircleIcon>
+      </ForgotPasswordContainer>
+    </ForgotPasswordWrapper>
   );
 }
 

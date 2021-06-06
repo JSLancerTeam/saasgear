@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 import Auth from '@/containers/Auth/Auth';
 import PrivateRoute from '@/routes/PrivateRoute';
+import PublicRoute from '@/routes/PublicRoute';
 import AdminLayout from '@/containers/Layout/Admin';
 import VerifyEmail from '@/containers/VerifyEmail';
 import Social from '@/containers/Social';
@@ -14,10 +15,12 @@ import { client } from '@/config/apollo';
 import GlobalLoading from '@/components/Layout/GlobalLoading';
 import GlobalStyle from '@/theme/globalStyles';
 import 'react-toastify/dist/ReactToastify.css';
+import useDocumentHeader from './hooks/useDocumentTitle';
 
 function App() {
+  useDocumentHeader({ title: 'SaaSgear' });
   const { error } = useSelector((state) => state.user);
-  document.title = 'SaaSgear';
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -31,13 +34,13 @@ function App() {
         <GlobalLoading />
         <ToastContainer />
         <Switch>
-          <Route path="/auth" component={Auth} />
           <Route path="/verify-email" component={VerifyEmail} />
           <Route path="/social/:provider/callback" component={Social} />
           <Route
             path="/teams/invitation/:invitationToken"
             component={AcceptInvitation}
           />
+          <PublicRoute path="/auth" component={Auth} />
           <PrivateRoute render={(props) => <AdminLayout {...props} />} />
           <Redirect from="*" to="/" />
         </Switch>

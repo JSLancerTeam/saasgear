@@ -100,7 +100,7 @@ function GlobalLoading() {
     <ProgressBar>
       <Bar>
         <Progress
-          loading={isLoading ? 1 : 0}
+          loading={Number(isLoading)}
           completing={isCompleting}
           completed={isCompleted}
         />

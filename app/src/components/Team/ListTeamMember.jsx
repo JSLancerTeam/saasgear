@@ -29,7 +29,7 @@ export default function ListTeamMember({ teamMembers, handleAction }) {
               <td width="10%">{it.isOwner ? 'admin' : 'member'}</td>
               {handleAction && (
                 <ActionTd>
-                  <Button>Cancle</Button>
+                  <Button>Cancel</Button>
                   <Button color="primary">Invitation</Button>
                 </ActionTd>
               )}

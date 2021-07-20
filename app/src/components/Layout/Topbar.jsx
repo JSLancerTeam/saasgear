@@ -242,7 +242,7 @@ const Topbar = ({ signout }) => {
         <ProfileMenu>
           <ProfileList>
             <ProfileItem>
-              <NavLinkStyle to="/profile">Profle</NavLinkStyle>
+              <NavLinkStyle to="/profile">Profile</NavLinkStyle>
             </ProfileItem>
             <ProfileItem>
               <SignoutBtn onClick={signout}>Sign Out</SignoutBtn>

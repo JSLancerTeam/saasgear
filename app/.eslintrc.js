@@ -1,9 +1,16 @@
 const path = require('path');
 
 module.exports = {
-  parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', 'lodash'],
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'airbnb', 
+    'prettier', 
+    'prettier/react',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended'
+  ],
+  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', 'lodash', '@typescript-eslint', "eslint-plugin-react"],
   env: {
     browser: true,
     node: true,
@@ -20,7 +27,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [['@', path.resolve(__dirname, './src')]],
-        extensions: ['.ts', '.js', '.jsx', '.json'],
+        extensions: ['.ts', '.js', '.jsx', '.json', '.tsx'],
       },
       node: {
         paths: ['src'],
@@ -88,5 +95,18 @@ module.exports = {
       },
     ],
     'lodash/import-scope': [2, 'method'],
+    'react/prop-types': 0,
+    'max-classes-per-file': 'off',
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    '@typescript-eslint/no-var-requires': 0
   },
 };

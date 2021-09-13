@@ -28,7 +28,7 @@ const TableResponsive = styled.div`
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-`
+`;
 
 const DocumentTable = ({ data, total, loading, onFetch }) => (
   <TableResponsive>

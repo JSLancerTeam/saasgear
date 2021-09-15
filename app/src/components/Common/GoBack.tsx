@@ -12,6 +12,8 @@ const IconBack = styled.div`
 
 type Props = {
   link?: string | null;
+  to?: string | null;
+  children?: React.ReactNode;
 }
 
 const GoBack: React.FC<Props> = ({ link }) => {
@@ -30,9 +32,5 @@ const GoBack: React.FC<Props> = ({ link }) => {
     </IconBack>
   );
 }
-
-GoBack.defaultProps = {
-  link: null,
-};
 
 export default React.memo(GoBack);

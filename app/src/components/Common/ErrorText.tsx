@@ -13,8 +13,9 @@ const Error = styled.p<{position: string | undefined}>`
 `;
 
 interface Props {
-  message?: string,
-  position?: string
+  message?: string;
+  position?: string;
+  [key: string]: unknown;
 }
 
 const ErrorText: React.FC<Props> = ({ message, position, ...props }) => (

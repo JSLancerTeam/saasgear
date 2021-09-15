@@ -44,7 +44,7 @@ type Props = {
   color?: ButtonColor;
   type?: ButtonType;
   children: React.ReactNode;
-  [x: string]: unknown;
+  [key: string]: unknown;
 }
 
 const Button: React.FC<Props> = ({ color, type, children, ...props }) => (

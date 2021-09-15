@@ -1,5 +1,4 @@
 import React, { useState, useEffect, memo } from 'react';
-import PropsType from 'prop-types';
 import {
   useStripe,
   useElements,
@@ -84,12 +83,21 @@ const RowGroup = styled.div`
   justify-content: space-between;
 `;
 
-const StripeForm = ({
+type Props = {
+  onSubmitSuccess: (token: string) => void;
+  className?: string;
+  onGoBack?: () => void;
+  submitText?: string;
+  apiLoading: boolean;
+  apiError?: string; 
+}
+
+const StripeForm: React.FC<Props> = ({
   onSubmitSuccess,
   className,
   onGoBack,
   apiLoading,
-  apiError,
+  apiError = "",
   submitText = 'Submit',
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -105,17 +113,20 @@ const StripeForm = ({
     setError(apiError);
   }, [apiError]);
 
-  async function onSubmit(e) {
+  async function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const card = elements.getElement(CardNumberElement);
-      const result = await stripe.createToken(card);
-      if (result.error) {
-        setError(result.error.message);
-      } else {
-        onSubmitSuccess(result.token.id);
+      if (elements && stripe) {
+        const card = elements.getElement(CardNumberElement);
+        let result;
+        if (card) result = await stripe.createToken(card); 
+        if (result?.error) {
+          setError(result.error?.message ?? "");
+        } else {
+          onSubmitSuccess(result?.token?.id ?? "");
+        }
       }
     } catch (err) {
       setError(err.toString());
@@ -160,15 +171,6 @@ const StripeForm = ({
       </SubmitButton>
     </StripeFormContainer>
   );
-};
-
-StripeForm.propTypes = {
-  onSubmitSuccess: PropsType.func.isRequired,
-  className: PropsType.string,
-  onGoBack: PropsType.func,
-  submitText: PropsType.string,
-  apiLoading: PropsType.bool,
-  apiError: PropsType.string,
 };
 
 export default memo(StripeForm);

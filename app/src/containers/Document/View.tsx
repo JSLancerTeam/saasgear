@@ -11,8 +11,12 @@ const ContentDocument = styled.div`
   min-height: calc(100vh - 64px);
 `
 
-const ViewDocument = () => {
-  const match = useRouteMatch();
+type MatchParams = {
+  id: string;
+}
+
+const ViewDocument: React.FC = () => {
+  const match = useRouteMatch<MatchParams>();
   const documentId = parseInt(match.params.id, 10);
   const [fetchDocumentDetail, { data: documentData, loading }] = useLazyQuery(
     getDocumentDetailQuery,
@@ -24,7 +28,7 @@ const ViewDocument = () => {
     }
   }, [documentId]);
 
-  function createMarkup(html) {
+  function createMarkup(html: string) {
     return {
       __html: DOMPurify.sanitize(html),
     };

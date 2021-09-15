@@ -148,10 +148,9 @@ type Props = {
   plans: Plans[];
   onChange: (name: string) => void;
   checkIsCurrentPlan: (id: string) => boolean;
-  planChanged: Partial<Plans>;
+  planChanged?: Plans;
   isYearly: boolean;
 }
-
 
 const Plans: React.FC<Props> = ({
   plans,
@@ -164,7 +163,7 @@ const Plans: React.FC<Props> = ({
     {plans.map((plan) => (
       <PlanWrapper
         onClick={() => onChange(plan.id)}
-        active={planChanged && plan.id === planChanged.id}
+        active={planChanged ? plan.id === planChanged.id : false}
         key={plan.id}
       >
         <Name>{plan.name}</Name>

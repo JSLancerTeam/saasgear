@@ -34,8 +34,8 @@ const BadgeWrapper = styled.div<BadgeWrapper>`
 
 
 type Props = {
-  children: React.ReactNode;
   type: BadgeWrapper["type"];
+  children: React.ReactNode;
 }
 
 const Badge: React.FC<Props> = ({ children, type }) => <BadgeWrapper type={type}>{children}</BadgeWrapper>;

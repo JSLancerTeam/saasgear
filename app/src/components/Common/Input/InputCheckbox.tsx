@@ -73,13 +73,6 @@ const Checkbox = React.forwardRef(
   ),
 );
 
-// Checkbox.propTypes = {
-//   defaultChecked: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // ??string
-//   type: PropTypes.oneOf(['checkbox', 'radio']),
-//   placeholder: PropTypes.string,
-//   id: PropTypes.string,
-// };
-
 Checkbox.displayName = 'Input';
 
 Checkbox.defaultProps = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 

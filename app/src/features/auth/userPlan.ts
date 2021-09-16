@@ -2,16 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type State = {
   data: {
-    id?: string;
-    userId?: string;
-    productId?: string;
-    priceId?: string;
+    id?: number;
+    userId?: number;
+    productId?: number;
+    priceId?: number;
     name?: string;
     amount?: number;
     productType: string;
     priceType?: string;
-    expiredAt?: string;
-    deletedAt?: string;
+    expiredAt?: Date;
+    deletedAt?: Date;
   }
   loading?: boolean;
 }

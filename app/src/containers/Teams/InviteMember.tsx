@@ -1,15 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import PropsType from 'prop-types';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 
-import type { TeamMembers } from "@/features/admin/team";
-
+import type { ITeamMember } from "@/features/admin/team";
 import { addTeamMember } from '@/features/admin/team';
 import InviteMemberForm from '@/components/Team/InviteMemberForm';
 import ListTeamMember from '@/components/Team/ListTeamMember';
@@ -32,7 +30,7 @@ type Payload = {
 }
 
 type Props = {
-  teamMembers: TeamMembers[];
+  teamMembers: ITeamMember[];
   alias: string;
 }
 
@@ -55,16 +53,16 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
       });
       if (data?.inviteMember) {
         const member = data.inviteMember;
-        dispatch(addTeamMember({ teamID: alias, data: member }));
+        dispatch(addTeamMember({ teamID: alias, data: [member] }));
       }
-    } catch (e) {
+    } catch (e: any) {
       console.log(error);
       setTimeout(() => console.log(error), 50);
       toast.error(e.message);
       console.log(JSON.stringify(e, null, 2));
     }
   }
-  function onActionInlistMember(params: string) {
+  function onActionInlistMember(params: unknown) {
     console.log(params);
   }
 
@@ -90,15 +88,5 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
     </ContentPage>
   );
 }
-
-// InviteMember.propTypes = {
-//   alias: PropsType.string.isRequired,
-//   teamMembers: PropsType.arrayOf(
-//     PropsType.shape({
-//       teamName: PropsType.string,
-//       teamID: PropsType.string,
-//     }),
-//   ),
-// };
 
 export default InviteMember;

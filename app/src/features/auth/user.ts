@@ -4,10 +4,11 @@ type Profile = {
   id?: string;
   avatarUrl?: string;
   email?: string;
+  isActive?: boolean;
+  position?: string;
+  company?: string;
   name?: string;
-  profileUser?: {
-    invitationToken: string;
-  }
+  invitationToken?: string;
 }
 
 type Error = {
@@ -21,7 +22,7 @@ type ProfileUser = {
 
 type State = {
   data: Profile;
-  error: string | null;
+  error: Error['error'];
   loading: boolean;
 }
 
@@ -49,5 +50,7 @@ const user = createSlice({
 });
 
 export const { setProfileUser, toggleToastError } = user.actions;
+
+export type { Profile };
 
 export default user.reducer;

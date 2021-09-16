@@ -1,22 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 
 import TeamForm from '@/components/Team/TeamForm';
 import { addNew } from '@/features/admin/team';
 import createTeamQuery from '@/queries/teams/createNewTeam';
 import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
 import ErrorText from '@/components/Common/ErrorText';
+import type { Team } from "@/features/admin/team";
 
 const TeamSchema = yup.object().shape({
   teamName: yup.string().required('Team name is reqired'),
   teamID: yup.string().required('Team ID is required'),
 });
+
+type Props = {
+  team: Team;
+}
+
+type TeamParams = {
+  teamName?: string;
+  teamID?: string;
+}
 
 const TeamDetail: React.FC<Props> = ({ team }) => {
   const history = useHistory();
@@ -30,7 +39,7 @@ const TeamDetail: React.FC<Props> = ({ team }) => {
   });
   const [createTeamMutation, { loading, error }] = useMutation(createTeamQuery);
 
-  async function createTeam({ teamName, teamID }) {
+  async function createTeam({ teamName, teamID }: TeamParams) {
     const { data, errors } = await createTeamMutation({
       variables: { name: teamName, alias: teamID },
     });
@@ -57,12 +66,5 @@ const TeamDetail: React.FC<Props> = ({ team }) => {
     </ContentPage>
   );
 }
-
-TeamDetail.propTypes = {
-  team: PropTypes.shape({
-    teamName: PropTypes.string,
-    teamID: PropTypes.string,
-  }),
-};
 
 export default TeamDetail;

@@ -128,7 +128,7 @@ const StripeForm: React.FC<Props> = ({
           onSubmitSuccess(result?.token?.id ?? "");
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       setError(err.toString());
     }
 

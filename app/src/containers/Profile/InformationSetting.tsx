@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 
+import type { Profile } from '@/features/auth/user';
 import { setProfileUser } from '@/features/auth/user';
 import { resolveAvatarPath } from '@/helpers/avatar.helper';
 import updateProfileQuery from '@/queries/user/updateProfile';
@@ -139,15 +139,7 @@ type Payload = {
 }
 
 type Props = {
-  user: {
-    id?: string;
-    avatarUrl?: string;
-    email?: string;
-    name?: string;
-    profileUser?: {
-      invitationToken: string;
-    }
-  }
+  user: Profile;
 };
 
 const InformationSetting: React.FC<Props> = ({ user }) => {

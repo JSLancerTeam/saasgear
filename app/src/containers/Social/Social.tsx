@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 
 import getQueryParam from '@/utils/getQueryParam';
@@ -39,11 +39,6 @@ const Social: React.FC = () => {
     };
   }, [error]);
 
-  // return loading ? (
-  //   <div>{provider}</div>
-  // ) : (
-  //   !error && <FormRegister data={data?.loginBySocial} />
-  // );
   return (
     <>
       {loading ? (

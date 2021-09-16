@@ -48,7 +48,7 @@ type Props = ReactHookFormType & {
   openPopupDeleteAccount: () => void;
 }
 
-const AccountForm: React.FC<Props> = ({ onSubmit, register, errors, loading, apiError, openPopupDeleteAccount }) =>  (
+const AccountForm: React.FC<Props> = ({ onSubmit, register, loading, apiError, openPopupDeleteAccount }) =>  (
   <Form onSubmit={onSubmit}>
     <FormGroupWrapper>
       <FormGroup>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import getQueryParam from '@/utils/getQueryParam';
 import verifyEmailQuery from '@/queries/auth/verifyEmail';
 import {
@@ -24,7 +24,7 @@ const VerifyEmail: React.FC = () => {
   const query = getQueryParam();
   const token = query.get('token');
   const history = useHistory();
-  const [verifyEmailMutation, { error, loading }] = useMutation(
+  const [verifyEmailMutation, { error }] = useMutation(
     verifyEmailQuery,
   );
   const [verifyResult, setVerifyResult] = useState(null);
@@ -47,30 +47,7 @@ const VerifyEmail: React.FC = () => {
     <ForgotPasswordWrapper>
       <Overlay />
       <ForgotPasswordContainer>
-        <GoBack to="/auth/signin">
-          <svg
-            width="18"
-            height="14"
-            viewBox="0 0 18 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17 7H1"
-              stroke="#7C88B1"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M7 13L1 7L7 1"
-              stroke="#7C88B1"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </GoBack>
+        <GoBack />
         <div>
           <Logo />
         </div>

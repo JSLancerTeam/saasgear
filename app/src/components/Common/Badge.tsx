@@ -2,10 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { COLORS } from '@/constants/style';
 
-type BadgeType = 'success' | 'error' | 'info';
-
 type BadgeWrapper = {
-  type: BadgeType;
+  type: 'success' | 'error' | 'info';
 }
 
 const BadgeWrapper = styled.div<BadgeWrapper>`
@@ -31,7 +29,6 @@ const BadgeWrapper = styled.div<BadgeWrapper>`
     }
   }}
 `;
-
 
 type Props = {
   type: BadgeWrapper["type"];

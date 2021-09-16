@@ -7,36 +7,36 @@ type It = {
   alias: string;
 }
 
-type TeamsPayload = {
+type TeamPayload = {
   teams: It[]
 } 
 
-type TeamMembers = {
-  userName: string;
-  userId: string;
-  email: string;
-  isOwner: boolean;
-  status: string;
+type ITeamMember = {
+  userName?: string;
+  userId?: string;
+  email?: string;
+  isOwner?: boolean;
+  status: 'active' | 'inactive' | 'pending' | 'decline';
 }
 
 type AddTeamMemberPayload = {
   teamID: string;
-  data: TeamMembers
+  data: ITeamMember | ITeamMember[];
 }
 
-type Teams = {
+type Team = {
   id?: string;
   teamID?: string;
   teamName?: string;
-  teamMembers: TeamMembers[];
+  teamMembers?: ITeamMember[];
 }
 
 type AddNewPayload = {
-  data: Teams;
+  data: Team;
 }
 
 type State = {
-  teams: Teams[]
+  teams: Team[];
 }
 
 const initialState: State = {
@@ -55,11 +55,11 @@ const team = createSlice({
       const { teamID, data } = action.payload;
       const teamIndex = state.teams.findIndex((it) => it.teamID === teamID);
       state.teams[teamIndex].teamMembers = flatten([
-        ...state.teams[teamIndex].teamMembers,
+        ...state.teams[teamIndex].teamMembers ?? [],
         data,
       ]);
     },
-    setTeams(state: State, action: PayloadAction<TeamsPayload>) {
+    setTeams(state: State, action: PayloadAction<TeamPayload>) {
       const { teams } = action.payload;
       state.teams = teams.map((it: It) => ({
         teamName: it.name,
@@ -72,6 +72,6 @@ const team = createSlice({
 
 export const { addNew, addTeamMember, setTeams } = team.actions;
 
-export type { Teams, TeamMembers };
+export type { Team, ITeamMember };
 
 export default team.reducer;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import DOMPurify from 'dompurify';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import { useRouteMatch } from 'react-router-dom';
 
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';

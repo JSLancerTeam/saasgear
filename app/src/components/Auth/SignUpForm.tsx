@@ -1,5 +1,4 @@
 import React from 'react';
-import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
 import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';

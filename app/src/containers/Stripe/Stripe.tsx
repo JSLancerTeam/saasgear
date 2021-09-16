@@ -1,13 +1,9 @@
 import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 import StripeForm from '@/components/Stripe/StripeForm';
 
-// let stripePromise: Promise<Stripe | null>;
-// if (process.env.REACT_APP_STRIPE_PUBLIC_KEY) {
-//   stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-// }
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 type Props = {

@@ -39,8 +39,8 @@ const resolvers = {
       }
       return result;
     },
-    logout: () => {
-      clearCookie(COOKIE_NAME.TOKEN);
+    logout: (_, __, { res }) => {
+      clearCookie(res, COOKIE_NAME.TOKEN);
       return true;
     },
     forgotPassword: async (_, { email }) => forgotPasswordUser(normalizeEmail(email)),

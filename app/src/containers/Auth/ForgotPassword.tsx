@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import ForgotPasswordForm from '@/components/Auth/ForgotPasswordForm';
 import forgotpasswordQuery from '@/queries/auth/forgotPassword';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import {
   ForgotPasswordWrapper,
   Overlay,

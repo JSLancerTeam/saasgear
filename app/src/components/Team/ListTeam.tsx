@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import PropsType from 'prop-types';
 import styled from 'styled-components';
 
+import type { Team } from "@/features/admin/team";
 import { ContentPage, TitleContent } from '../Layout/blockStyle';
 import { Table } from '../Common/Table';
 import Button from '../Common/Button';
@@ -24,13 +24,8 @@ const AddTeamBtn = styled(Button)`
   margin-top: 32px;
 `;
 
-type Teams = {
-  teamName?: string;
-  teamID?: string;
-}
-
 type Props = {
-  teams: Teams[];
+  teams: Team[];
 }
 
 const ListTeam: React.FC<Props> = ({ teams }) => {
@@ -63,14 +58,5 @@ const ListTeam: React.FC<Props> = ({ teams }) => {
     </ContentPage>
   );
 }
-
-// ListTeam.propTypes = {
-//   teams: PropsType.arrayOf(
-//     PropsType.shape({
-//       teamName: PropsType.string,
-//       teamID: PropsType.string,
-//     }),
-//   ),
-// };
 
 export default ListTeam;

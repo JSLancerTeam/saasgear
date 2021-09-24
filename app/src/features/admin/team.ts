@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import flatten from 'lodash/flatten';
 
 type It = {
-  id?: string;
+  id?: number;
   name: string;
   alias: string;
 }
@@ -13,7 +13,7 @@ type TeamPayload = {
 
 type ITeamMember = {
   userName?: string;
-  userId?: string;
+  userId?: number;
   email?: string;
   isOwner?: boolean;
   status: 'active' | 'inactive' | 'pending' | 'decline';
@@ -25,7 +25,7 @@ type AddTeamMemberPayload = {
 }
 
 type Team = {
-  id?: string;
+  id?: number;
   teamID?: string;
   teamName?: string;
   teamMembers?: ITeamMember[];

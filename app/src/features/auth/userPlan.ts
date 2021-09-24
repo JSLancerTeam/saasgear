@@ -10,8 +10,8 @@ type State = {
     amount?: number;
     productType: string;
     priceType?: string;
-    expiredAt?: Date;
-    deletedAt?: Date;
+    expiredAt?: string;
+    deletedAt?: string;
   }
   loading?: boolean;
 }

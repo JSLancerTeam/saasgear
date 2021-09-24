@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Profile = {
-  id?: string;
+  id?: number;
   avatarUrl?: string;
   email?: string;
   isActive?: boolean;

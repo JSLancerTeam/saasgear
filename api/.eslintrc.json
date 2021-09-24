@@ -4,7 +4,9 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb-base"],
+  "extends": [
+    "airbnb-typescript"
+  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -12,7 +14,14 @@
   "parserOptions": {
     "ecmaVersion": 2018
   },
-  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  },
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "operator-linebreak": ["error", "after"],
     "object-curly-newline": ["error", { "consistent": true }],
@@ -44,6 +53,6 @@
     "no-use-before-define": 0,
     "no-restricted-syntax": 0,
     "no-continue": 0,
-    "no-unsafe-finally": 0
+    "no-unsafe-finally": 0    
   }
 }

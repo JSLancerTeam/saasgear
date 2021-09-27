@@ -28,7 +28,7 @@ const ForgotPasswordSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Email is invalid'),
 });
 
-function ForgotPassword() {
+const ForgotPassword = () => {
   useDocumentHeader({ title: 'Forgot password' });
 
   const [isSubmitted, setIsSubmitted] = useState(false);

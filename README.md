@@ -1,6 +1,6 @@
 # [SaaSgear](https://github.com/JSLancerTeam/saasgear)
 
-SaaSgear is a ReactJS and NodeJS SaaS boilerplate to help developers set up new SaaS project quickly.
+ReactJS and NodeJS SaaS boilerplate for your next SaaS application.
 
 ## Features
 - **ReactJS:** High-performance and powerful interactive UI with React.

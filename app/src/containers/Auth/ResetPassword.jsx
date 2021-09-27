@@ -36,7 +36,7 @@ const ResetPasswordSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-function ResetPassword() {
+const ResetPassword = () => {
   useDocumentHeader({ title: 'Reset password' });
   const query = getQueryParam();
   const history = useHistory();
@@ -74,7 +74,7 @@ function ResetPassword() {
           register={register}
           errors={errors}
           apiError={error?.message}
-          isSubmiting={loading}
+          isSubmitting={loading}
         />
         <SquareIconTop>
           <img src={squareRadiusTop} alt="" />

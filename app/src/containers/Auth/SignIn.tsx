@@ -21,7 +21,12 @@ const SignInSchema = yup.object().shape({
   password: yup.string().required('Password is required'),
 });
 
-function SignIn() {
+type Payload = {
+  email: string;
+  password: string;
+}
+
+const SignIn: React.FC = () => {
   useDocumentHeader({ title: 'Sign In' });
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignInSchema),
@@ -29,7 +34,7 @@ function SignIn() {
   const [loginMutation, { error, loading }] = useMutation(loginQuery);
   const history = useHistory();
 
-  async function onSubmit(params) {
+  async function onSubmit(params: Payload) {
     try {
       const { data } = await loginMutation({ variables: params });
       if (data?.login) {

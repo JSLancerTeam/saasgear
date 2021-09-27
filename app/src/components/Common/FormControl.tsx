@@ -8,9 +8,9 @@ const FormControlWrapper = styled.div`
 `;
 
 interface Props {
-  className?: string,
-  children: React.ReactNode,
-  [x: string]: unknown
+  className?: string;
+  children: React.ReactNode;
+  [key: string]: unknown;
 }
 
 const FormControl: React.FC<Props> = ({ className, children, ...props }) => (

@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import { Controller, Control } from 'react-hook-form';
 import styled from 'styled-components';
 import { ReactHookFormType } from "@/typeReactHookForm";
@@ -67,15 +66,5 @@ const DocumentForm: React.FC<Props> = ({
     </ButtonGroup>
   </form>
 );
-
-// DocumentForm.propTypes = {
-//   editorContent: PropTypes.string,
-//   onSubmit: PropTypes.func.isRequired,
-//   register: PropTypes.func.isRequired,
-//   control: PropTypes.object.isRequired,
-//   formErrors: PropTypes.object,
-//   apiError: PropTypes.string,
-//   isSubmitting: PropTypes.bool.isRequired,
-// };
 
 export default memo(DocumentForm);

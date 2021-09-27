@@ -212,10 +212,10 @@ const Topbar: React.FC<Props> = ({ signout }) => {
     data: { avatarUrl, name },
   } = useSelector((state: RootState) => state.user);
   const [isShowMenu, setIsShowMenu] = useState(false);
-  const profileRef = useRef<HTMLElement>(null); // as React.MutableRefObject<HTMLDivElement>
+  const profileRef = useRef<HTMLElement>(null) as React.MutableRefObject<HTMLDivElement>;
 
-  function handleClickOutside(e) {
-    if (profileRef.current && !profileRef.current.contains(e.target)) {
+  function handleClickOutside(e: MouseEvent) {
+    if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
       setIsShowMenu(false);
     }
   }

@@ -64,7 +64,7 @@ export const ModalFooter = styled.div`
 
 type Props = {
   isOpen: Overlay["isOpen"];
-  children: React.ReactNode | React.ReactNode[]
+  children: React.ReactNode | React.ReactNode[];
 }
 
 const Modal: React.FC<Props> = ({ isOpen, children }) => (

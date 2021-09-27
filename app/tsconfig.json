@@ -5,7 +5,11 @@
     "baseUrl": "./",
     "module": "esnext",
     "target": "es6",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable"
+    ],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react-jsx",
@@ -13,7 +17,6 @@
     "rootDir": "src",
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
@@ -25,7 +28,15 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "exclude": ["node_modules", "build"],
-  "include": ["src", "./types"],
-  "types": ["typePatches"]
+  "exclude": [
+    "node_modules",
+    "build"
+  ],
+  "include": [
+    "src",
+    "./types"
+  ],
+  "types": [
+    "typePatches"
+  ]
 }

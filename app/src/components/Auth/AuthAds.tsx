@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import '@/assets/css/react-slide-custom.css';
-import { COLORS, mobileQuery } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 import squareGrid from '@/assets/images/svg/square-grid.svg';
 import squareRadiusPrimary from '@/assets/images/svg/square-radius-primary.svg';
 import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';

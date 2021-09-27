@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-import type { Teams } from "@/features/admin/team";
+import type { Team } from "@/features/admin/team";
 
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { RootState } from '@/config/store';
 import { addTeamMember } from '@/features/admin/team';
 import getTeamDetailQuery from '@/queries/teams/getTeamDetail';
@@ -19,7 +19,7 @@ type Params = {
 const EditTeam: React.FC = () => {
   const { teamId } = useParams<Params>();
   const { teams } = useSelector((state: RootState) => state.team);
-  const [currentTeam, setCurrentTeam] = useState<Teams>();
+  const [currentTeam, setCurrentTeam] = useState<Team>();
   const { data, loading } = useQuery(getTeamDetailQuery, {
     variables: { alias: teamId },
   });
@@ -44,17 +44,21 @@ const EditTeam: React.FC = () => {
   return currentTeam ? (
     <>
       <TeamDetail team={currentTeam} />
-      <TeamMember
-        teamMembers={currentTeam.teamMembers.filter(
-          (it) => it.status !== 'pending',
-        )}
-      />
-      <InviteMember
-        alias={teamId}
-        teamMembers={currentTeam.teamMembers.filter(
-          (it) => it.status === 'pending',
-        )}
-      />
+      {currentTeam.teamMembers && (
+        <>
+          <TeamMember
+            teamMembers={currentTeam.teamMembers.filter(
+              (it) => it.status !== 'pending',
+            )}
+          />
+          <InviteMember
+            alias={teamId}
+            teamMembers={currentTeam.teamMembers.filter(
+              (it) => it.status === 'pending',
+            )}
+          />
+        </>
+      )}
     </>
   ) : (
     <div>Loading...</div>

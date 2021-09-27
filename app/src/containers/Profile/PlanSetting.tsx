@@ -1,7 +1,6 @@
 import React,  { useState, useEffect } from 'react';
-import cn from 'classnames';
 import isEmpty from 'lodash/isEmpty';
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import styled from 'styled-components';

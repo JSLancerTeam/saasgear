@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
-import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import verifyTokenQuery from '@/queries/teams/verifyInviteToken';
 import getProfileQuery from '@/queries/auth/getProfile';
 import joinTeamQuery from '@/queries/teams/joinTeam';

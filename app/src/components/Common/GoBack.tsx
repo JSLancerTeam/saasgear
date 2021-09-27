@@ -12,8 +12,6 @@ const IconBack = styled.div`
 
 type Props = {
   link?: string | null;
-  to?: string | null;
-  children?: React.ReactNode;
 }
 
 const GoBack: React.FC<Props> = ({ link }) => {

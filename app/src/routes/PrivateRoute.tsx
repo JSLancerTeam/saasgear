@@ -11,7 +11,7 @@ import getProfileQuery from '@/queries/auth/getProfile';
 import { setProfileUser } from '@/features/auth/user';
 
 type Props = {
-  render?: RouteProps['render'];
+  render: RouteProps['render'];
 }
 
 const PrivateRoute: React.FC<Props> = ({ render }) => {
@@ -22,6 +22,8 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
   );
   const { data } = useSelector((state: RootState) => state.user);
 
+  
+
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) {
       getProfile();
@@ -31,7 +33,7 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
   useEffect(() => {
     if (userProfile && userProfile.profileUser) {
       if (userProfile?.profileUser?.invitationToken) {
-        history.push(`/teams/invitation/${data?.profileUser?.invitationToken}`);
+        history.push(`/teams/invitation/${data?.invitationToken}`);
       }
       dispatch(setProfileUser({ data: userProfile.profileUser, loading: loadingUserProfile }));
     }
@@ -39,9 +41,9 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
 
   return (
     <>
-      {data && data.id && !loadingUserProfile && (
+      {data && data.id && !loadingUserProfile && render && (
         <Route
-          render={ props => render && render(props)}
+          render={props => render(props)}
         />
       )}
       {(!data || !data.id || loadingUserProfile) && (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 
@@ -82,7 +82,7 @@ const PasswordSchema = yup.object().shape({
   newPassword: yup.string().required('New password is required').min(6, 'Password must be at least 6 characters'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), null], 'Password must match'),
+    .oneOf([yup.ref('newPassword'), ""], 'Password must match'),
 });
 
 type Payload = {

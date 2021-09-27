@@ -27,7 +27,7 @@ export function createClient(): ApolloClient<NormalizedCacheObject> {
   // server from the `GRAPHQL` environment variable, which by default is
   // set to an external playground at https://graphqlhub.com/graphql
   const httpLink = new HttpLink({
-    credentials: 'same-origin',
+    credentials: 'include',
     uri: process.env.REACT_APP_GRAPHQL_URL,
   });
 
@@ -49,6 +49,17 @@ export function createClient(): ApolloClient<NormalizedCacheObject> {
               `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
             )
           );
+          const errors = graphQLErrors[0];
+          switch (errors.extensions?.code) {
+            case 'UNAUTHENTICATED':
+              if (!window.location.pathname.startsWith('/auth')) {
+                window.location.href = '/auth/signin';
+              }
+              break;
+            case 'ANOTHER_ERROR_CODE':
+              break;
+            default:
+          }
         }
         if (networkError) {
           console.log(`[Network error]: ${networkError}`);
@@ -56,7 +67,8 @@ export function createClient(): ApolloClient<NormalizedCacheObject> {
       }),
 
       // Split on HTTP and WebSockets
-      httpLink
+      httpLink,
     ]),
+    credentials: "include"
   });
 }

@@ -55,7 +55,7 @@ const WYSIWYGEditor: React.FC<Props> = ({ editorContent = '', onChange, classNam
   }, [editorContent]);
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Editor
         editorState={editorState}
         wrapperClassName="editor-wrapper"

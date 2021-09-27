@@ -2,7 +2,7 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 
 import { registerAccountBySocial } from '@/queries/auth/socialLogin';

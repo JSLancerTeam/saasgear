@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 

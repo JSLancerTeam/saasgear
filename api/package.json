@@ -1,11 +1,10 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "server.ts",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
+    "start": "ts-node -r tsconfig-paths/register server.ts",
     "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
     "db:create-products": "node --experimental-modules --es-module-specifier-resolution=node scripts/create-products.js",
     "db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
@@ -14,8 +13,8 @@
     "db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
     "db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs",
     "postinstall": "link-module-alias && npx npm-force-resolutions",
-    "lint": "eslint --ext .js .",
-    "lint:fix": "eslint --ext .js . --fix"
+    "lint": "eslint --ext .ts .",
+    "lint:fix": "eslint --ext .ts . --fix"
   },
   "resolutions": {
     "**/**/fs-capacitor": "^6.2.0",
@@ -48,18 +47,37 @@
     "mysql2": "^2.2.5",
     "redis": "^3.0.2",
     "stripe": "^8.121.0",
+    "typescript": "^4.4.3",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/bunyan": "^1.8.7",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/eslint": "^7.28.0",
+    "@types/express": "^4.17.13",
+    "@types/graphql-resolvers": "^0.3.1",
+    "@types/graphql-upload": "^8.0.7",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/lodash": "^4.14.173",
+    "@types/mailgun-js": "^0.22.12",
+    "@types/mjml": "^4.7.0",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^16.9.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
     "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
     "nodemon": "^2.0.6",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "ts-node": "^10.2.1",
+    "tsconfig-paths": "^3.11.0"
   },
   "husky": {
     "hooks": {

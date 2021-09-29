@@ -1,23 +1,13 @@
-import Apollo from 'apollo-server-express';
-import { AxiosResponse } from 'axios';
+import Apollo from 'apollo-server-express';import { AxiosResponse } from 'axios';
 import { findUser, createUser } from '~/repository/user.repository';
 import { SOCIAL_PROVIDER } from '~/constants/provider.constant';
 import { sign } from '~/helpers/jwt.helper';
 import AxiosInstance from '~/utils/axios-instance';
-
-type UserGithub = {
-  user: {
-    name?: string;
-    email?: string;
-    avatarUrl?: string;
-    providerId?: string;
-    provider: 'github';
-  }
-}
+import { Token } from './login.service';
 
 export type SocialToken = {
   token: string;
-}
+};
 
 type AccessTokenFromGithubResponse = {
   access_token: string;
@@ -25,12 +15,7 @@ type AccessTokenFromGithubResponse = {
   scope: string;
   error: Error;
   error_description: string;
-}
-
-// type AccessTokenFromGithubResponseError = {
-//   error: Error;
-//   error_description: string;
-// }
+};
 
 type GetProfileResponse = {
   login: string;
@@ -56,8 +41,8 @@ type GetProfileResponse = {
   blog: string;
   location: string | null;
   email: string | null;
-  hireable: string | null; //
-  bio: string | null; //
+  hireable: string | null;
+  bio: string | null;
   twitter_username: string | null;
   public_repos: number;
   public_gists: number;
@@ -77,9 +62,9 @@ type GetProfileResponse = {
     collaborators: number;
     private_repos: number;
   }
-}
+};
 
-export async function loginGithub(code: string): Promise<UserGithub | SocialToken> {
+export async function loginGithub(code: string): Promise<Token> {
   const response = await getAccessTokenFromGithub(code);
   if (response.data.error) {
     throw new Apollo.ApolloError(response.data.error_description);
@@ -91,17 +76,17 @@ export async function loginGithub(code: string): Promise<UserGithub | SocialToke
   const user = await findUser({ provider_id: `${id}`, provider: SOCIAL_PROVIDER.github });
 
   if (user) {
-    if (!email || (email && user.email === email)) {
-      return {
-        user: {
-          name,
-          email,
-          avatarUrl: avatar_url,
-          providerId: `${id}`,
-          provider: SOCIAL_PROVIDER.github,
-        },
-      };
-    }
+    // if (!email || (email && user.email === email)) {
+    //   return {
+    //     user: {
+    //       name,
+    //       email,
+    //       avatarUrl: avatar_url,
+    //       providerId: `${id}`,
+    //       provider: SOCIAL_PROVIDER.github,
+    //     },
+    //   };
+    // }
     return {
       token: sign({
         email: user.email,
@@ -110,17 +95,17 @@ export async function loginGithub(code: string): Promise<UserGithub | SocialToke
       }),
     };
   }
-  if (!email) {
-    return {
-      user: {
-        name,
-        email,
-        avatarUrl: avatar_url,
-        providerId: `${id}`,
-        provider: SOCIAL_PROVIDER.github,
-      },
-    };
-  }
+  // if (!email) {
+  //   return {
+  //     user: {
+  //       name,
+  //       email,
+  //       avatarUrl: avatar_url,
+  //       providerId: `${id}`,
+  //       provider: SOCIAL_PROVIDER.github,
+  //     },
+  //   };
+  // }
   await createUser({
     provider: SOCIAL_PROVIDER.github,
     email,
@@ -129,6 +114,10 @@ export async function loginGithub(code: string): Promise<UserGithub | SocialToke
     avatar_url,
     is_active: true,
   });
+  console.log(name);
+  console.log(email);
+  console.log(avatar_url);
+  console.log(id);
   return { token: sign({ email, name }) };
 }
 

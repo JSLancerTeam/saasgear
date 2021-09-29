@@ -14,7 +14,7 @@ const products = [
 type Item = {
   name: string;
   amount: number;
-}
+};
 
 type StripeProductData = {
   id?: string;
@@ -23,7 +23,7 @@ type StripeProductData = {
     id?: string;
     type?: Stripe.Price.Recurring.Interval;
   }[]
-}
+};
 
 async function createProductItem(item: Item, dataStripe: StripeProductData[]): Promise<boolean> {
   const productStripe = dataStripe.find((pro) => pro.name === item.name);

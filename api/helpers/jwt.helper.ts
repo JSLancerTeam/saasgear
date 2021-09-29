@@ -4,7 +4,7 @@ type Payload = {
   email?: string;
   name?: string;
   createdAt?: string;
-}
+};
 
 const { sign: jwtSign, verify: jwtVerify } = pkg;
 

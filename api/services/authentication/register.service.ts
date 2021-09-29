@@ -14,10 +14,7 @@ import { findProductAndPriceByType } from '~/repository/products.repository';
 import { createNewSubcription } from '~/services/stripe/subcription.service';
 import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
 import formatDateDB from '~/utils/format-date-db';
-
-type Token = {
-  token: string;
-}
+import { Token } from './login.service';
 
 async function registerUser(email: string, password: string, name: string, paymentMethodToken: string, planName: string, billingType: 'MONTHLY' | 'YEARLY'): Promise<ApolloError | Token> {
   const validateResult = registerValidation({ email, password, name });
@@ -27,7 +24,7 @@ async function registerUser(email: string, password: string, name: string, payme
 
   try {
     const user = await findUser({ email });
-    if (user && user.is_active) {
+    if (user) {
       return new ApolloError('Email address has been used');
     }
 

@@ -3,7 +3,6 @@ import { Response } from 'express';
 import { verify } from '~/helpers/jwt.helper';
 import { findUser } from '~/repository/user.repository';
 import { getTeamInvitation } from '~/repository/team_invitations.repository';
-// import { fromPairs } from 'lodash';
 
 type UserLoginedResponse = {
   id: number;
@@ -14,7 +13,7 @@ type UserLoginedResponse = {
   company: string;
   avatarUrl: string;
   invitationToken: string | null;
-}
+};
 
 export default async function getUserLogined(bearerToken: string | null, res: Response): Promise<UserLoginedResponse> {
   if (bearerToken) {

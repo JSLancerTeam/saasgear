@@ -6,9 +6,9 @@ import { findUser } from '~/repository/user.repository';
 import { loginValidation } from '~/validations/authenticate.validation';
 import { clearCookie, COOKIE_NAME } from '~/utils/cookie';
 
-type Token = {
+export type Token = {
   token: string;
-}
+};
 
 export async function loginUser(email: string, password: string, res: Response): Promise<ValidationError | AuthenticationError | Token> {
   const validateResult = loginValidation({ email, password });

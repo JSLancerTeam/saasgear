@@ -1,7 +1,6 @@
 import Knex from 'knex';
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
-// eslint-disable-next-line import/no-cycle
 import { createTeamMember, teamMembersColumns, TeamMember } from './team_members.repository';
 
 type Team = {
@@ -12,22 +11,22 @@ type Team = {
   updated_at?: string;
   deleted_at?: string;
   created_by?: number;
-}
+};
 
 type GetAllTeam = {
   teamId?: number;
   userId?: number;
-}
+};
 
 type NewTeamAndMember = {
   name?: string;
   alias?: string;
   userid?: number;
-}
+};
 
 type Condition = {
   [key: string]: number | string;
-}
+};
 
 export type GetAllTeamResponse = TeamMember & Team;
 

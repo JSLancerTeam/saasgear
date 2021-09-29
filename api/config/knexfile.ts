@@ -20,7 +20,7 @@ type Config = {
     directory: string;
     recursive: boolean;
   }
-}
+};
 
 export default (database: string, host: string, user: string, password: string, port: number): Config => ({
   client: 'mysql2',

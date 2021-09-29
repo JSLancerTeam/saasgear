@@ -58,7 +58,7 @@ export function createClient(): ApolloClient<NormalizedCacheObject> {
               break;
             case 'ANOTHER_ERROR_CODE':
               break;
-            default:
+            default: 
           }
         }
         if (networkError) {
@@ -69,6 +69,17 @@ export function createClient(): ApolloClient<NormalizedCacheObject> {
       // Split on HTTP and WebSockets
       httpLink,
     ]),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+      mutate: {
+        errorPolicy: 'all',
+      },
+    },
     credentials: "include"
   });
 }

@@ -5,7 +5,7 @@ import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
 import { UserProfile } from '~/repository/user.repository';
 
-type Token = {
+type TokenParams = {
   id?: number;
   user_id?: number;
   token?: string;
@@ -13,7 +13,7 @@ type Token = {
   is_active?: boolean;
   created_at?: string;
   updated_at?: string;
-}
+};
 
 export async function deleteUser(currentUser: UserProfile): Promise<boolean> {
   const tokens = await getToken({ user_id: currentUser.id });
@@ -30,7 +30,7 @@ export async function deleteUser(currentUser: UserProfile): Promise<boolean> {
   return true;
 }
 
-function disableAllField(user: UserProfile, tokens: Token[], userPlan: UserPlanData = null): Promise<unknown> {
+function disableAllField(user: UserProfile, tokens: TokenParams[], userPlan: UserPlanData = null): Promise<unknown> {
   return database.transaction((trx) => {
     const queries = [];
     queries.push(database(TABLES.users).where({ id: user.id }).update({ deleted_at: new Date() }).transacting(trx));

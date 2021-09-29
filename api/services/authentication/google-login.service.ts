@@ -4,8 +4,31 @@ import { findUser, createUser } from '~/repository/user.repository';
 import AxiosInstance from '~/utils/axios-instance';
 import { SOCIAL_PROVIDER } from '~/constants/provider.constant';
 import { sign } from '~/helpers/jwt.helper';
+import { Token } from './login.service';
+import { AxiosResponse } from 'axios';
 
-export async function loginGoogle(code: string) {
+type GetAccessTokenFromGoogleResponse = {
+  access_token?: string;
+  expires_in?: number;
+  scope?: string;
+  token_type?: string;
+  id_token?: string;
+  error?: Error;
+  error_description?: string;
+};
+
+type GetUserInfoResponse = {
+  id: string;
+  email: string;
+  verified_email: boolean;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  locale: string;
+};
+
+export async function loginGoogle(code: string): Promise<Token> {
   const response = await getAccessTokenFromGoogle(code);
   if (response.data.error) {
     throw new Apollo.ApolloError(response.data.error_description);
@@ -19,18 +42,18 @@ export async function loginGoogle(code: string) {
 
   const userByEmail = await findUser({ email });
   if (userByEmail) {
-    if (userByEmail?.provider === SOCIAL_PROVIDER.google && parseInt(userByEmail?.provider_id, 10) === id) {
+    if (userByEmail?.provider === SOCIAL_PROVIDER.google && parseInt(userByEmail?.provider_id, 10) === Number(id)) {
       return { token: sign({ email, name }) };
     }
-    return {
-      user: {
-        name,
-        email,
-        avatarUrl: picture,
-        providerId: id,
-        provider: SOCIAL_PROVIDER.google,
-      },
-    };
+    // return {
+    //   user: {
+    //     name,
+    //     email,
+    //     avatarUrl: picture,
+    //     providerId: id,
+    //     provider: SOCIAL_PROVIDER.google,
+    //   },
+    // };
   }
 
   await createUser({
@@ -44,7 +67,7 @@ export async function loginGoogle(code: string) {
   return { token: sign({ email, name }) };
 }
 
-async function getAccessTokenFromGoogle(code: string) {
+async function getAccessTokenFromGoogle(code: string): Promise<AxiosResponse<GetAccessTokenFromGoogleResponse>> {
   const path = 'https://oauth2.googleapis.com/token';
   const data = {
     client_id: process.env.GOOGLE_CLIENT_KEY,
@@ -63,7 +86,7 @@ async function getAccessTokenFromGoogle(code: string) {
   });
 }
 
-async function getUserInfo(token: string) {
+async function getUserInfo(token: string): Promise<AxiosResponse<GetUserInfoResponse>> {
   const path = 'https://www.googleapis.com/userinfo/v2/me';
   return AxiosInstance.get(path, {
     headers: {

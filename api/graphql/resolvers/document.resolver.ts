@@ -6,7 +6,7 @@ const resolvers = {
   Query: {
     getDocuments: combineResolvers(
       isAuthenticated,
-      (_, { offset, limit }) => getDocuments(offset, limit),
+      (_, { offset, limit }, { user }) => getDocuments(user.id, offset, limit),
     ),
     getDocumentDetail: combineResolvers(
       isAuthenticated,

@@ -11,12 +11,12 @@ export type DataSubcription = {
   }[];
   trial_end?: number;
   hosted_invoice_url?: string;
-}
+};
 
 type NewSubcription = {
   customer_id: string;
   subcription_id: string;
-}
+};
 
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY, {
   apiVersion: '2020-08-27',

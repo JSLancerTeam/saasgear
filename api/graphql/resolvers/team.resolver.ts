@@ -7,7 +7,7 @@ import { GetDetailTeamInvitation } from '~/repository/team_invitations.repositor
 
 type Token = {
   invitationToken: string;
-}
+};
 
 const resolvers = {
   Query: {

@@ -17,15 +17,15 @@ import { clearCookie, COOKIE_NAME, setAuthenticationCookie } from '~/utils/cooki
 
 type Res = {
   res: Response;
-}
+};
 
 type Provider = {
   provider: 'GITHUB' | 'FACEBOOK' | 'GOOGLE';
-}
+};
 
 type LoginBySocial = Provider & {
   code: string;
-}
+};
 
 type Register = {
   email: string;
@@ -34,33 +34,33 @@ type Register = {
   paymentMethodToken: string;
   planName: string;
   billingType: 'MONTHLY' | 'YEARLY';
-}
+};
 
 type Login = {
   email: string;
   password: string;
-}
+};
 
 type ForgotPassword = {
   email: string;
-}
+};
 
 type ResetPassword = {
   token: string;
   password: string;
   confirmPassword: string;
-}
+};
 
 type Verify = {
   token: string;
-}
+};
 
 type RegisterSocialAccount = Provider & {
   email: string;
   name: string;
   avatarUrl: string;
   providerId: string;
-}
+};
 
 const resolvers = {
   Query: {
@@ -68,7 +68,14 @@ const resolvers = {
       isAuthenticated,
       (_, args, { user }) => user,
     ),
-    loginBySocial: (_: unknown, { provider, code }: LoginBySocial) => loginSocial(provider, code),
+    loginBySocial: async (_: unknown, { provider, code }: LoginBySocial, { res }: Res) => {
+      const result = await loginSocial(provider, code);
+      if (result && result.token) {
+        setAuthenticationCookie(res, result.token);
+        return true;
+      }
+      return result;
+    },
   },
   Mutation: {
     register: async (_: unknown, { email, password, name, paymentMethodToken, planName, billingType } : Register, { res }: Res) => {

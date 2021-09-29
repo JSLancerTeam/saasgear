@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import AdminLayout from '@/components/Layout/Admin';
 import { setUserPlan } from '@/features/auth/userPlan';
+import { logout as logoutUser } from '@/features/auth/user';
 import getUserPlanQuery from '@/queries/userPlans/getUserPlan';
 import logoutQuery from '@/queries/auth/logout';
 
@@ -26,6 +27,7 @@ const AdminLayoutContainer: React.FC = () => {
   }, [userPlanData, loadingUserPlan]);
 
   async function signout() {
+    dispatch(logoutUser());
     await logout();
     history.push('/auth/signin');
   }

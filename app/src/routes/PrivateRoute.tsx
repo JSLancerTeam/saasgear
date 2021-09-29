@@ -22,8 +22,6 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
   );
   const { data } = useSelector((state: RootState) => state.user);
 
-  
-
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) {
       getProfile();

@@ -18,7 +18,7 @@ export type UserPlanData = {
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
-}
+};
 
 export type GetUserPlanByCustomerIdResponse = {
   id: number;
@@ -37,7 +37,7 @@ export type GetUserPlanByCustomerIdResponse = {
   productType?: string;
   name?: string;
   amount?: number;
-}
+};
 
 const TABLE = TABLES.userPlans;
 

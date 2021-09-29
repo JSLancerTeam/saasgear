@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Profile = {
-  id?: number;
-  avatarUrl?: string;
-  email?: string;
-  isActive?: boolean;
-  position?: string;
-  company?: string;
-  name?: string;
-  invitationToken?: string;
+  id?: number | null;
+  avatarUrl?: string | null;
+  email?: string | null;
+  isActive?: boolean| null;
+  position?: string | null;
+  company?: string | null;
+  name?: string | null;
+  invitationToken?: string | null;
 }
 
 type Error = {
@@ -36,6 +36,9 @@ const user = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    logout(state: State) {
+      state.data = {};
+    },
     setProfileUser(state: State, action: PayloadAction<ProfileUser>) {
       const { data, loading } = action.payload;
       const dataUser = data || {};
@@ -49,7 +52,7 @@ const user = createSlice({
   },
 });
 
-export const { setProfileUser, toggleToastError } = user.actions;
+export const { logout, setProfileUser, toggleToastError } = user.actions;
 
 export type { Profile };
 

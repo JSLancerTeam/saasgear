@@ -19,6 +19,8 @@ const Social: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  console.log(provider);
+
   const { data, loading, error } = useQuery(socialLoginQuery, {
     variables: { provider: provider.toUpperCase(), code },
   });

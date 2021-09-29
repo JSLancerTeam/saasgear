@@ -12,7 +12,7 @@ type Props = {
     teamName?: string;
     link?: string;
   }
-}
+};
 
 export default async function compileEmailTemplate({ fileName, data }: Props): Promise<string> {
   const mjMail = await fs.promises.readFile(path.join('email-templates', fileName), 'utf8');

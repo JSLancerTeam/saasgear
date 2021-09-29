@@ -5,7 +5,6 @@ import { loginGoogle } from './google-login.service';
 import { Token } from './login.service';
 
 export async function loginSocial(provider: 'GITHUB' | 'FACEBOOK' | 'GOOGLE', code: string): Promise<Token> {
-  console.log(provider);
   let result = null;
   switch (provider) {
     case SOCIAL_PROVIDER.github.toUpperCase():

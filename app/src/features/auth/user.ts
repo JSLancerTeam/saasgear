@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Profile = {
-  id?: number | null;
-  avatarUrl?: string | null;
-  email?: string | null;
-  isActive?: boolean| null;
-  position?: string | null;
-  company?: string | null;
-  name?: string | null;
-  invitationToken?: string | null;
+  id?: number;
+  avatarUrl?: string;
+  email?: string;
+  isActive?: boolean;
+  position?: string;
+  company?: string;
+  name?: string;
+  invitationToken?: string;
 }
 
 type Error = {

@@ -6,27 +6,7 @@ import { SOCIAL_PROVIDER } from '~/constants/provider.constant';
 import { sign } from '~/helpers/jwt.helper';
 import { Token } from './login.service';
 import { AxiosResponse } from 'axios';
-
-type GetAccessTokenFromGoogleResponse = {
-  access_token?: string;
-  expires_in?: number;
-  scope?: string;
-  token_type?: string;
-  id_token?: string;
-  error?: Error;
-  error_description?: string;
-};
-
-type GetUserInfoResponse = {
-  id: string;
-  email: string;
-  verified_email: boolean;
-  name: string;
-  given_name: string;
-  family_name: string;
-  picture: string;
-  locale: string;
-};
+import { GetAccessTokenFromGoogleResponse, GetUserInfoResponse } from './social-login-types/google-login';
 
 export async function loginGoogle(code: string): Promise<Token> {
   const response = await getAccessTokenFromGoogle(code);
@@ -45,15 +25,6 @@ export async function loginGoogle(code: string): Promise<Token> {
     if (userByEmail?.provider === SOCIAL_PROVIDER.google && parseInt(userByEmail?.provider_id, 10) === Number(id)) {
       return { token: sign({ email, name }) };
     }
-    // return {
-    //   user: {
-    //     name,
-    //     email,
-    //     avatarUrl: picture,
-    //     providerId: id,
-    //     provider: SOCIAL_PROVIDER.google,
-    //   },
-    // };
   }
 
   await createUser({

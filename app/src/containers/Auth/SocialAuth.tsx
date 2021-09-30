@@ -33,10 +33,10 @@ const SocialList = styled.div`
   }
 `;
 
-const SocialAuth:React.FC = () => {
+const SocialAuth: React.FC = () => {
   const facebookLoginUrl = `https://www.facebook.com/v9.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/facebook/callback&scope=email`;
   const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/google/callback&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}`;
-  const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&scope=user`;
+  const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/github/callback&scope=user`;
 
   return (
     <SocialList>

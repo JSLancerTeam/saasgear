@@ -9,7 +9,7 @@ export type ProductData = {
   stripe_id?: string;
   created_at?: string;
   updated_at?: string;
-}
+};
 
 export type FindProductAndPriceByTypeResponse = {
   id?: number;
@@ -22,7 +22,7 @@ export type FindProductAndPriceByTypeResponse = {
   price_type: string;
   price_stripe_id: string;
   amount?: number;
-}
+};
 
 const TABLE = TABLES.products;
 

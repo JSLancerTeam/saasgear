@@ -23,7 +23,7 @@ export type DocumentInfo = {
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
-}
+};
 
 export type FindDocumentById = {
   id: number;
@@ -34,11 +34,11 @@ export type FindDocumentById = {
   updatedAt: string;
   deletedAt: string;
   createdBy?: string;
-}
+};
 
 export type FindDocumentsResponse = FindDocumentById[] & {
   count: number;
-}
+};
 
 /**
  * Insert Document
@@ -75,11 +75,12 @@ export function findDocumentById(id: number): Promise<FindDocumentById> {
  * @param {number} limit
  *
  */
-export function findDocuments(offset = 0, limit = DEFAULT_LIMIT): Promise<FindDocumentsResponse[]> {
+export function findDocuments(userId: number, offset = 0, limit = DEFAULT_LIMIT): Promise<FindDocumentsResponse[]> {
   return Promise.all([
     database(TABLE)
       .join(TABLES.users, documentColumns.userId, usersColumns.id)
       .select(documentColumns, `${usersColumns.name} as createdBy`)
+      .where(documentColumns.userId, userId)
       .whereNull(documentColumns.deletedAt)
       .limit(limit)
       .offset(offset),

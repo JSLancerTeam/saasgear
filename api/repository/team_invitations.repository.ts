@@ -1,7 +1,6 @@
 import Knex from 'knex';
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
-// eslint-disable-next-line import/no-cycle
 import { teamsColumns } from './team.repository';
 import { usersColumns } from './user.repository';
 
@@ -13,14 +12,14 @@ type TeamInvitation = {
   token?: string;
   valid_until?: string;
   created_at?: string;
-}
+};
 
 export type GetDetailTeamInvitation = {
   owner: string;
   teamName: string;
   until: string;
   status: string;
-}
+};
 
 const TABLE = TABLES.teamInvitations;
 

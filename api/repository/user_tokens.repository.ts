@@ -4,11 +4,11 @@ import { TABLES } from '~/constants/database.constant';
 type Condition = {
   type: 'verify_email' | 'forgot_password';
   id?: number;
-}
+};
 
 type GetToken = {
   user_id: number;
-}
+};
 
 export type UserToken = {
   id?: number;
@@ -18,7 +18,7 @@ export type UserToken = {
   is_active?: boolean;
   created_at?: string;
   updated_at?: string;
-}
+};
 
 const TABLE = TABLES.userTokens;
 

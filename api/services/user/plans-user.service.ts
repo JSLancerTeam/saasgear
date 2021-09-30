@@ -75,7 +75,6 @@ export async function createUserPlan(userId: number, paymentMethodToken: string,
 export async function updateUserPlan(userPlanId: number, planName: string, billingType: 'MONTHLY' | 'YEARLY'): Promise<true | ApolloError> {
   try {
     const userPlan = await getUserPlanById(userPlanId);
-    console.log(userPlan);
     if (!userPlan) {
       return new ApolloError('Can not find any user plan');
     }

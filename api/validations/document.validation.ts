@@ -9,7 +9,7 @@ import Validator, { ValidationError } from 'fastest-validator';
 type CreateInfo = {
   name: string;
   body: string;
-}
+};
 
 export function createValidation(data: CreateInfo): true | ValidationError[] {
   const validator = new Validator();

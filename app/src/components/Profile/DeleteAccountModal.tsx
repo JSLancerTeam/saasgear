@@ -34,7 +34,7 @@ const NoteLabel = styled(FormGroupLabel)`
 type Props = ReactHookFormType & {
   closeModal?: () => void;
   isOpen: boolean;
-  email?: string;
+  email?: string | null;
   isValid?: boolean;
 }
 

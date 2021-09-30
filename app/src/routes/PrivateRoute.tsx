@@ -22,8 +22,6 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
   );
   const { data } = useSelector((state: RootState) => state.user);
 
-  
-
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) {
       getProfile();
@@ -33,7 +31,7 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
   useEffect(() => {
     if (userProfile && userProfile.profileUser) {
       if (userProfile?.profileUser?.invitationToken) {
-        history.push(`/teams/invitation/${data?.invitationToken}`);
+        history.push(`/teams/invitation/${userProfile.profileUser.invitationToken}`);
       }
       dispatch(setProfileUser({ data: userProfile.profileUser, loading: loadingUserProfile }));
     }

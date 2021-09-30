@@ -11,7 +11,7 @@ export type UserPermission = {
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
-}
+};
 
 const TABLE = TABLES.userPermissions;
 

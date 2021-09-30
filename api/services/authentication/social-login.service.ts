@@ -2,8 +2,9 @@ import { SOCIAL_PROVIDER } from '~/constants/provider.constant';
 import { loginGithub } from './github-login.service';
 import { loginFacebook } from './facebook-login.service';
 import { loginGoogle } from './google-login.service';
+import { Token } from './login.service';
 
-export async function loginSocial(provider: 'GITHUB' | 'FACEBOOK' | 'GOOGLE', code: string) {
+export async function loginSocial(provider: 'GITHUB' | 'FACEBOOK' | 'GOOGLE', code: string): Promise<Token> {
   let result = null;
   switch (provider) {
     case SOCIAL_PROVIDER.github.toUpperCase():

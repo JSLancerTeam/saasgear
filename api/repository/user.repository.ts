@@ -29,7 +29,7 @@ type FindUserProps = {
   provider_id?: string;
   provider?: 'github' | 'google' | 'facebook';
   deleted_at?: string;
-}
+};
 
 export type UserProfile = {
   id?: number;
@@ -45,7 +45,7 @@ export type UserProfile = {
   created_at?: string;
   updated_at?: string;
   deleted_at?: string;
-}
+};
 
 type GetUserByIdAndJoinUserTokenResponse = UserProfile & UserToken;
 

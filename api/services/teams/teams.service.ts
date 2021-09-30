@@ -19,13 +19,13 @@ type FindTeamByAliasResponse = {
   email: string;
   status: string;
   isOwner: boolean;
-}
+};
 
 type CreateTeamResponse = {
   id: Promise<number | Error>;
   name: string;
   alias: string;
-}
+};
 
 /**
  * Function to get all team

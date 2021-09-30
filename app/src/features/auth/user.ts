@@ -36,6 +36,9 @@ const user = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    logout(state: State) {
+      state.data = {};
+    },
     setProfileUser(state: State, action: PayloadAction<ProfileUser>) {
       const { data, loading } = action.payload;
       const dataUser = data || {};
@@ -49,7 +52,7 @@ const user = createSlice({
   },
 });
 
-export const { setProfileUser, toggleToastError } = user.actions;
+export const { logout, setProfileUser, toggleToastError } = user.actions;
 
 export type { Profile };
 

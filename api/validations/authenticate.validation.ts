@@ -3,17 +3,17 @@ import Validator, { ValidationError } from 'fastest-validator';
 type LoginInfo = {
   email: string;
   password: string;
-}
+};
 
 type RegisterInfo = {
   email: string;
   password: string;
   name: string;
-}
+};
 
 type ChangePasswordInfo = {
   password: string;
-}
+};
 
 function loginValidation(data: LoginInfo): true | ValidationError[] {
   const validator = new Validator();

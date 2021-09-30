@@ -10,7 +10,7 @@ export type Price = {
   product_id?: number;
   created_at?: string;
   updated_at?: string;
-}
+};
 
 const TABLE = TABLES.prices;
 

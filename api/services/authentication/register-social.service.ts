@@ -7,14 +7,11 @@ import compileEmailTemplate from '~/helpers/compile-email-template';
 import sendMail from '~/libs/mail';
 import { sign } from '~/helpers/jwt.helper';
 import { SEND_MAIL_TYPE } from '~/constants/send-mail-type.constant';
+import { Token } from './login.service';
 
 type Provider = 'GITHUB' | 'FACEBOOK' | 'GOOGLE';
 
 type ProviderLower = Lowercase<Provider>;
-
-type Token = {
-  token: string;
-}
 
 export async function registerAccountBySocial(provider: Provider, email: string, name: string, avatarUrl: string, providerId: string): Promise<Token> {
   const existEmail = await findUser({ email });

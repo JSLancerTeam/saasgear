@@ -8,7 +8,7 @@ import { FOLDER_PATHS } from '~/utils/folder-path';
 
 type ChangeUserAvatarResponse = {
   url: string;
-}
+};
 
 export async function updateProfile(id: number, name: string, company: string, position: string): Promise<true | ApolloError> {
   try {

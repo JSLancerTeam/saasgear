@@ -4,10 +4,8 @@ import formatDateDB from '~/utils/format-date-db';
 
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
-// eslint-disable-next-line import/no-cycle
 import { teamsColumns } from './team.repository';
 import { usersColumns } from './user.repository';
-// eslint-disable-next-line import/no-cycle
 import { createTeamInvitation, VALID_PERIOD_DAYS } from './team_invitations.repository';
 
 const TABLE = TABLES.teamMembers;
@@ -20,7 +18,7 @@ export type TeamMember = {
   updated_at?: string;
   deleted_at?: string;
   invitation_token?: string;
-}
+};
 
 type MemberAndInviteToken = {
   userId: number;
@@ -28,11 +26,11 @@ type MemberAndInviteToken = {
   memberId?: number;
   email?: string;
   token?: string;
-}
+};
 
 type Alias = {
   alias: string;
-}
+};
 
 type GetListTeamMemberByAliasTeamResponse = {
   userName: string;
@@ -40,7 +38,7 @@ type GetListTeamMemberByAliasTeamResponse = {
   email: string;
   status: string;
   owner: number;
-}
+};
 
 export const teamMembersColumns = {
   userId: 'team_members.user_id',

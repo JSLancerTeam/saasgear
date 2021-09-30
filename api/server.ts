@@ -19,7 +19,7 @@ import stripeHooks from './services/stripe/webhooks.servive';
 type ContextParams = {
   req: Request;
   res: Response;
-}
+};
 
 dotenv.config();
 

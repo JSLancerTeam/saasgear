@@ -7,7 +7,7 @@ import { createValidation } from '~/validations/document.validation';
 type GetDocumentsResponse = {
   documents: FindDocumentsResponse;
   count: number;
-}
+};
 
 /**
  * Create Document
@@ -40,9 +40,9 @@ export async function createDocument(userId: number, name: string, body: string)
  * @param {number} limit
  *
  */
-export async function getDocuments(offset: number, limit: number): Promise<GetDocumentsResponse> {
+export async function getDocuments(userId: number, offset: number, limit: number): Promise<GetDocumentsResponse> {
   try {
-    const [documents, { count }] = await findDocuments(offset, limit);
+    const [documents, { count }] = await findDocuments(userId, offset, limit);
     return {
       documents,
       count,

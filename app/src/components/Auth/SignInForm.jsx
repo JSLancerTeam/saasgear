@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   SignUpFormContainer,
   FormContent,
@@ -61,18 +62,20 @@ function SignInForm({
   apiError,
   isSubmitting,
 }) {
+  const { t } = useTranslation('auth');
+
   return (
     <SignInContainer>
       <Logo />
       <FormContent onSubmit={onSubmit}>
-        <FormHeader>Welcome Back!</FormHeader>
+        <FormHeader>{t('sign-in.welcome-back')}</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>Email</FormGroupLabel>
+            <FormGroupLabel>{t('sign-in.email')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="email"
-                placeholder="yourname@yourbusiness.com"
+                placeholder={t('sign-in.placeholder-email')}
                 name="email"
                 ref={register}
               />
@@ -82,11 +85,11 @@ function SignInForm({
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>Password</FormGroupLabel>
+            <FormGroupLabel>{t('sign-in.password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder="your password"
+                placeholder={t('sign-in.placeholder-password')}
                 name="password"
                 ref={register}
               />
@@ -97,20 +100,20 @@ function SignInForm({
           </FormGroup>
           <RembemberSection>
             <Checkbox type="checkbox" name="rembemer" id="rembemer" />
-            <RememberLabel htmlFor="rembemer">Remember me</RememberLabel>
+            <RememberLabel htmlFor="rembemer">{t('sign-in.remember-label')}</RememberLabel>
           </RembemberSection>
           <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Please wait' : 'Sign in'}
+            {isSubmitting ? t('sign-in.please-wait') : t('sign-in.text')}
           </SubmitButton>
           <ForgotLink>
-            <Link to="/auth/forgot-password">Forgot Password?</Link>
+            <Link to="/auth/forgot-password">{t('sign-in.forgot-password')}</Link>
           </ForgotLink>
           <SocialAuth />
         </div>
       </FormContent>
       {apiError && <ErrorText message={apiError} position="center" />}
       <TextHaveAccount>
-        Dont have account? <Link to="/auth/signup">Register</Link>.
+        {t('sign-in.not-have-account')} <Link to="/auth/signup">{t('sign-in.register')}</Link>.
       </TextHaveAccount>
     </SignInContainer>
   );

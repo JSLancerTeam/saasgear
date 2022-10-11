@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
 import SignInForm from '@/components/Auth/SignInForm';
 import loginQuery from '@/queries/auth/login';

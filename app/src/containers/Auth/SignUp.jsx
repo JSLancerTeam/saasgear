@@ -18,7 +18,7 @@ import {
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
+  name: yup.string().required(''),
   email: yup.string().required('Email is required').email('Email invalid'),
   password: yup
     .string()

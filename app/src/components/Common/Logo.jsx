@@ -1,6 +1,8 @@
 import React from 'react';
-import { COLORS } from '@/constants/style';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
+import { COLORS } from '@/constants/style';
 
 const LogoHeader = styled.div`
   font-size: 21.6px;
@@ -15,10 +17,12 @@ const LogoHeaderName = styled.span`
 `;
 
 function Logo() {
+  const { t } = useTranslation("auth");
+
   return (
     <LogoHeader>
-      <LogoHeaderName>SaaS</LogoHeaderName>
-      <span>gear</span>
+      <LogoHeaderName>{t('sign-in.logo.saas')}</LogoHeaderName>
+      <span>{t('sign-in.logo.gear')}</span>
     </LogoHeader>
   );
 }

@@ -15,15 +15,17 @@ import Input from '../Common/Input/Input';
 const ButtonGroup = styled.div`
   display: flex;
   margin-top: 30px;
-
-  button:first-child {
-    margin-right: 16px;
-  }
+  
   button {
     ${mobileQuery} {
       width: 100%;
     }
   }
+
+  button:first-child {
+    margin-right: 16px;
+  }
+  
 `;
 
 export default function TeamForm({

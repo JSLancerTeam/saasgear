@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import SignUpForm from '@/components/Auth/SignUpForm';
 import AuthAdsArea from '@/components/Auth/AuthAds';
@@ -18,16 +19,16 @@ import {
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
-  name: yup.string().required(''),
-  email: yup.string().required('Email is required').email('Email invalid'),
+  name: yup.string().required('sign-up.require-name'),
+  email: yup.string().required('sign-up.require-email').email('sign-up.valid-email'),
   password: yup
     .string()
-    .required('Password is required')
-    .min(6, 'Password must be at least 6 characters'),
+    .required('sign-up.require-password')
+    .min(6, 'sign-up.min-password'),
   passwordConfirmation: yup
     .string()
-    .required('Password confirm is required')
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .required('sign-up.require-password-confirm')
+    .oneOf([yup.ref('password'), null], 'sign-up.password-match'),
 });
 
 const SignUp = () => {
@@ -36,6 +37,7 @@ const SignUp = () => {
     resolver: yupResolver(SignUpSchema),
     shouldUnregister: false,
   });
+  const { t } = useTranslation();
   const [registerMutation, { error, loading }] = useMutation(registerQuery);
   const [showStripeForm, setShowStripeForm] = useState(false);
   const [formData, setFormData] = useState({});
@@ -90,7 +92,7 @@ const SignUp = () => {
             formErrors={formErrors}
             apiError={error?.message}
             isSubmitting={loading}
-            submitText={planName ? 'Next' : 'Sign up'}
+            submitText={planName ? t('sign-up.next') : t('sign-up.text')}
           />
         )}
       </SignUpFormLeft>

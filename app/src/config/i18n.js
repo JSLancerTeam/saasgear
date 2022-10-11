@@ -2,11 +2,11 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import backend from 'i18next-http-backend';
 
-import authFile from '../locales/en/auth.json';
+import translationEn from '../locales/en.json';
 
 const resources = {
   en: {
-    auth: authFile
+    translation: translationEn,
   }
 }
 

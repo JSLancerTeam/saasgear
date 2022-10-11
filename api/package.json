@@ -32,7 +32,7 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dayjs": "^1.9.6",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "fastest-validator": "^1.8.0",
     "graphql": "^15.5.0",

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import PropsType from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import {
   useStripe,
   useElements,
@@ -96,6 +97,7 @@ const StripeForm = ({
   const [error, setError] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsSubmitting(apiLoading);
@@ -131,17 +133,17 @@ const StripeForm = ({
         <div>
           <FormGroup>
             <FormGroupLabel htmlFor="street_address">
-              Card Number
+              {t('common.stripe.card')}
             </FormGroupLabel>
             <CardNumberEl className="card-el" />
           </FormGroup>
           <RowGroup>
             <FormGroupCardExpire>
-              <FormGroupLabel htmlFor="first_name">Expiration</FormGroupLabel>
+              <FormGroupLabel htmlFor="first_name">{t('common.stripe.expiration')}</FormGroupLabel>
               <CardExpiryElementEl />
             </FormGroupCardExpire>
             <FormGroupCardCvc>
-              <FormGroupLabel htmlFor="last_name">CVC</FormGroupLabel>
+              <FormGroupLabel htmlFor="last_name">{t('common.stripe.cvc')}</FormGroupLabel>
               <CardCvcElementEl />
             </FormGroupCardCvc>
           </RowGroup>
@@ -156,7 +158,7 @@ const StripeForm = ({
         color="primary"
         width="100%"
       >
-        {isSubmitting ? 'Please wait' : submitText}
+        {isSubmitting ? t('common.stripe.wait') : submitText}
       </SubmitButton>
     </StripeFormContainer>
   );

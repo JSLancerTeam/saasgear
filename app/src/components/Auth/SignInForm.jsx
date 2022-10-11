@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropsType from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useMutation } from '@apollo/react-hooks';
 import { useTranslation } from 'react-i18next';
+import loginQuery from '@/queries/auth/login';
+
 import {
   SignUpFormContainer,
   FormContent,
@@ -55,19 +60,38 @@ const TextHaveAccount = styled(FormNote)`
   text-align: center;
 `;
 
-function SignInForm({
-  onSubmit,
-  register,
-  formErrors,
-  apiError,
-  isSubmitting,
-}) {
-  const { t } = useTranslation('auth');
+const SignInSchema = yup.object().shape({
+  email: yup.string().required('sign-in.require-email').email('sign-in.valid-email'),
+  password: yup.string().required('sign-in.require-password'),
+});
+
+function SignInForm() {
+  const { t } = useTranslation();
+
+  const { register, handleSubmit, errors: formErrors } = useForm({
+    resolver: yupResolver(SignInSchema),
+  });
+    
+  const [loginMutation, { error, loading }] = useMutation(loginQuery);
+  const history = useHistory();
+
+  async function onSubmit(params) {
+    try {
+      const { data } = await loginMutation({ variables: params });
+      if (data?.login) {
+        history.push('/');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return false;
+  }
 
   return (
     <SignInContainer>
       <Logo />
-      <FormContent onSubmit={onSubmit}>
+      <FormContent onSubmit={handleSubmit(onSubmit)}>
         <FormHeader>{t('sign-in.welcome-back')}</FormHeader>
         <div>
           <FormGroup>
@@ -80,7 +104,7 @@ function SignInForm({
                 ref={register}
               />
               {formErrors?.email && (
-                <ErrorText message={formErrors.email.message} />
+                <ErrorText message={t(formErrors.email.message)} />
               )}
             </FormControl>
           </FormGroup>
@@ -94,7 +118,7 @@ function SignInForm({
                 ref={register}
               />
               {formErrors?.password && (
-                <ErrorText message={formErrors.password.message} />
+                <ErrorText message={t(formErrors.password.message)} />
               )}
             </FormControl>
           </FormGroup>
@@ -102,8 +126,8 @@ function SignInForm({
             <Checkbox type="checkbox" name="rembemer" id="rembemer" />
             <RememberLabel htmlFor="rembemer">{t('sign-in.remember-label')}</RememberLabel>
           </RembemberSection>
-          <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? t('sign-in.please-wait') : t('sign-in.text')}
+          <SubmitButton color="primary" type="submit" disabled={loading}>
+            {loading ? t('sign-in.please-wait') : t('sign-in.text')}
           </SubmitButton>
           <ForgotLink>
             <Link to="/auth/forgot-password">{t('sign-in.forgot-password')}</Link>
@@ -111,20 +135,12 @@ function SignInForm({
           <SocialAuth />
         </div>
       </FormContent>
-      {apiError && <ErrorText message={apiError} position="center" />}
+      {error?.message && <ErrorText message={t(error?.message)} position="center" />}
       <TextHaveAccount>
         {t('sign-in.not-have-account')} <Link to="/auth/signup">{t('sign-in.register')}</Link>.
       </TextHaveAccount>
     </SignInContainer>
   );
 }
-
-SignInForm.propTypes = {
-  onSubmit: PropsType.func.isRequired,
-  register: PropsType.func.isRequired,
-  formErrors: PropsType.object,
-  apiError: PropsType.string,
-  isSubmitting: PropsType.bool.isRequired,
-};
 
 export default SignInForm;

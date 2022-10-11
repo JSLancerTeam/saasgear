@@ -17,7 +17,7 @@ const LogoHeaderName = styled.span`
 `;
 
 function Logo() {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation();
 
   return (
     <LogoHeader>

@@ -1,4 +1,12 @@
 {
+  "common": {
+    "stripe": {
+      "card": "Card Number",
+      "expiration": "Expiration",
+      "cvc": "CVC",
+      "wait": "Please wait"
+    }
+  },
   "sign-in": {
     "text": "Sign in",
     "logo": {
@@ -14,7 +22,10 @@
     "please-wait": "Please wait",
     "forgot-password": "Forgot Password?",
     "not-have-account": "Dont have account?",
-    "register": "Register"
+    "register": "Register",
+    "require-email": "Email is required",
+    "valid-email": "Email invalid",
+    "require-password": "Password is required"
   },
   "sign-up": {
     "text": "Sign up",
@@ -28,6 +39,7 @@
     "require-password": "Password is required",
     "min-password": "Password must be at least 6 characters",
     "require-password-confirm": "Password confirm is required",
-    "password-match": "Passwords must match"
+    "password-match": "Passwords must match",
+    "next": "Next"
   }
 }

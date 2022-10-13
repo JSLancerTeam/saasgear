@@ -5,6 +5,8 @@ import * as yup from 'yup';
 import ForgotPasswordForm from '@/components/Auth/ForgotPasswordForm';
 import forgotpasswordQuery from '@/queries/auth/forgotPassword';
 import { useMutation } from '@apollo/react-hooks';
+import { useTranslation } from 'react-i18next';
+
 import {
   ForgotPasswordWrapper,
   Overlay,
@@ -25,11 +27,13 @@ import circleSmall from '@/assets/images/svg/circle-small.svg';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ForgotPasswordSchema = yup.object().shape({
-  email: yup.string().required('Email is required').email('Email is invalid'),
+  email: yup.string().required('common.validation.require-email').email('common.validation.valid-email'),
 });
 
 function ForgotPassword() {
-  useDocumentHeader({ title: 'Forgot password' });
+  const { t } = useTranslation();
+
+  useDocumentHeader({ title: t('common.title.forgot-password') });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { register, handleSubmit, errors } = useForm({
@@ -38,7 +42,6 @@ function ForgotPassword() {
   const [forgotPasswordMutation, { loading, error }] = useMutation(
     forgotpasswordQuery,
   );
-
   async function onSubmit(data) {
     setIsSubmitted(false);
     try {

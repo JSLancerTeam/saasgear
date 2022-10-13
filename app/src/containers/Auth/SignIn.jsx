@@ -8,10 +8,12 @@ import {
 } from '@/components/Auth/AuthForm';
 import AuthAdsArea from '@/components/Auth/AuthAds';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
+import { useTranslation } from 'react-i18next';
 
 
 function SignIn() {
-  useDocumentHeader({ title: 'Sign In' });
+  const { t } = useTranslation();
+  useDocumentHeader({ title: t('common.title.sign-in') });
 
 
   return (

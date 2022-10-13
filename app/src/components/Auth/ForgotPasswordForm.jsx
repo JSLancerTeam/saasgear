@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropsType from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
@@ -26,53 +27,51 @@ function ForgotPasswordForm({
   isSubmitting,
   apiError,
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <GoBack />
       <div>
         <Logo />
       </div>
-      <ForgotPasswordText>Forgot Password</ForgotPasswordText>
+      <ForgotPasswordText>{t('common.title.forgot-password')}</ForgotPasswordText>
       <ForgotPasswordDescription>
-        Enter your username, or the email address you used to register. We will
-        send you an email containing your username and a link to reset your
-        password.
+        {t('forgot-password.description')}
       </ForgotPasswordDescription>
       {!isSubmitted ? (
         <ForgotPasswordFormWrapper onSubmit={onSubmit}>
           <FormGroup>
-            <FormGroupLabel>Your Email</FormGroupLabel>
+            <FormGroupLabel>{t('common.label.your-email')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="email"
-                placeholder="yourname@yourbusiness.com"
+                placeholder={t('common.placeholder.email')}
                 name="email"
                 ref={register}
               />
-              {errors?.email && <ErrorText message={errors.email.message} />}
+              {errors?.email && <ErrorText message={t(errors.email.message)} />}
             </FormControl>
           </FormGroup>
           <FormGroup>
             <ForgotPasswordButton>
               <Button color="primary" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Please wait' : 'Send'}
+                {isSubmitting ? t('common.text.please-wait') : t('common.text.send')}
               </Button>
             </ForgotPasswordButton>
             {apiError && <ErrorText message={apiError} position="center" />}
             <TextNote>
-              If you still need help, contact{' '}
-              <Link to="##">Saasgear Support</Link>
+              {t('forgot-password.footer')}{' '}
+              <Link to="##">{t('forgot-password.support')}</Link>
             </TextNote>
           </FormGroup>
         </ForgotPasswordFormWrapper>
       ) : (
         <>
           <ConfirmationText>
-            We&apos;ve sent you an email with a link to reset password. Please
-            check your email so create new password
+            {t('forgot-password.confirm')}
           </ConfirmationText>
           <TextNote>
-            Go to <Link to="/auth/signin">Sign In</Link>
+            {t('forgot-password.go-to')} <Link to="/auth/signin">{t('common.title.sign-in')}</Link>
           </TextNote>
         </>
       )}

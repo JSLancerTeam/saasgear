@@ -3,6 +3,7 @@ import { useLazyQuery } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Queries
 import getProfileQuery from '@/queries/auth/getProfile';
@@ -13,6 +14,7 @@ import { setProfileUser } from '@/features/auth/user';
 const PrivateRoute = ({ render }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [getProfile, { data: userProfile, loading: loadingUserProfile }] = useLazyQuery(
     getProfileQuery,
   );
@@ -41,7 +43,7 @@ const PrivateRoute = ({ render }) => {
         />
       )}
       {(!data || !data.id || loadingUserProfile) && (
-        <div>Loading...</div>
+        <div>{t('common.text.loading')}</div>
       )}
     </>
   );

@@ -1,45 +1,119 @@
 {
   "common": {
+    "logo": {
+      "saas": "SaaS",
+      "gear": "gear"
+    },
+    "title": {
+      "sign-in": "Sign In",
+      "forgot-password": "Forgot Password",
+      "reset-password": "Reset password",
+      "new-document": "New Document"
+    },
     "stripe": {
       "card": "Card Number",
       "expiration": "Expiration",
-      "cvc": "CVC",
-      "wait": "Please wait"
+      "cvc": "CVC"
+    },
+    "label": {
+      "remember-label": "Remember me",
+      "email": "Email",
+      "password": "Password",
+      "your-name": "Your Name",
+      "confirm-password": "Confirm password",
+      "your-email": "Your Email",
+      "name": "Name",
+      "body": "Body"
+    },
+    "text": {
+      "submit": "Submit",
+      "please-wait": "Please wait",
+      "not-have-account": "Dont have account?",
+      "register": "Register",
+      "send": "Send",
+      "loading": "Loading ...",
+      "save": "Save"
+    },
+    "validation": {
+      "require-name": "Name is required",
+      "require-body": "Body is required",
+      "require-email": "Email is required",
+      "valid-email": "Email invalid",
+      "require-password": "Password is required",
+      "min-password": "Password must be at least 6 characters",
+      "require-password-confirm": "Password confirm is required",
+      "password-match": "Passwords must match"
+    },
+    "placeholder": {
+      "email": "yourname@yourbusiness.com",
+      "password": "your password",
+      "name": "David",
+      "confirm-password": "Confirm your password"
     }
   },
   "sign-in": {
-    "text": "Sign in",
-    "logo": {
-      "saas": "SaaS",
-      "gear": "gear"
-    },
-    "welcome-back": "Welcome Back!",
-    "email": "Email",
-    "placeholder-email": "yourname@yourbusiness.com",
-    "password": "Password",
-    "placeholder-password": "your password",
-    "remember-label": "Remember me",
-    "please-wait": "Please wait",
-    "forgot-password": "Forgot Password?",
-    "not-have-account": "Dont have account?",
-    "register": "Register",
-    "require-email": "Email is required",
-    "valid-email": "Email invalid",
-    "require-password": "Password is required"
+    "text": {
+      "heading": "Welcome Back!",
+      "button-text": "Sign in",
+      "next": "Next",
+      "forgot-password": "Forgot Password?"
+    }
   },
   "sign-up": {
-    "text": "Sign up",
-    "logo": {
-      "saas": "SaaS",
-      "gear": "gear"
-    },
-    "require-name": "Name is required",
-    "require-email": "Email is required",
-    "valid-email": "Email invalid",
-    "require-password": "Password is required",
-    "min-password": "Password must be at least 6 characters",
-    "require-password-confirm": "Password confirm is required",
-    "password-match": "Passwords must match",
-    "next": "Next"
+    "text": {
+      "heading": "Create Account",
+      "button-text": "Sign up",
+      "next": "Next",
+      "footer-desc": "By clicking Sign Up, you agree to our",
+      "terms": "Terms",
+      "data-policy": "Data Policy",
+      "and": "and",
+      "cookie-policy": "Cookie Policy",
+      "have-account": "Already have account?"
+    }
+  },
+  "forgot-password": {
+    "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
+    "footer": "If you still need help, contact",
+    "support": "Saasgear Support",
+    "confirm": "We&apos;ve sent you an email with a link to reset password. Please check your email so create new password",
+    "go-to": "Go to"
+  },
+  "reset-password": {
+    "change-success": "Change password successfully!",
+    "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
+    "footer": "If you still need help, contact",
+    "support": "Saasgear Support",
+    "please-wait": "Please wait ..."
+  },
+  "advertisement": {
+    "ad1-title": "ReactJS",
+    "ad1": "High-performance and powerful interactive UI with React.",
+    "ad2-title": "Subscription payments",
+    "ad2": "We have integrated Stripe subscription payments to allow you to monetize your SaaS.",
+    "ad3-title": "Teams",
+    "ad3": "Your users are able to invite their teammates to their account."
+  },
+  "verify-email": {
+    "title": "Verify Account",
+    "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
+    "success": "Verify email success"
+  },
+  "accept-invitation": {
+    "title": "Accept Invitation?",
+    "have-invitated": "You&apos; ve been invitated to join",
+    "by": "by",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "dashboard": "Dashboard Page",
+  "team": {
+    "detail": {
+      "title": "Team Detail",
+      "label": {
+        "name": "Team name",
+        "id": "Team ID"
+      }
+    }
   }
 }

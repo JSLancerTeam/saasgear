@@ -158,7 +158,7 @@ const StripeForm = ({
         color="primary"
         width="100%"
       >
-        {isSubmitting ? t('common.stripe.wait') : submitText}
+        {isSubmitting ? t('common.text.please-wait') : submitText}
       </SubmitButton>
     </StripeFormContainer>
   );

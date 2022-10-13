@@ -5,6 +5,7 @@ import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import DocumentForm from '@/components/Document/DocumentForm';
 import createDocumentQuery from '@/queries/document/createDocument';
@@ -33,13 +34,14 @@ const SaveBtn = styled(Button)`
 `;
 
 const ActionDocumentSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
-  body: yup.string().required('Body is required'),
+  name: yup.string().required('common.validation.require-name'),
+  body: yup.string().required('common.validation.require-body'),
 });
 
 const ActionDocument = () => {
   const match = useRouteMatch();
   const history = useHistory();
+  const { t } = useTranslation();
   const documentId = parseInt(match.params.id, 10);
   const { handleSubmit, control, register, errors, setValue } = useForm({
     resolver: yupResolver(ActionDocumentSchema),
@@ -95,14 +97,14 @@ const ActionDocument = () => {
         <TitlePageStyle>
           {documentData?.getDocumentDetail?.name
             ? documentData.getDocumentDetail.name
-            : 'New Document'}
+            : t('common.title.new-document')}
         </TitlePageStyle>
         <SaveBtn
           color="primary"
           onClick={handleSubmit(onSubmit)}
           disabled={isCreating || isUpdating}
         >
-          {isCreating || isUpdating ? 'Please wait' : 'Save'}
+          {isCreating || isUpdating ? t('common.text.please-wait') : t('common.text.save')}
         </SaveBtn>
       </Header>
       <ContentPage>

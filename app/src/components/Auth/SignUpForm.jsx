@@ -3,6 +3,7 @@ import PropsType from 'prop-types';
 import { Link } from 'react-router-dom';
 import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';
+import { useTranslation } from 'react-i18next';
 import {
   SignUpFormContainer,
   FormContent,
@@ -33,82 +34,84 @@ function SignUpForm({
   formErrors,
   apiError,
   isSubmitting,
-  submitText = 'Submit',
+  submitText
 }) {
+  const { t } = useTranslation();
+
   return (
     <SignUpFormContainer>
       <Logo />
       <FormContent onSubmit={onSubmit}>
-        <FormHeader>Create Account</FormHeader>
+        <FormHeader>{t('sign-up.text.heading')}</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>Your Name</FormGroupLabel>
+            <FormGroupLabel>{t('common.label.your-name')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="text"
-                placeholder="David"
+                placeholder={t('common.placeholder.name')}
                 name="name"
                 ref={register}
               />
               {formErrors?.name && (
-                <ErrorText message={formErrors.name.message} />
+                <ErrorText message={t(formErrors.name.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>Email</FormGroupLabel>
+            <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="email"
-                placeholder="yourname@yourbusiness.com"
+                placeholder={t('common.placeholder.email')}
                 name="email"
                 ref={register}
               />
               {formErrors?.email && (
-                <ErrorText message={formErrors.email.message} />
+                <ErrorText message={t(formErrors.email.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>Password</FormGroupLabel>
+            <FormGroupLabel>{t('common.label.password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder="Your password"
+                placeholder={t('common.placeholder.password')}
                 name="password"
                 ref={register}
               />
               {formErrors?.password && (
-                <ErrorText message={formErrors.password.message} />
+                <ErrorText message={t(formErrors.password.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>Confirm password</FormGroupLabel>
+            <FormGroupLabel>{t('common.label.confirm-password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder="Confirm your password"
+                placeholder={t('common.placeholder.confirm-password')}
                 name="passwordConfirmation"
                 ref={register}
               />
               {formErrors?.passwordConfirmation && (
-                <ErrorText message={formErrors.passwordConfirmation.message} />
+                <ErrorText message={t(formErrors.passwordConfirmation.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormSubmitButton color="primary" type="submit">
-            {isSubmitting ? 'Please wait' : submitText}
+            {isSubmitting ? t('common.text.please-wait') : (submitText ?? t('common.text.submit'))}
           </FormSubmitButton>
         </div>
       </FormContent>
-      {apiError && <ErrorText message={apiError} position="center" />}
+      {apiError && <ErrorText message={t(apiError)} position="center" />}
       <FormNote>
-        By clicking Sign Up, you agree to our <a href="##">Terms</a>,{' '}
-        <a href="##">Data Policy</a> and <a href="##">Cookie Policy</a>.
+        {t('sign-up.text.footer-desc')} <a href="##">{t('sign-up.text.terms')}</a>,{' '}
+        <a href="##">{t('sign-up.text.data-policy')}</a> {t('sign-up.text.and')} <a href="##">{t('sign-up.text.cookie-policy')}</a>.
       </FormNote>
       <TextHaveAccount>
-        Already have account? <Link to="/auth/signin">Sign In</Link>.
+        {t('sign-up.text.have-account')} <Link to="/auth/signin">{t('common.title.sign-in')}</Link>.
       </TextHaveAccount>
     </SignUpFormContainer>
   );

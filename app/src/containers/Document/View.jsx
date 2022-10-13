@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import DOMPurify from 'dompurify';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { useRouteMatch } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
 import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
@@ -12,6 +13,7 @@ const ContentDocument = styled.div`
 `
 
 const ViewDocument = () => {
+  const { t } = useTranslation
   const match = useRouteMatch();
   const documentId = parseInt(match.params.id, 10);
   const [fetchDocumentDetail, { data: documentData, loading }] = useLazyQuery(
@@ -32,7 +34,7 @@ const ViewDocument = () => {
 
   return (
     <ContentDocument>
-      {loading && <div>Loading...</div>}
+      {loading && <div>{t('common.text.loading')}</div>}
 
       {!loading && documentData?.getDocumentDetail && (
         <>

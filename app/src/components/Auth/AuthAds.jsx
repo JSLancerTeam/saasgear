@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import '@/assets/css/react-slide-custom.css';
@@ -84,6 +85,7 @@ const SlideItemContainer = styled.div`
 `;
 
 function AuthAdsArea() {
+  const { t } = useTranslation();
   return (
     <AuthAdsWrapper>
       <AdsIconGrid>
@@ -106,27 +108,27 @@ function AuthAdsArea() {
         <div>
           <SlideItemContainer>
             <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>ReactJS</SlideItemTitle>
+            <SlideItemTitle>{t('advertisement.ad1-title')}</SlideItemTitle>
             <SlideItemDescription>
-              High-performance and powerful interactive UI with React.
+              {t('advertisement.ad1')}
             </SlideItemDescription>
           </SlideItemContainer>
         </div>
         <div>
           <SlideItemContainer>
             <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>Subscription payments</SlideItemTitle>
+            <SlideItemTitle>{t('advertisement.ad2-title')}</SlideItemTitle>
             <SlideItemDescription>
-              We have integrated Stripe subscription payments to allow you to monetize your SaaS.
+              {t('advertisement.ad2')}
             </SlideItemDescription>
           </SlideItemContainer>
         </div>
         <div>
           <SlideItemContainer>
             <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>Teams</SlideItemTitle>
+            <SlideItemTitle>{t('advertisement.ad3-title')}</SlideItemTitle>
             <SlideItemDescription>
-              Your users are able to invite their teammates to their account.
+              {t('advertisement.ad3')}
             </SlideItemDescription>
           </SlideItemContainer>
         </div>

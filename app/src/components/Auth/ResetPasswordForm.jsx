@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GoBack from '@/components/Common/GoBack';
 import Logo from '@/components/Common/Logo';
+import { useTranslation } from 'react-i18next';
 import {
   ForgotPasswordText,
   ForgotPasswordDescription,
@@ -25,57 +26,57 @@ function ResetPasswordForm({
   apiError,
   isSubmiting,
 }) {
+  const { t } = useTranslation();
+
   return (
     <>
       <GoBack link="/auth/signin" />
       <div>
         <Logo />
       </div>
-      <ForgotPasswordText>Reset Password</ForgotPasswordText>
+      <ForgotPasswordText>{t('common.title.reset-password')}</ForgotPasswordText>
       <ForgotPasswordDescription>
-        Enter your username, or the email address you used to register. We will
-        send you an email containing your username and a link to reset your
-        password.
+        {t('reset-password.description')}
       </ForgotPasswordDescription>
       <ForgotPasswordFormWrapper onSubmit={onSubmit}>
         <FormGroup>
-          <FormGroupLabel>Password</FormGroupLabel>
+          <FormGroupLabel>{t('common.label.password')}</FormGroupLabel>
           <FormControl>
             <Input
               type="password"
-              placeholder="your password"
+              placeholder={t('common.placeholder.password')}
               name="password"
               ref={register}
             />
             {errors?.password && (
-              <ErrorText message={errors.password.message} />
+              <ErrorText message={t(errors.password.message)} />
             )}
           </FormControl>
         </FormGroup>
         <FormGroup>
-          <FormGroupLabel>Confirm Password</FormGroupLabel>
+          <FormGroupLabel>{t('common.label.confirm-password')}</FormGroupLabel>
           <FormControl>
             <Input
               type="password"
-              placeholder="confirm your password"
+              placeholder={t('common.placeholder.confirm-password')}
               name="passwordConfirmation"
               ref={register}
             />
             {errors?.passwordConfirmation && (
-              <ErrorText message={errors.passwordConfirmation.message} />
+              <ErrorText message={t(errors.passwordConfirmation.message)} />
             )}
           </FormControl>
         </FormGroup>
         <FormGroup>
           <ForgotPasswordButton>
             <Button color="primary" type="submit">
-              {isSubmiting ? 'Please wait ...' : 'Reset Password'}
+              {isSubmiting ? t('reset-password.please-wait') : t('common.title.reset-password')}
             </Button>
           </ForgotPasswordButton>
           {apiError && <Badge type="error">{apiError}</Badge>}
           <TextNote>
-            If you still need help, contact{' '}
-            <Link to="##">Saasgear Support</Link>
+            {t('reset-password.footer')}{' '}
+            <Link to="##">{t('reset-password.support')}</Link>
           </TextNote>
         </FormGroup>
       </ForgotPasswordFormWrapper>

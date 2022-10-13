@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@apollo/react-hooks';
+import { useTranslation } from 'react-i18next';
 
 import TeamForm from '@/components/Team/TeamForm';
 import { addNew } from '@/features/admin/team';
@@ -19,6 +20,7 @@ const TeamSchema = yup.object().shape({
 });
 
 export default function TeamDetail({ team }) {
+  const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors: formErrors } = useForm({
@@ -45,7 +47,7 @@ export default function TeamDetail({ team }) {
 
   return (
     <ContentPage>
-      <TitleContent>Team Detail</TitleContent>
+      <TitleContent>{t('team.detail.title')}</TitleContent>
       <TeamForm
         onSubmit={handleSubmit(createTeam)}
         register={register}

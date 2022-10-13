@@ -21,8 +21,8 @@ function Logo() {
 
   return (
     <LogoHeader>
-      <LogoHeaderName>{t('sign-in.logo.saas')}</LogoHeaderName>
-      <span>{t('sign-in.logo.gear')}</span>
+      <LogoHeaderName>{t('common.logo.saas')}</LogoHeaderName>
+      <span>{t('common.logo.gear')}</span>
     </LogoHeader>
   );
 }

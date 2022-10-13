@@ -61,8 +61,8 @@ const TextHaveAccount = styled(FormNote)`
 `;
 
 const SignInSchema = yup.object().shape({
-  email: yup.string().required('sign-in.require-email').email('sign-in.valid-email'),
-  password: yup.string().required('sign-in.require-password'),
+  email: yup.string().required('common.validation.require-email').email('common.validation.valid-email'),
+  password: yup.string().required('common.validation.require-password'),
 });
 
 function SignInForm() {
@@ -92,14 +92,14 @@ function SignInForm() {
     <SignInContainer>
       <Logo />
       <FormContent onSubmit={handleSubmit(onSubmit)}>
-        <FormHeader>{t('sign-in.welcome-back')}</FormHeader>
+        <FormHeader>{t('sign-in.text.heading')}</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>{t('sign-in.email')}</FormGroupLabel>
+            <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="email"
-                placeholder={t('sign-in.placeholder-email')}
+                placeholder={t('common.placeholder.email')}
                 name="email"
                 ref={register}
               />
@@ -109,11 +109,11 @@ function SignInForm() {
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>{t('sign-in.password')}</FormGroupLabel>
+            <FormGroupLabel>{t('common.label.password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder={t('sign-in.placeholder-password')}
+                placeholder={t('common.placeholder.password')}
                 name="password"
                 ref={register}
               />
@@ -124,20 +124,20 @@ function SignInForm() {
           </FormGroup>
           <RembemberSection>
             <Checkbox type="checkbox" name="rembemer" id="rembemer" />
-            <RememberLabel htmlFor="rembemer">{t('sign-in.remember-label')}</RememberLabel>
+            <RememberLabel htmlFor="rembemer">{t('common.label.remember-label')}</RememberLabel>
           </RembemberSection>
           <SubmitButton color="primary" type="submit" disabled={loading}>
-            {loading ? t('sign-in.please-wait') : t('sign-in.text')}
+            {loading ? t('common.text.please-wait') : t('sign-in.text.button-text')}
           </SubmitButton>
           <ForgotLink>
-            <Link to="/auth/forgot-password">{t('sign-in.forgot-password')}</Link>
+            <Link to="/auth/forgot-password">{t('sign-in.text.forgot-password')}</Link>
           </ForgotLink>
           <SocialAuth />
         </div>
       </FormContent>
       {error?.message && <ErrorText message={t(error?.message)} position="center" />}
       <TextHaveAccount>
-        {t('sign-in.not-have-account')} <Link to="/auth/signup">{t('sign-in.register')}</Link>.
+        {t('common.text.not-have-account')} <Link to="/auth/signup">{t('common.text.register')}</Link>.
       </TextHaveAccount>
     </SignInContainer>
   );

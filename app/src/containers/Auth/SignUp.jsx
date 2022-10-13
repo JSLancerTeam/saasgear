@@ -19,16 +19,16 @@ import {
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
-  name: yup.string().required('sign-up.require-name'),
-  email: yup.string().required('sign-up.require-email').email('sign-up.valid-email'),
+  name: yup.string().required('common.validation.require-name'),
+  email: yup.string().required('common.validation.require-email').email('common.validation.valid-email'),
   password: yup
     .string()
-    .required('sign-up.require-password')
-    .min(6, 'sign-up.min-password'),
+    .required('common.validation.require-password')
+    .min(6, 'common.validation.min-password'),
   passwordConfirmation: yup
     .string()
-    .required('sign-up.require-password-confirm')
-    .oneOf([yup.ref('password'), null], 'sign-up.password-match'),
+    .required('common.validation.require-password-confirm')
+    .oneOf([yup.ref('password'), null], 'common.validation.password-match'),
 });
 
 const SignUp = () => {
@@ -92,7 +92,7 @@ const SignUp = () => {
             formErrors={formErrors}
             apiError={error?.message}
             isSubmitting={loading}
-            submitText={planName ? t('sign-up.next') : t('sign-up.text')}
+            submitText={planName ? t('sign-up.text.next') : t('sign-up.text.button-text')}
           />
         )}
       </SignUpFormLeft>

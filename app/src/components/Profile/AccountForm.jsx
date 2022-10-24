@@ -1,6 +1,7 @@
 import React from 'react';
 import PropsType from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { COLORS, mobileQuery } from '@/constants/style';
 import FormGroup from '../Common/FormGroup';
@@ -43,21 +44,23 @@ const DeleteLink = styled.div`
 `;
 
 function AccountForm({ onSubmit, register, errors, loading, apiError, openPopupDeleteAccount }) {
+  const { t } = useTranslation();
+
   return (
     <Form onSubmit={onSubmit}>
       <FormGroupWrapper>
         <FormGroup>
-          <FormGroupLabel>Your name</FormGroupLabel>
+          <FormGroupLabel>{t('common.label.your-name')}</FormGroupLabel>
           <Input name="name" ref={register} />
         </FormGroup>
       </FormGroupWrapper>
       <FormGroup>
-        <FormGroupLabel>Email</FormGroupLabel>
+        <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
         <Input type="email" name="email" ref={register} disabled />
       </FormGroup>
       <ButtonGroup>
-        <DeleteLink onClick={openPopupDeleteAccount}>I&apos;d like to delete my account</DeleteLink>
-        <Button type="submit" color="primary" disabled={loading}>{loading ? 'Please wait' : 'Save and Update'}</Button>
+        <DeleteLink onClick={openPopupDeleteAccount}>{t('profile.text.delete')}</DeleteLink>
+        <Button type="submit" color="primary" disabled={loading}>{loading ? t('common.text.please-wait') : t('common.text.save-and-update')}</Button>
       </ButtonGroup>
       {apiError && <ErrorText message={apiError} />}
     </Form>

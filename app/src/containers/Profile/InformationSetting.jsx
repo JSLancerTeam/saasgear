@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import { setProfileUser } from '@/features/auth/user';
 import { resolveAvatarPath } from '@/helpers/avatar.helper';
@@ -129,11 +130,12 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)`
 `;
 
 const AccountSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
+  name: yup.string().required('common.validation.require-name'),
 });
 
 const InformationSetting = ({ user }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { register, handleSubmit, errors, setValue, getValues, watch } = useForm({
     resolver: yupResolver(AccountSchema),
     defaultValues: user,
@@ -162,7 +164,7 @@ const InformationSetting = ({ user }) => {
     try {
       const { data } = await updateProfileMutation({ variables: params });
       if (data?.updateProfile) {
-        toast.success('Update profile successfully!');
+        toast.success(t('common.status.update-success'));
       }
     } catch (err) {
       console.log(err);
@@ -174,7 +176,7 @@ const InformationSetting = ({ user }) => {
       const file = e.target.files[0];
       if (file) {
         if (file.size > 2 * 1000 * 1000) {
-          toast.error('File is too big');
+          toast.error(t('common.status.error-big-size'));
           return;
         }
         const { data } = await updateProfileAvatarMutation({
@@ -185,11 +187,11 @@ const InformationSetting = ({ user }) => {
         if (data && data.updateProfileAvatar && data.updateProfileAvatar.url) {
           dispatch(setProfileUser({ data: {avatarUrl: data.updateProfileAvatar.url}, loading: isUpdatingAvatar }));
           setValue('avatarUrl', data.updateProfileAvatar.url);
-          toast.success('Change avatar successfully');
+          toast.success(t('common.status.channge-avatar-success'));
         }
       }
     } catch (errorChangeProfile) {
-      toast.error('Can not update your avatar');
+      toast.error(t('common.status.change-avatar-failed'));
     }
   }
 
@@ -207,7 +209,7 @@ const InformationSetting = ({ user }) => {
       <Header onClick={() => setIsOpen(!isOpen)}>
         <AvatarWrapper>
           <Avatar htmlFor="avatar">
-            <img src={resolveAvatarPath(getValues('avatarUrl'), AvatarIcon)} alt="avatar" />
+            <img src={resolveAvatarPath(getValues('avatarUrl'), AvatarIcon)} alt={t('common.alt.avatar')} />
             <input
               type="file"
               id="avatar"
@@ -223,10 +225,10 @@ const InformationSetting = ({ user }) => {
         </AvatarWrapper>
         <ActionWrapper>
           <ActionItem mobile><SettingIcon /></ActionItem>
-          <ActionItem desktop>Edit Profile</ActionItem>
+          <ActionItem desktop>{t('common.label.edit-profile')}</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
-      </Header>Avatar
+      </Header>{t('common.text.avatar')}
       <AccountForm
         onSubmit={handleSubmit(onSubmit)}
         register={register}

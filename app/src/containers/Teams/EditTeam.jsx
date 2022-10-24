@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
+import { useTranslation } from 'react-i18next';
 
 import { addTeamMember } from '@/features/admin/team';
 import getTeamDetailQuery from '@/queries/teams/getTeamDetail';
@@ -11,6 +12,7 @@ import TeamMember from './TeamMember';
 
 export default function EditTeam() {
   const { teamId } = useParams();
+  const { t } = useTranslation();
   const { teams } = useSelector((state) => state.team);
   const [currentTeam, setCurrentTeam] = useState();
   const { data, loading } = useQuery(getTeamDetailQuery, {
@@ -50,6 +52,6 @@ export default function EditTeam() {
       />
     </>
   ) : (
-    <div>Loading...</div>
+    <div>{t('common.text.loading')}</div>
   );
 }

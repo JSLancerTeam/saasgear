@@ -19,8 +19,8 @@ export default function DeleteAccount({ closeModal, isOpen }) {
   const AccountSettingSchema = yup.object().shape({
     email: yup
       .string()
-      .required('Email is required')
-      .email('Email invalid')
+      .required('common.validation.require-email')
+      .email('common.validation.valid-email')
       .matches(email),
   });
   const { register, handleSubmit, errors, watch, formState } = useForm({

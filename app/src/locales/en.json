@@ -23,16 +23,27 @@
       "confirm-password": "Confirm password",
       "your-email": "Your Email",
       "name": "Name",
-      "body": "Body"
+      "body": "Body",
+      "edit-profile": "Edit Profile"
     },
     "text": {
       "submit": "Submit",
+      "cancel": "Cancel",
       "please-wait": "Please wait",
+      "save-and-update": "Save and Update",
       "not-have-account": "Dont have account?",
       "register": "Register",
       "send": "Send",
       "loading": "Loading ...",
-      "save": "Save"
+      "save": "Save",
+      "no-result": "No result",
+      "edit": "Edit",
+      "delete": "Delete",
+      "no": "No",
+      "view": "View",
+      "admin": "admin",
+      "member": "member",
+      "avatar": "Avatar"
     },
     "validation": {
       "require-name": "Name is required",
@@ -42,13 +53,31 @@
       "require-password": "Password is required",
       "min-password": "Password must be at least 6 characters",
       "require-password-confirm": "Password confirm is required",
-      "password-match": "Passwords must match"
+      "password-match": "Password must match",
+      "require-current-password": "Current password is required",
+      "require-new-password": "New password is required"
     },
     "placeholder": {
       "email": "yourname@yourbusiness.com",
       "password": "your password",
       "name": "David",
-      "confirm-password": "Confirm your password"
+      "confirm-password": "Confirm your password",
+      "search": "Search..",
+      "g-email": "david@jslancer.com"
+    },
+    "status": {
+      "update-success": "Update profile successfully!",
+      "channge-avatar-success": "Change avatar successfully",
+      "change-avatar-failed": "Can not update your avatar",
+      "error-big-size": "File is too big",
+      "change-password-success": "Change password successfully!"
+    },
+    "alt": {
+      "avatar": "avatar"
+    },
+    "error": {
+      "UNAUTHENTICATED": "Invalid email or password",
+      "GRAPHQL_VALIDATION_FAILED": "The 'password' field length must be greater than or equal to 6 characters long."
     }
   },
   "sign-in": {
@@ -76,7 +105,7 @@
     "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
     "footer": "If you still need help, contact",
     "support": "Saasgear Support",
-    "confirm": "We&apos;ve sent you an email with a link to reset password. Please check your email so create new password",
+    "confirm": "We've sent you an email with a link to reset password. Please check your email so create new password",
     "go-to": "Go to"
   },
   "reset-password": {
@@ -101,19 +130,67 @@
   },
   "accept-invitation": {
     "title": "Accept Invitation?",
-    "have-invitated": "You&apos; ve been invitated to join",
+    "have-invitated": "You' ve been invitated to join",
     "by": "by",
     "accept": "Accept",
     "decline": "Decline"
   },
   "dashboard": "Dashboard Page",
   "team": {
-    "detail": {
-      "title": "Team Detail",
-      "label": {
-        "name": "Team name",
-        "id": "Team ID"
-      }
+    "detail": "Team Detail",
+    "members": "Team Members",
+    "invite": "Invite Team Members",
+    "list-team": "My Teams",
+    "text": {
+      "save": "Save Team",
+      "add": "Add Team",
+      "member": "Member",
+      "role": "Role",
+      "invitation": "Invitation",
+      "invite": "Invite",
+      "pending": "Pending Invitations",
+      "name": "Name",
+      "click-button": "Click button below to create your first team!",
+      "create": "Create Team"
+    },
+    "label": {
+      "name": "Team name",
+      "id": "Team ID"
+    },
+    "placeholder": {
+      "team-name": "Your team name",
+      "team-id": "A unique ID for your team"
+    }
+  },
+  "document": {
+    "title": "Document",
+    "create": "Create New Document",
+    "table": {
+      "id": "ID",
+      "name": "Name",
+      "created-by": "Created By",
+      "created-at": "Created At",
+      "action": "Action"
+    }
+  },
+  "profile": {
+    "title": "Account Settings",
+    "text": {
+      "account": "Account",
+      "desc": "This information can be edited from your profile page",
+      "delete": "I'd like to delete my account",
+      "delete-modal": "Are you sure you want to delete your account? All of your data will be permanently removed. This action cannot be undone.",
+      "please-enter": "Please enter",
+      "to-confirm": "to confirm",
+      "change-password": "Change Password",
+      "change-password-desc": "Forgot your password, find back in seconds",
+      "current-password": "Current password",
+      "update-password": "Update Password",
+      "new-password": "New password",
+      "confirm-new-password": "Confirm new password"
+    },
+    "label": {
+      "delete": "Delete Account"
     }
   }
 }

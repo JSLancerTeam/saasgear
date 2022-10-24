@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { COLORS, mobileQuery } from '@/constants/style';
 import Modal, { ModalHeader, ModalContent, ModalFooter } from '../Common/Modal';
@@ -40,28 +41,28 @@ export default function DeleteAccountModal({
   errors,
   isValid,
 }) {
+  const { t } = useTranslation();
   return (
     <Modal isOpen={isOpen}>
-      <ModalHeader>Delete Account</ModalHeader>
+      <ModalHeader>{t('profile.label.delete')}</ModalHeader>
       <ModalContent>
         <DeleteText>
-          Are you sure you want to delete your account? All of your data will be
-          permanently removed. This action cannot be undone.
+          {t('profile.text.delete-modal')}
         </DeleteText>
         <Form onSubmit={onSubmit}>
           <FormGroup>
             <NoteLabel>
-              Please enter <EmailText>{email}</EmailText> to confirm
+              {t('profile.text.please-enter')} <EmailText>{email}</EmailText> {t('profile.text.to-confirm')}
             </NoteLabel>
             <Input type="email" name="email" ref={register} />
-            {errors?.email && <ErrorText message={errors.email.message} />}
+            {errors?.email && <ErrorText message={t(errors.email.message)} />}
           </FormGroup>
         </Form>
       </ModalContent>
       <ModalFooter>
-        <Button onClick={closeModal}>No</Button>
+        <Button onClick={closeModal}>{t('common.text.no')}</Button>
         <Button type="submit" color="primary" disabled={!isValid}>
-          Delete
+          {t('common.text.delete')}
         </Button>
       </ModalFooter>
     </Modal>

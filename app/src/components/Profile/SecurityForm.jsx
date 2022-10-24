@@ -1,6 +1,7 @@
 import React from 'react';
 import PropsType from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { mobileQuery } from '@/constants/style';
 import ErrorText from '../Common/ErrorText';
@@ -31,24 +32,26 @@ function SecurityForm({
   apiError,
   isSubmitting,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Form onSubmit={onSubmit}>
       <FormGroup>
-        <FormGroupLabel>Current password</FormGroupLabel>
+        <FormGroupLabel>{t('profile.text.current-password')}</FormGroupLabel>
         <Input type="password" name="currentPassword" ref={register} />
         {formErrors?.currentPassword && (
           <ErrorText message={formErrors.currentPassword.message} />
         )}
       </FormGroup>
       <FormGroup>
-        <FormGroupLabel>New password</FormGroupLabel>
+        <FormGroupLabel>{t('profile.text.new-password')}</FormGroupLabel>
         <Input type="password" name="newPassword" ref={register} />
         {formErrors?.newPassword && (
           <ErrorText message={formErrors.newPassword.message} />
         )}
       </FormGroup>
       <FormGroup>
-        <FormGroupLabel>Confirm new password</FormGroupLabel>
+        <FormGroupLabel>{t('profile.text.confirm-new-password')}</FormGroupLabel>
         <Input type="password" name="confirmPassword" ref={register} />
         {formErrors?.confirmPassword && (
           <ErrorText message={formErrors.confirmPassword.message} />
@@ -56,7 +59,7 @@ function SecurityForm({
       </FormGroup>
       <ButtonGroup>
         <Button type="submit" color="primary" disabled={isSubmitting}>
-          {isSubmitting ? 'Please wait' : 'Update Password'}
+          {isSubmitting ? t('common.text.please-wait') : t('profile.text.update-password')}
         </Button>
       </ButtonGroup>
       {apiError && <ErrorText message={apiError} />}

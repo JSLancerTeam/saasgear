@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import PropsType from 'prop-types';
 import { Table } from '../Common/Table';
 import Button from '../Common/Button';
@@ -13,12 +14,13 @@ const ActionTd = styled.td`
 `;
 
 export default function ListTeamMember({ teamMembers, handleAction }) {
+  const { t } = useTranslation();
   return (
     <Table>
       <thead>
         <tr>
-          <th>Member</th>
-          <th>Role</th>
+          <th>{t('team.text.member')}</th>
+          <th>{t('team.text.role')}</th>
         </tr>
       </thead>
       <tbody>
@@ -26,18 +28,18 @@ export default function ListTeamMember({ teamMembers, handleAction }) {
           teamMembers.map((it) => (
             <tr key={it.userId}>
               <td width="70%">{it.email}</td>
-              <td width="10%">{it.isOwner ? 'admin' : 'member'}</td>
+              <td width="10%">{it.isOwner ? t('common.text.admin') : t('common.text.member')}</td>
               {handleAction && (
                 <ActionTd>
-                  <Button>Cancel</Button>
-                  <Button color="primary">Invitation</Button>
+                  <Button>{t('common.text.cancel')}</Button>
+                  <Button color="primary">{t('team.text.invitation')}</Button>
                 </ActionTd>
               )}
             </tr>
           ))
         ) : (
           <tr>
-            <td colSpan={2}>No result</td>
+            <td colSpan={2}>{t('common.text.no-result')}</td>
           </tr>
         )}
       </tbody>

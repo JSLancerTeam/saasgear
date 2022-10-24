@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { mobileQuery } from '@/constants/style';
 import { ReactComponent as EnvelopeIcon } from '@/assets/images/svg/envelope.svg';
@@ -48,19 +49,21 @@ function InviteMemberForm({
   apiError,
   isSubmiting,
 }) {
+  const { t } = useTranslation();
+
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
         <FormControlStyle>
           <InviteInput
             type="text"
-            placeholder="david@jslancer.com"
+            placeholder={t('common.placeholder.g-email')}
             name="emailMember"
             ref={register}
           />
           <InviteBtn type="submit" color="primary" disabled={isSubmiting}>
             <EnvelopeIcon />
-            <span>Invite</span>
+            <span>{t('team.text.invite')}</span>
           </InviteBtn>
         </FormControlStyle>
         {formErrors?.emailMember && (

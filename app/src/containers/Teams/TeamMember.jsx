@@ -1,13 +1,16 @@
 import React from 'react';
 import PropsType from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
 import ListTeamMember from '@/components/Team/ListTeamMember';
 
 export default function TeamMember({ teamMembers }) {
+  const { t } = useTranslation();
+
   return (
     <ContentPage>
-      <TitleContent>Team Members</TitleContent>
+      <TitleContent>{t('team.members')}</TitleContent>
       <ListTeamMember teamMembers={teamMembers} />
     </ContentPage>
   );

@@ -12,6 +12,7 @@ import changePasswordQuery from '@/queries/auth/changePassword';
 import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-down-24.svg';
 import { ReactComponent as SettingIcon } from '@/assets/images/svg/setting.svg';
+import { t } from 'i18next';
 
 const Wrapper = styled.div`
   max-height: 90px;
@@ -79,11 +80,11 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)`
 `;
 
 const PasswordSchema = yup.object().shape({
-  currentPassword: yup.string().required('Current password is required'),
-  newPassword: yup.string().required('New password is required').min(6, 'Password must be at least 6 characters'),
+  currentPassword: yup.string().required('common.validation.require-current-password'),
+  newPassword: yup.string().required('common.validation.require-new-password').min(6, 'common.validation.min-password'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), null], 'Password must match'),
+    .oneOf([yup.ref('newPassword'), null], 'common.validation.password-match'),
 });
 
 const PasswordSetting = () => {
@@ -96,7 +97,7 @@ const PasswordSetting = () => {
   async function onSubmit(params) {
     const { data } = await changePasswordMutation({ variables: params });
     if (data?.changePassword) {
-      toast.success('Change password successfully!')
+      toast.success('common.status.change-password-success')
     }
   }
 
@@ -104,12 +105,12 @@ const PasswordSetting = () => {
     <Wrapper expand={isOpen}>
       <Header onClick={() => setIsOpen(!isOpen)}>
         <SubTitleWrapper>
-          <SubTitle>Change Password</SubTitle>
-          <SubDesc>Forgot your password, find back in seconds</SubDesc>
+          <SubTitle>{t('profile.text.change-password')}</SubTitle>
+          <SubDesc>{t('profile.text.change-password-desc')}</SubDesc>
         </SubTitleWrapper>
         <ActionWrapper>
           <ActionItem mobile><SettingIcon /></ActionItem>
-          <ActionItem desktop>Update Password</ActionItem>
+          <ActionItem desktop>{t('profile.text.update-password')}</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
       </Header>

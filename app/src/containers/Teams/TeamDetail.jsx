@@ -47,7 +47,7 @@ export default function TeamDetail({ team }) {
 
   return (
     <ContentPage>
-      <TitleContent>{t('team.detail.title')}</TitleContent>
+      <TitleContent>{t('team.detail')}</TitleContent>
       <TeamForm
         onSubmit={handleSubmit(createTeam)}
         register={register}

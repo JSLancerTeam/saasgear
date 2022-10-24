@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 
@@ -30,56 +31,60 @@ const TableResponsive = styled.div`
   -ms-overflow-style: -ms-autohiding-scrollbar;
 `
 
-const DocumentTable = ({ data, total, loading, onFetch }) => (
-  <TableResponsive>
-    <Table>
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <THead scope="col" width="300px">Created By</THead>
-          <th scope="col">Created At</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {loading && (
-          <tr>
-            <TdCenter colSpan={5}>Loading...</TdCenter>
-          </tr>
-        )}
+const DocumentTable = ({ data, total, loading, onFetch }) => {
+  const { t } = useTranslation();
 
-        {!loading && data.length === 0 && (
+  return (
+    <TableResponsive>
+      <Table>
+        <thead>
           <tr>
-            <TdCenter colSpan={5}>No result</TdCenter>
+            <th scope="col">{t('document.table.id')}</th>
+            <th scope="col">{t('document.table.name')}</th>
+            <THead scope="col" width="300px">{t('document.table.created-by')}</THead>
+            <th scope="col">{t('document.table.created-at')}</th>
+            <th scope="col">{t('document.table.action')}</th>
           </tr>
-        )}
-
-        {!loading &&
-          data.length > 0 &&
-          data.map((item) => (
-            <tr key={item.id}>
-              <td>#{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.createdBy}</td>
-              <td>{dayjs(item.createdAt).format('YYYY-MM-DD HH:mm')}</td>
-              <ActionTd>
-                <Link to={`/document/edit/${item.id}`}>Edit</Link>
-                <Link to={`/document/view/${item.id}`}>View</Link>
-              </ActionTd>
+        </thead>
+        <tbody>
+          {loading && (
+            <tr>
+              <TdCenter colSpan={5}>{t('common.text.loading')}</TdCenter>
             </tr>
-          ))}
-      </tbody>
-    </Table>
-    {total > 0 && (
-      <div>
+          )}
+
+          {!loading && data.length === 0 && (
+            <tr>
+              <TdCenter colSpan={5}>{t('common.text.no-result')}</TdCenter>
+            </tr>
+          )}
+
+          {!loading &&
+            data.length > 0 &&
+            data.map((item) => (
+              <tr key={item.id}>
+                <td>#{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.createdBy}</td>
+                <td>{dayjs(item.createdAt).format('YYYY-MM-DD HH:mm')}</td>
+                <ActionTd>
+                  <Link to={`/document/edit/${item.id}`}>{t('common.text.edit')}</Link>
+                  <Link to={`/document/view/${item.id}`}>{t('common.text.view')}</Link>
+                </ActionTd>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      {total > 0 && (
         <div>
-          <Pagination total={total} onPageChange={onFetch} />
+          <div>
+            <Pagination total={total} onPageChange={onFetch} />
+          </div>
         </div>
-      </div>
-    )}
-  </TableResponsive>
-);
+      )}
+    </TableResponsive>
+  )
+};
 
 DocumentTable.propTypes = {
   data: PropTypes.array,

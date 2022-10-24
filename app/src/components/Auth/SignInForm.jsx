@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -87,6 +87,13 @@ function SignInForm() {
 
     return false;
   }
+  
+  useEffect(() => {
+    if (error) {
+      console.log(error.graphQLErrors)
+      console.log(Object.keys(error));
+    }
+  }, [error]);
 
   return (
     <SignInContainer>
@@ -135,7 +142,7 @@ function SignInForm() {
           <SocialAuth />
         </div>
       </FormContent>
-      {error?.message && <ErrorText message={t(error?.message)} position="center" />}
+      {error?.graphQLErrors.length > 0 && <ErrorText message={t(`common.error.${error.graphQLErrors[0].extensions.code}`)} position="center" />}
       <TextHaveAccount>
         {t('common.text.not-have-account')} <Link to="/auth/signup">{t('common.text.register')}</Link>.
       </TextHaveAccount>

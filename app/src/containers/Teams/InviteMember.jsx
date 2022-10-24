@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import PropsType from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
@@ -21,11 +22,12 @@ const ListInvitation = styled.div`
 const inviteMemberSchema = yup.object().shape({
   emailMember: yup
     .string()
-    .required('Email is required')
-    .email('Email invalid'),
+    .required('common.validation.require-email')
+    .email('common.validation.valid-email'),
 });
 
 function InviteMember({ teamMembers, alias }) {
+  const { t } = useTranslation();
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(inviteMemberSchema),
   });
@@ -59,7 +61,7 @@ function InviteMember({ teamMembers, alias }) {
 
   return (
     <ContentPage>
-      <TitleContent>Invite Team Members</TitleContent>
+      <TitleContent>{t('team.invite')}</TitleContent>
       <InviteMemberForm
         register={register}
         onSubmit={handleSubmit(onSubmit)}
@@ -69,7 +71,7 @@ function InviteMember({ teamMembers, alias }) {
       />
       {teamMembers && teamMembers.length > 0 && (
         <ListInvitation>
-          <TitleContent>Pending Invitations</TitleContent>
+          <TitleContent>{t('team.text.pending')}</TitleContent>
           <ListTeamMember
             handleAction={onActionInlistMember}
             teamMembers={teamMembers}

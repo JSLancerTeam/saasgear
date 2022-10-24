@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import PropsType from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { mobileQuery } from '@/constants/style';
 import FormGroup from '../Common/FormGroup';
@@ -36,15 +37,16 @@ export default function TeamForm({
   loading,
 }) {
   const history = useHistory();
+  const { t } = useTranslation();
 
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
-        <FormGroupLabel>Team name</FormGroupLabel>
+        <FormGroupLabel>{t('team.label.name')}</FormGroupLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder="Your team name"
+            placeholder={t('team.placeholder.team-name')}
             name="teamName"
             ref={register}
           />
@@ -54,11 +56,11 @@ export default function TeamForm({
         </FormControl>
       </FormGroup>
       <FormGroup>
-        <FormGroupLabel>Team ID</FormGroupLabel>
+        <FormGroupLabel>{t('team.label.id')}</FormGroupLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder="A unique ID for your team"
+            placeholder={t('team.placeholder.team-id')}
             name="teamID"
             ref={register}
           />
@@ -69,9 +71,9 @@ export default function TeamForm({
       </FormGroup>
       <ButtonGroup>
         <Button color="primary" type="submit" disabled={loading}>
-          {isEdit ? 'Save Team' : 'Add Team'}
+          {isEdit ? t('team.text.save') : t('team.text.add')}
         </Button>
-        <Button onClick={() => history.push('/teams')}>Cancel</Button>
+        <Button onClick={() => history.push('/teams')}>{t('common.text.cancel')}</Button>
       </ButtonGroup>
     </form>
   );

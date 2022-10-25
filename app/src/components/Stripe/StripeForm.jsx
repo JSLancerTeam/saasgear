@@ -102,7 +102,7 @@ const StripeForm = ({
   useEffect(() => {
     setIsSubmitting(apiLoading);
   }, [apiLoading]);
-
+  
   useEffect(() => {
     setError(apiError);
   }, [apiError]);
@@ -115,7 +115,7 @@ const StripeForm = ({
       const card = elements.getElement(CardNumberElement);
       const result = await stripe.createToken(card);
       if (result.error) {
-        setError(result.error.message);
+        setError(result.error);
       } else {
         onSubmitSuccess(result.token.id);
       }
@@ -133,24 +133,24 @@ const StripeForm = ({
         <div>
           <FormGroup>
             <FormGroupLabel htmlFor="street_address">
-              {t('common.stripe.card')}
+              {t('payment.label.card')}
             </FormGroupLabel>
             <CardNumberEl className="card-el" />
           </FormGroup>
           <RowGroup>
             <FormGroupCardExpire>
-              <FormGroupLabel htmlFor="first_name">{t('common.stripe.expiration')}</FormGroupLabel>
+              <FormGroupLabel htmlFor="first_name">{t('payment.label.expiration')}</FormGroupLabel>
               <CardExpiryElementEl />
             </FormGroupCardExpire>
             <FormGroupCardCvc>
-              <FormGroupLabel htmlFor="last_name">{t('common.stripe.cvc')}</FormGroupLabel>
+              <FormGroupLabel htmlFor="last_name">{t('payment.label.cvc')}</FormGroupLabel>
               <CardCvcElementEl />
             </FormGroupCardCvc>
           </RowGroup>
         </div>
       </div>
       {error && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">{error}</p>
+        <p className="text-red-500 text-xs italic mt-1 text-center">{t(`common.error.${error.code}`)}</p>
       )}
       <SubmitButton
         type="submit"

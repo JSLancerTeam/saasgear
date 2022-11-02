@@ -203,7 +203,7 @@ const InformationSetting = ({ user }) => {
   useEffect(() => {
     setValue('avatarUrl', user.avatarUrl);
   }, [user.avatarUrl]);
-
+  console.log(error);
   return (
     <Wrapper expand={isOpen}>
       <Header onClick={() => setIsOpen(!isOpen)}>

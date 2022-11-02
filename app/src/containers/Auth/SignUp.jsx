@@ -83,14 +83,14 @@ const SignUp = () => {
             onSubmitSuccess={createPaymentMethodSuccess}
             onGoBack={handleGoBack}
             apiLoading={loading}
-            apiError={error?.message}
+            apiError={error ? t(`sign-up.error.${error.graphQLErrors[0]?.extensions.code}`) : '' }
           />
         ) : (
           <SignUpForm
             onSubmit={handleSubmit(onSubmit)}
             register={register}
             formErrors={formErrors}
-            apiError={error?.message}
+            apiError={error ? t(`sign-up.error.${error.graphQLErrors[0]?.extensions.code}`) : '' }
             isSubmitting={loading}
             submitText={planName ? t('sign-up.text.next') : t('sign-up.text.button-text')}
           />

@@ -50,7 +50,7 @@ function InviteMemberForm({
   isSubmiting,
 }) {
   const { t } = useTranslation();
-
+  console.log(apiError);
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
@@ -67,7 +67,7 @@ function InviteMemberForm({
           </InviteBtn>
         </FormControlStyle>
         {formErrors?.emailMember && (
-          <ErrorText message={formErrors.emailMember.message} />
+          <ErrorText message={t(formErrors.emailMember.message)} />
         )}
         {apiError && <ErrorText message={apiError} />}
       </FormGroup>

@@ -55,7 +55,7 @@ export default function TeamDetail({ team }) {
         loading={loading}
         isEdit={!!team}
       />
-      {error?.message && <ErrorText>{error.message}</ErrorText>}
+      {error && <ErrorText message={t(`team.error.${error.graphQLErrors[0]?.extensions.code}`)} />}
     </ContentPage>
   );
 }

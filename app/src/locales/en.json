@@ -71,9 +71,8 @@
       "avatar": "avatar"
     },
     "error": {
-      "UNAUTHENTICATED": "Invalid email or password",
-      "GRAPHQL_VALIDATION_FAILED": "The 'password' field length must be greater than or equal to 6 characters long.",
       "INTERNAL_SERVER_ERROR": "Internal server error.",
+      "BAD_USER_INPUT": "Bad user input",
       "incomplete_number": "Your card number is incomplete.",
       "incomplete_expiry": "Your card's expiration date is incomplete.",
       "incomplete_cvc": "Your card's security code is incomplete."
@@ -85,6 +84,10 @@
       "button-text": "Sign in",
       "next": "Next",
       "forgot-password": "Forgot Password?"
+    },
+    "error": {
+      "UNAUTHENTICATED": "Invalid email or password",
+      "GRAPHQL_VALIDATION_FAILED": "The 'password' field length must be greater than or equal to 6 characters long."
     }
   },
   "sign-up": {
@@ -98,6 +101,9 @@
       "and": "and",
       "cookie-policy": "Cookie Policy",
       "have-account": "Already have account?"
+    },
+    "error": {
+      "INTERNAL_SERVER_ERROR": "Your account is not yet verify"
     }
   },
   "forgot-password": {
@@ -159,6 +165,9 @@
     "placeholder": {
       "team-name": "Your team name",
       "team-id": "A unique ID for your team"
+    },
+    "error": {
+      "INTERNAL_SERVER_ERROR": "Team exist"
     }
   },
   "document": {

@@ -87,13 +87,6 @@ function SignInForm() {
 
     return false;
   }
-  
-  useEffect(() => {
-    if (error) {
-      console.log(error.graphQLErrors)
-      console.log(Object.keys(error));
-    }
-  }, [error]);
 
   return (
     <SignInContainer>
@@ -142,7 +135,7 @@ function SignInForm() {
           <SocialAuth />
         </div>
       </FormContent>
-      {error?.graphQLErrors.length > 0 && <ErrorText message={t(`common.error.${error.graphQLErrors[0].extensions.code}`)} position="center" />}
+      {error?.graphQLErrors.length > 0 && <ErrorText message={t(`common.error.${error.graphQLErrors[0]?.extensions.code}`)} position="center" />}
       <TextHaveAccount>
         {t('common.text.not-have-account')} <Link to="/auth/signup">{t('common.text.register')}</Link>.
       </TextHaveAccount>

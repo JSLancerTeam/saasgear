@@ -97,7 +97,7 @@ const PasswordSetting = () => {
   async function onSubmit(params) {
     const { data } = await changePasswordMutation({ variables: params });
     if (data?.changePassword) {
-      toast.success('common.status.change-password-success')
+      toast.success(t('common.status.change-password-success'))
     }
   }
 

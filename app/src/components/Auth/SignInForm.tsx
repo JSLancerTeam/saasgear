@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   SignUpFormContainer,
   FormContent,
@@ -66,58 +67,62 @@ const SignInForm: React.FC<Props> = ({
   formErrors,
   apiError,
   isSubmitting,
-}) => (
-  <SignInContainer>
-    <Logo />
-    <FormContent onSubmit={onSubmit}>
-      <FormHeader>Welcome Back!</FormHeader>
-      <div>
-        <FormGroup>
-          <FormGroupLabel>Email</FormGroupLabel>
-          <FormControl>
-            <Input
-              type="email"
-              placeholder="yourname@yourbusiness.com"
-              name="email"
-              ref={register}
-            />
-            {formErrors?.email && (
-              <ErrorText message={formErrors.email.message} />
-            )}
-          </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormGroupLabel>Password</FormGroupLabel>
-          <FormControl>
-            <Input
-              type="password"
-              placeholder="your password"
-              name="password"
-              ref={register}
-            />
-            {formErrors?.password && (
-              <ErrorText message={formErrors.password.message} />
-            )}
-          </FormControl>
-        </FormGroup>
-        <RembemberSection>
-          <Checkbox type="checkbox" name="rembemer" id="rembemer" />
-          <RememberLabel htmlFor="rembemer">Remember me</RememberLabel>
-        </RembemberSection>
-        <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Please wait' : 'Sign in'}
-        </SubmitButton>
-        <ForgotLink>
-          <Link to="/auth/forgot-password">Forgot Password?</Link>
-        </ForgotLink>
-        <SocialAuth />
-      </div>
-    </FormContent>
-    {apiError && <ErrorText message={apiError} position="center" />}
-    <TextHaveAccount>
-      Dont have account? <Link to="/auth/signup">Register</Link>.
-    </TextHaveAccount>
-  </SignInContainer>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <SignInContainer>
+      <Logo />
+      <FormContent onSubmit={onSubmit}>
+        <FormHeader>{t('sign-in.text.heading')}</FormHeader>
+        <div>
+          <FormGroup>
+            <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
+            <FormControl>
+              <Input
+                type="email"
+                placeholder={t('common.placeholder.email')}
+                name="email"
+                ref={register}
+              />
+              {formErrors?.email && (
+                <ErrorText message={t(`${formErrors.email.message}`)} />
+              )}
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <FormGroupLabel>{t('common.label.password')}</FormGroupLabel>
+            <FormControl>
+              <Input
+                type="password"
+                placeholder={t('common.placeholder.password')}
+                name="password"
+                ref={register}
+              />
+              {formErrors?.password && (
+                <ErrorText message={t(`${formErrors.password.message}`)} />
+              )}
+            </FormControl>
+          </FormGroup>
+          <RembemberSection>
+            <Checkbox type="checkbox" name="rembemer" id="rembemer" />
+            <RememberLabel htmlFor="rembemer">{t('common.label.remember-label')}</RememberLabel>
+          </RembemberSection>
+          <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? t('common.text.please-wait') : t('sign-in.text.button-text')}
+          </SubmitButton>
+          <ForgotLink>
+            <Link to="/auth/forgot-password">{t('sign-in.text.forgot-password')}</Link>
+          </ForgotLink>
+          <SocialAuth />
+        </div>
+      </FormContent>
+      {apiError && <ErrorText message={apiError} position="center" />}
+      <TextHaveAccount>
+        {t('common.text.not-have-account')} <Link to="/auth/signup">{t('common.text.register')}</Link>.
+      </TextHaveAccount>
+    </SignInContainer>
+  );
+};
 
 export default SignInForm;

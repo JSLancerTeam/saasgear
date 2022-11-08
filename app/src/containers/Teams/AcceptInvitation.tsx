@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { useParams, useHistory } from 'react-router-dom';
 import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import verifyTokenQuery from '@/queries/teams/verifyInviteToken';
@@ -40,6 +41,7 @@ type Params = {
 }
 
 const AcceptInvitation: React.FC = () => {
+  const { t } = useTranslation();
   const { invitationToken } = useParams<Params>();
   const [teamInfo, setTeamInfo] = useState<TeamInfo | null>(null);
   const history = useHistory();
@@ -77,7 +79,7 @@ const AcceptInvitation: React.FC = () => {
   }
 
   return loading && getProfileLoading ? (
-    <div> Loading ....</div>
+    <div> {t('common.text.loading')}</div>
   ) : (
     <ForgotPasswordWrapper>
       <Overlay />
@@ -85,17 +87,17 @@ const AcceptInvitation: React.FC = () => {
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>Accept Invitation?</ForgotPasswordText>
+        <ForgotPasswordText>{t('accept-invitation.title')}</ForgotPasswordText>
         <ForgotPasswordDescription>
-          You&apos; ve been invitated to join{' '}
-          <strong>{teamInfo?.teamName}</strong> by{' '}
+          {t('accept-invitation.have-invitated')}{' '}
+          <strong>{teamInfo?.teamName}</strong> {t('accept-invitation.by')}{' '}
           <strong>{teamInfo?.owner}</strong>
         </ForgotPasswordDescription>
         <ButtonGroup>
           <Button color="primary" onClick={() => handleUserJoinTeam('accept')}>
-            Accept
+            {t('accept-invitation.accept')}
           </Button>
-          <Button onClick={() => handleUserJoinTeam('decline')}>Decline</Button>
+          <Button onClick={() => handleUserJoinTeam('decline')}>{t('accept-invitation.decline')}</Button>
         </ButtonGroup>
         <SquareIconTop>
           <svg

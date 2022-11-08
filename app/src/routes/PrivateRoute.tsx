@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, RouteProps, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { RootState } from '@/config/store';
 
 // Queries
@@ -17,6 +18,7 @@ type Props = {
 const PrivateRoute: React.FC<Props> = ({ render }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [getProfile, { data: userProfile, loading: loadingUserProfile }] = useLazyQuery(
     getProfileQuery,
   );
@@ -45,7 +47,7 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
         />
       )}
       {(!data || !data.id || loadingUserProfile) && (
-        <div>Loading...</div>
+        <div>{t('common.text.loading')}</div>
       )}
     </>
   );

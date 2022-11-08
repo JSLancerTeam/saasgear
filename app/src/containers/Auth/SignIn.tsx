@@ -16,8 +16,8 @@ import AuthAdsArea from '@/components/Auth/AuthAds';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignInSchema = yup.object().shape({
-  email: yup.string().required('Email is required').email('Email invalid'),
-  password: yup.string().required('Password is required'),
+  email: yup.string().required('common.validation.require-email').email('common.validation.valid-email'),
+  password: yup.string().required('common.validation.require-password'),
 });
 
 type Payload = {

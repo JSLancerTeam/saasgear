@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   useStripe,
   useElements,
@@ -102,6 +103,7 @@ const StripeForm: React.FC<Props> = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const { t } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -142,17 +144,17 @@ const StripeForm: React.FC<Props> = ({
         <div>
           <FormGroup>
             <FormGroupLabel htmlFor="street_address">
-              Card Number
+              {t('payment.label.card')}
             </FormGroupLabel>
             <CardNumberEl className="card-el" />
           </FormGroup>
           <RowGroup>
             <FormGroupCardExpire>
-              <FormGroupLabel htmlFor="first_name">Expiration</FormGroupLabel>
+              <FormGroupLabel htmlFor="first_name">{t('payment.label.expiration')}</FormGroupLabel>
               <CardExpiryElementEl />
             </FormGroupCardExpire>
             <FormGroupCardCvc>
-              <FormGroupLabel htmlFor="last_name">CVC</FormGroupLabel>
+              <FormGroupLabel htmlFor="last_name">{t('payment.label.cvc')}</FormGroupLabel>
               <CardCvcElementEl />
             </FormGroupCardCvc>
           </RowGroup>
@@ -167,7 +169,7 @@ const StripeForm: React.FC<Props> = ({
         color="primary"
         width="100%"
       >
-        {isSubmitting ? 'Please wait' : submitText}
+        {isSubmitting ? t('common.text.please-wait') : (submitText ?? t('common.text.submit'))}
       </SubmitButton>
     </StripeFormContainer>
   );

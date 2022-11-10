@@ -67,7 +67,7 @@ const SecurityForm: React.FC<Props> = ({
           {isSubmitting ? t('common.text.please-wait') : t('profile.text.update-password')}
         </Button>
       </ButtonGroup>
-      {apiError && <ErrorText message={apiError} />}
+      {apiError && <ErrorText message={t(`profile.error.password.${apiError}`)} />}
     </Form>
   );
 };

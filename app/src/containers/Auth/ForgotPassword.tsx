@@ -25,7 +25,7 @@ import circleSmall from '@/assets/images/svg/circle-small.svg';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ForgotPasswordSchema = yup.object().shape({
-  email: yup.string().required('Email is required').email('Email is invalid'),
+  email: yup.string().required('common.validation.require-email').email('common.validation.valid-email'),
 });
 
 const ForgotPassword: React.FC = () => {
@@ -60,7 +60,7 @@ const ForgotPassword: React.FC = () => {
           errors={errors}
           isSubmitted={isSubmitted && !error}
           isSubmitting={loading}
-          apiError={error?.message}
+          apiError={error?.graphQLErrors?.[0]?.extensions?.code}
         />
         <SquareIconTop>
           <img src={squareRadiusTop} alt="" />

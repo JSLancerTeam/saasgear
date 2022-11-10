@@ -203,6 +203,11 @@
     },
     "label": {
       "delete": "Delete Account"
+    },
+    "error": {
+      "password": {
+        "INTERNAL_SERVER_ERROR": "Current password is not correct"
+      }
     }
   },
   "payment": {

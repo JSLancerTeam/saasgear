@@ -55,7 +55,7 @@ const SignUpSocialForm: React.FC<Props> = ({
         </button>
       </div>
       {errorAPI && (
-        <p className="text-red-500 text-xs italic mt-1">{errorAPI}</p>
+        <p className="text-red-500 text-xs italic mt-1">{t(`sign-up.error.${errorAPI}`)}</p>
       )}
     </form>
   );

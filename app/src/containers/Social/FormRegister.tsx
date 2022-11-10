@@ -68,7 +68,7 @@ const FormRegister: React.FC<Props> = ({ data }) => {
             onSubmit={handleSubmit(onSubmit)}
             register={register}
             formErrors={formErrors}
-            errorAPI={error?.message}
+            errorAPI={error?.graphQLErrors?.[0]?.extensions?.code}
           />
         </div>
       </div>

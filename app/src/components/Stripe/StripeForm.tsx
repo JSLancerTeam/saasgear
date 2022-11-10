@@ -125,7 +125,7 @@ const StripeForm: React.FC<Props> = ({
         let result;
         if (card) result = await stripe.createToken(card); 
         if (result?.error) {
-          setError(result.error?.message ?? "");
+          setError(result.error?.code ?? "");
         } else {
           onSubmitSuccess(result?.token?.id ?? "");
         }
@@ -161,7 +161,7 @@ const StripeForm: React.FC<Props> = ({
         </div>
       </div>
       {error && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">{error}</p>
+        <p className="text-red-500 text-xs italic mt-1 text-center">{t(`sign-up.error.${error}`)}</p>
       )}
       <SubmitButton
         type="submit"

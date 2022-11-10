@@ -90,14 +90,14 @@ const SignUp: React.FC = () => {
             onSubmitSuccess={createPaymentMethodSuccess}
             onGoBack={handleGoBack}
             apiLoading={loading}
-            apiError={error?.message}
+            apiError={error?.graphQLErrors?.[0]?.extensions?.code}
           />
         ) : (
           <SignUpForm
             onSubmit={handleSubmit(onSubmit)}
             register={register}
             formErrors={formErrors}
-            apiError={error?.message}
+            apiError={error?.graphQLErrors?.[0]?.extensions?.code}
             isSubmitting={loading}
             submitText={planName ? 'Next' : 'Sign up'}
           />

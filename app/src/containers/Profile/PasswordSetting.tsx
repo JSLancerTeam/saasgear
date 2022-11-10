@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@apollo/client';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import SecurityForm from '@/components/Profile/SecurityForm';
@@ -78,11 +79,11 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)<{ expand: number }>`
 `;
 
 const PasswordSchema = yup.object().shape({
-  currentPassword: yup.string().required('Current password is required'),
-  newPassword: yup.string().required('New password is required').min(6, 'Password must be at least 6 characters'),
+  currentPassword: yup.string().required('common.validation.require-current-password'),
+  newPassword: yup.string().required('common.validation.require-new-password').min(6, 'common.validation.min-password'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), ""], 'Password must match'),
+    .oneOf([yup.ref('newPassword'), ""], 'common.validation.password-match'),
 });
 
 type Payload = {
@@ -91,6 +92,7 @@ type Payload = {
 }
 
 const PasswordSetting: React.FC = () => {
+  const { t } = useTranslation();
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(PasswordSchema),
   });
@@ -100,7 +102,7 @@ const PasswordSetting: React.FC = () => {
   async function onSubmit(params: Payload) {
     const { data } = await changePasswordMutation({ variables: params });
     if (data?.changePassword) {
-      toast.success('Change password successfully!')
+      toast.success('common.status.change-password-success')
     }
   }
 
@@ -108,12 +110,12 @@ const PasswordSetting: React.FC = () => {
     <Wrapper expand={isOpen}>
       <Header onClick={() => setIsOpen(!isOpen)}>
         <SubTitleWrapper>
-          <SubTitle>Change Password</SubTitle>
-          <SubDesc>Forgot your password, find back in seconds</SubDesc>
+          <SubTitle>{t('profile.text.change-password')}</SubTitle>
+          <SubDesc>{t('profile.text.change-password-desc')}</SubDesc>
         </SubTitleWrapper>
         <ActionWrapper>
           <ActionItem mobile><SettingIcon /></ActionItem>
-          <ActionItem desktop>Update Password</ActionItem>
+          <ActionItem desktop>{t('profile.text.update-password')}</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
       </Header>

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import type { ITeamMember } from "@/features/admin/team";
 import { addTeamMember } from '@/features/admin/team';
@@ -21,8 +22,8 @@ const ListInvitation = styled.div`
 const inviteMemberSchema = yup.object().shape({
   emailMember: yup
     .string()
-    .required('Email is required')
-    .email('Email invalid'),
+    .required('common.validation.require-email')
+    .email('common.validation.valid-email'),
 });
 
 type Payload = {
@@ -35,6 +36,7 @@ type Props = {
 }
 
 const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
+  const { t } = useTranslation();
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(inviteMemberSchema),
   });
@@ -68,7 +70,7 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
 
   return (
     <ContentPage>
-      <TitleContent>Invite Team Members</TitleContent>
+      <TitleContent>{t('team.invite')}</TitleContent>
       <InviteMemberForm
         register={register}
         onSubmit={handleSubmit(onSubmit)}
@@ -78,7 +80,7 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
       />
       {teamMembers && teamMembers.length > 0 && (
         <ListInvitation>
-          <TitleContent>Pending Invitations</TitleContent>
+          <TitleContent>{t('team.text.pending')}</TitleContent>
           <ListTeamMember
             handleAction={onActionInlistMember}
             teamMembers={teamMembers}

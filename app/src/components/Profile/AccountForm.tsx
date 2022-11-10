@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
 import { COLORS, mobileQuery } from '@/constants/style';
@@ -48,24 +49,27 @@ type Props = ReactHookFormType & {
   openPopupDeleteAccount: () => void;
 }
 
-const AccountForm: React.FC<Props> = ({ onSubmit, register, loading, apiError, openPopupDeleteAccount }) =>  (
-  <Form onSubmit={onSubmit}>
-    <FormGroupWrapper>
-      <FormGroup>
-        <FormGroupLabel>Your name</FormGroupLabel>
-        <Input name="name" ref={register} />
-      </FormGroup>
-    </FormGroupWrapper>
-    <FormGroup>
-      <FormGroupLabel>Email</FormGroupLabel>
-      <Input type="email" name="email" ref={register} disabled />
-    </FormGroup>
-    <ButtonGroup>
-      <DeleteLink onClick={openPopupDeleteAccount}>I&apos;d like to delete my account</DeleteLink>
-      <Button type="submit" color="primary" disabled={loading}>{loading ? 'Please wait' : 'Save and Update'}</Button>
-    </ButtonGroup>
-    {apiError && <ErrorText message={apiError} />}
-  </Form>
-);
+const AccountForm: React.FC<Props> = ({ onSubmit, register, loading, apiError, openPopupDeleteAccount }) =>  {
+  const { t } = useTranslation();
 
+  return (
+    <Form onSubmit={onSubmit}>
+      <FormGroupWrapper>
+        <FormGroup>
+          <FormGroupLabel>{t('common.label.your-name')}</FormGroupLabel>
+          <Input name="name" ref={register} />
+        </FormGroup>
+      </FormGroupWrapper>
+      <FormGroup>
+        <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
+        <Input type="email" name="email" ref={register} disabled />
+      </FormGroup>
+      <ButtonGroup>
+        <DeleteLink onClick={openPopupDeleteAccount}>{t('profile.text.delete')}</DeleteLink>
+        <Button type="submit" color="primary" disabled={loading}>{loading ? t('common.text.please-wait') : t('common.text.save-and-update')}</Button>
+      </ButtonGroup>
+      {apiError && <ErrorText message={apiError} />}
+    </Form>
+  );
+};
 export default AccountForm;

@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { Controller, Control } from 'react-hook-form';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { ReactHookFormType } from "@/typeReactHookForm";
 
 import { mobileQuery } from '@/constants/style';
@@ -38,33 +39,36 @@ const DocumentForm: React.FC<Props> = ({
   formErrors,
   apiError,
   isSubmitting,
-}) => (
-  <form onSubmit={onSubmit}>
-    <FormGroup>
-      <FormGroupLabel>Name</FormGroupLabel>
-      <Input name="name" ref={register} />
-      {formErrors?.name && <ErrorText message={formErrors.name.message} />}
-    </FormGroup>
-    <FormGroup>
-      <FormGroupLabel>Body</FormGroupLabel>
-      <Controller
-        name="body"
-        control={control}
-        defaultValue=""
-        render={({ onChange }) => (
-          <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />
-        )}
-      />
-      {formErrors?.body && <ErrorText message={formErrors.body.message} />}
-    </FormGroup>
-    {apiError && <ErrorText message={apiError} />}
+}) => {
+  const { t } = useTranslation();
+  return (
+    <form onSubmit={onSubmit}>
+      <FormGroup>
+        <FormGroupLabel>{t('common.label.name')}</FormGroupLabel>
+        <Input name="name" ref={register} />
+        {formErrors?.name && <ErrorText message={t(`${formErrors.name.message}`)} />}
+      </FormGroup>
+      <FormGroup>
+        <FormGroupLabel>{t('common.label.body')}</FormGroupLabel>
+        <Controller
+          name="body"
+          control={control}
+          defaultValue=""
+          render={({ onChange }) => (
+            <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />
+          )}
+        />
+        {formErrors?.body && <ErrorText message={t(`${formErrors.body.message}`)} />}
+      </FormGroup>
+      {apiError && <ErrorText message={`document.error.${apiError}`} />}
 
-    <ButtonGroup>
-      <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Please wait' : 'Save'}
-      </SaveBtn>
-    </ButtonGroup>
-  </form>
-);
+      <ButtonGroup>
+        <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? t('common.text.please-wait') : t('common.text.save')}
+        </SaveBtn>
+      </ButtonGroup>
+    </form>
+  );
+};
 
 export default memo(DocumentForm);

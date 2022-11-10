@@ -117,7 +117,7 @@ const SignInForm: React.FC<Props> = ({
           <SocialAuth />
         </div>
       </FormContent>
-      {apiError && <ErrorText message={apiError} position="center" />}
+      {apiError && <ErrorText message={t(`sign-in.error.${apiError}`)} position="center" />}
       <TextHaveAccount>
         {t('common.text.not-have-account')} <Link to="/auth/signup">{t('common.text.register')}</Link>.
       </TextHaveAccount>

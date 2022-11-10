@@ -53,7 +53,7 @@ const SignIn: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
           register={register}
           formErrors={formErrors}
-          apiError={error?.message}
+          apiError={error?.graphQLErrors?.[0]?.extensions?.code}
           isSubmitting={loading}
         />
       </SignUpFormLeft>

@@ -72,11 +72,7 @@
       "avatar": "avatar"
     },
     "error": {
-      "GRAPHQL_VALIDATION_FAILED": "The 'password' field length must be greater than or equal to 6 characters long.",
-      "INTERNAL_SERVER_ERROR": "Internal server error.",
-      "incomplete_number": "Your card number is incomplete.",
-      "incomplete_expiry": "Your card's expiration date is incomplete.",
-      "incomplete_cvc": "Your card's security code is incomplete."
+      "INTERNAL_SERVER_ERROR": "Internal server error."
     }
   },
   "sign-in": {
@@ -87,7 +83,8 @@
       "forgot-password": "Forgot Password?"
     },
     "error": {
-      "UNAUTHENTICATED": "Invalid email or password"
+      "UNAUTHENTICATED": "Invalid email or password",
+      "GRAPHQL_VALIDATION_FAILED": "The 'password' field length must be greater than or equal to 6 characters long."
     }
   },
   "sign-up": {
@@ -101,6 +98,12 @@
       "and": "and",
       "cookie-policy": "Cookie Policy",
       "have-account": "Already have account?"
+    },
+    "error": {
+      "INTERNAL_SERVER_ERROR": "Email address has been used",
+      "incomplete_number": "Your card number is incomplete.",
+      "incomplete_expiry": "Your card's expiration date is incomplete.",
+      "incomplete_cvc": "Your card's security code is incomplete."
     }
   },
   "forgot-password": {
@@ -162,6 +165,13 @@
     "placeholder": {
       "team-name": "Your team name",
       "team-id": "A unique ID for your team"
+    },
+    "validation": {
+      "require-team-name": "Team name is reqired",
+      "require-team-id": "Team ID is required"
+    },
+    "error": {
+      "INTERNAL_SERVER_ERROR": "Team exist"
     }
   },
   "document": {

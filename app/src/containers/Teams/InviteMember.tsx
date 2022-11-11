@@ -22,8 +22,8 @@ const ListInvitation = styled.div`
 const inviteMemberSchema = yup.object().shape({
   emailMember: yup
     .string()
-    .required('common.validation.require-email')
-    .email('common.validation.valid-email'),
+    .required('Common.validation.require-email')
+    .email('Common.validation.valid-email'),
 });
 
 type Payload = {
@@ -70,7 +70,7 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
 
   return (
     <ContentPage>
-      <TitleContent>{t('team.invite')}</TitleContent>
+      <TitleContent>{t('Team.invite')}</TitleContent>
       <InviteMemberForm
         register={register}
         onSubmit={handleSubmit(onSubmit)}
@@ -80,7 +80,7 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
       />
       {teamMembers && teamMembers.length > 0 && (
         <ListInvitation>
-          <TitleContent>{t('team.text.pending')}</TitleContent>
+          <TitleContent>{t('Team.text.pending')}</TitleContent>
           <ListTeamMember
             handleAction={onActionInlistMember}
             teamMembers={teamMembers}

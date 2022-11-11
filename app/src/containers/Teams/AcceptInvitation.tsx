@@ -79,7 +79,7 @@ const AcceptInvitation: React.FC = () => {
   }
 
   return loading && getProfileLoading ? (
-    <div> {t('common.text.loading')}</div>
+    <div> {t('Common.text.loading')}</div>
   ) : (
     <ForgotPasswordWrapper>
       <Overlay />
@@ -87,17 +87,17 @@ const AcceptInvitation: React.FC = () => {
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>{t('accept-invitation.title')}</ForgotPasswordText>
+        <ForgotPasswordText>{t('Accept-invitation.title')}</ForgotPasswordText>
         <ForgotPasswordDescription>
-          {t('accept-invitation.have-invitated')}{' '}
-          <strong>{teamInfo?.teamName}</strong> {t('accept-invitation.by')}{' '}
+          {t('Accept-invitation.have-invitated')}{' '}
+          <strong>{teamInfo?.teamName}</strong> {t('Accept-invitation.by')}{' '}
           <strong>{teamInfo?.owner}</strong>
         </ForgotPasswordDescription>
         <ButtonGroup>
           <Button color="primary" onClick={() => handleUserJoinTeam('accept')}>
-            {t('accept-invitation.accept')}
+            {t('Accept-invitation.accept')}
           </Button>
-          <Button onClick={() => handleUserJoinTeam('decline')}>{t('accept-invitation.decline')}</Button>
+          <Button onClick={() => handleUserJoinTeam('decline')}>{t('Accept-invitation.decline')}</Button>
         </ButtonGroup>
         <SquareIconTop>
           <svg

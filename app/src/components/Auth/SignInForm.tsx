@@ -74,52 +74,52 @@ const SignInForm: React.FC<Props> = ({
     <SignInContainer>
       <Logo />
       <FormContent onSubmit={onSubmit}>
-        <FormHeader>{t('sign-in.text.heading')}</FormHeader>
+        <FormHeader>{t('Sign-in.text.heading')}</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="email"
-                placeholder={t('common.placeholder.email')}
+                placeholder={t('Common.placeholder.email')}
                 name="email"
                 ref={register}
               />
-              {formErrors?.email && (
-                <ErrorText message={t(`${formErrors.email.message}`)} />
+              {formErrors?.email?.message && (
+                <ErrorText message={t(formErrors.email.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>{t('common.label.password')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder={t('common.placeholder.password')}
+                placeholder={t('Common.placeholder.password')}
                 name="password"
                 ref={register}
               />
-              {formErrors?.password && (
-                <ErrorText message={t(`${formErrors.password.message}`)} />
+              {formErrors?.password?.message && (
+                <ErrorText message={t(formErrors.password.message)} />
               )}
             </FormControl>
           </FormGroup>
           <RembemberSection>
             <Checkbox type="checkbox" name="rembemer" id="rembemer" />
-            <RememberLabel htmlFor="rembemer">{t('common.label.remember-label')}</RememberLabel>
+            <RememberLabel htmlFor="rembemer">{t('Common.label.remember-label')}</RememberLabel>
           </RembemberSection>
           <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? t('common.text.please-wait') : t('sign-in.text.button-text')}
+            {isSubmitting ? t('Common.text.please-wait') : t('Sign-in.text.button-text')}
           </SubmitButton>
           <ForgotLink>
-            <Link to="/auth/forgot-password">{t('sign-in.text.forgot-password')}</Link>
+            <Link to="/auth/forgot-password">{t('Sign-in.text.forgot-password')}</Link>
           </ForgotLink>
           <SocialAuth />
         </div>
       </FormContent>
-      {apiError && <ErrorText message={t(`sign-in.error.${apiError}`)} position="center" />}
+      {apiError && <ErrorText message={t(`Sign-in.error.${apiError}`)} position="center" />}
       <TextHaveAccount>
-        {t('common.text.not-have-account')} <Link to="/auth/signup">{t('common.text.register')}</Link>.
+        {t('Common.text.not-have-account')} <Link to="/auth/signup">{t('Common.text.register')}</Link>.
       </TextHaveAccount>
     </SignInContainer>
   );

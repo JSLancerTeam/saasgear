@@ -23,7 +23,7 @@ const SignUpSocialForm: React.FC<Props> = ({
           htmlFor="email"
           className="block text-sm font-medium leading-5 text-gray-700"
         >
-          {t('common.label.email')}
+          {t('Common.label.email')}
         </label>
         <input
           id="email"
@@ -31,9 +31,9 @@ const SignUpSocialForm: React.FC<Props> = ({
           ref={register}
           className="mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         />
-        {formErrors?.email && (
+        {formErrors?.email?.message && (
           <p className="text-red-500 text-xs italic mt-1">
-            {t(`${formErrors.email.message}`)}
+            {t(formErrors.email.message)}
           </p>
         )}
       </div>
@@ -50,12 +50,12 @@ const SignUpSocialForm: React.FC<Props> = ({
               alt="the-lock"
             />
           </span>
-          {t('common.text.please-wait')}
+          {t('Common.text.please-wait')}
           {/* {isSubmitting ? 'Please wait' : submitText} */}
         </button>
       </div>
       {errorAPI && (
-        <p className="text-red-500 text-xs italic mt-1">{t(`sign-up.error.${errorAPI}`)}</p>
+        <p className="text-red-500 text-xs italic mt-1">{t(`Sign-up.error.${errorAPI}`)}</p>
       )}
     </form>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import '@/assets/css/react-slide-custom.css';
@@ -83,54 +84,57 @@ const SlideItemContainer = styled.div`
   text-align: center;
 `;
 
-const AuthAdsArea: React.FC = () => (
-  <AuthAdsWrapper>
-    <AdsIconGrid>
-      <img src={squareGrid} alt="" />
-    </AdsIconGrid>
-    <AdsIconBlock>
-      <img src={squareRadiusPrimary} alt="" />
-    </AdsIconBlock>
-    <AdsCircleIcon></AdsCircleIcon>
-    <AdsBigBlock>
-      <img src={squareRadiusTopBig} alt="" />
-    </AdsBigBlock>
-    <SlideCustom
-      easing="ease"
-      arrows={false}
-      canSwipe={false}
-      duration={3000}
-      indicators
-    >
-      <div>
-        <SlideItemContainer>
-          <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-          <SlideItemTitle>ReactJS</SlideItemTitle>
-          <SlideItemDescription>
-            High-performance and powerful interactive UI with React.
-          </SlideItemDescription>
-        </SlideItemContainer>
-      </div>
-      <div>
-        <SlideItemContainer>
-          <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-          <SlideItemTitle>Subscription payments</SlideItemTitle>
-          <SlideItemDescription>
-            We have integrated Stripe subscription payments to allow you to monetize your SaaS.
-          </SlideItemDescription>
-        </SlideItemContainer>
-      </div>
-      <div>
-        <SlideItemContainer>
-          <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-          <SlideItemTitle>Teams</SlideItemTitle>
-          <SlideItemDescription>
-            Your users are able to invite their teammates to their account.
-          </SlideItemDescription>
-        </SlideItemContainer>
-      </div>
-    </SlideCustom>
-  </AuthAdsWrapper>
-);
+const AuthAdsArea: React.FC = () => {
+  const { t } = useTranslation();
 
+  return (
+    <AuthAdsWrapper>
+      <AdsIconGrid>
+        <img src={squareGrid} alt="" />
+      </AdsIconGrid>
+      <AdsIconBlock>
+        <img src={squareRadiusPrimary} alt="" />
+      </AdsIconBlock>
+      <AdsCircleIcon></AdsCircleIcon>
+      <AdsBigBlock>
+        <img src={squareRadiusTopBig} alt="" />
+      </AdsBigBlock>
+      <SlideCustom
+        easing="ease"
+        arrows={false}
+        canSwipe={false}
+        duration={3000}
+        indicators
+      >
+        <div>
+          <SlideItemContainer>
+            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+            <SlideItemTitle>{t('Advertisement.ad1-title')}</SlideItemTitle>
+            <SlideItemDescription>
+              {t('Advertisement.ad1')}
+            </SlideItemDescription>
+          </SlideItemContainer>
+        </div>
+        <div>
+          <SlideItemContainer>
+            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+            <SlideItemTitle>{t('Advertisement.ad2-title')}</SlideItemTitle>
+            <SlideItemDescription>
+              {t('Advertisement.ad2')}
+            </SlideItemDescription>
+          </SlideItemContainer>
+        </div>
+        <div>
+          <SlideItemContainer>
+            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+            <SlideItemTitle>{t('Advertisement.ad3-title')}</SlideItemTitle>
+            <SlideItemDescription>
+              {t('Advertisement.ad3')}
+            </SlideItemDescription>
+          </SlideItemContainer>
+        </div>
+      </SlideCustom>
+    </AuthAdsWrapper>
+  );
+};
 export default React.memo(AuthAdsArea);

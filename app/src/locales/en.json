@@ -1,5 +1,5 @@
 {
-  "common": {
+  "Common": {
     "logo": {
       "saas": "SaaS",
       "gear": "gear"
@@ -75,7 +75,7 @@
       "INTERNAL_SERVER_ERROR": "Internal server error."
     }
   },
-  "sign-in": {
+  "Sign-in": {
     "text": {
       "heading": "Welcome Back!",
       "button-text": "Sign in",
@@ -87,7 +87,7 @@
       "GRAPHQL_VALIDATION_FAILED": "The 'password' field length must be greater than or equal to 6 characters long."
     }
   },
-  "sign-up": {
+  "Sign-up": {
     "text": {
       "heading": "Create Account",
       "button-text": "Sign up",
@@ -106,21 +106,21 @@
       "incomplete_cvc": "Your card's security code is incomplete."
     }
   },
-  "forgot-password": {
+  "Forgot-password": {
     "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
     "footer": "If you still need help, contact",
     "support": "Saasgear Support",
     "confirm": "We've sent you an email with a link to reset password. Please check your email so create new password",
     "go-to": "Go to"
   },
-  "reset-password": {
+  "Reset-password": {
     "change-success": "Change password successfully!",
     "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
     "footer": "If you still need help, contact",
     "support": "Saasgear Support",
     "please-wait": "Please wait ..."
   },
-  "advertisement": {
+  "Advertisement": {
     "ad1-title": "ReactJS",
     "ad1": "High-performance and powerful interactive UI with React.",
     "ad2-title": "Subscription payments",
@@ -128,20 +128,20 @@
     "ad3-title": "Teams",
     "ad3": "Your users are able to invite their teammates to their account."
   },
-  "verify-email": {
+  "Verify-email": {
     "title": "Verify Account",
     "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
     "success": "Verify email success"
   },
-  "accept-invitation": {
+  "Accept-invitation": {
     "title": "Accept Invitation?",
     "have-invitated": "You' ve been invitated to join",
     "by": "by",
     "accept": "Accept",
     "decline": "Decline"
   },
-  "dashboard": "Dashboard Page",
-  "team": {
+  "Dashboard": "Dashboard Page",
+  "Team": {
     "detail": "Team Detail",
     "members": "Team Members",
     "invite": "Invite Team Members",
@@ -174,7 +174,7 @@
       "INTERNAL_SERVER_ERROR": "Team exist"
     }
   },
-  "document": {
+  "Document": {
     "title": "Document",
     "create": "Create New Document",
     "table": {
@@ -185,7 +185,7 @@
       "action": "Action"
     }
   },
-  "profile": {
+  "Profile": {
     "title": "Account Settings",
     "text": {
       "account": "Account",
@@ -210,7 +210,7 @@
       }
     }
   },
-  "payment": {
+  "Payment": {
     "label": {
       "card": "Card Number",
       "expiration": "Expiration",

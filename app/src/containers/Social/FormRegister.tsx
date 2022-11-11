@@ -10,7 +10,7 @@ import { registerAccountBySocial } from '@/queries/auth/socialLogin';
 import SignUpSocialForm from '@/components/Auth/SignUpSocialForm';
 
 const registerSchema = yup.object().shape({
-  email: yup.string().required('common.validation.require-email').email('common.validation.valid-email'),
+  email: yup.string().required('Common.validation.require-email').email('Common.validation.valid-email'),
 });
 
 type FormData = {
@@ -62,7 +62,7 @@ const FormRegister: React.FC<Props> = ({ data }) => {
             className="rounded-full h-64 w-64 mx-auto"
           />
           <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-            {t('common.text.hi')} {data.user.name} !!
+            {t('Common.text.hi')} {data.user.name} !!
           </h2>
           <SignUpSocialForm
             onSubmit={handleSubmit(onSubmit)}

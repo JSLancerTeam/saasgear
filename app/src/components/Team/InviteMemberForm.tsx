@@ -61,17 +61,17 @@ const InviteMemberForm: React.FC<Props> = ({
         <FormControlStyle>
           <InviteInput
             type="text"
-            placeholder={t('common.placeholder.g-email')}
+            placeholder={t('Common.placeholder.g-email')}
             name="emailMember"
             ref={register}
           />
           <InviteBtn type="submit" color="primary" disabled={isSubmiting}>
             <EnvelopeIcon />
-            <span>{t('team.text.invite')}</span>
+            <span>{t('Team.text.invite')}</span>
           </InviteBtn>
         </FormControlStyle>
-        {formErrors?.emailMember && (
-          <ErrorText message={t(`${formErrors.emailMember.message}`)} />
+        {formErrors?.emailMember?.message && (
+          <ErrorText message={t(formErrors.emailMember.message)} />
         )}
         {apiError && <ErrorText message={apiError} />}
       </FormGroup>

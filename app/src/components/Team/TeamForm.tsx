@@ -44,38 +44,38 @@ const TeamForm: React.FC<Props> = ({
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
-        <FormGroupLabel>{t('team.label.name')}</FormGroupLabel>
+        <FormGroupLabel>{t('Team.label.name')}</FormGroupLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder={t('team.placeholder.team-name')}
+            placeholder={t('Team.placeholder.team-name')}
             name="teamName"
             ref={register}
           />
-          {formErrors?.teamName && (
-            <ErrorText message={t(`${formErrors.teamName.message}`)} />
+          {formErrors?.teamName?.message && (
+            <ErrorText message={t(formErrors.teamName.message)} />
           )}
         </FormControl>
       </FormGroup>
       <FormGroup>
-        <FormGroupLabel>{t('team.label.id')}</FormGroupLabel>
+        <FormGroupLabel>{t('Team.label.id')}</FormGroupLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder={t('team.placeholder.team-id')}
+            placeholder={t('Team.placeholder.team-id')}
             name="teamID"
             ref={register}
           />
-          {formErrors?.teamID && (
-            <ErrorText message={t(`${formErrors.teamID.message}`)} />
+          {formErrors?.teamID?.message && (
+            <ErrorText message={t(formErrors.teamID.message)} />
           )}
         </FormControl>
       </FormGroup>
       <ButtonGroup>
         <Button color="primary" type="submit" disabled={loading}>
-          {isEdit ? t('team.text.save') : t('team.text.add')}
+          {isEdit ? t('Team.text.save') : t('Team.text.add')}
         </Button>
-        <Button onClick={() => history.push('/teams')}>{t('common.text.cancel')}</Button>
+        <Button onClick={() => history.push('/teams')}>{t('Common.text.cancel')}</Button>
       </ButtonGroup>
     </form>
   );

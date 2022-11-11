@@ -38,23 +38,23 @@ const DocumentTable = ({ data, total, loading, onFetch }) => {
       <Table>
         <thead>
           <tr>
-            <th scope="col">{t('document.table.id')}</th>
-            <th scope="col">{t('document.table.name')}</th>
-            <THead scope="col" width="300px">{t('document.table.created-by')}</THead>
-            <th scope="col">{t('document.table.created-at')}</th>
-            <th scope="col">{t('document.table.action')}</th>
+            <th scope="col">{t('Document.table.id')}</th>
+            <th scope="col">{t('Document.table.name')}</th>
+            <THead scope="col" width="300px">{t('Document.table.created-by')}</THead>
+            <th scope="col">{t('Document.table.created-at')}</th>
+            <th scope="col">{t('Document.table.action')}</th>
           </tr>
         </thead>
         <tbody>
           {loading && (
             <tr>
-              <TdCenter colSpan={5}>{t('common.text.loading')}</TdCenter>
+              <TdCenter colSpan={5}>{t('Common.text.loading')}</TdCenter>
             </tr>
           )}
 
           {!loading && data.length === 0 && (
             <tr>
-              <TdCenter colSpan={5}>{t('common.text.no-result')}</TdCenter>
+              <TdCenter colSpan={5}>{t('Common.text.no-result')}</TdCenter>
             </tr>
           )}
 
@@ -67,8 +67,8 @@ const DocumentTable = ({ data, total, loading, onFetch }) => {
                 <td>{item.createdBy}</td>
                 <td>{dayjs(item.createdAt).format('YYYY-MM-DD HH:mm')}</td>
                 <ActionTd>
-                  <Link to={`/document/edit/${item.id}`}>{t('common.text.edit')}</Link>
-                  <Link to={`/document/view/${item.id}`}>{t('common.text.view')}</Link>
+                  <Link to={`/document/edit/${item.id}`}>{t('Common.text.edit')}</Link>
+                  <Link to={`/document/view/${item.id}`}>{t('Common.text.view')}</Link>
                 </ActionTd>
               </tr>
             ))}

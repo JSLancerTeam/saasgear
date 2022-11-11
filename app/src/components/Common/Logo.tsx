@@ -20,8 +20,8 @@ const Logo: React.FC = () => {
 
   return (
     <LogoHeader>
-      <LogoHeaderName>{t('common.logo.saas')}</LogoHeaderName>
-      <span>{t('common.logo.gear')}</span>
+      <LogoHeaderName>{t('Common.logo.saas')}</LogoHeaderName>
+      <span>{t('Common.logo.gear')}</span>
     </LogoHeader>
   );
 }

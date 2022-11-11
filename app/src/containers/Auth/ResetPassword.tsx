@@ -30,11 +30,11 @@ import circleSmall from '@/assets/images/svg/circle-small.svg';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ResetPasswordSchema = yup.object().shape({
-  password: yup.string().required('common.validation.require-password'),
+  password: yup.string().required('Common.validation.require-password'),
   passwordConfirmation: yup
     .string()
-    .required('common.validation.require-password-confirm')
-    .oneOf([yup.ref('password'), ""], 'common.validation.password-match'),
+    .required('Common.validation.require-password-confirm')
+    .oneOf([yup.ref('password'), ""], 'Common.validation.password-match'),
 });
 
 type Payload = {
@@ -68,7 +68,7 @@ const ResetPassword: React.FC = () => {
       },
     });
     if (data?.resetPassword) {
-      toast.success(t('common.status.change-password-success'));
+      toast.success(t('Common.status.change-password-success'));
       history.push('/auth/signin');
     }
   }

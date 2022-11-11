@@ -6,7 +6,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="container">
-      <h1 className="text-2xl text-red-700 leading-tight">{t('dashboard')}</h1>
+      <h1 className="text-2xl text-red-700 leading-tight">{t('Dashboard')}</h1>
     </div>
   );
 }

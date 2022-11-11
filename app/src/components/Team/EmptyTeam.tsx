@@ -21,9 +21,9 @@ const EmptyTeam: React.FC = () => {
   return (
     <Content>
       <MainContent>
-        <Description>{t('team.text.click-button')}</Description>
+        <Description>{t('Team.text.click-button')}</Description>
         <Button color="primary" onClick={() => history.push('/teams/new')}>
-          {t('team.text.create')}
+          {t('Team.text.create')}
         </Button>
       </MainContent>
     </Content>

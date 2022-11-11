@@ -39,49 +39,49 @@ const ResetPasswordForm:React.FC<Props> = ({
       <div>
         <Logo />
       </div>
-      <ForgotPasswordText>{t('common.title.reset-password')}</ForgotPasswordText>
+      <ForgotPasswordText>{t('Common.title.reset-password')}</ForgotPasswordText>
       <ForgotPasswordDescription>
-        {t('reset-password.description')}
+        {t('Reset-password.description')}
       </ForgotPasswordDescription>
       <ForgotPasswordFormWrapper onSubmit={onSubmit}>
         <FormGroup>
-          <FormGroupLabel>{t('common.label.password')}</FormGroupLabel>
+          <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
           <FormControl>
             <Input
               type="password"
-              placeholder={t('common.placeholder.password')}
+              placeholder={t('Common.placeholder.password')}
               name="password"
               ref={register}
             />
-            {errors?.password && (
-              <ErrorText message={t(`${errors.password.message}`)} />
+            {errors?.password?.message && (
+              <ErrorText message={t(errors.password.message)} />
             )}
           </FormControl>
         </FormGroup>
         <FormGroup>
-          <FormGroupLabel>{t('common.label.confirm-password')}</FormGroupLabel>
+          <FormGroupLabel>{t('Common.label.confirm-password')}</FormGroupLabel>
           <FormControl>
             <Input
               type="password"
-              placeholder={t('common.placeholder.confirm-password')}
+              placeholder={t('Common.placeholder.confirm-password')}
               name="passwordConfirmation"
               ref={register}
             />
-            {errors?.passwordConfirmation && (
-              <ErrorText message={t(`${errors.passwordConfirmation.message}`)} />
+            {errors?.passwordConfirmation?.message && (
+              <ErrorText message={t(errors.passwordConfirmation.message)} />
             )}
           </FormControl>
         </FormGroup>
         <FormGroup>
           <ForgotPasswordButton>
             <Button color="primary" type="submit">
-              {isSubmitting ? t('reset-password.please-wait') : t('common.title.reset-password')}
+              {isSubmitting ? t('Reset-password.please-wait') : t('Common.title.reset-password')}
             </Button>
           </ForgotPasswordButton>
           {apiError && <Badge type="error">{apiError}</Badge>}
           <TextNote>
-            {t('forgot-password.footer')}{' '}
-            <Link to="##">{t('forgot-password.support')}</Link>
+            {t('Forgot-password.footer')}{' '}
+            <Link to="##">{t('Forgot-password.support')}</Link>
           </TextNote>
         </FormGroup>
       </ForgotPasswordFormWrapper>

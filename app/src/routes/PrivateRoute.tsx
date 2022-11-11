@@ -47,7 +47,7 @@ const PrivateRoute: React.FC<Props> = ({ render }) => {
         />
       )}
       {(!data || !data.id || loadingUserProfile) && (
-        <div>{t('common.text.loading')}</div>
+        <div>{t('Common.text.loading')}</div>
       )}
     </>
   );

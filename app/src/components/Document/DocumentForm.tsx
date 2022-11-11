@@ -44,12 +44,12 @@ const DocumentForm: React.FC<Props> = ({
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
-        <FormGroupLabel>{t('common.label.name')}</FormGroupLabel>
+        <FormGroupLabel>{t('Common.label.name')}</FormGroupLabel>
         <Input name="name" ref={register} />
-        {formErrors?.name && <ErrorText message={t(`${formErrors.name.message}`)} />}
+        {formErrors?.name?.message && <ErrorText message={t(formErrors.name.message)} />}
       </FormGroup>
       <FormGroup>
-        <FormGroupLabel>{t('common.label.body')}</FormGroupLabel>
+        <FormGroupLabel>{t('Common.label.body')}</FormGroupLabel>
         <Controller
           name="body"
           control={control}
@@ -58,13 +58,13 @@ const DocumentForm: React.FC<Props> = ({
             <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />
           )}
         />
-        {formErrors?.body && <ErrorText message={t(`${formErrors.body.message}`)} />}
+        {formErrors?.body?.message && <ErrorText message={t(formErrors.body.message)} />}
       </FormGroup>
-      {apiError && <ErrorText message={`document.error.${apiError}`} />}
+      {apiError && <ErrorText message={`Document.error.${apiError}`} />}
 
       <ButtonGroup>
         <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? t('common.text.please-wait') : t('common.text.save')}
+          {isSubmitting ? t('Common.text.please-wait') : t('Common.text.save')}
         </SaveBtn>
       </ButtonGroup>
     </form>

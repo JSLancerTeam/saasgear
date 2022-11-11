@@ -38,7 +38,7 @@ const ViewDocument: React.FC = () => {
 
   return (
     <ContentDocument>
-      {loading && <div>{t('common.text.loading')}</div>}
+      {loading && <div>{t('Common.text.loading')}</div>}
 
       {!loading && documentData?.getDocumentDetail && (
         <>

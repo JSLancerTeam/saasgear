@@ -18,16 +18,16 @@ import {
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
-  name: yup.string().required('common.validation.require-name'),
-  email: yup.string().required('common.validation.require-email').email('common.validation.valid-email'),
+  name: yup.string().required('Common.validation.require-name'),
+  email: yup.string().required('Common.validation.require-email').email('Common.validation.valid-email'),
   password: yup
     .string()
-    .required('common.validation.require-password')
-    .min(6, 'common.validation.min-password'),
+    .required('Common.validation.require-password')
+    .min(6, 'Common.validation.min-password'),
   passwordConfirmation: yup
     .string()
-    .required('common.validation.require-password-confirm')
-    .oneOf([yup.ref('password'), ""], 'common.validation.password-match'),
+    .required('Common.validation.require-password-confirm')
+    .oneOf([yup.ref('password'), ""], 'Common.validation.password-match'),
 });
 
 type SignUpPayload = {

@@ -51,25 +51,25 @@ const DeleteAccountModal: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <Modal isOpen={isOpen}>
-      <ModalHeader>{t('profile.label.delete')}</ModalHeader>
+      <ModalHeader>{t('Profile.label.delete')}</ModalHeader>
       <ModalContent>
         <DeleteText>
-          {t('profile.text.delete-modal')}
+          {t('Profile.text.delete-modal')}
         </DeleteText>
         <Form onSubmit={onSubmit}>
           <FormGroup>
             <NoteLabel>
-              {t('profile.text.please-enter')} <EmailText>{email}</EmailText> {t('profile.text.to-confirm')}
+              {t('Profile.text.please-enter')} <EmailText>{email}</EmailText> {t('Profile.text.to-confirm')}
             </NoteLabel>
             <Input type="email" name="email" ref={register} />
-            {errors?.email && <ErrorText message={t(`${errors.email.message}`)} />}
+            {errors?.email?.message && <ErrorText message={t(errors.email.message)} />}
           </FormGroup>
         </Form>
       </ModalContent>
       <ModalFooter>
-        <Button onClick={closeModal}>{t('common.text.no')}</Button>
+        <Button onClick={closeModal}>{t('Common.text.no')}</Button>
         <Button type="submit" color="primary" disabled={!isValid}>
-          {t('common.text.delete')}
+          {t('Common.text.delete')}
         </Button>
       </ModalFooter>
     </Modal>

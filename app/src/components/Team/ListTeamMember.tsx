@@ -24,8 +24,8 @@ const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
     <Table>
       <thead>
         <tr>
-          <th>{t('team.text.member')}</th>
-          <th>{t('team.text.role')}</th>
+          <th>{t('Team.text.member')}</th>
+          <th>{t('Team.text.role')}</th>
         </tr>
       </thead>
       <tbody>
@@ -36,15 +36,15 @@ const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
               <td width="10%">{it.isOwner ? 'admin' : 'member'}</td>
               {!!handleAction && (
                 <ActionTd>
-                  <Button>{t('common.text.cancel')}</Button>
-                  <Button color="primary">{t('team.text.invitation')}</Button>
+                  <Button>{t('Common.text.cancel')}</Button>
+                  <Button color="primary">{t('Team.text.invitation')}</Button>
                 </ActionTd>
               )}
             </tr>
           ))
         ) : (
           <tr>
-            <td colSpan={2}>{t('common.text.no-result')}</td>
+            <td colSpan={2}>{t('Common.text.no-result')}</td>
           </tr>
         )}
       </tbody>

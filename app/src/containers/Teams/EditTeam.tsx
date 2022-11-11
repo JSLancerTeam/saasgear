@@ -63,7 +63,7 @@ const EditTeam: React.FC = () => {
       )}
     </>
   ) : (
-    <div>{t('common.text.loading')}</div>
+    <div>{t('Common.text.loading')}</div>
   );
 }
 

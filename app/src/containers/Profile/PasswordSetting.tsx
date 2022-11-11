@@ -79,11 +79,11 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)<{ expand: number }>`
 `;
 
 const PasswordSchema = yup.object().shape({
-  currentPassword: yup.string().required('common.validation.require-current-password'),
-  newPassword: yup.string().required('common.validation.require-new-password').min(6, 'common.validation.min-password'),
+  currentPassword: yup.string().required('Common.validation.require-current-password'),
+  newPassword: yup.string().required('Common.validation.require-new-password').min(6, 'Common.validation.min-password'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), ""], 'common.validation.password-match'),
+    .oneOf([yup.ref('newPassword'), ""], 'Common.validation.password-match'),
 });
 
 type Payload = {
@@ -102,7 +102,7 @@ const PasswordSetting: React.FC = () => {
   async function onSubmit(params: Payload) {
     const { data } = await changePasswordMutation({ variables: params });
     if (data?.changePassword) {
-      toast.success('common.status.change-password-success')
+      toast.success('Common.status.change-password-success')
     }
   }
 
@@ -110,12 +110,12 @@ const PasswordSetting: React.FC = () => {
     <Wrapper expand={isOpen}>
       <Header onClick={() => setIsOpen(!isOpen)}>
         <SubTitleWrapper>
-          <SubTitle>{t('profile.text.change-password')}</SubTitle>
-          <SubDesc>{t('profile.text.change-password-desc')}</SubDesc>
+          <SubTitle>{t('Profile.text.change-password')}</SubTitle>
+          <SubDesc>{t('Profile.text.change-password-desc')}</SubDesc>
         </SubTitleWrapper>
         <ActionWrapper>
           <ActionItem mobile><SettingIcon /></ActionItem>
-          <ActionItem desktop>{t('profile.text.update-password')}</ActionItem>
+          <ActionItem desktop>{t('Profile.text.update-password')}</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
       </Header>

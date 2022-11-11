@@ -144,24 +144,24 @@ const StripeForm: React.FC<Props> = ({
         <div>
           <FormGroup>
             <FormGroupLabel htmlFor="street_address">
-              {t('payment.label.card')}
+              {t('Payment.label.card')}
             </FormGroupLabel>
             <CardNumberEl className="card-el" />
           </FormGroup>
           <RowGroup>
             <FormGroupCardExpire>
-              <FormGroupLabel htmlFor="first_name">{t('payment.label.expiration')}</FormGroupLabel>
+              <FormGroupLabel htmlFor="first_name">{t('Payment.label.expiration')}</FormGroupLabel>
               <CardExpiryElementEl />
             </FormGroupCardExpire>
             <FormGroupCardCvc>
-              <FormGroupLabel htmlFor="last_name">{t('payment.label.cvc')}</FormGroupLabel>
+              <FormGroupLabel htmlFor="last_name">{t('Payment.label.cvc')}</FormGroupLabel>
               <CardCvcElementEl />
             </FormGroupCardCvc>
           </RowGroup>
         </div>
       </div>
       {error && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">{t(`sign-up.error.${error}`)}</p>
+        <p className="text-red-500 text-xs italic mt-1 text-center">{t(`Sign-up.error.${error}`)}</p>
       )}
       <SubmitButton
         type="submit"
@@ -169,7 +169,7 @@ const StripeForm: React.FC<Props> = ({
         color="primary"
         width="100%"
       >
-        {isSubmitting ? t('common.text.please-wait') : (submitText ?? t('common.text.submit'))}
+        {isSubmitting ? t('Common.text.please-wait') : (submitText ?? t('Common.text.submit'))}
       </SubmitButton>
     </StripeFormContainer>
   );

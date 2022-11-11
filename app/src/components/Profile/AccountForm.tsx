@@ -56,17 +56,17 @@ const AccountForm: React.FC<Props> = ({ onSubmit, register, loading, apiError, o
     <Form onSubmit={onSubmit}>
       <FormGroupWrapper>
         <FormGroup>
-          <FormGroupLabel>{t('common.label.your-name')}</FormGroupLabel>
+          <FormGroupLabel>{t('Common.label.your-name')}</FormGroupLabel>
           <Input name="name" ref={register} />
         </FormGroup>
       </FormGroupWrapper>
       <FormGroup>
-        <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
+        <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
         <Input type="email" name="email" ref={register} disabled />
       </FormGroup>
       <ButtonGroup>
-        <DeleteLink onClick={openPopupDeleteAccount}>{t('profile.text.delete')}</DeleteLink>
-        <Button type="submit" color="primary" disabled={loading}>{loading ? t('common.text.please-wait') : t('common.text.save-and-update')}</Button>
+        <DeleteLink onClick={openPopupDeleteAccount}>{t('Profile.text.delete')}</DeleteLink>
+        <Button type="submit" color="primary" disabled={loading}>{loading ? t('Common.text.please-wait') : t('Common.text.save-and-update')}</Button>
       </ButtonGroup>
       {apiError && <ErrorText message={apiError} />}
     </Form>

@@ -47,76 +47,76 @@ const SignUpForm: React.FC<CustomProps> = ({
     <SignUpFormContainer>
       <Logo />
       <FormContent onSubmit={onSubmit}>
-        <FormHeader>{t('sign-up.text.heading')}</FormHeader>
+        <FormHeader>{t('Sign-up.text.heading')}</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>{t('common.label.your-name')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.your-name')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="text"
-                placeholder={t('common.placeholder.name')}
+                placeholder={t('Common.placeholder.name')}
                 name="name"
                 ref={register}
               />
-              {formErrors?.name && (
-                <ErrorText message={t(`${formErrors.name.message}`)} />
+              {formErrors?.name?.message && (
+                <ErrorText message={t(formErrors.name.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>{t('common.label.email')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="email"
-                placeholder={t('common.placeholder.email')}
+                placeholder={t('Common.placeholder.email')}
                 name="email"
                 ref={register}
               />
-              {formErrors?.email && (
-                <ErrorText message={t(`${formErrors.email.message}`)} />
+              {formErrors?.email?.message && (
+                <ErrorText message={t(formErrors.email.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>{t('common.label.password')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder={t('common.placeholder.password')}
+                placeholder={t('Common.placeholder.password')}
                 name="password"
                 ref={register}
               />
-              {formErrors?.password && (
-                <ErrorText message={t(`${formErrors.password.message}`)} />
+              {formErrors?.password?.message && (
+                <ErrorText message={t(formErrors.password.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>{t('common.label.confirm-password')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.confirm-password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder={t('common.placeholder.confirm-password')}
+                placeholder={t('Common.placeholder.confirm-password')}
                 name="passwordConfirmation"
                 ref={register}
               />
-              {formErrors?.passwordConfirmation && (
-                <ErrorText message={t(`${formErrors.passwordConfirmation.message}`)} />
+              {formErrors?.passwordConfirmation?.message && (
+                <ErrorText message={t(formErrors.passwordConfirmation.message)} />
               )}
             </FormControl>
           </FormGroup>
           <FormSubmitButton color="primary" type="submit">
-            {isSubmitting ? t('common.text.please-wait') : (submitText ?? t('common.text.submit'))}
+            {isSubmitting ? t('Common.text.please-wait') : (submitText ?? t('Common.text.submit'))}
           </FormSubmitButton>
         </div>
       </FormContent>
       {apiError && <ErrorText message={apiError} position="center" />}
       <FormNote>
-        {t('sign-up.text.footer-desc')} <a href="##">{t('sign-up.text.terms')}</a>,{' '}
-        <a href="##">{t('sign-up.text.data-policy')}</a> {t('sign-up.text.and')} <a href="##">{t('sign-up.text.cookie-policy')}</a>.
+        {t('Sign-up.text.footer-desc')} <a href="##">{t('Sign-up.text.terms')}</a>,{' '}
+        <a href="##">{t('Sign-up.text.data-policy')}</a> {t('Sign-up.text.and')} <a href="##">{t('Sign-up.text.cookie-policy')}</a>.
       </FormNote>
       <TextHaveAccount>
-        {t('sign-up.text.have-account')} <Link to="/auth/signin">{t('common.title.sign-in')}</Link>.
+        {t('Sign-up.text.have-account')} <Link to="/auth/signin">{t('Common.title.sign-in')}</Link>.
       </TextHaveAccount>
     </SignUpFormContainer>
   );

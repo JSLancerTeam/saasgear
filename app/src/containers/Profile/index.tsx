@@ -22,12 +22,12 @@ const Profile: React.FC = () => {
 
   return (
     <div>
-      <TitlePage>{t('profile.title')}</TitlePage>
-      {loading ? <div>{t('common.text.loading')}</div> : (
+      <TitlePage>{t('Profile.title')}</TitlePage>
+      {loading ? <div>{t('Common.text.loading')}</div> : (
         <>
           <ContentPageStyle>
-            <TitleContentStyle>{t('profile.text.account')}</TitleContentStyle>
-            <Description>{t('profile.text.desc')}</Description>
+            <TitleContentStyle>{t('Profile.text.account')}</TitleContentStyle>
+            <Description>{t('Profile.text.desc')}</Description>
             <InformationSetting user={data} />
             <PasswordSetting />
           </ContentPageStyle>

@@ -77,14 +77,14 @@ const ListDocument: React.FC = () => {
   return (
     <div>
       <Header>
-        <TitlePageStyle>{t('document.title')}</TitlePageStyle>
+        <TitlePageStyle>{t('Document.title')}</TitlePageStyle>
         <RightHeader>
-          <SearchInput placeholder={t('common.placeholder.search')} />
+          <SearchInput placeholder={t('Common.placeholder.search')} />
           <CreateBtn
             color="primary"
             onClick={() => history.push('/document/create')}
           >
-            <CreateBtnContent>{t('document.create')}</CreateBtnContent>
+            <CreateBtnContent>{t('Document.create')}</CreateBtnContent>
             <CreateBtnContent mobile><AddIcon /></CreateBtnContent>
           </CreateBtn>
         </RightHeader>

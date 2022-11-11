@@ -34,11 +34,11 @@ const ListTeam: React.FC<Props> = ({ teams }) => {
   const { t } = useTranslation();
   return (
     <ContentPage>
-      <TitleContent> {t('team.list-team')}</TitleContent>
+      <TitleContent> {t('Team.list-team')}</TitleContent>
       <Table>
         <thead>
           <tr>
-            <th>{t('team.text.name')}</th>
+            <th>{t('Team.text.name')}</th>
           </tr>
         </thead>
         <tbody>
@@ -46,15 +46,15 @@ const ListTeam: React.FC<Props> = ({ teams }) => {
             <tr key={it.teamID}>
               <td>{it.teamName}</td>
               <ActionTd>
-                <Link to={`/teams/edit/${it.teamID}`}>{t('common.text.edit')}</Link>
-                <Link to="/teams">{t('common.text.delete')}</Link>
+                <Link to={`/teams/edit/${it.teamID}`}>{t('Common.text.edit')}</Link>
+                <Link to="/teams">{t('Common.text.delete')}</Link>
               </ActionTd>
             </tr>
           ))}
         </tbody>
       </Table>
       <AddTeamBtn color="primary" onClick={() => history.push('/teams/new')}>
-        {t('team.text.add')}
+        {t('Team.text.add')}
       </AddTeamBtn>
     </ContentPage>
   );

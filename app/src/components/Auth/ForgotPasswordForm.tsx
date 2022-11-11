@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
@@ -67,8 +67,9 @@ const ForgotPasswordForm: React.FC<Props> = ({
             </ForgotPasswordButton>
             {apiError && <ErrorText message={t(`Forgot-password.error.${apiError}`)} position="center" />}
             <TextNote>
-              {t('Forgot-password.footer')}{' '}
-              <Link to="##">{t('Forgot-password.support')}</Link>
+              <Trans components={[<Link to="##"></Link>]}>
+                {t('Forgot-password.footer')}
+              </Trans>
             </TextNote>
           </FormGroup>
         </ForgotPasswordFormWrapper>
@@ -78,7 +79,9 @@ const ForgotPasswordForm: React.FC<Props> = ({
             {t('Forgot-password.confirm')}
           </ConfirmationText>
           <TextNote>
-            {t('Forgot-password.go-to')} <Link to="/auth/signin">{t('Common.title.sign-in')}</Link>
+            <Trans components={[<Link to="/auth/signin"></Link>]}>
+              {t('Forgot-password.go-to')}
+            </Trans>
           </TextNote>
         </>
       )}

@@ -100,7 +100,7 @@ const ActionDocument: React.FC = () => {
       history.push('/document');
     }
   }
-  console.log(errors);
+
   return (
     <div>
       <Header>

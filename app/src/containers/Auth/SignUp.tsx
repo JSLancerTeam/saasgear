@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
@@ -41,6 +42,7 @@ type SignUpPayload = {
 
 const SignUp: React.FC = () => {
   useDocumentHeader({ title: 'Sign Up' });
+  const { t } = useTranslation();
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignUpSchema),
     shouldUnregister: false,
@@ -99,7 +101,7 @@ const SignUp: React.FC = () => {
             formErrors={formErrors}
             apiError={error?.graphQLErrors?.[0]?.extensions?.code}
             isSubmitting={loading}
-            submitText={planName ? 'Next' : 'Sign up'}
+            submitText={planName ? t('Sign-up.text.next') : t('Sign-up.text.button-text')}
           />
         )}
       </SignUpFormLeft>

@@ -58,7 +58,6 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
         dispatch(addTeamMember({ teamID: alias, data: [member] }));
       }
     } catch (e: any) {
-      console.log(error);
       setTimeout(() => console.log(error), 50);
       toast.error(e.message);
       console.log(JSON.stringify(e, null, 2));

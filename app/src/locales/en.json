@@ -5,7 +5,6 @@
       "gear": "gear"
     },
     "title": {
-      "sign-in": "Sign In",
       "forgot-password": "Forgot Password",
       "reset-password": "Reset password",
       "new-document": "New Document"
@@ -27,8 +26,6 @@
       "cancel": "Cancel",
       "please-wait": "Please wait",
       "save-and-update": "Save and Update",
-      "not-have-account": "Dont have account?",
-      "register": "Register",
       "send": "Send",
       "loading": "Loading ...",
       "save": "Save",
@@ -80,7 +77,8 @@
       "heading": "Welcome Back!",
       "button-text": "Sign in",
       "next": "Next",
-      "forgot-password": "Forgot Password?"
+      "forgot-password": "Forgot Password?",
+      "not-have-account": "Dont have account? <0>Register</0>"
     },
     "error": {
       "UNAUTHENTICATED": "Invalid email or password",
@@ -92,12 +90,8 @@
       "heading": "Create Account",
       "button-text": "Sign up",
       "next": "Next",
-      "footer-desc": "By clicking Sign Up, you agree to our",
-      "terms": "Terms",
-      "data-policy": "Data Policy",
-      "and": "and",
-      "cookie-policy": "Cookie Policy",
-      "have-account": "Already have account?"
+      "footer-desc": "By clicking Sign Up, you agree to our <0>Terms</0>, <1>Data Policy</1> and <2>Cookie Policy</2>.",
+      "have-account": "Already have account? <0>Sign In</0>."
     },
     "error": {
       "INTERNAL_SERVER_ERROR": "Email address has been used",
@@ -108,10 +102,9 @@
   },
   "Forgot-password": {
     "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
-    "footer": "If you still need help, contact",
-    "support": "Saasgear Support",
+    "footer": "If you still need help, contact <0>Saasgear Support</0>",
     "confirm": "We've sent you an email with a link to reset password. Please check your email so create new password",
-    "go-to": "Go to"
+    "go-to": "Go to <0>Sign In</0>"
   },
   "Reset-password": {
     "change-success": "Change password successfully!",
@@ -135,7 +128,7 @@
   },
   "Accept-invitation": {
     "title": "Accept Invitation?",
-    "have-invitated": "You' ve been invitated to join",
+    "have-invitated": "You' ve been invitated to join <0>{{teamName}}</0> by <0>{{owner}}</0>",
     "by": "by",
     "accept": "Accept",
     "decline": "Decline"
@@ -192,8 +185,7 @@
       "desc": "This information can be edited from your profile page",
       "delete": "I'd like to delete my account",
       "delete-modal": "Are you sure you want to delete your account? All of your data will be permanently removed. This action cannot be undone.",
-      "please-enter": "Please enter",
-      "to-confirm": "to confirm",
+      "please-enter": "Please enter <0>{{email}}</0> to confirm",
       "change-password": "Change Password",
       "change-password-desc": "Forgot your password, find back in seconds",
       "current-password": "Current password",

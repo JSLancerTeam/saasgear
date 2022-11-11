@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
 import { COLORS, mobileQuery } from '@/constants/style';
@@ -59,7 +59,12 @@ const DeleteAccountModal: React.FC<Props> = ({
         <Form onSubmit={onSubmit}>
           <FormGroup>
             <NoteLabel>
-              {t('Profile.text.please-enter')} <EmailText>{email}</EmailText> {t('Profile.text.to-confirm')}
+              <Trans
+                components={[<EmailText></EmailText>]}
+                values={{ email }}
+              >
+                {t('Profile.text.please-enter')}
+              </Trans>
             </NoteLabel>
             <Input type="email" name="email" ref={register} />
             {errors?.email?.message && <ErrorText message={t(errors.email.message)} />}

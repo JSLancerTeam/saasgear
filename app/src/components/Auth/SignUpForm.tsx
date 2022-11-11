@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';
 import {
@@ -110,13 +110,16 @@ const SignUpForm: React.FC<CustomProps> = ({
           </FormSubmitButton>
         </div>
       </FormContent>
-      {apiError && <ErrorText message={apiError} position="center" />}
+      {apiError && <ErrorText message={t(`Sign-up.error.${apiError}`)} position="center" />}
       <FormNote>
-        {t('Sign-up.text.footer-desc')} <a href="##">{t('Sign-up.text.terms')}</a>,{' '}
-        <a href="##">{t('Sign-up.text.data-policy')}</a> {t('Sign-up.text.and')} <a href="##">{t('Sign-up.text.cookie-policy')}</a>.
+        <Trans components={[<Link to="##"></Link>, <Link to="##"></Link>, <Link to="##"></Link>]}>
+          {t('Sign-up.text.footer-desc')}
+        </Trans>
       </FormNote>
       <TextHaveAccount>
-        {t('Sign-up.text.have-account')} <Link to="/auth/signin">{t('Common.title.sign-in')}</Link>.
+        <Trans components={[<Link to="/auth/signin"></Link>]}>
+          {t('Sign-up.text.have-account')}
+        </Trans>
       </TextHaveAccount>
     </SignUpFormContainer>
   );

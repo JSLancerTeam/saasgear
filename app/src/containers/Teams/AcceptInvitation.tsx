@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { useParams, useHistory } from 'react-router-dom';
 import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import verifyTokenQuery from '@/queries/teams/verifyInviteToken';
@@ -89,9 +89,12 @@ const AcceptInvitation: React.FC = () => {
         </div>
         <ForgotPasswordText>{t('Accept-invitation.title')}</ForgotPasswordText>
         <ForgotPasswordDescription>
-          {t('Accept-invitation.have-invitated')}{' '}
-          <strong>{teamInfo?.teamName}</strong> {t('Accept-invitation.by')}{' '}
-          <strong>{teamInfo?.owner}</strong>
+          <Trans
+            components={[<strong></strong>]}
+            values={{ teamName: teamInfo?.teamName, owner: teamInfo?.owner }}
+          >
+            {t('Accept-invitation.have-invitated')}
+          </Trans>
         </ForgotPasswordDescription>
         <ButtonGroup>
           <Button color="primary" onClick={() => handleUserJoinTeam('accept')}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import GoBack from '@/components/Common/GoBack';
 import Logo from '@/components/Common/Logo';
 import {
@@ -80,8 +80,9 @@ const ResetPasswordForm:React.FC<Props> = ({
           </ForgotPasswordButton>
           {apiError && <Badge type="error">{apiError}</Badge>}
           <TextNote>
-            {t('Forgot-password.footer')}{' '}
-            <Link to="##">{t('Forgot-password.support')}</Link>
+            <Trans components={[<Link to="##"></Link>]}>
+              {t('Forgot-password.footer')}
+            </Trans>
           </TextNote>
         </FormGroup>
       </ForgotPasswordFormWrapper>

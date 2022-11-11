@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import {
   SignUpFormContainer,
   FormContent,
@@ -119,7 +119,9 @@ const SignInForm: React.FC<Props> = ({
       </FormContent>
       {apiError && <ErrorText message={t(`Sign-in.error.${apiError}`)} position="center" />}
       <TextHaveAccount>
-        {t('Common.text.not-have-account')} <Link to="/auth/signup">{t('Common.text.register')}</Link>.
+        <Trans components={[<Link to="/auth/signup"></Link>]}>
+          {t('Sign-in.text.not-have-account')}
+        </Trans>
       </TextHaveAccount>
     </SignInContainer>
   );

@@ -154,7 +154,7 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
   const [isOpenModalDeleteAccount, setIsOpenModalDeleteAccount] = useState(
     false,
   );
-  console.log(isOpenModalDeleteAccount);
+
   const [updateProfileMutation, { error, loading }] = useMutation(
     updateProfileQuery,
   );

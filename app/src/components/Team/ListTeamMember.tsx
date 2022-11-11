@@ -44,7 +44,7 @@ const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
           ))
         ) : (
           <tr>
-            <td colSpan={2}>{t('Common.text.no-result')}</td>
+            <td colSpan={2}>{t('Common.text.no_result')}</td>
           </tr>
         )}
       </tbody>

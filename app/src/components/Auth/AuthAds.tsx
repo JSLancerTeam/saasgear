@@ -109,7 +109,7 @@ const AuthAdsArea: React.FC = () => {
         <div>
           <SlideItemContainer>
             <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>{t('Advertisement.ad1-title')}</SlideItemTitle>
+            <SlideItemTitle>{t('Advertisement.ad1_title')}</SlideItemTitle>
             <SlideItemDescription>
               {t('Advertisement.ad1')}
             </SlideItemDescription>
@@ -118,7 +118,7 @@ const AuthAdsArea: React.FC = () => {
         <div>
           <SlideItemContainer>
             <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>{t('Advertisement.ad2-title')}</SlideItemTitle>
+            <SlideItemTitle>{t('Advertisement.ad2_title')}</SlideItemTitle>
             <SlideItemDescription>
               {t('Advertisement.ad2')}
             </SlideItemDescription>
@@ -127,7 +127,7 @@ const AuthAdsArea: React.FC = () => {
         <div>
           <SlideItemContainer>
             <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>{t('Advertisement.ad3-title')}</SlideItemTitle>
+            <SlideItemTitle>{t('Advertisement.ad3_title')}</SlideItemTitle>
             <SlideItemDescription>
               {t('Advertisement.ad3')}
             </SlideItemDescription>

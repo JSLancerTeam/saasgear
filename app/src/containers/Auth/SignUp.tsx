@@ -19,16 +19,16 @@ import {
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
-  name: yup.string().required('Common.validation.require-name'),
-  email: yup.string().required('Common.validation.require-email').email('Common.validation.valid-email'),
+  name: yup.string().required('Common.validation.require_name'),
+  email: yup.string().required('Common.validation.require_email').email('Common.validation.valid_email'),
   password: yup
     .string()
-    .required('Common.validation.require-password')
-    .min(6, 'Common.validation.min-password'),
+    .required('Common.validation.require_password')
+    .min(6, 'Common.validation.min_password'),
   passwordConfirmation: yup
     .string()
-    .required('Common.validation.require-password-confirm')
-    .oneOf([yup.ref('password'), ""], 'Common.validation.password-match'),
+    .required('Common.validation.require_password_confirm')
+    .oneOf([yup.ref('password'), ""], 'Common.validation.password_match'),
 });
 
 type SignUpPayload = {
@@ -41,8 +41,8 @@ type SignUpPayload = {
 }
 
 const SignUp: React.FC = () => {
-  useDocumentHeader({ title: 'Sign Up' });
   const { t } = useTranslation();
+  useDocumentHeader({ title: t('Common.title.sign_up') });
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignUpSchema),
     shouldUnregister: false,
@@ -101,7 +101,7 @@ const SignUp: React.FC = () => {
             formErrors={formErrors}
             apiError={error?.graphQLErrors?.[0]?.extensions?.code}
             isSubmitting={loading}
-            submitText={planName ? t('Sign-up.text.next') : t('Sign-up.text.button-text')}
+            submitText={planName ? t('Sign_up.text.next') : t('Sign_up.text.button_text')}
           />
         )}
       </SignUpFormLeft>

@@ -54,7 +54,7 @@ const DeleteAccountModal: React.FC<Props> = ({
       <ModalHeader>{t('Profile.label.delete')}</ModalHeader>
       <ModalContent>
         <DeleteText>
-          {t('Profile.text.delete-modal')}
+          {t('Profile.text.delete_modal')}
         </DeleteText>
         <Form onSubmit={onSubmit}>
           <FormGroup>
@@ -63,7 +63,7 @@ const DeleteAccountModal: React.FC<Props> = ({
                 components={[<EmailText></EmailText>]}
                 values={{ email }}
               >
-                {t('Profile.text.please-enter')}
+                {t('Profile.text.please_enter')}
               </Trans>
             </NoteLabel>
             <Input type="email" name="email" ref={register} />

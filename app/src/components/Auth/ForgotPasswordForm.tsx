@@ -41,14 +41,14 @@ const ForgotPasswordForm: React.FC<Props> = ({
       <div>
         <Logo />
       </div>
-      <ForgotPasswordText>{t('Common.title.forgot-password')}</ForgotPasswordText>
+      <ForgotPasswordText>{t('Common.title.forgot_password')}</ForgotPasswordText>
       <ForgotPasswordDescription>
-        {t('Forgot-password.description')}
+        {t('Forgot_password.description')}
       </ForgotPasswordDescription>
       {!isSubmitted ? (
         <ForgotPasswordFormWrapper onSubmit={onSubmit}>
           <FormGroup>
-            <FormGroupLabel>{t('Common.label.your-email')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.your_email')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="email"
@@ -62,13 +62,13 @@ const ForgotPasswordForm: React.FC<Props> = ({
           <FormGroup>
             <ForgotPasswordButton>
               <Button color="primary" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? t('Common.text.please-wait') : t('Common.text.save')}
+                {isSubmitting ? t('Common.text.please_wait') : t('Common.text.save')}
               </Button>
             </ForgotPasswordButton>
-            {apiError && <ErrorText message={t(`Forgot-password.error.${apiError}`)} position="center" />}
+            {apiError && <ErrorText message={t(`Forgot_password.error.${apiError}`)} position="center" />}
             <TextNote>
               <Trans components={[<Link to="##"></Link>]}>
-                {t('Forgot-password.footer')}
+                {t('Forgot_password.footer')}
               </Trans>
             </TextNote>
           </FormGroup>
@@ -76,11 +76,11 @@ const ForgotPasswordForm: React.FC<Props> = ({
       ) : (
         <>
           <ConfirmationText>
-            {t('Forgot-password.confirm')}
+            {t('Forgot_password.confirm')}
           </ConfirmationText>
           <TextNote>
             <Trans components={[<Link to="/auth/signin"></Link>]}>
-              {t('Forgot-password.go-to')}
+              {t('Forgot_password.go_to')}
             </Trans>
           </TextNote>
         </>

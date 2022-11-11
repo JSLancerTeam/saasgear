@@ -34,7 +34,7 @@ const ListTeam: React.FC<Props> = ({ teams }) => {
   const { t } = useTranslation();
   return (
     <ContentPage>
-      <TitleContent> {t('Team.list-team')}</TitleContent>
+      <TitleContent> {t('Team.list_team')}</TitleContent>
       <Table>
         <thead>
           <tr>

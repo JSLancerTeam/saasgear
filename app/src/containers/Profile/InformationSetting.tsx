@@ -130,7 +130,7 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)<{ expand: number }>`
 `;
 
 const AccountSchema = yup.object().shape({
-  name: yup.string().required('Common.validation.require-name'),
+  name: yup.string().required('Common.validation.require_name'),
 });
 
 type Payload = {
@@ -175,7 +175,7 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
     try {
       const { data } = await updateProfileMutation({ variables: params });
       if (data?.updateProfile) {
-        toast.success(t('Common.status.update-success'));
+        toast.success(t('Common.status.update_success'));
       }
     } catch (err) {
       console.log(err);
@@ -187,7 +187,7 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
       const file: File = (e?.target?.files as FileList)[0];
       if (file) {
         if (file.size > 2 * 1000 * 1000) {
-          toast.error(t('Common.status.error-big-size'));
+          toast.error(t('Common.status.error_big_size'));
           return;
         }
         const { data } = await updateProfileAvatarMutation({
@@ -198,11 +198,11 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
         if (data && data.updateProfileAvatar && data.updateProfileAvatar.url) {
           dispatch(setProfileUser({ data: {avatarUrl: data.updateProfileAvatar.url}, loading: isUpdatingAvatar }));
           setValue('avatarUrl', data.updateProfileAvatar.url);
-          toast.success(t('Common.status.channge-avatar-success'));
+          toast.success(t('Common.status.channge_avatar_success'));
         }
       }
     } catch (errorChangeProfile) {
-      toast.error(t('Common.status.change-avatar-failed'));
+      toast.error(t('Common.status.change_avatar_failed'));
     }
   }
 
@@ -236,7 +236,7 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
         </AvatarWrapper>
         <ActionWrapper>
           <ActionItem mobile><SettingIcon /></ActionItem>
-          <ActionItem desktop>{t('Common.label.edit-profile')}</ActionItem>
+          <ActionItem desktop>{t('Common.label.edit_profile')}</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
       </Header>{t('Common.text.avatar')}

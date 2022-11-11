@@ -48,7 +48,7 @@ const TeamForm: React.FC<Props> = ({
         <FormControl>
           <Input
             type="text"
-            placeholder={t('Team.placeholder.team-name')}
+            placeholder={t('Team.placeholder.team_name')}
             name="teamName"
             ref={register}
           />
@@ -62,7 +62,7 @@ const TeamForm: React.FC<Props> = ({
         <FormControl>
           <Input
             type="text"
-            placeholder={t('Team.placeholder.team-id')}
+            placeholder={t('Team.placeholder.team_id')}
             name="teamID"
             ref={register}
           />

@@ -30,11 +30,11 @@ import circleSmall from '@/assets/images/svg/circle-small.svg';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ResetPasswordSchema = yup.object().shape({
-  password: yup.string().required('Common.validation.require-password'),
+  password: yup.string().required('Common.validation.require_password'),
   passwordConfirmation: yup
     .string()
-    .required('Common.validation.require-password-confirm')
-    .oneOf([yup.ref('password'), ""], 'Common.validation.password-match'),
+    .required('Common.validation.require_password_confirm')
+    .oneOf([yup.ref('password'), ""], 'Common.validation.password_match'),
 });
 
 type Payload = {
@@ -43,9 +43,9 @@ type Payload = {
 }
 
 const ResetPassword: React.FC = () => {
-  useDocumentHeader({ title: 'Reset password' });
-  const query = getQueryParam();
   const { t } = useTranslation();
+  useDocumentHeader({ title: t('Common.title.reset_password') });
+  const query = getQueryParam();
   const history = useHistory();
   const token = query.get('token');
   const { register, handleSubmit, errors } = useForm({
@@ -68,7 +68,7 @@ const ResetPassword: React.FC = () => {
       },
     });
     if (data?.resetPassword) {
-      toast.success(t('Common.status.change-password-success'));
+      toast.success(t('Common.status.change_password_success'));
       history.push('/auth/signin');
     }
   }

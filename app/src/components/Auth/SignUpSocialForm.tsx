@@ -50,12 +50,12 @@ const SignUpSocialForm: React.FC<Props> = ({
               alt="the-lock"
             />
           </span>
-          {t('Common.text.please-wait')}
+          {t('Common.text.please_wait')}
           {/* {isSubmitting ? 'Please wait' : submitText} */}
         </button>
       </div>
       {errorAPI && (
-        <p className="text-red-500 text-xs italic mt-1">{t(`Sign-up.error.${errorAPI}`)}</p>
+        <p className="text-red-500 text-xs italic mt-1">{t(`Sign_up.error.${errorAPI}`)}</p>
       )}
     </form>
   );

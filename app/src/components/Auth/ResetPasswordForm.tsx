@@ -39,9 +39,9 @@ const ResetPasswordForm:React.FC<Props> = ({
       <div>
         <Logo />
       </div>
-      <ForgotPasswordText>{t('Common.title.reset-password')}</ForgotPasswordText>
+      <ForgotPasswordText>{t('Common.title.reset_password')}</ForgotPasswordText>
       <ForgotPasswordDescription>
-        {t('Reset-password.description')}
+        {t('Reset_password.description')}
       </ForgotPasswordDescription>
       <ForgotPasswordFormWrapper onSubmit={onSubmit}>
         <FormGroup>
@@ -59,11 +59,11 @@ const ResetPasswordForm:React.FC<Props> = ({
           </FormControl>
         </FormGroup>
         <FormGroup>
-          <FormGroupLabel>{t('Common.label.confirm-password')}</FormGroupLabel>
+          <FormGroupLabel>{t('Common.label.confirm_password')}</FormGroupLabel>
           <FormControl>
             <Input
               type="password"
-              placeholder={t('Common.placeholder.confirm-password')}
+              placeholder={t('Common.placeholder.confirm_password')}
               name="passwordConfirmation"
               ref={register}
             />
@@ -75,13 +75,13 @@ const ResetPasswordForm:React.FC<Props> = ({
         <FormGroup>
           <ForgotPasswordButton>
             <Button color="primary" type="submit">
-              {isSubmitting ? t('Reset-password.please-wait') : t('Common.title.reset-password')}
+              {isSubmitting ? t('Reset_password.please_wait') : t('Common.title.reset_password')}
             </Button>
           </ForgotPasswordButton>
           {apiError && <Badge type="error">{apiError}</Badge>}
           <TextNote>
             <Trans components={[<Link to="##"></Link>]}>
-              {t('Forgot-password.footer')}
+              {t('Forgot_password.footer')}
             </Trans>
           </TextNote>
         </FormGroup>

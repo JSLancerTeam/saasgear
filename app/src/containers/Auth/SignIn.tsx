@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
@@ -16,8 +17,8 @@ import AuthAdsArea from '@/components/Auth/AuthAds';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignInSchema = yup.object().shape({
-  email: yup.string().required('Common.validation.require-email').email('Common.validation.valid-email'),
-  password: yup.string().required('Common.validation.require-password'),
+  email: yup.string().required('Common.validation.require_email').email('Common.validation.valid_email'),
+  password: yup.string().required('Common.validation.require_password'),
 });
 
 type Payload = {
@@ -26,7 +27,8 @@ type Payload = {
 }
 
 const SignIn: React.FC = () => {
-  useDocumentHeader({ title: 'Sign In' });
+  const { t } = useTranslation();
+  useDocumentHeader({ title: t('Common.title.sign_in') });
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignInSchema),
   });

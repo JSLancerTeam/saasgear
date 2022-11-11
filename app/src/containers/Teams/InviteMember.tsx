@@ -22,8 +22,8 @@ const ListInvitation = styled.div`
 const inviteMemberSchema = yup.object().shape({
   emailMember: yup
     .string()
-    .required('Common.validation.require-email')
-    .email('Common.validation.valid-email'),
+    .required('Common.validation.require_email')
+    .email('Common.validation.valid_email'),
 });
 
 type Payload = {

@@ -53,12 +53,12 @@ const VerifyEmail: React.FC = () => {
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>{t('Verify-email.title')}</ForgotPasswordText>
+        <ForgotPasswordText>{t('Verify_email.title')}</ForgotPasswordText>
         <ForgotPasswordDescription>
-          {t('Verify-email.description')}
+          {t('Verify_email.description')}
         </ForgotPasswordDescription>
         <Badge type={verifyResult !== null ? 'success' : 'error'}>
-          {verifyResult !== null ? t('Verify-email.success') : error?.message}
+          {verifyResult !== null ? t('Verify_email.success') : error?.message}
         </Badge>
         <SquareIconTop>
           <svg

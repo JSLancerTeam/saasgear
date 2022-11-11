@@ -34,8 +34,8 @@ const SaveBtn = styled(Button)`
 `;
 
 const ActionDocumentSchema = yup.object().shape({
-  name: yup.string().required('Common.validation.require-name'),
-  body: yup.string().required('Common.validation.require-body'),
+  name: yup.string().required('Common.validation.require_name'),
+  body: yup.string().required('Common.validation.require_body'),
 });
 
 type MatchParams = {
@@ -107,14 +107,14 @@ const ActionDocument: React.FC = () => {
         <TitlePageStyle>
           {documentData?.getDocumentDetail?.name
             ? documentData.getDocumentDetail.name
-            : t('Common.title.new-document')}
+            : t('Common.title.new_document')}
         </TitlePageStyle>
         <SaveBtn
           color="primary"
           onClick={handleSubmit(onSubmit)}
           disabled={isCreating || isUpdating}
         >
-          {isCreating || isUpdating ? t('Common.text.please-wait') : t('Common.text.save')}
+          {isCreating || isUpdating ? t('Common.text.please_wait') : t('Common.text.save')}
         </SaveBtn>
       </Header>
       <ContentPage>

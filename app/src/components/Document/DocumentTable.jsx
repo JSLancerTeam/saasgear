@@ -40,8 +40,8 @@ const DocumentTable = ({ data, total, loading, onFetch }) => {
           <tr>
             <th scope="col">{t('Document.table.id')}</th>
             <th scope="col">{t('Document.table.name')}</th>
-            <THead scope="col" width="300px">{t('Document.table.created-by')}</THead>
-            <th scope="col">{t('Document.table.created-at')}</th>
+            <THead scope="col" width="300px">{t('Document.table.created_by')}</THead>
+            <th scope="col">{t('Document.table.created_at')}</th>
             <th scope="col">{t('Document.table.action')}</th>
           </tr>
         </thead>
@@ -54,7 +54,7 @@ const DocumentTable = ({ data, total, loading, onFetch }) => {
 
           {!loading && data.length === 0 && (
             <tr>
-              <TdCenter colSpan={5}>{t('Common.text.no-result')}</TdCenter>
+              <TdCenter colSpan={5}>{t('Common.text.no_result')}</TdCenter>
             </tr>
           )}
 

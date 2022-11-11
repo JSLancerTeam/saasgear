@@ -64,7 +64,7 @@ const DocumentForm: React.FC<Props> = ({
 
       <ButtonGroup>
         <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? t('Common.text.please-wait') : t('Common.text.save')}
+          {isSubmitting ? t('Common.text.please_wait') : t('Common.text.save')}
         </SaveBtn>
       </ButtonGroup>
     </form>

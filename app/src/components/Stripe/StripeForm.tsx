@@ -161,7 +161,7 @@ const StripeForm: React.FC<Props> = ({
         </div>
       </div>
       {error && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">{t(`Sign-up.error.${error}`)}</p>
+        <p className="text-red-500 text-xs italic mt-1 text-center">{t(`Sign_up.error.${error}`)}</p>
       )}
       <SubmitButton
         type="submit"
@@ -169,7 +169,7 @@ const StripeForm: React.FC<Props> = ({
         color="primary"
         width="100%"
       >
-        {isSubmitting ? t('Common.text.please-wait') : (submitText ?? t('Common.text.submit'))}
+        {isSubmitting ? t('Common.text.please_wait') : (submitText ?? t('Common.text.submit'))}
       </SubmitButton>
     </StripeFormContainer>
   );

@@ -15,8 +15,8 @@ import type { Team } from "@/features/admin/team";
 import { t } from 'i18next';
 
 const TeamSchema = yup.object().shape({
-  teamName: yup.string().required('Team.validation.require-team-name'),
-  teamID: yup.string().required('Team.validation.require-team-id'),
+  teamName: yup.string().required('Team.validation.require_team_name'),
+  teamID: yup.string().required('Team.validation.require_team_id'),
 });
 
 type Props = {

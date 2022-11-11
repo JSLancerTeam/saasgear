@@ -74,7 +74,7 @@ const SignInForm: React.FC<Props> = ({
     <SignInContainer>
       <Logo />
       <FormContent onSubmit={onSubmit}>
-        <FormHeader>{t('Sign-in.text.heading')}</FormHeader>
+        <FormHeader>{t('Sign_in.text.heading')}</FormHeader>
         <div>
           <FormGroup>
             <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
@@ -106,21 +106,21 @@ const SignInForm: React.FC<Props> = ({
           </FormGroup>
           <RembemberSection>
             <Checkbox type="checkbox" name="rembemer" id="rembemer" />
-            <RememberLabel htmlFor="rembemer">{t('Common.label.remember-label')}</RememberLabel>
+            <RememberLabel htmlFor="rembemer">{t('Common.label.remember_label')}</RememberLabel>
           </RembemberSection>
           <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? t('Common.text.please-wait') : t('Sign-in.text.button-text')}
+            {isSubmitting ? t('Common.text.please_wait') : t('Sign_in.text.button_text')}
           </SubmitButton>
           <ForgotLink>
-            <Link to="/auth/forgot-password">{t('Sign-in.text.forgot-password')}</Link>
+            <Link to="/auth/forgot-password">{t('Sign_in.text.forgot_password')}</Link>
           </ForgotLink>
           <SocialAuth />
         </div>
       </FormContent>
-      {apiError && <ErrorText message={t(`Sign-in.error.${apiError}`)} position="center" />}
+      {apiError && <ErrorText message={t(`Sign_in.error.${apiError}`)} position="center" />}
       <TextHaveAccount>
         <Trans components={[<Link to="/auth/signup"></Link>]}>
-          {t('Sign-in.text.not-have-account')}
+          {t('Sign_in.text.not_have_account')}
         </Trans>
       </TextHaveAccount>
     </SignInContainer>

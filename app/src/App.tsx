@@ -3,6 +3,7 @@ import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Auth from '@/containers/Auth/Auth';
 import PrivateRoute from '@/routes/PrivateRoute';
@@ -21,7 +22,8 @@ import { RootState } from './config/store';
 const client = createClient();
 
 const App: React.FC = () => {
-  useDocumentHeader({ title: 'SaaSgear' });
+  const { t } = useTranslation();
+  useDocumentHeader({ title: t('Common.title.saasgear') });
   const { error } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {

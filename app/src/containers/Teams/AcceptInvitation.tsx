@@ -87,20 +87,20 @@ const AcceptInvitation: React.FC = () => {
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>{t('Accept-invitation.title')}</ForgotPasswordText>
+        <ForgotPasswordText>{t('Accept_invitation.title')}</ForgotPasswordText>
         <ForgotPasswordDescription>
           <Trans
             components={[<strong></strong>]}
             values={{ teamName: teamInfo?.teamName, owner: teamInfo?.owner }}
           >
-            {t('Accept-invitation.have-invitated')}
+            {t('Accept_invitation.have_invitated')}
           </Trans>
         </ForgotPasswordDescription>
         <ButtonGroup>
           <Button color="primary" onClick={() => handleUserJoinTeam('accept')}>
-            {t('Accept-invitation.accept')}
+            {t('Accept_invitation.accept')}
           </Button>
-          <Button onClick={() => handleUserJoinTeam('decline')}>{t('Accept-invitation.decline')}</Button>
+          <Button onClick={() => handleUserJoinTeam('decline')}>{t('Accept_invitation.decline')}</Button>
         </ButtonGroup>
         <SquareIconTop>
           <svg

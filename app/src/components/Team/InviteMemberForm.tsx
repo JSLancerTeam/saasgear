@@ -61,7 +61,7 @@ const InviteMemberForm: React.FC<Props> = ({
         <FormControlStyle>
           <InviteInput
             type="text"
-            placeholder={t('Common.placeholder.g-email')}
+            placeholder={t('Common.placeholder.g_email')}
             name="emailMember"
             ref={register}
           />

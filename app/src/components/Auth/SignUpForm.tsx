@@ -47,10 +47,10 @@ const SignUpForm: React.FC<CustomProps> = ({
     <SignUpFormContainer>
       <Logo />
       <FormContent onSubmit={onSubmit}>
-        <FormHeader>{t('Sign-up.text.heading')}</FormHeader>
+        <FormHeader>{t('Sign_up.text.heading')}</FormHeader>
         <div>
           <FormGroup>
-            <FormGroupLabel>{t('Common.label.your-name')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.your_name')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="text"
@@ -92,11 +92,11 @@ const SignUpForm: React.FC<CustomProps> = ({
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <FormGroupLabel>{t('Common.label.confirm-password')}</FormGroupLabel>
+            <FormGroupLabel>{t('Common.label.confirm_password')}</FormGroupLabel>
             <FormControl>
               <Input
                 type="password"
-                placeholder={t('Common.placeholder.confirm-password')}
+                placeholder={t('Common.placeholder.confirm_password')}
                 name="passwordConfirmation"
                 ref={register}
               />
@@ -106,19 +106,19 @@ const SignUpForm: React.FC<CustomProps> = ({
             </FormControl>
           </FormGroup>
           <FormSubmitButton color="primary" type="submit">
-            {isSubmitting ? t('Common.text.please-wait') : (submitText ?? t('Common.text.submit'))}
+            {isSubmitting ? t('Common.text.please_wait') : (submitText ?? t('Common.text.submit'))}
           </FormSubmitButton>
         </div>
       </FormContent>
-      {apiError && <ErrorText message={t(`Sign-up.error.${apiError}`)} position="center" />}
+      {apiError && <ErrorText message={t(`Sign_up.error.${apiError}`)} position="center" />}
       <FormNote>
         <Trans components={[<Link to="##"></Link>, <Link to="##"></Link>, <Link to="##"></Link>]}>
-          {t('Sign-up.text.footer-desc')}
+          {t('Sign_up.text.footer_desc')}
         </Trans>
       </FormNote>
       <TextHaveAccount>
         <Trans components={[<Link to="/auth/signin"></Link>]}>
-          {t('Sign-up.text.have-account')}
+          {t('Sign_up.text.have_account')}
         </Trans>
       </TextHaveAccount>
     </SignUpFormContainer>

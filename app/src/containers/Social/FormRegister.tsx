@@ -10,7 +10,7 @@ import { registerAccountBySocial } from '@/queries/auth/socialLogin';
 import SignUpSocialForm from '@/components/Auth/SignUpSocialForm';
 
 const registerSchema = yup.object().shape({
-  email: yup.string().required('Common.validation.require-email').email('Common.validation.valid-email'),
+  email: yup.string().required('Common.validation.require_email').email('Common.validation.valid_email'),
 });
 
 type FormData = {

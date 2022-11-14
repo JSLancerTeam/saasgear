@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import type { Team } from "@/features/admin/team";
 
@@ -18,6 +19,7 @@ type Params = {
 
 const EditTeam: React.FC = () => {
   const { teamId } = useParams<Params>();
+  const { t } = useTranslation();
   const { teams } = useSelector((state: RootState) => state.team);
   const [currentTeam, setCurrentTeam] = useState<Team>();
   const { data, loading } = useQuery(getTeamDetailQuery, {
@@ -61,7 +63,7 @@ const EditTeam: React.FC = () => {
       )}
     </>
   ) : (
-    <div>Loading...</div>
+    <div>{t('Common.text.loading')}</div>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -33,8 +34,8 @@ const SaveBtn = styled(Button)`
 `;
 
 const ActionDocumentSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
-  body: yup.string().required('Body is required'),
+  name: yup.string().required('Common.validation.require_name'),
+  body: yup.string().required('Common.validation.require_body'),
 });
 
 type MatchParams = {
@@ -50,6 +51,7 @@ type Payload = {
 const ActionDocument: React.FC = () => {
   const match = useRouteMatch<MatchParams>();
   const history = useHistory();
+  const { t } = useTranslation();
   const documentId = parseInt(match.params.id, 10);
   const { handleSubmit, control, register, errors, setValue } = useForm({
     resolver: yupResolver(ActionDocumentSchema),
@@ -105,14 +107,14 @@ const ActionDocument: React.FC = () => {
         <TitlePageStyle>
           {documentData?.getDocumentDetail?.name
             ? documentData.getDocumentDetail.name
-            : 'New Document'}
+            : t('Common.title.new_document')}
         </TitlePageStyle>
         <SaveBtn
           color="primary"
           onClick={handleSubmit(onSubmit)}
           disabled={isCreating || isUpdating}
         >
-          {isCreating || isUpdating ? 'Please wait' : 'Save'}
+          {isCreating || isUpdating ? t('Common.text.please_wait') : t('Common.text.save')}
         </SaveBtn>
       </Header>
       <ContentPage>
@@ -123,7 +125,7 @@ const ActionDocument: React.FC = () => {
           register={register}
           isSubmitting={isCreating || isUpdating}
           formErrors={errors}
-          apiError={createError?.message || updateError?.message}
+          apiError={createError?.graphQLErrors?.[0]?.extensions?.code || updateError?.graphQLErrors?.[0]?.extensions?.code}
         />
       </ContentPage>
     </div>

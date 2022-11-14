@@ -12,10 +12,11 @@ import createTeamQuery from '@/queries/teams/createNewTeam';
 import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
 import ErrorText from '@/components/Common/ErrorText';
 import type { Team } from "@/features/admin/team";
+import { t } from 'i18next';
 
 const TeamSchema = yup.object().shape({
-  teamName: yup.string().required('Team name is reqired'),
-  teamID: yup.string().required('Team ID is required'),
+  teamName: yup.string().required('Team.validation.require_team_name'),
+  teamID: yup.string().required('Team.validation.require_team_id'),
 });
 
 type Props = {
@@ -54,7 +55,7 @@ const TeamDetail: React.FC<Props> = ({ team }) => {
 
   return (
     <ContentPage>
-      <TitleContent>Team Detail</TitleContent>
+      <TitleContent>{t('Team.detail')}</TitleContent>
       <TeamForm
         onSubmit={handleSubmit(createTeam)}
         register={register}
@@ -62,7 +63,7 @@ const TeamDetail: React.FC<Props> = ({ team }) => {
         loading={loading}
         isEdit={!!team}
       />
-      {error?.message && <ErrorText>{error.message}</ErrorText>}
+      {error && <ErrorText>{t(`Team.error.${error?.graphQLErrors?.[0]?.extensions?.code}`)}</ErrorText>}
     </ContentPage>
   );
 }

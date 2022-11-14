@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation, Trans } from 'react-i18next';
 import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';
 import {
@@ -40,82 +41,87 @@ const SignUpForm: React.FC<CustomProps> = ({
   apiError,
   isSubmitting,
   submitText = 'Submit',
-}) => (
-  <SignUpFormContainer>
-    <Logo />
-    <FormContent onSubmit={onSubmit}>
-      <FormHeader>Create Account</FormHeader>
-      <div>
-        <FormGroup>
-          <FormGroupLabel>Your Name</FormGroupLabel>
-          <FormControl>
-            <Input
-              type="text"
-              placeholder="David"
-              name="name"
-              ref={register}
-            />
-            {formErrors?.name && (
-              <ErrorText message={formErrors.name.message} />
-            )}
-          </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormGroupLabel>Email</FormGroupLabel>
-          <FormControl>
-            <Input
-              type="email"
-              placeholder="yourname@yourbusiness.com"
-              name="email"
-              ref={register}
-            />
-            {formErrors?.email && (
-              <ErrorText message={formErrors.email.message} />
-            )}
-          </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormGroupLabel>Password</FormGroupLabel>
-          <FormControl>
-            <Input
-              type="password"
-              placeholder="Your password"
-              name="password"
-              ref={register}
-            />
-            {formErrors?.password && (
-              <ErrorText message={formErrors.password.message} />
-            )}
-          </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormGroupLabel>Confirm password</FormGroupLabel>
-          <FormControl>
-            <Input
-              type="password"
-              placeholder="Confirm your password"
-              name="passwordConfirmation"
-              ref={register}
-            />
-            {formErrors?.passwordConfirmation && (
-              <ErrorText message={formErrors.passwordConfirmation.message} />
-            )}
-          </FormControl>
-        </FormGroup>
-        <FormSubmitButton color="primary" type="submit">
-          {isSubmitting ? 'Please wait' : submitText}
-        </FormSubmitButton>
-      </div>
-    </FormContent>
-    {apiError && <ErrorText message={apiError} position="center" />}
-    <FormNote>
-      By clicking Sign Up, you agree to our <a href="##">Terms</a>,{' '}
-      <a href="##">Data Policy</a> and <a href="##">Cookie Policy</a>.
-    </FormNote>
-    <TextHaveAccount>
-      Already have account? <Link to="/auth/signin">Sign In</Link>.
-    </TextHaveAccount>
-  </SignUpFormContainer>
-);
-
+}) => {
+  const { t } = useTranslation();
+  return (
+    <SignUpFormContainer>
+      <Logo />
+      <FormContent onSubmit={onSubmit}>
+        <FormHeader>{t('Sign_up.text.heading')}</FormHeader>
+        <div>
+          <FormGroup>
+            <FormGroupLabel>{t('Common.label.your_name')}</FormGroupLabel>
+            <FormControl>
+              <Input
+                type="text"
+                placeholder={t('Common.placeholder.name')}
+                name="name"
+                ref={register}
+              />
+              {formErrors?.name?.message && (
+                <ErrorText message={t(formErrors.name.message)} />
+              )}
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
+            <FormControl>
+              <Input
+                type="email"
+                placeholder={t('Common.placeholder.email')}
+                name="email"
+                ref={register}
+              />
+              {formErrors?.email?.message && (
+                <ErrorText message={t(formErrors.email.message)} />
+              )}
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
+            <FormControl>
+              <Input
+                type="password"
+                placeholder={t('Common.placeholder.password')}
+                name="password"
+                ref={register}
+              />
+              {formErrors?.password?.message && (
+                <ErrorText message={t(formErrors.password.message)} />
+              )}
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <FormGroupLabel>{t('Common.label.confirm_password')}</FormGroupLabel>
+            <FormControl>
+              <Input
+                type="password"
+                placeholder={t('Common.placeholder.confirm_password')}
+                name="passwordConfirmation"
+                ref={register}
+              />
+              {formErrors?.passwordConfirmation?.message && (
+                <ErrorText message={t(formErrors.passwordConfirmation.message)} />
+              )}
+            </FormControl>
+          </FormGroup>
+          <FormSubmitButton color="primary" type="submit">
+            {isSubmitting ? t('Common.text.please_wait') : (submitText ?? t('Common.text.submit'))}
+          </FormSubmitButton>
+        </div>
+      </FormContent>
+      {apiError && <ErrorText message={t(`Sign_up.error.${apiError}`)} position="center" />}
+      <FormNote>
+        <Trans components={[<Link to="##"></Link>, <Link to="##"></Link>, <Link to="##"></Link>]}>
+          {t('Sign_up.text.footer_desc')}
+        </Trans>
+      </FormNote>
+      <TextHaveAccount>
+        <Trans components={[<Link to="/auth/signin"></Link>]}>
+          {t('Sign_up.text.have_account')}
+        </Trans>
+      </TextHaveAccount>
+    </SignUpFormContainer>
+  );
+};
 export default SignUpForm;

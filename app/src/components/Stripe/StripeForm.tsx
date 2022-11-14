@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   useStripe,
   useElements,
@@ -102,6 +103,7 @@ const StripeForm: React.FC<Props> = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const { t } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -123,7 +125,7 @@ const StripeForm: React.FC<Props> = ({
         let result;
         if (card) result = await stripe.createToken(card); 
         if (result?.error) {
-          setError(result.error?.message ?? "");
+          setError(result.error?.code ?? "");
         } else {
           onSubmitSuccess(result?.token?.id ?? "");
         }
@@ -142,24 +144,24 @@ const StripeForm: React.FC<Props> = ({
         <div>
           <FormGroup>
             <FormGroupLabel htmlFor="street_address">
-              Card Number
+              {t('Payment.label.card')}
             </FormGroupLabel>
             <CardNumberEl className="card-el" />
           </FormGroup>
           <RowGroup>
             <FormGroupCardExpire>
-              <FormGroupLabel htmlFor="first_name">Expiration</FormGroupLabel>
+              <FormGroupLabel htmlFor="first_name">{t('Payment.label.expiration')}</FormGroupLabel>
               <CardExpiryElementEl />
             </FormGroupCardExpire>
             <FormGroupCardCvc>
-              <FormGroupLabel htmlFor="last_name">CVC</FormGroupLabel>
+              <FormGroupLabel htmlFor="last_name">{t('Payment.label.cvc')}</FormGroupLabel>
               <CardCvcElementEl />
             </FormGroupCardCvc>
           </RowGroup>
         </div>
       </div>
       {error && (
-        <p className="text-red-500 text-xs italic mt-1 text-center">{error}</p>
+        <p className="text-red-500 text-xs italic mt-1 text-center">{t(`Sign_up.error.${error}`)}</p>
       )}
       <SubmitButton
         type="submit"
@@ -167,7 +169,7 @@ const StripeForm: React.FC<Props> = ({
         color="primary"
         width="100%"
       >
-        {isSubmitting ? 'Please wait' : submitText}
+        {isSubmitting ? t('Common.text.please_wait') : (submitText ?? t('Common.text.submit'))}
       </SubmitButton>
     </StripeFormContainer>
   );

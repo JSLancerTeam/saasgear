@@ -30,12 +30,10 @@ export function usePortal(id: string): HTMLDivElement {
   }
 
   function addRootElement(rootElem: HTMLDivElement) {
-    if (document?.body?.lastElementChild?.nextElementSibling) {
-      document.body.insertBefore(
-        rootElem,
-        document.body.lastElementChild.nextElementSibling
-      );
-    }
+    document.body.insertBefore(
+      rootElem,
+      document?.body?.lastElementChild?.nextElementSibling ?? null
+    );
     
   }
 

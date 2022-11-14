@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import getQueryParam from '@/utils/getQueryParam';
 import verifyEmailQuery from '@/queries/auth/verifyEmail';
 import {
@@ -22,6 +23,7 @@ import Badge from '@/components/Common/Badge';
 
 const VerifyEmail: React.FC = () => {
   const query = getQueryParam();
+  const { t } = useTranslation();
   const token = query.get('token');
   const history = useHistory();
   const [verifyEmailMutation, { error }] = useMutation(
@@ -51,14 +53,12 @@ const VerifyEmail: React.FC = () => {
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>Verify Account</ForgotPasswordText>
+        <ForgotPasswordText>{t('Verify_email.title')}</ForgotPasswordText>
         <ForgotPasswordDescription>
-          Enter your username, or the email address you used to register. We
-          will send you an email containing your username and a link to reset
-          your password.
+          {t('Verify_email.description')}
         </ForgotPasswordDescription>
         <Badge type={verifyResult !== null ? 'success' : 'error'}>
-          {verifyResult !== null ? 'Verify email success' : error?.message}
+          {verifyResult !== null ? t('Verify_email.success') : error?.message}
         </Badge>
         <SquareIconTop>
           <svg

@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import ResetPasswordForm from '@/components/Auth/ResetPasswordForm';
 import getQueryParam from '@/utils/getQueryParam';
@@ -29,11 +30,11 @@ import circleSmall from '@/assets/images/svg/circle-small.svg';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ResetPasswordSchema = yup.object().shape({
-  password: yup.string().required('Password is required'),
+  password: yup.string().required('Common.validation.require_password'),
   passwordConfirmation: yup
     .string()
-    .required('Password confirm is required')
-    .oneOf([yup.ref('password'), ""], 'Passwords must match'),
+    .required('Common.validation.require_password_confirm')
+    .oneOf([yup.ref('password'), ""], 'Common.validation.password_match'),
 });
 
 type Payload = {
@@ -42,7 +43,8 @@ type Payload = {
 }
 
 const ResetPassword: React.FC = () => {
-  useDocumentHeader({ title: 'Reset password' });
+  const { t } = useTranslation();
+  useDocumentHeader({ title: t('Common.title.reset_password') });
   const query = getQueryParam();
   const history = useHistory();
   const token = query.get('token');
@@ -66,7 +68,7 @@ const ResetPassword: React.FC = () => {
       },
     });
     if (data?.resetPassword) {
-      toast.success('Change password successfully!');
+      toast.success(t('Common.status.change_password_success'));
       history.push('/auth/signin');
     }
   }

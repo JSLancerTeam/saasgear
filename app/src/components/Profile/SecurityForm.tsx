@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
 import { mobileQuery } from '@/constants/style';
@@ -35,36 +36,40 @@ const SecurityForm: React.FC<Props> = ({
   formErrors,
   apiError,
   isSubmitting,
-}) => (
-  <Form onSubmit={onSubmit}>
-    <FormGroup>
-      <FormGroupLabel>Current password</FormGroupLabel>
-      <Input type="password" name="currentPassword" ref={register} />
-      {formErrors?.currentPassword && (
-        <ErrorText message={formErrors.currentPassword.message} />
-      )}
-    </FormGroup>
-    <FormGroup>
-      <FormGroupLabel>New password</FormGroupLabel>
-      <Input type="password" name="newPassword" ref={register} />
-      {formErrors?.newPassword && (
-        <ErrorText message={formErrors.newPassword.message} />
-      )}
-    </FormGroup>
-    <FormGroup>
-      <FormGroupLabel>Confirm new password</FormGroupLabel>
-      <Input type="password" name="confirmPassword" ref={register} />
-      {formErrors?.confirmPassword && (
-        <ErrorText message={formErrors.confirmPassword.message} />
-      )}
-    </FormGroup>
-    <ButtonGroup>
-      <Button type="submit" color="primary" disabled={isSubmitting}>
-        {isSubmitting ? 'Please wait' : 'Update Password'}
-      </Button>
-    </ButtonGroup>
-    {apiError && <ErrorText message={apiError} />}
-  </Form>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Form onSubmit={onSubmit}>
+      <FormGroup>
+        <FormGroupLabel>{t('Profile.text.current_password')}</FormGroupLabel>
+        <Input type="password" name="currentPassword" ref={register} />
+        {formErrors?.currentPassword?.message && (
+          <ErrorText message={t(formErrors.currentPassword.message)} />
+        )}
+      </FormGroup>
+      <FormGroup>
+        <FormGroupLabel>{t('Profile.text.new_password')}</FormGroupLabel>
+        <Input type="password" name="newPassword" ref={register} />
+        {formErrors?.newPassword?.message && (
+          <ErrorText message={t(formErrors.newPassword.message)} />
+        )}
+      </FormGroup>
+      <FormGroup>
+        <FormGroupLabel>{t('Profile.text.confirm_new_password')}</FormGroupLabel>
+        <Input type="password" name="confirmPassword" ref={register} />
+        {formErrors?.confirmPassword?.message && (
+          <ErrorText message={t(formErrors.confirmPassword.message)} />
+        )}
+      </FormGroup>
+      <ButtonGroup>
+        <Button type="submit" color="primary" disabled={isSubmitting}>
+          {isSubmitting ? t('Common.text.please_wait') : t('Profile.text.update_password')}
+        </Button>
+      </ButtonGroup>
+      {apiError && <ErrorText message={t(`Profile.error.password.${apiError}`)} />}
+    </Form>
+  );
+};
 
 export default SecurityForm;

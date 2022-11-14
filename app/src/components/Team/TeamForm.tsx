@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from '@/typeReactHookForm';
 import { mobileQuery } from '@/constants/style';
@@ -39,42 +40,42 @@ const TeamForm: React.FC<Props> = ({
   loading,
 }) => {
   const history = useHistory();
-
+  const { t } = useTranslation();
   return (
     <form onSubmit={onSubmit}>
       <FormGroup>
-        <FormGroupLabel>Team name</FormGroupLabel>
+        <FormGroupLabel>{t('Team.label.name')}</FormGroupLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder="Your team name"
+            placeholder={t('Team.placeholder.team_name')}
             name="teamName"
             ref={register}
           />
-          {formErrors?.teamName && (
-            <ErrorText message={formErrors.teamName.message} />
+          {formErrors?.teamName?.message && (
+            <ErrorText message={t(formErrors.teamName.message)} />
           )}
         </FormControl>
       </FormGroup>
       <FormGroup>
-        <FormGroupLabel>Team ID</FormGroupLabel>
+        <FormGroupLabel>{t('Team.label.id')}</FormGroupLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder="A unique ID for your team"
+            placeholder={t('Team.placeholder.team_id')}
             name="teamID"
             ref={register}
           />
-          {formErrors?.teamID && (
-            <ErrorText message={formErrors.teamID.message} />
+          {formErrors?.teamID?.message && (
+            <ErrorText message={t(formErrors.teamID.message)} />
           )}
         </FormControl>
       </FormGroup>
       <ButtonGroup>
         <Button color="primary" type="submit" disabled={loading}>
-          {isEdit ? 'Save Team' : 'Add Team'}
+          {isEdit ? t('Team.text.save') : t('Team.text.add')}
         </Button>
-        <Button onClick={() => history.push('/teams')}>Cancel</Button>
+        <Button onClick={() => history.push('/teams')}>{t('Common.text.cancel')}</Button>
       </ButtonGroup>
     </form>
   );

@@ -15,7 +15,7 @@ type ChangePasswordInfo = {
   password: string;
 };
 
-function loginValidation(data: LoginInfo): true | ValidationError[] {
+function loginValidation(data: LoginInfo): true | ValidationError[] | Promise<true | ValidationError[]> {
   const validator = new Validator();
   const schema = {
     email: { type: 'email' },
@@ -24,7 +24,7 @@ function loginValidation(data: LoginInfo): true | ValidationError[] {
   return validator.validate(data, schema);
 }
 
-function registerValidation(data: RegisterInfo): true | ValidationError[] {
+function registerValidation(data: RegisterInfo): true | ValidationError[] | Promise<true | ValidationError[]> {
   const validator = new Validator();
   const schema = {
     email: { type: 'email' },
@@ -34,7 +34,7 @@ function registerValidation(data: RegisterInfo): true | ValidationError[] {
   return validator.validate(data, schema);
 }
 
-function changePasswordValidation(data: ChangePasswordInfo): true | ValidationError[] {
+function changePasswordValidation(data: ChangePasswordInfo): true | ValidationError[] | Promise<true | ValidationError[]> {
   const validator = new Validator();
   const schema = {
     password: {

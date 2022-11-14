@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import type { Profile } from '@/features/auth/user';
 import { setProfileUser } from '@/features/auth/user';
@@ -129,7 +130,7 @@ const ArrowDown24IconStyle = styled(ArrowDown24Icon)<{ expand: number }>`
 `;
 
 const AccountSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
+  name: yup.string().required('Common.validation.require_name'),
 });
 
 type Payload = {
@@ -144,6 +145,7 @@ type Props = {
 
 const InformationSetting: React.FC<Props> = ({ user }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { register, handleSubmit, errors, setValue, getValues, watch } = useForm({
     resolver: yupResolver(AccountSchema),
     defaultValues: user,
@@ -152,6 +154,7 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
   const [isOpenModalDeleteAccount, setIsOpenModalDeleteAccount] = useState(
     false,
   );
+
   const [updateProfileMutation, { error, loading }] = useMutation(
     updateProfileQuery,
   );
@@ -172,7 +175,7 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
     try {
       const { data } = await updateProfileMutation({ variables: params });
       if (data?.updateProfile) {
-        toast.success('Update profile successfully!');
+        toast.success(t('Common.status.update_success'));
       }
     } catch (err) {
       console.log(err);
@@ -184,7 +187,7 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
       const file: File = (e?.target?.files as FileList)[0];
       if (file) {
         if (file.size > 2 * 1000 * 1000) {
-          toast.error('File is too big');
+          toast.error(t('Common.status.error_big_size'));
           return;
         }
         const { data } = await updateProfileAvatarMutation({
@@ -195,11 +198,11 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
         if (data && data.updateProfileAvatar && data.updateProfileAvatar.url) {
           dispatch(setProfileUser({ data: {avatarUrl: data.updateProfileAvatar.url}, loading: isUpdatingAvatar }));
           setValue('avatarUrl', data.updateProfileAvatar.url);
-          toast.success('Change avatar successfully');
+          toast.success(t('Common.status.channge_avatar_success'));
         }
       }
     } catch (errorChangeProfile) {
-      toast.error('Can not update your avatar');
+      toast.error(t('Common.status.change_avatar_failed'));
     }
   }
 
@@ -233,10 +236,10 @@ const InformationSetting: React.FC<Props> = ({ user }) => {
         </AvatarWrapper>
         <ActionWrapper>
           <ActionItem mobile><SettingIcon /></ActionItem>
-          <ActionItem desktop>Edit Profile</ActionItem>
+          <ActionItem desktop>{t('Common.label.edit_profile')}</ActionItem>
           <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
         </ActionWrapper>
-      </Header>Avatar
+      </Header>{t('Common.text.avatar')}
       <AccountForm
         onSubmit={handleSubmit(onSubmit)}
         register={register}

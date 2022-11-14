@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation, Trans } from 'react-i18next';
 import GoBack from '@/components/Common/GoBack';
 import Logo from '@/components/Common/Logo';
 import {
@@ -29,61 +30,64 @@ const ResetPasswordForm:React.FC<Props> = ({
   errors,
   apiError,
   isSubmitting,
-}) => (
-  <>
-    <GoBack link="/auth/signin" />
-    <div>
-      <Logo />
-    </div>
-    <ForgotPasswordText>Reset Password</ForgotPasswordText>
-    <ForgotPasswordDescription>
-      Enter your username, or the email address you used to register. We will
-      send you an email containing your username and a link to reset your
-      password.
-    </ForgotPasswordDescription>
-    <ForgotPasswordFormWrapper onSubmit={onSubmit}>
-      <FormGroup>
-        <FormGroupLabel>Password</FormGroupLabel>
-        <FormControl>
-          <Input
-            type="password"
-            placeholder="your password"
-            name="password"
-            ref={register}
-          />
-          {errors?.password && (
-            <ErrorText message={errors.password.message} />
-          )}
-        </FormControl>
-      </FormGroup>
-      <FormGroup>
-        <FormGroupLabel>Confirm Password</FormGroupLabel>
-        <FormControl>
-          <Input
-            type="password"
-            placeholder="confirm your password"
-            name="passwordConfirmation"
-            ref={register}
-          />
-          {errors?.passwordConfirmation && (
-            <ErrorText message={errors.passwordConfirmation.message} />
-          )}
-        </FormControl>
-      </FormGroup>
-      <FormGroup>
-        <ForgotPasswordButton>
-          <Button color="primary" type="submit">
-            {isSubmitting ? 'Please wait ...' : 'Reset Password'}
-          </Button>
-        </ForgotPasswordButton>
-        {apiError && <Badge type="error">{apiError}</Badge>}
-        <TextNote>
-          If you still need help, contact{' '}
-          <Link to="##">Saasgear Support</Link>
-        </TextNote>
-      </FormGroup>
-    </ForgotPasswordFormWrapper>
-  </>
-)
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <GoBack link="/auth/signin" />
+      <div>
+        <Logo />
+      </div>
+      <ForgotPasswordText>{t('Common.title.reset_password')}</ForgotPasswordText>
+      <ForgotPasswordDescription>
+        {t('Reset_password.description')}
+      </ForgotPasswordDescription>
+      <ForgotPasswordFormWrapper onSubmit={onSubmit}>
+        <FormGroup>
+          <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
+          <FormControl>
+            <Input
+              type="password"
+              placeholder={t('Common.placeholder.password')}
+              name="password"
+              ref={register}
+            />
+            {errors?.password?.message && (
+              <ErrorText message={t(errors.password.message)} />
+            )}
+          </FormControl>
+        </FormGroup>
+        <FormGroup>
+          <FormGroupLabel>{t('Common.label.confirm_password')}</FormGroupLabel>
+          <FormControl>
+            <Input
+              type="password"
+              placeholder={t('Common.placeholder.confirm_password')}
+              name="passwordConfirmation"
+              ref={register}
+            />
+            {errors?.passwordConfirmation?.message && (
+              <ErrorText message={t(errors.passwordConfirmation.message)} />
+            )}
+          </FormControl>
+        </FormGroup>
+        <FormGroup>
+          <ForgotPasswordButton>
+            <Button color="primary" type="submit">
+              {isSubmitting ? t('Reset_password.please_wait') : t('Common.title.reset_password')}
+            </Button>
+          </ForgotPasswordButton>
+          {apiError && <Badge type="error">{apiError}</Badge>}
+          <TextNote>
+            <Trans components={[<Link to="##"></Link>]}>
+              {t('Forgot_password.footer')}
+            </Trans>
+          </TextNote>
+        </FormGroup>
+      </ForgotPasswordFormWrapper>
+    </>
+  );
+}
 
 export default ResetPasswordForm;

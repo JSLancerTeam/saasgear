@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { ITeamMember } from "@/features/admin/team";
 import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
@@ -8,11 +9,13 @@ type Props = {
   teamMembers: ITeamMember[];
 }
 
-const TeamMember: React.FC<Props> = ({ teamMembers }) => (
-  <ContentPage>
-    <TitleContent>Team Members</TitleContent>
-    <ListTeamMember teamMembers={teamMembers} />
-  </ContentPage>
-);
-
+const TeamMember: React.FC<Props> = ({ teamMembers }) => {
+  const { t } = useTranslation();
+  return(
+    <ContentPage>
+      <TitleContent>{t('Team.members')}</TitleContent>
+      <ListTeamMember teamMembers={teamMembers} />
+    </ContentPage>
+  );
+};
 export default TeamMember;

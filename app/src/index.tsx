@@ -7,6 +7,8 @@ import { Integrations } from '@sentry/tracing';
 import store from '@/config/store';
 import App from './App';
 
+import './config/i18n';
+
 init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
   integrations: [new Integrations.BrowserTracing()],

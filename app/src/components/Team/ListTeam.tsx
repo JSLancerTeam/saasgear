@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import type { Team } from "@/features/admin/team";
 import { ContentPage, TitleContent } from '../Layout/blockStyle';
@@ -30,14 +31,14 @@ type Props = {
 
 const ListTeam: React.FC<Props> = ({ teams }) => {
   const history = useHistory();
-
+  const { t } = useTranslation();
   return (
     <ContentPage>
-      <TitleContent> My Teams</TitleContent>
+      <TitleContent> {t('Team.list_team')}</TitleContent>
       <Table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>{t('Team.text.name')}</th>
           </tr>
         </thead>
         <tbody>
@@ -45,15 +46,15 @@ const ListTeam: React.FC<Props> = ({ teams }) => {
             <tr key={it.teamID}>
               <td>{it.teamName}</td>
               <ActionTd>
-                <Link to={`/teams/edit/${it.teamID}`}>Edit</Link>
-                <Link to="/teams">Delete</Link>
+                <Link to={`/teams/edit/${it.teamID}`}>{t('Common.text.edit')}</Link>
+                <Link to="/teams">{t('Common.text.delete')}</Link>
               </ActionTd>
             </tr>
           ))}
         </tbody>
       </Table>
       <AddTeamBtn color="primary" onClick={() => history.push('/teams/new')}>
-        Add Team
+        {t('Team.text.add')}
       </AddTeamBtn>
     </ContentPage>
   );

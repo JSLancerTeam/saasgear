@@ -1,6 +1,7 @@
 import React from 'react';
 import { COLORS } from '@/constants/style';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 const LogoHeader = styled.div`
   font-size: 21.6px;
@@ -14,12 +15,15 @@ const LogoHeaderName = styled.span`
   font-weight: 800;
 `;
 
-const Logo: React.FC = () => (
-  <LogoHeader>
-    <LogoHeaderName>SaaS</LogoHeaderName>
-    <span>gear</span>
-  </LogoHeader>
-)
+const Logo: React.FC = () => {
+  const { t } = useTranslation();
 
+  return (
+    <LogoHeader>
+      <LogoHeaderName>{t('Common.logo.saas')}</LogoHeaderName>
+      <span>{t('Common.logo.gear')}</span>
+    </LogoHeader>
+  );
+}
 
 export default Logo;

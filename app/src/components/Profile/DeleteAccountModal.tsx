@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation, Trans } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
 import { COLORS, mobileQuery } from '@/constants/style';
@@ -46,31 +47,37 @@ const DeleteAccountModal: React.FC<Props> = ({
   register,
   errors,
   isValid,
-}) => (
-  <Modal isOpen={isOpen}>
-    <ModalHeader>Delete Account</ModalHeader>
-    <ModalContent>
-      <DeleteText>
-        Are you sure you want to delete your account? All of your data will be
-        permanently removed. This action cannot be undone.
-      </DeleteText>
-      <Form onSubmit={onSubmit}>
-        <FormGroup>
-          <NoteLabel>
-            Please enter <EmailText>{email}</EmailText> to confirm
-          </NoteLabel>
-          <Input type="email" name="email" ref={register} />
-          {errors?.email && <ErrorText message={errors.email.message} />}
-        </FormGroup>
-      </Form>
-    </ModalContent>
-    <ModalFooter>
-      <Button onClick={closeModal}>No</Button>
-      <Button type="submit" color="primary" disabled={!isValid}>
-        Delete
-      </Button>
-    </ModalFooter>
-  </Modal>
-);
-
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Modal isOpen={isOpen}>
+      <ModalHeader>{t('Profile.label.delete')}</ModalHeader>
+      <ModalContent>
+        <DeleteText>
+          {t('Profile.text.delete_modal')}
+        </DeleteText>
+        <Form onSubmit={onSubmit}>
+          <FormGroup>
+            <NoteLabel>
+              <Trans
+                components={[<EmailText></EmailText>]}
+                values={{ email }}
+              >
+                {t('Profile.text.please_enter')}
+              </Trans>
+            </NoteLabel>
+            <Input type="email" name="email" ref={register} />
+            {errors?.email?.message && <ErrorText message={t(errors.email.message)} />}
+          </FormGroup>
+        </Form>
+      </ModalContent>
+      <ModalFooter>
+        <Button onClick={closeModal}>{t('Common.text.no')}</Button>
+        <Button type="submit" color="primary" disabled={!isValid}>
+          {t('Common.text.delete')}
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
+};
 export default DeleteAccountModal;

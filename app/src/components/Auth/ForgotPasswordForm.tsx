@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Trans, useTranslation } from 'react-i18next';
 import Logo from '@/components/Common/Logo';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
@@ -31,57 +32,61 @@ const ForgotPasswordForm: React.FC<Props> = ({
   isSubmitted,
   isSubmitting,
   apiError,
-}) => (
-  <>
-    <GoBack />
-    <div>
-      <Logo />
-    </div>
-    <ForgotPasswordText>Forgot Password</ForgotPasswordText>
-    <ForgotPasswordDescription>
-      Enter your username, or the email address you used to register. We will
-      send you an email containing your username and a link to reset your
-      password.
-    </ForgotPasswordDescription>
-    {!isSubmitted ? (
-      <ForgotPasswordFormWrapper onSubmit={onSubmit}>
-        <FormGroup>
-          <FormGroupLabel>Your Email</FormGroupLabel>
-          <FormControl>
-            <Input
-              type="email"
-              placeholder="yourname@yourbusiness.com"
-              name="email"
-              ref={register}
-            />
-            {errors?.email && <ErrorText message={errors.email.message} />}
-          </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <ForgotPasswordButton>
-            <Button color="primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Please wait' : 'Send'}
-            </Button>
-          </ForgotPasswordButton>
-          {apiError && <ErrorText message={apiError} position="center" />}
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <GoBack />
+      <div>
+        <Logo />
+      </div>
+      <ForgotPasswordText>{t('Common.title.forgot_password')}</ForgotPasswordText>
+      <ForgotPasswordDescription>
+        {t('Forgot_password.description')}
+      </ForgotPasswordDescription>
+      {!isSubmitted ? (
+        <ForgotPasswordFormWrapper onSubmit={onSubmit}>
+          <FormGroup>
+            <FormGroupLabel>{t('Common.label.your_email')}</FormGroupLabel>
+            <FormControl>
+              <Input
+                type="email"
+                placeholder={t('Common.placeholder.email')}
+                name="email"
+                ref={register}
+              />
+              {errors?.email?.message && <ErrorText message={t(errors.email.message)} />}
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <ForgotPasswordButton>
+              <Button color="primary" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? t('Common.text.please_wait') : t('Common.text.save')}
+              </Button>
+            </ForgotPasswordButton>
+            {apiError && <ErrorText message={t(`Forgot_password.error.${apiError}`)} position="center" />}
+            <TextNote>
+              <Trans components={[<Link to="##"></Link>]}>
+                {t('Forgot_password.footer')}
+              </Trans>
+            </TextNote>
+          </FormGroup>
+        </ForgotPasswordFormWrapper>
+      ) : (
+        <>
+          <ConfirmationText>
+            {t('Forgot_password.confirm')}
+          </ConfirmationText>
           <TextNote>
-            If you still need help, contact{' '}
-            <Link to="##">Saasgear Support</Link>
+            <Trans components={[<Link to="/auth/signin"></Link>]}>
+              {t('Forgot_password.go_to')}
+            </Trans>
           </TextNote>
-        </FormGroup>
-      </ForgotPasswordFormWrapper>
-    ) : (
-      <>
-        <ConfirmationText>
-          We&apos;ve sent you an email with a link to reset password. Please
-          check your email so create new password
-        </ConfirmationText>
-        <TextNote>
-          Go to <Link to="/auth/signin">Sign In</Link>
-        </TextNote>
-      </>
-    )}
-  </>
-)
+        </>
+      )}
+    </>
+  );
+};
 
 export default ForgotPasswordForm;

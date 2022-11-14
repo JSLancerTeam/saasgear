@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import DocumentTable from '@/components/Document/DocumentTable';
 import getDocumentListQuery from '@/queries/document/getDocumentList';
@@ -66,6 +67,7 @@ const CreateBtnContent = styled.span<{ mobile?: boolean }>`
 
 const ListDocument: React.FC = () => {
   const history = useHistory();
+  const { t } = useTranslation();
   const { data, loading, refetch } = useQuery(getDocumentListQuery);
 
   function onFetchDocuments(offset: number, limit: number) {
@@ -75,14 +77,14 @@ const ListDocument: React.FC = () => {
   return (
     <div>
       <Header>
-        <TitlePageStyle>Document</TitlePageStyle>
+        <TitlePageStyle>{t('Document.title')}</TitlePageStyle>
         <RightHeader>
-          <SearchInput placeholder="Search.." />
+          <SearchInput placeholder={t('Common.placeholder.search')} />
           <CreateBtn
             color="primary"
             onClick={() => history.push('/document/create')}
           >
-            <CreateBtnContent>Create New Document</CreateBtnContent>
+            <CreateBtnContent>{t('Document.create')}</CreateBtnContent>
             <CreateBtnContent mobile><AddIcon /></CreateBtnContent>
           </CreateBtn>
         </RightHeader>

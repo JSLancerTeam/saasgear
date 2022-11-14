@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import ForgotPasswordForm from '@/components/Auth/ForgotPasswordForm';
 import forgotpasswordQuery from '@/queries/auth/forgotPassword';
 import { useMutation } from '@apollo/client';
@@ -25,11 +26,12 @@ import circleSmall from '@/assets/images/svg/circle-small.svg';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const ForgotPasswordSchema = yup.object().shape({
-  email: yup.string().required('Email is required').email('Email is invalid'),
+  email: yup.string().required('Common.validation.require_email').email('Common.validation.valid_email'),
 });
 
 const ForgotPassword: React.FC = () => {
-  useDocumentHeader({ title: 'Forgot password' });
+  const { t } = useTranslation();
+  useDocumentHeader({ title: t('Common.title.forgot_password') });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { register, handleSubmit, errors } = useForm({
@@ -60,7 +62,7 @@ const ForgotPassword: React.FC = () => {
           errors={errors}
           isSubmitted={isSubmitted && !error}
           isSubmitting={loading}
-          apiError={error?.message}
+          apiError={error?.graphQLErrors?.[0]?.extensions?.code}
         />
         <SquareIconTop>
           <img src={squareRadiusTop} alt="" />

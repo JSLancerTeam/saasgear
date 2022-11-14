@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from '@/typeReactHookForm';
 import { mobileQuery } from '@/constants/style';
@@ -52,27 +53,29 @@ const InviteMemberForm: React.FC<Props> = ({
   formErrors,
   apiError,
   isSubmiting,
-}) => (
-  <form onSubmit={onSubmit}>
-    <FormGroup>
-      <FormControlStyle>
-        <InviteInput
-          type="text"
-          placeholder="david@jslancer.com"
-          name="emailMember"
-          ref={register}
-        />
-        <InviteBtn type="submit" color="primary" disabled={isSubmiting}>
-          <EnvelopeIcon />
-          <span>Invite</span>
-        </InviteBtn>
-      </FormControlStyle>
-      {formErrors?.emailMember && (
-        <ErrorText message={formErrors.emailMember.message} />
-      )}
-      {apiError && <ErrorText message={apiError} />}
-    </FormGroup>
-  </form>
-);
-
+}) => {
+  const { t } = useTranslation();
+  return (
+    <form onSubmit={onSubmit}>
+      <FormGroup>
+        <FormControlStyle>
+          <InviteInput
+            type="text"
+            placeholder={t('Common.placeholder.g_email')}
+            name="emailMember"
+            ref={register}
+          />
+          <InviteBtn type="submit" color="primary" disabled={isSubmiting}>
+            <EnvelopeIcon />
+            <span>{t('Team.text.invite')}</span>
+          </InviteBtn>
+        </FormControlStyle>
+        {formErrors?.emailMember?.message && (
+          <ErrorText message={t(formErrors.emailMember.message)} />
+        )}
+        {apiError && <ErrorText message={apiError} />}
+      </FormGroup>
+    </form>
+  );
+};
 export default InviteMemberForm;

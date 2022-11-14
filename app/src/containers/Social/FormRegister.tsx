@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -9,7 +10,7 @@ import { registerAccountBySocial } from '@/queries/auth/socialLogin';
 import SignUpSocialForm from '@/components/Auth/SignUpSocialForm';
 
 const registerSchema = yup.object().shape({
-  email: yup.string().required('Email is required').email('Email invalid'),
+  email: yup.string().required('Common.validation.require_email').email('Common.validation.valid_email'),
 });
 
 type FormData = {
@@ -31,6 +32,7 @@ type Props = {
 const FormRegister: React.FC<Props> = ({ data }) => {
   const [registerMutation, { error }] = useMutation(registerAccountBySocial);
   const history = useHistory();
+  const { t } = useTranslation();
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(registerSchema),
   });
@@ -60,13 +62,13 @@ const FormRegister: React.FC<Props> = ({ data }) => {
             className="rounded-full h-64 w-64 mx-auto"
           />
           <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-            Hi {data.user.name} !!
+            {t('Common.text.hi')} {data.user.name} !!
           </h2>
           <SignUpSocialForm
             onSubmit={handleSubmit(onSubmit)}
             register={register}
             formErrors={formErrors}
-            errorAPI={error?.message}
+            errorAPI={error?.graphQLErrors?.[0]?.extensions?.code}
           />
         </div>
       </div>

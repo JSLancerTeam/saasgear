@@ -11,7 +11,7 @@ type CreateInfo = {
   body: string;
 };
 
-export function createValidation(data: CreateInfo): true | ValidationError[] {
+export function createValidation(data: CreateInfo): true | ValidationError[] | Promise<true | ValidationError[]> {
   const validator = new Validator();
   const schema = {
     name: { type: 'string' },

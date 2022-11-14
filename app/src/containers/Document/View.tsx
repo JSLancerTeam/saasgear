@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import DOMPurify from 'dompurify';
+import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
 import { useRouteMatch } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ type MatchParams = {
 
 const ViewDocument: React.FC = () => {
   const match = useRouteMatch<MatchParams>();
+  const { t } = useTranslation();
   const documentId = parseInt(match.params.id, 10);
   const [fetchDocumentDetail, { data: documentData, loading }] = useLazyQuery(
     getDocumentDetailQuery,
@@ -36,7 +38,7 @@ const ViewDocument: React.FC = () => {
 
   return (
     <ContentDocument>
-      {loading && <div>Loading...</div>}
+      {loading && <div>{t('Common.text.loading')}</div>}
 
       {!loading && documentData?.getDocumentDetail && (
         <>

@@ -25,8 +25,8 @@ const DeleteAccount: React.FC<Props> = ({ closeModal, isOpen }) => {
   const AccountSettingSchema = yup.object().shape({
     email: yup
       .string()
-      .required('Email is required')
-      .email('Email invalid')
+      .required('Common.validation.require_email')
+      .email('Common.validation.valid_email')
       .matches(emailRegex),
   });
   const { register, handleSubmit, errors, watch, formState } = useForm({

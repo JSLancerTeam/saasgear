@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import Button from '../Common/Button';
 import { Description } from '../Layout/blockStyle';
@@ -15,13 +16,14 @@ const MainContent = styled.div`
 
 const EmptyTeam: React.FC = () => {
   const history = useHistory();
+  const { t } = useTranslation();
 
   return (
     <Content>
       <MainContent>
-        <Description>Click button below to create your first team!</Description>
+        <Description>{t('Team.text.click_button')}</Description>
         <Button color="primary" onClick={() => history.push('/teams/new')}>
-          Create Team
+          {t('Team.text.create')}
         </Button>
       </MainContent>
     </Content>

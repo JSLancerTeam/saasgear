@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
@@ -18,16 +19,16 @@ import {
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
-  email: yup.string().required('Email is required').email('Email invalid'),
+  name: yup.string().required('Common.validation.require_name'),
+  email: yup.string().required('Common.validation.require_email').email('Common.validation.valid_email'),
   password: yup
     .string()
-    .required('Password is required')
-    .min(6, 'Password must be at least 6 characters'),
+    .required('Common.validation.require_password')
+    .min(6, 'Common.validation.min_password'),
   passwordConfirmation: yup
     .string()
-    .required('Password confirm is required')
-    .oneOf([yup.ref('password'), ""], 'Passwords must match'),
+    .required('Common.validation.require_password_confirm')
+    .oneOf([yup.ref('password'), ""], 'Common.validation.password_match'),
 });
 
 type SignUpPayload = {
@@ -40,7 +41,8 @@ type SignUpPayload = {
 }
 
 const SignUp: React.FC = () => {
-  useDocumentHeader({ title: 'Sign Up' });
+  const { t } = useTranslation();
+  useDocumentHeader({ title: t('Common.title.sign_up') });
   const { register, handleSubmit, errors: formErrors } = useForm({
     resolver: yupResolver(SignUpSchema),
     shouldUnregister: false,
@@ -90,16 +92,16 @@ const SignUp: React.FC = () => {
             onSubmitSuccess={createPaymentMethodSuccess}
             onGoBack={handleGoBack}
             apiLoading={loading}
-            apiError={error?.message}
+            apiError={error?.graphQLErrors?.[0]?.extensions?.code}
           />
         ) : (
           <SignUpForm
             onSubmit={handleSubmit(onSubmit)}
             register={register}
             formErrors={formErrors}
-            apiError={error?.message}
+            apiError={error?.graphQLErrors?.[0]?.extensions?.code}
             isSubmitting={loading}
-            submitText={planName ? 'Next' : 'Sign up'}
+            submitText={planName ? t('Sign_up.text.next') : t('Sign_up.text.button_text')}
           />
         )}
       </SignUpFormLeft>

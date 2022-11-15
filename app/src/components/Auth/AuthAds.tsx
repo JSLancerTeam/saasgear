@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import '@/assets/css/react-slide-custom.css';
-import { COLORS } from '@/constants/style';
 import squareGrid from '@/assets/images/svg/square-grid.svg';
 import squareRadiusPrimary from '@/assets/images/svg/square-radius-primary.svg';
 import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';
@@ -12,36 +11,6 @@ import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';
 const SlideCustom = styled(Slide)`
   max-width: 100%;
   height: 100%;
-`;
-
-const SlideImage = styled.img`
-  margin: 0 auto;
-  max-width: 100%;
-`;
-
-const SlideItemTitle = styled.h4`
-  font-weight: bold;
-  font-size: 26px;
-  line-height: 36px;
-  text-align: center;
-  letter-spacing: 0.5px;
-  color: ${COLORS.WHITE};
-  margin-top: 82px;
-  margin-bottom: 12px;
-`;
-
-const SlideItemDescription = styled.div`
-  font-size: 14px;
-  line-height: 24px;
-  text-align: center;
-  color: ${COLORS.WHITE};
-`;
-
-const SlideItemContainer = styled.div`
-  max-width: 80%;
-  display: block;
-  margin: 0 auto;
-  text-align: center;
 `;
 
 const AuthAdsArea: React.FC = () => {
@@ -59,43 +28,47 @@ const AuthAdsArea: React.FC = () => {
       <div className='absolute left-[26.52%] right-0 bottom-0 top-[44.01%]'>
         <img src={squareRadiusTopBig} alt="" />
       </div>
-      <div className='.slide-container'>
-        <SlideCustom
-          easing="ease"
-          arrows={false}
-          canSwipe={false}
-          duration={3000}
-          indicators
-        >
-          <div>
-            <SlideItemContainer>
-              <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-              <SlideItemTitle>{t('Advertisement.ad1_title')}</SlideItemTitle>
-              <SlideItemDescription>
-                {t('Advertisement.ad1')}
-              </SlideItemDescription>
-            </SlideItemContainer>
+      <SlideCustom
+        easing="ease"
+        arrows={false}
+        canSwipe={false}
+        duration={3000}
+        indicators
+      >
+        <div>
+          <div className='max-w-[80%] block mx-auto my-0 text-center'>
+            <img src="https://placeimg.com/517/337/any" alt="asd" className='mx-auto my-0 max-w-full' />
+            <h4 className='font-bold text-[26px] leading-[36px] text-center tracking-[0.5px] text-white mt-[82px] mb-[12px]'>
+              {t('Advertisement.ad1_title')}
+            </h4>
+            <div className='text-[14px] leading-6 text-center text-white'>
+              {t('Advertisement.ad1')}
+            </div>
           </div>
-          <div>
-            <SlideItemContainer>
-              <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-              <SlideItemTitle>{t('Advertisement.ad2_title')}</SlideItemTitle>
-              <SlideItemDescription>
-                {t('Advertisement.ad2')}
-              </SlideItemDescription>
-            </SlideItemContainer>
+        </div>
+        <div>
+          <div className='max-w-[80%] block mx-auto my-0 text-center'>
+            <img src="https://placeimg.com/517/337/any" alt="asd" className='mx-auto my-0 max-w-full' />
+            <div className='font-bold text-[26px] leading-[36px] text-center tracking-[0.5px] text-white mt-[82px] mb-[12px]'>
+              {t('Advertisement.ad2_title')}
+            </div>
+            <div className='text-[14px] leading-6 text-center text-white'>
+              {t('Advertisement.ad2')}
+            </div>
           </div>
-          <div>
-            <SlideItemContainer>
-              <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-              <SlideItemTitle>{t('Advertisement.ad3_title')}</SlideItemTitle>
-              <SlideItemDescription>
-                {t('Advertisement.ad3')}
-              </SlideItemDescription>
-            </SlideItemContainer>
+        </div>
+        <div>
+          <div className='max-w-[80%] block mx-auto my-0 text-center'>
+            <img src="https://placeimg.com/517/337/any" alt="asd" className='mx-auto my-0 max-w-full' />
+            <div className='font-bold text-[26px] leading-[36px] text-center tracking-[0.5px] text-white mt-[82px] mb-[12px]'>
+              {t('Advertisement.ad3_title')}
+            </div>
+            <div className='text-[14px] leading-6 text-center text-white'>
+              {t('Advertisement.ad3')}
+            </div>
           </div>
-        </SlideCustom>
-      </div>
+        </div>
+      </SlideCustom>
     </div>
   );
 };

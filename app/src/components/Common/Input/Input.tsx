@@ -36,7 +36,7 @@ type Props = {
 
 const Input = React.forwardRef(
   ({ type, defaultValue, placeholder, ...props }: Props, ref: React.Ref<HTMLInputElement>) => (
-    <InputWrapper
+    <input
       type={type}
       defaultValue={defaultValue}
       placeholder={placeholder}

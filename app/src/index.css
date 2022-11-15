@@ -21,9 +21,6 @@
 }
 
 @layer components {
-  .slide-container, .slide-container > div {
-    @apply max-w-full h-full;    
-  }
 }
 
 @layer utilities {

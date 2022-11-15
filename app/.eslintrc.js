@@ -88,12 +88,7 @@ module.exports = {
     'react/self-closing-comp': 0,
     'react/sort-comp': 0,
     'react/no-danger': 0,
-    'react/jsx-props-no-spreading': [
-      2,
-      {
-        custom: 'ignore',
-      },
-    ],
+    'react/jsx-props-no-spreading': 0,
     'lodash/import-scope': [2, 'method'],
     'react/prop-types': 0,
     'max-classes-per-file': 'off',

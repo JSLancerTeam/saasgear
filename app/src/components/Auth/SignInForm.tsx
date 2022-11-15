@@ -2,12 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
-import {
-  SignUpFormContainer,
-  FormContent,
-  FormHeader,
-  FormNote,
-} from '@/components/Auth/AuthForm';
+
 import FormControl from '@/components/Common/FormControl';
 import { COLORS } from '@/constants/style';
 import Input from '@/components/Common/Input/Input';
@@ -15,15 +10,10 @@ import Checkbox from '@/components/Common/Input/InputCheckbox';
 import Button from '@/components/Common/Button';
 import ErrorText from '@/components/Common/ErrorText';
 import Logo from '@/components/Common/Logo';
-import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
 import SocialAuth from '@/containers/Auth/SocialAuth';
 import { ReactHookFormType } from "@/typeReactHookForm";
 
-
-const SignInContainer = styled(SignUpFormContainer)`
-  width: 300px;
-`;
 const RembemberSection = styled.div`
   display: flex;
   align-items: center;
@@ -51,10 +41,6 @@ const ForgotLink = styled.div`
     margin-top: 24px;
   }
 `;
-const TextHaveAccount = styled(FormNote)`
-  margin-top: 179px;
-  text-align: center;
-`;
 
 type Props = ReactHookFormType & {
   isSubmitting: boolean;
@@ -71,12 +57,12 @@ const SignInForm: React.FC<Props> = ({
   const { t } = useTranslation();
 
   return (
-    <SignInContainer>
+    <div className='bg-white max-w-[300px] w-[300px]'>
       <Logo />
-      <FormContent onSubmit={onSubmit}>
-        <FormHeader>{t('Sign_in.text.heading')}</FormHeader>
+      <form onSubmit={onSubmit} className='mb-[24px]'>
+        <div className='font-bold text-[26px] leading-9 text-sapphire_blue mb-[34px]'>{t('Sign_in.text.heading')}</div>
         <div>
-          <FormGroup>
+          <div className='mb-4 w-full block'>
             <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
             <FormControl>
               <Input
@@ -89,8 +75,8 @@ const SignInForm: React.FC<Props> = ({
                 <ErrorText message={String(t(formErrors.email.message))} />
               )}
             </FormControl>
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className='mb-4 w-full block'>
             <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
             <FormControl>
               <Input
@@ -103,7 +89,7 @@ const SignInForm: React.FC<Props> = ({
                 <ErrorText message={String(t(formErrors.password.message))} />
               )}
             </FormControl>
-          </FormGroup>
+          </div>
           <RembemberSection>
             <Checkbox type="checkbox" name="rembemer" id="rembemer" />
             <RememberLabel htmlFor="rembemer">{t('Common.label.remember_label')}</RememberLabel>
@@ -116,14 +102,14 @@ const SignInForm: React.FC<Props> = ({
           </ForgotLink>
           <SocialAuth />
         </div>
-      </FormContent>
+      </form>
       {apiError && <ErrorText message={String(t(`Sign_in.error.${apiError}`))} position="center" />}
-      <TextHaveAccount>
+      <div className='mt-[179px] text-center text-[14px] leading-[24px] text-sapphire_blue'>
         <Trans components={[<Link to="/auth/signup"></Link>]}>
           {t('Sign_in.text.not_have_account')}
         </Trans>
-      </TextHaveAccount>
-    </SignInContainer>
+      </div>
+    </div>
   );
 };
 

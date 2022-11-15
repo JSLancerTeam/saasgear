@@ -40,7 +40,7 @@
     "react-i18next": "^12.0.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "react-slideshow-image": "^3.4.3",
     "react-toastify": "^6.1.0",
     "redux": "^4.0.5",
@@ -90,6 +90,11 @@
       "pre-commit": "lint-staged && npm run lint"
     }
   },
+  "resolutions": {
+    "@types/react": "17.0.20",
+    "@types/react-dom": "17.0.9",
+    "graphql": "^15.4.0"
+  },
   "devDependencies": {
     "@types/apollo-upload-client": "^14.1.0",
     "@types/dompurify": "^2.2.3",
@@ -109,7 +114,9 @@
     "@types/styled-components": "^5.1.14",
     "@types/webpack-env": "^1.16.2",
     "@types/yup": "^0.29.13",
-    "autoprefixer": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.42.1",
+    "autoprefixer": "^10.4.13",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
@@ -124,13 +131,14 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.1",
-    "postcss": "^8.2.1",
+    "postcss": "^8.4.19",
     "postcss-cli": "^8.3.1",
     "pre-commit": "^1.2.2",
     "prettier": "^2.1.2",
     "stylelint": "^13.7.2",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.10.0"
+    "stylelint-processor-styled-components": "^1.10.0",
+    "tailwindcss": "^3.2.4"
   }
 }

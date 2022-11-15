@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply not-italic box-border tracking-[0.5px];
+    font-family: theme('fontFamily.inter');
+  }
+  a {
+    @apply no-underline;
+    color: theme('colors.primary');
+  }
+  html, body {
+    @apply m-0 p-0 relative;
+  }
+
+  h1, h2, h3, h4, h5, h6, ul, li, p {
+    @apply m-0 p-0;
+  }
+}
+
+@layer components {
+  .slide-container, .slide-container > div {
+    @apply max-w-full h-full;    
+  }
+}
+
+@layer utilities {
+  .public-DraftEditor-content {
+    min-height: 500px;
+    overflow: auto;
+  }
+
+}

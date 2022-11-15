@@ -53,7 +53,7 @@ const TeamForm: React.FC<Props> = ({
             ref={register}
           />
           {formErrors?.teamName?.message && (
-            <ErrorText message={t(formErrors.teamName.message)} />
+            <ErrorText message={String(t(formErrors.teamName.message))} />
           )}
         </FormControl>
       </FormGroup>
@@ -67,7 +67,7 @@ const TeamForm: React.FC<Props> = ({
             ref={register}
           />
           {formErrors?.teamID?.message && (
-            <ErrorText message={t(formErrors.teamID.message)} />
+            <ErrorText message={String(t(formErrors.teamID.message))} />
           )}
         </FormControl>
       </FormGroup>

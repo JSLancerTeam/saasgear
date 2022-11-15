@@ -71,7 +71,7 @@ const InviteMemberForm: React.FC<Props> = ({
           </InviteBtn>
         </FormControlStyle>
         {formErrors?.emailMember?.message && (
-          <ErrorText message={t(formErrors.emailMember.message)} />
+          <ErrorText message={String(t(formErrors.emailMember.message))} />
         )}
         {apiError && <ErrorText message={apiError} />}
       </FormGroup>

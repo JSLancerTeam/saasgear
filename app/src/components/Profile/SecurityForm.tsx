@@ -45,21 +45,21 @@ const SecurityForm: React.FC<Props> = ({
         <FormGroupLabel>{t('Profile.text.current_password')}</FormGroupLabel>
         <Input type="password" name="currentPassword" ref={register} />
         {formErrors?.currentPassword?.message && (
-          <ErrorText message={t(formErrors.currentPassword.message)} />
+          <ErrorText message={String(t(formErrors.currentPassword.message))} />
         )}
       </FormGroup>
       <FormGroup>
         <FormGroupLabel>{t('Profile.text.new_password')}</FormGroupLabel>
         <Input type="password" name="newPassword" ref={register} />
         {formErrors?.newPassword?.message && (
-          <ErrorText message={t(formErrors.newPassword.message)} />
+          <ErrorText message={String(t(formErrors.newPassword.message))} />
         )}
       </FormGroup>
       <FormGroup>
         <FormGroupLabel>{t('Profile.text.confirm_new_password')}</FormGroupLabel>
         <Input type="password" name="confirmPassword" ref={register} />
         {formErrors?.confirmPassword?.message && (
-          <ErrorText message={t(formErrors.confirmPassword.message)} />
+          <ErrorText message={String(t(formErrors.confirmPassword.message))} />
         )}
       </FormGroup>
       <ButtonGroup>
@@ -67,7 +67,7 @@ const SecurityForm: React.FC<Props> = ({
           {isSubmitting ? t('Common.text.please_wait') : t('Profile.text.update_password')}
         </Button>
       </ButtonGroup>
-      {apiError && <ErrorText message={t(`Profile.error.password.${apiError}`)} />}
+      {apiError && <ErrorText message={String(t(`Profile.error.password.${apiError}`))} />}
     </Form>
   );
 };

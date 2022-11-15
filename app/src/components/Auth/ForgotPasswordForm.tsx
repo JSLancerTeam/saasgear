@@ -56,7 +56,7 @@ const ForgotPasswordForm: React.FC<Props> = ({
                 name="email"
                 ref={register}
               />
-              {errors?.email?.message && <ErrorText message={t(errors.email.message)} />}
+              {errors?.email?.message && <ErrorText message={String(t(errors.email.message))} />}
             </FormControl>
           </FormGroup>
           <FormGroup>
@@ -65,7 +65,7 @@ const ForgotPasswordForm: React.FC<Props> = ({
                 {isSubmitting ? t('Common.text.please_wait') : t('Common.text.save')}
               </Button>
             </ForgotPasswordButton>
-            {apiError && <ErrorText message={t(`Forgot_password.error.${apiError}`)} position="center" />}
+            {apiError && <ErrorText message={String(t(`Forgot_password.error.${apiError}`))} position="center" />}
             <TextNote>
               <Trans components={[<Link to="##"></Link>]}>
                 {t('Forgot_password.footer')}

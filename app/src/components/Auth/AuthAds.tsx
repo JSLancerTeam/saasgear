@@ -9,46 +9,6 @@ import squareGrid from '@/assets/images/svg/square-grid.svg';
 import squareRadiusPrimary from '@/assets/images/svg/square-radius-primary.svg';
 import squareRadiusTopBig from '@/assets/images/svg/square-radius-top-big.svg';
 
-const AuthAdsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  position: relative;
-`;
-
-const AdsIconGrid = styled.div`
-  position: absolute;
-  width: 129px;
-  height: 121px;
-  top: 164px;
-  right: 50px;
-`;
-
-const AdsIconBlock = styled.div`
-  position: absolute;
-  left: 56px;
-  top: 180px;
-`;
-
-const AdsCircleIcon = styled.div`
-  position: absolute;
-  left: 38px;
-  bottom: 110px;
-  border: 1px solid ${COLORS.LIGHT_BLUE};
-  border-radius: 50%;
-  width: 58px;
-  height: 58px;
-`;
-
-const AdsBigBlock = styled.div`
-  position: absolute;
-  left: 26.52%;
-  right: 0%;
-  top: 44.01%;
-  bottom: 0%;
-`;
-
 const SlideCustom = styled(Slide)`
   max-width: 100%;
   height: 100%;
@@ -88,53 +48,55 @@ const AuthAdsArea: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <AuthAdsWrapper>
-      <AdsIconGrid>
+    <div className='flex justify-center items-center h-full relative'>
+      <div className='absolute w-[129px] h-[121px] top-[164px] right-[50px]'>
         <img src={squareGrid} alt="" />
-      </AdsIconGrid>
-      <AdsIconBlock>
+      </div>
+      <div className='absolute top-[180px] left-[56px]'>
         <img src={squareRadiusPrimary} alt="" />
-      </AdsIconBlock>
-      <AdsCircleIcon></AdsCircleIcon>
-      <AdsBigBlock>
+      </div>
+      <div className='absolute left-[38px] bottom-[110px] border-[1px] border-solid border-light_blue rounded-[50%] w-[58px] h-[58px]' />
+      <div className='absolute left-[26.52%] right-0 bottom-0 top-[44.01%]'>
         <img src={squareRadiusTopBig} alt="" />
-      </AdsBigBlock>
-      <SlideCustom
-        easing="ease"
-        arrows={false}
-        canSwipe={false}
-        duration={3000}
-        indicators
-      >
-        <div>
-          <SlideItemContainer>
-            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>{t('Advertisement.ad1_title')}</SlideItemTitle>
-            <SlideItemDescription>
-              {t('Advertisement.ad1')}
-            </SlideItemDescription>
-          </SlideItemContainer>
-        </div>
-        <div>
-          <SlideItemContainer>
-            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>{t('Advertisement.ad2_title')}</SlideItemTitle>
-            <SlideItemDescription>
-              {t('Advertisement.ad2')}
-            </SlideItemDescription>
-          </SlideItemContainer>
-        </div>
-        <div>
-          <SlideItemContainer>
-            <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
-            <SlideItemTitle>{t('Advertisement.ad3_title')}</SlideItemTitle>
-            <SlideItemDescription>
-              {t('Advertisement.ad3')}
-            </SlideItemDescription>
-          </SlideItemContainer>
-        </div>
-      </SlideCustom>
-    </AuthAdsWrapper>
+      </div>
+      <div className='.slide-container'>
+        <SlideCustom
+          easing="ease"
+          arrows={false}
+          canSwipe={false}
+          duration={3000}
+          indicators
+        >
+          <div>
+            <SlideItemContainer>
+              <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+              <SlideItemTitle>{t('Advertisement.ad1_title')}</SlideItemTitle>
+              <SlideItemDescription>
+                {t('Advertisement.ad1')}
+              </SlideItemDescription>
+            </SlideItemContainer>
+          </div>
+          <div>
+            <SlideItemContainer>
+              <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+              <SlideItemTitle>{t('Advertisement.ad2_title')}</SlideItemTitle>
+              <SlideItemDescription>
+                {t('Advertisement.ad2')}
+              </SlideItemDescription>
+            </SlideItemContainer>
+          </div>
+          <div>
+            <SlideItemContainer>
+              <SlideImage src="https://placeimg.com/517/337/any" alt="asd" />
+              <SlideItemTitle>{t('Advertisement.ad3_title')}</SlideItemTitle>
+              <SlideItemDescription>
+                {t('Advertisement.ad3')}
+              </SlideItemDescription>
+            </SlideItemContainer>
+          </div>
+        </SlideCustom>
+      </div>
+    </div>
   );
 };
 export default React.memo(AuthAdsArea);

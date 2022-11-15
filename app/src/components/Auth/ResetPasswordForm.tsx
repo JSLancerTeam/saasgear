@@ -54,7 +54,7 @@ const ResetPasswordForm:React.FC<Props> = ({
               ref={register}
             />
             {errors?.password?.message && (
-              <ErrorText message={t(errors.password.message)} />
+              <ErrorText message={String(t(errors.password.message))} />
             )}
           </FormControl>
         </FormGroup>
@@ -68,7 +68,7 @@ const ResetPasswordForm:React.FC<Props> = ({
               ref={register}
             />
             {errors?.passwordConfirmation?.message && (
-              <ErrorText message={t(errors.passwordConfirmation.message)} />
+              <ErrorText message={String(t(errors.passwordConfirmation.message))} />
             )}
           </FormControl>
         </FormGroup>

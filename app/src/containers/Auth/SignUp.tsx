@@ -101,7 +101,7 @@ const SignUp: React.FC = () => {
             formErrors={formErrors}
             apiError={error?.graphQLErrors?.[0]?.extensions?.code}
             isSubmitting={loading}
-            submitText={planName ? t('Sign_up.text.next') : t('Sign_up.text.button_text')}
+            submitText={String(planName ? t('Sign_up.text.next') : t('Sign_up.text.button_text'))}
           />
         )}
       </SignUpFormLeft>

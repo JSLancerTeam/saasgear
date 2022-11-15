@@ -67,7 +67,7 @@ const DeleteAccountModal: React.FC<Props> = ({
               </Trans>
             </NoteLabel>
             <Input type="email" name="email" ref={register} />
-            {errors?.email?.message && <ErrorText message={t(errors.email.message)} />}
+            {errors?.email?.message && <ErrorText message={String(t(errors.email.message))} />}
           </FormGroup>
         </Form>
       </ModalContent>

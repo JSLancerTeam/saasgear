@@ -37,7 +37,8 @@ export interface SlideshowProps {
   slidesToScroll?: number,
   canSwipe?: boolean,
   easing?: string,
-  cssClass?: string
+  cssClass?: string,
+  children: React.ReactNode
 }
 export interface ZoomProps extends SlideshowProps {
   scale: number

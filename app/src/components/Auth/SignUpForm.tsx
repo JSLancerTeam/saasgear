@@ -59,7 +59,7 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.name?.message && (
-                <ErrorText message={t(formErrors.name.message)} />
+                <ErrorText message={String(t(formErrors.name.message))} />
               )}
             </FormControl>
           </FormGroup>
@@ -73,7 +73,7 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.email?.message && (
-                <ErrorText message={t(formErrors.email.message)} />
+                <ErrorText message={String(t(formErrors.email.message))} />
               )}
             </FormControl>
           </FormGroup>
@@ -87,7 +87,7 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.password?.message && (
-                <ErrorText message={t(formErrors.password.message)} />
+                <ErrorText message={String(t(formErrors.password.message))} />
               )}
             </FormControl>
           </FormGroup>
@@ -101,7 +101,7 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.passwordConfirmation?.message && (
-                <ErrorText message={t(formErrors.passwordConfirmation.message)} />
+                <ErrorText message={String(t(formErrors.passwordConfirmation.message))} />
               )}
             </FormControl>
           </FormGroup>
@@ -110,7 +110,7 @@ const SignUpForm: React.FC<CustomProps> = ({
           </FormSubmitButton>
         </div>
       </FormContent>
-      {apiError && <ErrorText message={t(`Sign_up.error.${apiError}`)} position="center" />}
+      {apiError && <ErrorText message={String(t(`Sign_up.error.${apiError}`))} position="center" />}
       <FormNote>
         <Trans components={[<Link to="##"></Link>, <Link to="##"></Link>, <Link to="##"></Link>]}>
           {t('Sign_up.text.footer_desc')}

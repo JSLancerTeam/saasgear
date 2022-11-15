@@ -46,7 +46,7 @@ const DocumentForm: React.FC<Props> = ({
       <FormGroup>
         <FormGroupLabel>{t('Common.label.name')}</FormGroupLabel>
         <Input name="name" ref={register} />
-        {formErrors?.name?.message && <ErrorText message={t(formErrors.name.message)} />}
+        {formErrors?.name?.message && <ErrorText message={String(t(formErrors.name.message))} />}
       </FormGroup>
       <FormGroup>
         <FormGroupLabel>{t('Common.label.body')}</FormGroupLabel>
@@ -58,7 +58,7 @@ const DocumentForm: React.FC<Props> = ({
             <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />
           )}
         />
-        {formErrors?.body?.message && <ErrorText message={t(formErrors.body.message)} />}
+        {formErrors?.body?.message && <ErrorText message={String(t(formErrors.body.message))} />}
       </FormGroup>
       {apiError && <ErrorText message={`Document.error.${apiError}`} />}
 

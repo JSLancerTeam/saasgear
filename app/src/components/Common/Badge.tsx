@@ -35,10 +35,5 @@ type Props = {
   children: React.ReactNode;
 }
 
-const Badge: React.FC<Props> = ({ children, type }) => <BadgeWrapper type={type}>{children}</BadgeWrapper>;
-
-Badge.defaultProps = {
-  type: 'success',
-};
-
+const Badge: React.FC<Props> = ({ children, type = 'success' }) => <BadgeWrapper type={type}>{children}</BadgeWrapper>;
 export default React.memo(Badge);

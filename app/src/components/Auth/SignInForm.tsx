@@ -86,7 +86,7 @@ const SignInForm: React.FC<Props> = ({
                 ref={register}
               />
               {formErrors?.email?.message && (
-                <ErrorText message={t(formErrors.email.message)} />
+                <ErrorText message={String(t(formErrors.email.message))} />
               )}
             </FormControl>
           </FormGroup>
@@ -100,7 +100,7 @@ const SignInForm: React.FC<Props> = ({
                 ref={register}
               />
               {formErrors?.password?.message && (
-                <ErrorText message={t(formErrors.password.message)} />
+                <ErrorText message={String(t(formErrors.password.message))} />
               )}
             </FormControl>
           </FormGroup>
@@ -117,7 +117,7 @@ const SignInForm: React.FC<Props> = ({
           <SocialAuth />
         </div>
       </FormContent>
-      {apiError && <ErrorText message={t(`Sign_in.error.${apiError}`)} position="center" />}
+      {apiError && <ErrorText message={String(t(`Sign_in.error.${apiError}`))} position="center" />}
       <TextHaveAccount>
         <Trans components={[<Link to="/auth/signup"></Link>]}>
           {t('Sign_in.text.not_have_account')}

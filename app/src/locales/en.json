@@ -6,7 +6,9 @@
     },
     "title": {
       "saasgear": "SaaSgear",
+      "profile": "Profile",
       "sign_in": "Sign In",
+      "sign_out": "Sign Out",
       "sign_up": "Sign Up",
       "forgot_password": "Forgot Password",
       "reset_password": "Reset password",

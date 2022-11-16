@@ -11,11 +11,6 @@ import AuthAdsArea from '@/components/Auth/AuthAds';
 import registerQuery from '@/queries/auth/register';
 import getQueryParam from '@/utils/getQueryParam';
 import StripeContainer from '@/containers/Stripe';
-import {
-  SignUpFormWrapper,
-  SignUpFormLeft,
-  SignUpAds,
-} from '@/components/Auth/AuthForm';
 import useDocumentHeader from '@/hooks/useDocumentTitle';
 
 const SignUpSchema = yup.object().shape({
@@ -85,8 +80,8 @@ const SignUp: React.FC = () => {
   }
 
   return (
-    <SignUpFormWrapper>
-      <SignUpFormLeft>
+    <div className='flex justify-center min-h-screen sm:flex-col sm:pt-10'>
+      <div className='w-[45%] flex justify-center items-center sm:w-full'>
         {showStripeForm ? (
           <StripeContainer
             onSubmitSuccess={createPaymentMethodSuccess}
@@ -104,11 +99,11 @@ const SignUp: React.FC = () => {
             submitText={String(planName ? t('Sign_up.text.next') : t('Sign_up.text.button_text'))}
           />
         )}
-      </SignUpFormLeft>
-      <SignUpAds>
+      </div>
+      <div className='w-[55%] bg-primary overflow-hidden sm:hidden'>
         <AuthAdsArea />
-      </SignUpAds>
-    </SignUpFormWrapper>
+      </div>
+    </div>
   );
 };
 

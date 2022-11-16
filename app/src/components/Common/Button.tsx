@@ -47,15 +47,10 @@ type Props = {
   [key: string]: unknown;
 }
 
-const Button: React.FC<Props> = ({ color, type, children, ...props }) => (
+const Button: React.FC<Props> = ({ color = 'default', type = 'button', children, ...props }) => (
   <ButtonWrapper type={type} color={color} {...props}>
     {children}
   </ButtonWrapper>
 )
-
-Button.defaultProps = {
-  color: 'default',
-  type: 'button',
-};
 
 export default React.memo(Button);

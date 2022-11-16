@@ -7,77 +7,8 @@ import cn from 'classnames';
 import type { RootState } from '@/config/store';
 import { toggleSidebar } from '@/features/admin/sidebar';
 import { ReactComponent as LogoIcon } from '@/assets/images/svg/logo.svg';
-import { COLORS, mobileQuery } from '@/constants/style';
+import { COLORS } from '@/constants/style';
 import routes from '@/routes';
-
-const Wrapper = styled.div`
-  width: 235px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  ${mobileQuery} {
-    position: fixed;
-    left: -235px;
-    z-index: 0;
-    background: #fff;
-    z-index: 50;
-    transition: all .4s ease-in-out;
-    &.active {
-      left: 0;
-      z-index: 50;
-    }
-  }
-`;
-
-const WrapperOverlay = styled.div`
-  ${mobileQuery} {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background: rgba(0, 0, 0, .3);
-    left: 0;
-    top: 0;
-    z-index: 49;
-  }
-`
-
-const LogoWrapper = styled.a`
-  display: flex;
-  height: 81px;
-  align-items: center;
-  padding-left: 30px;
-  border-bottom: 1px solid ${COLORS.GRAY};
-  border-right: 1px solid ${COLORS.GRAY};
-`;
-
-const LogoText = styled.div`
-  color: #0080ff;
-  font-size: 22px;
-  line-height: 27px;
-  font-weight: 500;
-  margin-left: 8px;
-
-  span:first-child {
-    font-weight: 800;
-  }
-`;
-
-const MenuWrapper = styled.div`
-  flex-grow: 1;
-`;
-
-const MenuList = styled.ul`
-  padding: 0;
-  padding-right: 14px;
-`;
-
-const MenuItem = styled.li`
-  height: 60px;
-  display: flex;
-  align-items: center;
-`;
 
 const MenuText = styled.span`
   font-size: 18px;
@@ -125,30 +56,30 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
-      {isOpen && <WrapperOverlay onClick={closeSidebar} /> }
-      <Wrapper className={cn({ active: isOpen })}>
-        <LogoWrapper href="/">
+      {isOpen && <div onClick={closeSidebar} role='presentation' className='sm:fixed sm:h-screen sm:w-screen overflow-hidden sm:left-0 sm:top-0 sm:z-[49] text-black opacity-30' /> }
+      <div className={cn('w-[235px] h-screen flex flex-col sm:fixed sm:left-[-235px] sm:z-[50] sm:bg-white sm:transition-all sm:duration-[400ms] sm:active:left-0 sm:active:z-[50]', { active: isOpen })}>
+        <a href="/" className='flex h-[81px] items-center pl-[30px] border-b border-r border-solid border-gray'>
           <LogoIcon />
-          <LogoText>
+          <div className='text-primary text-[22px] leading-[27px] font-medium ml-2 [&>span:first-child]:font-extrabold'>
             <span>SaaS</span>
             <span>gear</span>
-          </LogoText>
-        </LogoWrapper>
-        <MenuWrapper>
-          <MenuList>
+          </div>
+        </a>
+        <div className='flex-grow'>
+          <ul className='p-0 pr-[14px]'>
             {routes
               .filter((route) => route.isSidebar)
               .map((route) => (
-                <MenuItem key={route.path}>
+                <li key={route.path} className='h-[60px] flex items-center'>
                   <NavLinkStyle to={route.path} activeClassName="active" onClick={closeSidebar}>
                     {route.icon}
                     <MenuText>{route.name}</MenuText>
                   </NavLinkStyle>
-                </MenuItem>
+                </li>
               ))}
-          </MenuList>
-        </MenuWrapper>
-      </Wrapper>
+          </ul>
+        </div>
+      </div>
     </>
   );
 };

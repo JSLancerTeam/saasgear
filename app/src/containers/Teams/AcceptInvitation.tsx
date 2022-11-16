@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useTranslation, Trans } from 'react-i18next';
 import { useParams, useHistory } from 'react-router-dom';
 import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
@@ -7,29 +6,7 @@ import verifyTokenQuery from '@/queries/teams/verifyInviteToken';
 import getProfileQuery from '@/queries/auth/getProfile';
 import joinTeamQuery from '@/queries/teams/joinTeam';
 import Logo from '@/components/Common/Logo';
-import {
-  ForgotPasswordWrapper,
-  Overlay,
-  ForgotPasswordContainer,
-  ForgotPasswordText,
-  ForgotPasswordDescription,
-  SquareIconTop,
-  SmallSquareBottom,
-  SmallSquareTop,
-  SmallSquareGrid,
-  SquareIconBottom,
-  CircleIcon,
-} from '@/components/Auth/AuthForm';
 import Button from '@/components/Common/Button';
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-
-  button:first-child {
-    margin-right: 32px;
-  }
-`;
 
 type TeamInfo = {
   teamName?: string;
@@ -81,28 +58,28 @@ const AcceptInvitation: React.FC = () => {
   return loading && getProfileLoading ? (
     <div> {t('Common.text.loading')}</div>
   ) : (
-    <ForgotPasswordWrapper>
-      <Overlay />
-      <ForgotPasswordContainer>
+    <div className='h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative'>
+      <div className='absolute w-full h-full bg-primary z-[-2]' />
+      <div className='w-[762px] mx-auto my-0 text-center bg-white p-10 relative rounded-[5px]'>
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>{t('Accept_invitation.title')}</ForgotPasswordText>
-        <ForgotPasswordDescription>
+        <div className='font-bold text-[26px] leading-9 text-sapphire_blue mt-[3px]'>{t('Accept_invitation.title')}</div>
+        <p className='text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10'>
           <Trans
             components={[<strong></strong>]}
             values={{ teamName: teamInfo?.teamName, owner: teamInfo?.owner }}
           >
             {t('Accept_invitation.have_invitated')}
           </Trans>
-        </ForgotPasswordDescription>
-        <ButtonGroup>
+        </p>
+        <div className='flex justify-center [&>button:first-child]:mr-8'>
           <Button color="primary" onClick={() => handleUserJoinTeam('accept')}>
             {t('Accept_invitation.accept')}
           </Button>
           <Button onClick={() => handleUserJoinTeam('decline')}>{t('Accept_invitation.decline')}</Button>
-        </ButtonGroup>
-        <SquareIconTop>
+        </div>
+        <div className='absolute w-[495px] h-[480px] left-[-400px] top-[-175px] z-[-1]'>
           <svg
             width="496"
             height="482"
@@ -115,8 +92,8 @@ const AcceptInvitation: React.FC = () => {
               stroke="#2291FF"
             />
           </svg>
-        </SquareIconTop>
-        <SmallSquareBottom>
+        </div>
+        <div className='absolute w-[195px] h-[195px] left-[-60px] bottom-[-25px] z-[-1]'>
           <svg
             width="195"
             height="195"
@@ -129,8 +106,8 @@ const AcceptInvitation: React.FC = () => {
               fill="#0075E8"
             />
           </svg>
-        </SmallSquareBottom>
-        <SmallSquareTop>
+        </div>
+        <div className='absolute w-[114px] h-[121px] top-[-57px] right-[-54px] z-[-1]'>
           <svg
             width="114"
             height="121"
@@ -143,8 +120,8 @@ const AcceptInvitation: React.FC = () => {
               fill="#1788F8"
             />
           </svg>
-        </SmallSquareTop>
-        <SmallSquareGrid>
+        </div>
+        <div className='absolute w-[129px] h-[121px] top-[-105px] right-[-300px]'>
           <svg
             width="131"
             height="123"
@@ -187,8 +164,8 @@ const AcceptInvitation: React.FC = () => {
               />
             </g>
           </svg>
-        </SmallSquareGrid>
-        <SquareIconBottom>
+        </div>
+        <div className='absolute w-[593px] h-[528px] right-[-400px] bottom-[-190px] z-[-1]'>
           <svg
             width="594"
             height="523"
@@ -201,8 +178,8 @@ const AcceptInvitation: React.FC = () => {
               stroke="#2291FF"
             />
           </svg>
-        </SquareIconBottom>
-        <CircleIcon>
+        </div>
+        <div className='absolute w-[58px] h-[58px] bottom-[-26px] right-[164px] z-[-1]'>
           <svg
             width="60"
             height="60"
@@ -212,9 +189,9 @@ const AcceptInvitation: React.FC = () => {
           >
             <circle cx="30" cy="30" r="29" stroke="#2291FF" />
           </svg>
-        </CircleIcon>
-      </ForgotPasswordContainer>
-    </ForgotPasswordWrapper>
+        </div>
+      </div>
+    </div>
   );
 }
 

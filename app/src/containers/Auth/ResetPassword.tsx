@@ -73,8 +73,8 @@ const ResetPassword: React.FC = () => {
     }
   }
   return (
-    <ForgotPasswordWrapper>
-      <Overlay />
+    <div className='h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative'>
+      <div className='absolute w-full h-full bg-primary z-[-2]' />
       <ForgotPasswordContainer>
         <ResetPasswordForm
           onSubmit={handleSubmit(onSubmit)}
@@ -102,7 +102,7 @@ const ResetPassword: React.FC = () => {
           <img src={circleSmall} alt="" />
         </CircleIcon>
       </ForgotPasswordContainer>
-    </ForgotPasswordWrapper>
+    </div>
   );
 }
 

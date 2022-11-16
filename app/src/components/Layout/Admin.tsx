@@ -1,42 +1,20 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
 
-import { COLORS, mobileQuery } from '@/constants/style';
 import routes from '@/routes';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
-
-const LayoutWrapper = styled.div`
-  display: flex;
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
-
-const Content = styled.div`
-  flex-grow: 1;
-  background-color: ${COLORS.BODY};
-  overflow-y: auto;
-  padding: 32px 15px;
-  ${mobileQuery} {
-    min-height: calc(100vh - 64px);
-  }
-`;
 
 type Props = {
   signout: () => void;
 }
 
 const AdminLayout: React.FC<Props> = ({ signout }) => (
-  <LayoutWrapper>
+  <div className='flex'>
     <Sidebar />
-    <ContentWrapper>
+    <div className='flex flex-col flex-grow'>
       <Topbar signout={signout} />
-      <Content>
+      <div className='flex-grow bg-body overflow-y-auto px-[15px] py-[32px] sm:min-h-[calc(100vh_-_64px)]'>
         <Switch>
           {routes.map((route) => (
             <Route
@@ -48,9 +26,9 @@ const AdminLayout: React.FC<Props> = ({ signout }) => (
           ))}
           <Redirect from="*" to="/dashboard" />
         </Switch>
-      </Content>
-    </ContentWrapper>
-  </LayoutWrapper>
+      </div>
+    </div>
+  </div>
 );
 
 export default AdminLayout;

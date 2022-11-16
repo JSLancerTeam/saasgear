@@ -1,14 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import goBackIcon from '@/assets/images/svg/back.svg';
-
-const IconBack = styled.div`
-  text-align: left;
-  margin-bottom: 16px;
-  display: block;
-  cursor: pointer;
-`;
 
 type Props = {
   link?: string | null;
@@ -25,9 +17,9 @@ const GoBack: React.FC<Props> = ({ link }) => {
   }
 
   return (
-    <IconBack onClick={goBack}>
+    <div onClick={goBack} role='presentation' className='text-left mb-4 block cursor-pointer'>
       <img src={goBackIcon} alt="" />
-    </IconBack>
+    </div>
   );
 }
 

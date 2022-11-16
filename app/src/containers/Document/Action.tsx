@@ -11,20 +11,8 @@ import DocumentForm from '@/components/Document/DocumentForm';
 import createDocumentQuery from '@/queries/document/createDocument';
 import updateDocumentQuery from '@/queries/document/updateDocument';
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
-import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
 import Button from '@/components/Common/Button';
 import { mobileQuery } from '@/constants/style';
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 26px;
-`;
-
-const TitlePageStyle = styled(TitlePage)`
-  margin-bottom: 0;
-`;
 
 const SaveBtn = styled(Button)`
   width: 264px;
@@ -103,12 +91,12 @@ const ActionDocument: React.FC = () => {
 
   return (
     <div>
-      <Header>
-        <TitlePageStyle>
+      <div className="flex justify-between items-center mb-[26px]">
+        <h3 className="font-bold text-[26px] leading-9 text-sapphire_blue">
           {documentData?.getDocumentDetail?.name
             ? documentData.getDocumentDetail.name
             : t('Common.title.new_document')}
-        </TitlePageStyle>
+        </h3>
         <SaveBtn
           color="primary"
           onClick={handleSubmit(onSubmit)}
@@ -116,8 +104,8 @@ const ActionDocument: React.FC = () => {
         >
           {isCreating || isUpdating ? t('Common.text.please_wait') : t('Common.text.save')}
         </SaveBtn>
-      </Header>
-      <ContentPage>
+      </div>
+      <div className="bg-white border border-solid border-dark_grey shadow-[0px_2px_4px_rgba(28,41,90,0.0367952)] rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
         <DocumentForm
           editorContent={editorContent}
           onSubmit={handleSubmit(onSubmit)}
@@ -127,7 +115,7 @@ const ActionDocument: React.FC = () => {
           formErrors={errors}
           apiError={createError?.graphQLErrors?.[0]?.extensions?.code || updateError?.graphQLErrors?.[0]?.extensions?.code}
         />
-      </ContentPage>
+      </div>
     </div>
   );
 };

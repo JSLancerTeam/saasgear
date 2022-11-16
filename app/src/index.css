@@ -29,4 +29,17 @@
     overflow: auto;
   }
 
+  .topbar_avatar img {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+
+  @screen sm {
+    .topbar_avatar img {
+      width: 33.33px;
+      height: 33.33px;
+    }
+  }
 }

@@ -6,14 +6,10 @@ interface Props {
   [key: string]: unknown;
 }
 
-const FormControl: React.FC<Props> = ({ className, children, ...props }) => (
+const FormControl: React.FC<Props> = ({ className = "", children, ...props }) => (
   <div className={`w-full block ${className}`} {...props}>
     {children}
   </div>
 )
-
-FormControl.defaultProps = {
-  className: "",
-};
 
 export default React.memo(FormControl);

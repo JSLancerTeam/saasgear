@@ -1,47 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
-import { COLORS, mobileQuery } from '@/constants/style';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import Input from '../Common/Input/Input';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
-
-const Form = styled.form`
-  margin: 24px 0;
-`;
-
-const FormGroupWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 32px;
-
-  ${mobileQuery} {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const DeleteLink = styled.div`
-  font-size: 14px;
-  line-height: 24px;
-  color: ${COLORS.RED};
-  margin-right: 25px;
-  cursor: pointer;
-
-  ${mobileQuery} {
-    margin-bottom: 10px;
-  }
-`;
 
 type Props = ReactHookFormType & {
   loading?: boolean;
@@ -53,23 +18,25 @@ const AccountForm: React.FC<Props> = ({ onSubmit, register, loading, apiError, o
   const { t } = useTranslation();
 
   return (
-    <Form onSubmit={onSubmit}>
-      <FormGroupWrapper>
+    <form onSubmit={onSubmit} className="mx-0 my-6">
+      <div className="flex justify-between">
         <FormGroup>
           <FormGroupLabel>{t('Common.label.your_name')}</FormGroupLabel>
           <Input name="name" ref={register} />
         </FormGroup>
-      </FormGroupWrapper>
+      </div>
       <FormGroup>
         <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
         <Input type="email" name="email" ref={register} disabled />
       </FormGroup>
-      <ButtonGroup>
-        <DeleteLink onClick={openPopupDeleteAccount}>{t('Profile.text.delete')}</DeleteLink>
+      <div className="flex justify-between items-center mt-8 sm:flex-col sm:items-start">
+        <div onClick={openPopupDeleteAccount} role="presentation" className="text-[14px] leading-6 text-red mr-[25px] cursor-pointer sm:mb-[10px]">
+          {t('Profile.text.delete')}
+        </div>
         <Button type="submit" color="primary" disabled={loading}>{loading ? t('Common.text.please_wait') : t('Common.text.save_and_update')}</Button>
-      </ButtonGroup>
+      </div>
       {apiError && <ErrorText message={apiError} />}
-    </Form>
+    </form>
   );
 };
 export default AccountForm;

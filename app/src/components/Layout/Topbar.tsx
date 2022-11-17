@@ -10,7 +10,7 @@ import { toggleSidebar } from '@/features/admin/sidebar';
 import type { RootState } from '@/config/store';
 import { resolveAvatarPath } from '@/helpers/avatar.helper';
 import Avatar from '@/assets/images/avatar.jpg';
-import { COLORS, mobileQuery } from '@/constants/style';
+import { mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDownIcon } from '@/assets/images/svg/arrow-down-18.svg';
 import { ReactComponent as MenuIcon } from '@/assets/images/svg/menu.svg';
 import Input from '@/components/Common/Input';

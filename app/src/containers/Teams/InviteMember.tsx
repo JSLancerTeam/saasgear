@@ -4,7 +4,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
-import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
@@ -13,11 +12,6 @@ import { addTeamMember } from '@/features/admin/team';
 import InviteMemberForm from '@/components/Team/InviteMemberForm';
 import ListTeamMember from '@/components/Team/ListTeamMember';
 import InviteMemberQuery from '@/queries/teams/inviteMember';
-import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
-
-const ListInvitation = styled.div`
-  margin-top: 32px;
-`;
 
 const inviteMemberSchema = yup.object().shape({
   emailMember: yup
@@ -68,8 +62,8 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
   }
 
   return (
-    <ContentPage>
-      <TitleContent>{t('Team.invite')}</TitleContent>
+    <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-8">{t('Team.invite')}</h5>
       <InviteMemberForm
         register={register}
         onSubmit={handleSubmit(onSubmit)}
@@ -78,15 +72,15 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
         apiError={error?.message}
       />
       {teamMembers && teamMembers.length > 0 && (
-        <ListInvitation>
-          <TitleContent>{t('Team.text.pending')}</TitleContent>
+        <div className="mt-8">
+          <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-8">{t('Team.text.pending')}</h5>
           <ListTeamMember
             handleAction={onActionInlistMember}
             teamMembers={teamMembers}
           />
-        </ListInvitation>
+        </div>
       )}
-    </ContentPage>
+    </div>
   );
 }
 

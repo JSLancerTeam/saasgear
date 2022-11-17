@@ -1,37 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
 // Icons
 import FaceBookSvg from '@/assets/images/svg/facebook.svg';
 import GoogleSvg from '@/assets/images/svg/google.svg';
 import GithubSvg from '@/assets/images/svg/github.svg';
-
-const SocialButton = styled.a`
-  border: 1px solid rgb(156 163 175 / 38%);
-  border-radius: 5px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SocialList = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 15px;
-  justify-content: center;
-  & > a {
-    width: 40px;
-    height: 40px;
-    margin-left: 10px;
-    &:first-child {
-      margin-left: 0;
-    }
-    & > img {
-      max-width: 35px;
-    }
-  }
-`;
 
 const SocialAuth: React.FC = () => {
   const facebookLoginUrl = `https://www.facebook.com/v9.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/facebook/callback&scope=email`;
@@ -39,23 +11,23 @@ const SocialAuth: React.FC = () => {
   const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_DOMAIN}/social/github/callback&scope=user`;
 
   return (
-    <SocialList>
+    <div className="flex justify-center items-center mt-[15px] [&>a]:w-10 [&>a]:h-10 [&>a]:ml-[10px] [&>a:first-child]:ml-0 [&>a>img]:max-w-[35px]">
       {process.env.REACT_APP_FACEBOOK_CLIENT_KEY && (
-        <SocialButton href={facebookLoginUrl}>
+        <a href={facebookLoginUrl} className="border border-solid border-[#9CA3AF] border-opacity-[0.38] rounded-[5px] h-10 flex justify-center items-center">
           <img src={FaceBookSvg} alt="Facebook icon" />
-        </SocialButton>
+        </a>
       )}
       {process.env.REACT_APP_GOOGLE_CLIENT_KEY && (
-        <SocialButton href={googleLoginUrl}>
+        <a href={googleLoginUrl} className="border border-solid border-[#9CA3AF] border-opacity-[0.38] rounded-[5px] h-10 flex justify-center items-center">
           <img src={GoogleSvg} alt="Google icon" />
-        </SocialButton>
+        </a>
       )}
       {process.env.REACT_APP_GITHUB_CLIENT_KEY && (
-        <SocialButton href={githubUrl}>
+        <a href={githubUrl} className="border border-solid border-[#9CA3AF] border-opacity-[0.38] rounded-[5px] h-10 flex justify-center items-center">
           <img src={GithubSvg} alt="Github icon" />
-        </SocialButton>
+        </a>
       )}
-    </SocialList>
+    </div>
   );
 };
 

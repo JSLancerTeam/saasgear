@@ -1,17 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import type { ITeamMember } from "@/features/admin/team";
 import { Table } from '../Common/Table';
 import Button from '../Common/Button';
-
-const ActionTd = styled.td`
-  width: 20%;
-
-  button:first-child {
-    margin-right: 20px;
-  }
-`;
 
 type Props = {
   teamMembers: ITeamMember[];
@@ -35,10 +26,10 @@ const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
               <td width="70%">{it.email}</td>
               <td width="10%">{it.isOwner ? 'admin' : 'member'}</td>
               {!!handleAction && (
-                <ActionTd>
+                <td className="w-1/5 [&_button:first-child]:mr-[20px]">
                   <Button>{t('Common.text.cancel')}</Button>
                   <Button color="primary">{t('Team.text.invitation')}</Button>
-                </ActionTd>
+                </td>
               )}
             </tr>
           ))

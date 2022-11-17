@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from './Button';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
-`;
-
 const PaginationBtn = styled(Button)`
   width: 33px;
   height: 36px;
@@ -77,7 +71,7 @@ const Pagination: React.FC<Props> = ({ total, size = 20, onPageChange }) => {
   }
 
   return pages && pages.length > 1 ? (
-    <Wrapper>
+    <div className="flex justify-end mt-4">
       <PaginationBtn
         type="button"
         onClick={() => handleControl('prev')}
@@ -102,7 +96,7 @@ const Pagination: React.FC<Props> = ({ total, size = 20, onPageChange }) => {
       >
         &gt;
       </PaginationBtn>
-    </Wrapper>
+    </div>
   ) : null;
 };
 

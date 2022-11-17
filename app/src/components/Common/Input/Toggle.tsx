@@ -1,22 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
-import { COLORS, mobileQuery } from '@/constants/style';
-
-const InputWrapper = styled.div``;
-
-const Label = styled.div`
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
-  opacity: 0.9;
-  color: ${COLORS.WHITE_BLUE};
-  margin-bottom: 11px;
-  text-transform: uppercase;
-
-  ${mobileQuery} {
-    margin-top: 11px;
-  }
-`;
+import { COLORS } from '@/constants/style';
 
 const Input = styled.input`
   display: none;
@@ -31,51 +15,27 @@ const Input = styled.input`
   }
 `;
 
-const LabelInput = styled.label`
-  cursor: pointer;
-  text-indent: -9999px;
-  width: 46px;
-  height: 24px;
-  background: ${COLORS.GRAY};
-  display: block;
-  border-radius: 8px;
-  position: relative;
-
-  &:active:after {
-    width: 25px;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-    background: #ffffff;
-    border-radius: 6px;
-    transition: 0.3s;
-  }
-`;
-
 type Props = {
   defaultChecked: boolean;
   label: string;
+  className?: string;
   [x: string]: unknown
 }
 
-const Toggle = forwardRef(({ defaultChecked, label, ...props }: Props, ref: React.Ref<HTMLInputElement>) => (
-  <InputWrapper>
-    {label && <Label>{label}</Label>}
+const Toggle = forwardRef(({ defaultChecked, label, className, ...props }: Props, ref: React.Ref<HTMLInputElement>) => (
+  <div>
+    {label && <div className="font-bold text-[12px] leading-[15px] opacity-90 text-white_blue mb-[11px] uppercase sm:mt-[11px]">{label}</div>}
     <Input
       type="checkbox"
       defaultChecked={defaultChecked}
+      className={`hidden [&:checked+label]:bg-green [&:checked+label::after]:left-[calc(100%_-_2px)] [&:checked+label::after]:translate-x-[-100%] ${className}`}
       {...props}
       ref={ref}
       id="switch"
     />
-    <LabelInput htmlFor="switch" />
-  </InputWrapper>
+    <label htmlFor="switch" className="cursor-pointer indent-[-9999px] w-[46px] h-6 bg-gray block rounded-lg relative active:after:w-[25px] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:w-[20px] after:h-[20px] after:bg-white after:rounded-md after:duration-300" />
+  </div>
 ));
 
 export default React.memo(Toggle);
+

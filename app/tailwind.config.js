@@ -23,11 +23,19 @@ module.exports = {
       'body': '#F4F7FC',
       'black': '#000000',
       'dark_grey': '#eaedf7',
+      'dark_gray': '#7c88b1'
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      'transitionTimingFunction': {
+        'only-ease': 'cubic-bezier(0.25, 0.1, 0.25, 1.0)'
+      },
+      'boxShadow': {
+        'xxl': '0px 2px 4px rgba(28, 41, 90, 0.0367952)',
+      }
+    },
     screens: {
       'sm': {'max': '768px'},
     }

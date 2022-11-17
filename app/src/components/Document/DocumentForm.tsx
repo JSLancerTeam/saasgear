@@ -12,11 +12,6 @@ import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
 import Input from '../Common/Input/Input';
 
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const SaveBtn = styled(Button)`
   width: 264px;
   ${mobileQuery} {
@@ -62,11 +57,11 @@ const DocumentForm: React.FC<Props> = ({
       </FormGroup>
       {apiError && <ErrorText message={`Document.error.${apiError}`} />}
 
-      <ButtonGroup>
+      <div className="flex justify-end">
         <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
           {isSubmitting ? t('Common.text.please_wait') : t('Common.text.save')}
         </SaveBtn>
-      </ButtonGroup>
+      </div>
     </form>
   );
 };

@@ -13,31 +13,6 @@ import Button from '@/components/Common/Button';
 import { ReactComponent as AddIcon } from '@/assets/images/svg/add.svg';
 import { mobileQuery } from '@/constants/style';
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 26px;
-
-  ${mobileQuery} {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const TitlePageStyle = styled(TitlePage)`
-  margin-bottom: 0;
-`;
-
-const RightHeader = styled.div`
-  display: flex;
-
-  ${mobileQuery} {
-    margin-top: 15px;
-    width: 100%;
-  }
-`;
-
 const SearchInput = styled(Input)`
   width: 284px;
   margin-right: 38px;
@@ -57,14 +32,6 @@ const CreateBtn = styled(Button)`
   }
 `;
 
-const CreateBtnContent = styled.span<{ mobile?: boolean }>`
-  display: ${(props) => props.mobile ? 'none' : 'block'};
-
-  ${mobileQuery} {
-    display: ${(props) => props.mobile ? 'block' : 'none'};
-  }
-`
-
 const ListDocument: React.FC = () => {
   const history = useHistory();
   const { t } = useTranslation();
@@ -76,19 +43,21 @@ const ListDocument: React.FC = () => {
 
   return (
     <div>
-      <Header>
-        <TitlePageStyle>{t('Document.title')}</TitlePageStyle>
-        <RightHeader>
+      <div className="flex justify-between items-center mb-[26px] sm:flex-col sm:items-start">
+        <h3 className="font-bold text-[26px] leading-9 text-sapphire_blue mb-0">
+          {t('Document.title')}
+        </h3>
+        <div className="flex sm:mt-[15px] sm:w-full">
           <SearchInput placeholder={t('Common.placeholder.search')} />
           <CreateBtn
             color="primary"
             onClick={() => history.push('/document/create')}
           >
-            <CreateBtnContent>{t('Document.create')}</CreateBtnContent>
-            <CreateBtnContent mobile><AddIcon /></CreateBtnContent>
+            <span className="block sm:hidden">{t('Document.create')}</span>
+            <span className="hidden sm:block"><AddIcon /></span>
           </CreateBtn>
-        </RightHeader>
-      </Header>
+        </div>
+      </div>
       <ContentPage>
         <DocumentTable
           data={data?.getDocuments?.documents}

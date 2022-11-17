@@ -1,31 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from '@/typeReactHookForm';
-import { mobileQuery } from '@/constants/style';
-import FormGroup from '../Common/FormGroup';
-import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
 import FormControl from '../Common/FormControl';
 import Input from '../Common/Input/Input';
-
-
-const ButtonGroup = styled.div`
-  display: flex;
-  margin-top: 30px;
-
-  button:first-child {
-    margin-right: 16px;
-  }
-  button {
-    ${mobileQuery} {
-      width: 100%;
-    }
-  }
-`;
 
 type Props = ReactHookFormType & {
   isEdit?: boolean;
@@ -43,8 +24,10 @@ const TeamForm: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <form onSubmit={onSubmit}>
-      <FormGroup>
-        <FormGroupLabel>{t('Team.label.name')}</FormGroupLabel>
+      <div className="mb-4 w-full block">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">
+          {t('Team.label.name')}
+        </label>
         <FormControl>
           <Input
             type="text"
@@ -56,9 +39,9 @@ const TeamForm: React.FC<Props> = ({
             <ErrorText message={String(t(formErrors.teamName.message))} />
           )}
         </FormControl>
-      </FormGroup>
-      <FormGroup>
-        <FormGroupLabel>{t('Team.label.id')}</FormGroupLabel>
+      </div>
+      <div className="mb-4 w-full block">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Team.label.id')}</label>
         <FormControl>
           <Input
             type="text"
@@ -70,13 +53,13 @@ const TeamForm: React.FC<Props> = ({
             <ErrorText message={String(t(formErrors.teamID.message))} />
           )}
         </FormControl>
-      </FormGroup>
-      <ButtonGroup>
+      </div>
+      <div className="flex mt-[30px] [&_button:first-child]:mr-4 [&_button]:sm:w-full">
         <Button color="primary" type="submit" disabled={loading}>
           {isEdit ? t('Team.text.save') : t('Team.text.add')}
         </Button>
         <Button onClick={() => history.push('/teams')}>{t('Common.text.cancel')}</Button>
-      </ButtonGroup>
+      </div>
     </form>
   );
 }

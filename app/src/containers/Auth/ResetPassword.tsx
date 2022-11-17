@@ -10,17 +10,7 @@ import { useTranslation } from 'react-i18next';
 import ResetPasswordForm from '@/components/Auth/ResetPasswordForm';
 import getQueryParam from '@/utils/getQueryParam';
 import resetPasswordQuery from '@/queries/auth/resetPassword';
-import {
-  ForgotPasswordWrapper,
-  Overlay,
-  ForgotPasswordContainer,
-  SquareIconTop,
-  SmallSquareBottom,
-  SmallSquareTop,
-  SmallSquareGrid,
-  SquareIconBottom,
-  CircleIcon,
-} from '@/components/Auth/AuthForm';
+
 import squareRadiusTop from '@/assets/images/svg/square-radius-top.svg';
 import squareRadiusTopPrimary from '@/assets/images/svg/square-radius-top-primary.svg';
 import squareRadiusTopPrimarySmall from '@/assets/images/svg/square-radius-top-primary-small.svg';
@@ -75,7 +65,7 @@ const ResetPassword: React.FC = () => {
   return (
     <div className='h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative'>
       <div className='absolute w-full h-full bg-primary z-[-2]' />
-      <ForgotPasswordContainer>
+      <div className="w-[762px] mx-auto my-0 text-center bg-white p-10 rounded-[5px] relative">
         <ResetPasswordForm
           onSubmit={handleSubmit(onSubmit)}
           register={register}
@@ -83,25 +73,25 @@ const ResetPassword: React.FC = () => {
           apiError={error?.message}
           isSubmitting={loading}
         />
-        <SquareIconTop>
+        <div className="absolute w-[495px] h-[480px] left-[-400px] top-[-175px] z-[-1]">
           <img src={squareRadiusTop} alt="" />
-        </SquareIconTop>
-        <SmallSquareBottom>
+        </div>
+        <div className="absolute w-[195px] h-[195px] left-[-60px] bottom-[-25px] z-[-1]">
           <img src={squareRadiusTopPrimary} alt="" />
-        </SmallSquareBottom>
-        <SmallSquareTop>
+        </div>
+        <div className="absolute w-[114px] h-[121px] top-[-57px] right-[-54px] z-[-1]">
           <img src={squareRadiusTopPrimarySmall} alt="" />
-        </SmallSquareTop>
-        <SmallSquareGrid>
+        </div>
+        <div className="absolute w-[129px] h-[121px] top-[-105px] right-[-300px]">
           <img src={squareGrid} alt="" />
-        </SmallSquareGrid>
-        <SquareIconBottom>
+        </div>
+        <div className="absolute w-[593px] h-[528px] right-[-400px] bottom-[-190px] z-[-1]">
           <img src={squareRadiusTopBig} alt="" />
-        </SquareIconBottom>
-        <CircleIcon>
+        </div>
+        <div className="absolute w-[58px] h-[58px] bottom-[-26px] right-[164px] z-[-1]">
           <img src={circleSmall} alt="" />
-        </CircleIcon>
-      </ForgotPasswordContainer>
+        </div>
+      </div>
     </div>
   );
 }

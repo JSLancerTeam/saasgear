@@ -105,7 +105,7 @@ const ActionDocument: React.FC = () => {
           {isCreating || isUpdating ? t('Common.text.please_wait') : t('Common.text.save')}
         </SaveBtn>
       </div>
-      <div className="bg-white border border-solid border-dark_grey shadow-[0px_2px_4px_rgba(28,41,90,0.0367952)] rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
         <DocumentForm
           editorContent={editorContent}
           onSubmit={handleSubmit(onSubmit)}

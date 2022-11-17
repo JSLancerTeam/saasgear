@@ -13,10 +13,6 @@ import Button from '@/components/Common/Button';
 import FormGroup from '@/components/Common/FormGroup';
 import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
-const StripeFormContainer = styled.form`
-  width: 300px;
-`;
-
 const CardNumberEl = styled(CardNumberElement)`
   padding: 11.6px 10px;
   background: ${COLORS.LIGHT_GRAY};
@@ -27,14 +23,6 @@ const CardNumberEl = styled(CardNumberElement)`
   text-align: center;
   color: ${COLORS.WHITE_GRAY};
   box-sizing: border-box;
-`;
-
-const FormGroupCardExpire = styled(FormGroup)`
-  margin-right: 10px;
-`;
-
-const FormGroupCardCvc = styled(FormGroup)`
-  margin-left: 10px;
 `;
 
 const CardExpiryElementEl = styled(CardExpiryElement)`
@@ -76,12 +64,6 @@ const BackButton = styled(Button)`
     color: ${COLORS.RED};
     width: 20px;
   }
-`;
-
-const RowGroup = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 type Props = {
@@ -138,7 +120,7 @@ const StripeForm: React.FC<Props> = ({
   }
 
   return (
-    <StripeFormContainer onSubmit={onSubmit} className={className}>
+    <form onSubmit={onSubmit} className={`w-[300px] ${className}`}>
       <div>
         {onGoBack && <BackButton type="button" onClick={onGoBack} />}
         <div>
@@ -148,16 +130,16 @@ const StripeForm: React.FC<Props> = ({
             </FormGroupLabel>
             <CardNumberEl className="card-el" />
           </FormGroup>
-          <RowGroup>
-            <FormGroupCardExpire>
+          <div className="flex items-center justify-between">
+            <div className="block w-full mb-4 mr-[10px]">
               <FormGroupLabel htmlFor="first_name">{t('Payment.label.expiration')}</FormGroupLabel>
               <CardExpiryElementEl />
-            </FormGroupCardExpire>
-            <FormGroupCardCvc>
+            </div>
+            <div className="block w-full mb-4 ml-[10px]">
               <FormGroupLabel htmlFor="last_name">{t('Payment.label.cvc')}</FormGroupLabel>
               <CardCvcElementEl />
-            </FormGroupCardCvc>
-          </RowGroup>
+            </div>
+          </div>
         </div>
       </div>
       {error && (
@@ -171,7 +153,7 @@ const StripeForm: React.FC<Props> = ({
       >
         {isSubmitting ? t('Common.text.please_wait') : (submitText ?? t('Common.text.submit'))}
       </SubmitButton>
-    </StripeFormContainer>
+    </form>
   );
 };
 

@@ -36,6 +36,10 @@
     object-fit: cover;
   }
 
+  .transform_modal {
+    transform: translate(-50%, -50%);
+  }
+
   @screen sm {
     .topbar_avatar img {
       width: 33.33px;

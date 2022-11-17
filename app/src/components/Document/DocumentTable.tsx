@@ -32,6 +32,7 @@ type Props = {
 
 const DocumentTable: React.FC<Props> = ({ data, total, loading, onFetch }) => {
   const { t } = useTranslation();
+  console.log(total);
   return (
     <TableResponsive>
       <Table>

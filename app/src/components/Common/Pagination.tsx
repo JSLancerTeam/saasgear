@@ -3,19 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from './Button';
 
-const PaginationBtn = styled(Button)`
-  width: 33px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-
-  & + & {
-    margin-left: 8px;
-  }
-`;
-
 function generatePages(total: number, current: number): Array<'...' | number> {
   if (total <= 5) {
     return Array.from(Array(total > 0 ? total : 0).keys());
@@ -72,38 +59,35 @@ const Pagination: React.FC<Props> = ({ total, size = 20, onPageChange }) => {
 
   return pages && pages.length > 1 ? (
     <div className="flex justify-end mt-4">
-      <PaginationBtn
+      <Button
         type="button"
         onClick={() => handleControl('prev')}
+        className="w-[33px] h-9 flex justify-center items-center p-0"
         disabled={currentPage === 0}
       >
         &lt;
-      </PaginationBtn>
+      </Button>
       {pages.map((page) => (
-        <PaginationBtn
+        <Button
           type="button"
           color={currentPage === page ? 'primary' : 'default'}
           key={page}
+          className="w-[33px] h-9 flex justify-center items-center p-0 ml-2"
           onClick={() => handleClickPage(page)}
         >
           {page !== '...' ? page + 1 : page}
-        </PaginationBtn>
+        </Button>
       ))}
-      <PaginationBtn
+      <Button
         type="button"
         onClick={() => handleControl('next')}
+        className="w-[33px] h-9 flex justify-center items-center p-0 ml-2"
         disabled={currentPage === totalPage - 1}
       >
         &gt;
-      </PaginationBtn>
+      </Button>
     </div>
   ) : null;
-};
-
-Pagination.propTypes = {
-  total: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  size: PropTypes.number,
 };
 
 export default memo(Pagination);

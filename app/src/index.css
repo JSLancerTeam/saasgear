@@ -40,6 +40,22 @@
     transform: translate(-50%, -50%);
   }
 
+  .editor-wrapper {
+    background: theme('colors.light_gray');
+    border: 1px solid theme('colors.white_blue');
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .editor {
+    padding: 10px;
+  }
+
+  .toolbar {
+    border: none;
+    border-bottom: 1px solid theme('colors.white_blue');
+  }
+
   @screen sm {
     .topbar_avatar img {
       width: 33.33px;

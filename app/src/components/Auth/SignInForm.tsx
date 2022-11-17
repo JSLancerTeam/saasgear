@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
@@ -11,12 +10,6 @@ import ErrorText from '@/components/Common/ErrorText';
 import Logo from '@/components/Common/Logo';
 import SocialAuth from '@/containers/Auth/SocialAuth';
 import { ReactHookFormType } from "@/typeReactHookForm";
-
-const SubmitButton = styled(Button)`
-  width: 100%;
-  text-transform: uppercase;
-  margin-top: 32px;
-`;
 
 type Props = ReactHookFormType & {
   isSubmitting: boolean;
@@ -76,9 +69,9 @@ const SignInForm: React.FC<Props> = ({
               {t('Common.label.remember_label')}
             </label>
           </div>
-          <SubmitButton color="primary" type="submit" disabled={isSubmitting}>
+          <Button color="primary" type="submit" disabled={isSubmitting} className='w-full uppercase mt-8'>
             {isSubmitting ? t('Common.text.please_wait') : t('Sign_in.text.button_text')}
-          </SubmitButton>
+          </Button>
           <div>
             <Link to="/auth/forgot-password" className='text-[14px] leading-[24px] text-light_primary text-right block mt-6'>
               {t('Sign_in.text.forgot_password')}

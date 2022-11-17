@@ -1,29 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
-import { mobileQuery } from '@/constants/style';
 import ErrorText from '../Common/ErrorText';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import Input from '../Common/Input/Input';
 import Button from '../Common/Button';
-
-const Form = styled.form`
-  margin: 24px 0;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 32px;
-
-  ${mobileQuery} {
-    justify-content: flex-start;
-  }
-`;
 
 type Props = ReactHookFormType & {
   apiError?: string;
@@ -40,7 +23,7 @@ const SecurityForm: React.FC<Props> = ({
   const { t } = useTranslation();
 
   return (
-    <Form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="mx-0 my-6">
       <FormGroup>
         <FormGroupLabel>{t('Profile.text.current_password')}</FormGroupLabel>
         <Input type="password" name="currentPassword" ref={register} />
@@ -62,13 +45,13 @@ const SecurityForm: React.FC<Props> = ({
           <ErrorText message={String(t(formErrors.confirmPassword.message))} />
         )}
       </FormGroup>
-      <ButtonGroup>
+      <div className='flex justify-end items-center mt-8 sm:justify-start'>
         <Button type="submit" color="primary" disabled={isSubmitting}>
           {isSubmitting ? t('Common.text.please_wait') : t('Profile.text.update_password')}
         </Button>
-      </ButtonGroup>
+      </div>
       {apiError && <ErrorText message={String(t(`Profile.error.password.${apiError}`))} />}
-    </Form>
+    </form>
   );
 };
 

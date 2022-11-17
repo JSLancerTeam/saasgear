@@ -2,18 +2,9 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 
 import Pagination from '../Common/Pagination';
 import { Table } from '../Common/Table';
-
-const TableResponsive = styled.div`
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-`;
 
 type IData = {
   id: string;
@@ -32,9 +23,9 @@ type Props = {
 
 const DocumentTable: React.FC<Props> = ({ data, total, loading, onFetch }) => {
   const { t } = useTranslation();
-  console.log(total);
+
   return (
-    <TableResponsive>
+    <div className="block w-full overflow-x-auto table_responsive">
       <Table>
         <thead>
           <tr>
@@ -81,7 +72,7 @@ const DocumentTable: React.FC<Props> = ({ data, total, loading, onFetch }) => {
           </div>
         </div>
       )}
-    </TableResponsive>
+    </div>
   );
 };
 

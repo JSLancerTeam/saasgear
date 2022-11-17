@@ -1,6 +1,4 @@
 import React, { useState, useEffect, memo } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Button from './Button';
 
 function generatePages(total: number, current: number): Array<'...' | number> {

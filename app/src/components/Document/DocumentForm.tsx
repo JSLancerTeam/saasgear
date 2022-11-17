@@ -1,23 +1,14 @@
 import React, { memo } from 'react';
 import { Controller, Control } from 'react-hook-form';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { ReactHookFormType } from "@/typeReactHookForm";
 
-import { mobileQuery } from '@/constants/style';
 import WYSIWYGEditor from './WYSIWYG';
 import FormGroup from '../Common/FormGroup';
 import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
 import Input from '../Common/Input/Input';
-
-const SaveBtn = styled(Button)`
-  width: 264px;
-  ${mobileQuery} {
-    width: 100%;
-  }
-`;
 
 type Props = ReactHookFormType & {
   editorContent?: string;
@@ -58,9 +49,9 @@ const DocumentForm: React.FC<Props> = ({
       {apiError && <ErrorText message={`Document.error.${apiError}`} />}
 
       <div className="flex justify-end">
-        <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
+        <Button color="primary" type="submit" disabled={isSubmitting} className="w-[264px] sm:w-full">
           {isSubmitting ? t('Common.text.please_wait') : t('Common.text.save')}
-        </SaveBtn>
+        </Button>
       </div>
     </form>
   );

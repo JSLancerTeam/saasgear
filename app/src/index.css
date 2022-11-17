@@ -56,6 +56,11 @@
     border-bottom: 1px solid theme('colors.white_blue');
   }
 
+  .table_responsive {
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
   @screen sm {
     .topbar_avatar img {
       width: 33.33px;

@@ -1,15 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import type { Team } from "@/features/admin/team";
 import { Table } from '../Common/Table';
 import Button from '../Common/Button';
-
-const AddTeamBtn = styled(Button)`
-  margin-top: 32px;
-`;
 
 type Props = {
   teams: Team[];
@@ -39,9 +34,9 @@ const ListTeam: React.FC<Props> = ({ teams }) => {
           ))}
         </tbody>
       </Table>
-      <AddTeamBtn color="primary" onClick={() => history.push('/teams/new')}>
+      <Button color="primary" onClick={() => history.push('/teams/new')} className="mt-8">
         {t('Team.text.add')}
-      </AddTeamBtn>
+      </Button>
     </div>
   );
 }

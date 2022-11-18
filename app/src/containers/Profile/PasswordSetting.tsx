@@ -1,82 +1,16 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@apollo/client';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import cn from 'classnames';
 
 import SecurityForm from '@/components/Profile/SecurityForm';
 import changePasswordQuery from '@/queries/auth/changePassword';
-import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDown24Icon } from '@/assets/images/svg/arrow-down-24.svg';
 import { ReactComponent as SettingIcon } from '@/assets/images/svg/setting.svg';
-
-const Wrapper = styled.div<{ expand: boolean }>`
-  max-height: 90px;
-  transition: max-height 0.3s ease-in-out;
-  overflow: hidden;
-
-  ${(props) => props.expand && css`
-    max-height: 1000px;
-  `}
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  height: 90px;
-`;
-
-const SubTitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const SubTitle = styled.p`
-  font-size: 16px;
-  line-height: 26px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-`;
-
-const SubDesc = styled.span`
-  font-size: 12px;
-  line-height: 16px;
-  color: ${COLORS.WHITE_GRAY};
-`;
-
-const ActionWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ActionItem = styled.span<{ mobile?: boolean; desktop?: boolean; }>`
-  display: ${(props) => props.mobile ? 'none' : 'block'};
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 22px;
-  margin-right: 14px;
-  color: ${COLORS.LIGHT_PRIMARY};
-  max-height: 22px;
-
-  ${mobileQuery} {
-    margin-right: 0;
-    text-align: left;
-    display: ${(props) => props.mobile ? 'block' : 'none'};
-  }
-`;
-
-const ArrowDown24IconStyle = styled(ArrowDown24Icon)<{ expand: number }>`
-  transform: rotate(0);
-  transition: transform 0.3s ease;
-
-  ${(props) => props.expand && css`
-    transform: rotate(-180deg);
-  `}
-`;
 
 const PasswordSchema = yup.object().shape({
   currentPassword: yup.string().required('Common.validation.require_current_password'),
@@ -107,18 +41,29 @@ const PasswordSetting: React.FC = () => {
   }
 
   return (
-    <Wrapper expand={isOpen}>
-      <Header onClick={() => setIsOpen(!isOpen)}>
-        <SubTitleWrapper>
-          <SubTitle>{t('Profile.text.change_password')}</SubTitle>
-          <SubDesc>{t('Profile.text.change_password_desc')}</SubDesc>
-        </SubTitleWrapper>
-        <ActionWrapper>
-          <ActionItem mobile><SettingIcon /></ActionItem>
-          <ActionItem desktop>{t('Profile.text.update_password')}</ActionItem>
-          <ArrowDown24IconStyle expand={isOpen ? 1 : 0} />
-        </ActionWrapper>
-      </Header>
+    <div
+      className={cn("max-h-[90px] transition-[max-height] duration-300 ease-in-out overflow-hidden", { 
+        "max-h-[1000px]": isOpen 
+      })}
+    >
+      <div onClick={() => setIsOpen(!isOpen)} role="presentation" className="flex justify-between items-center cursor-pointer h-[90px]">
+        <div className="flex flex-col">
+          <p className="text-[16px] leading-[26px] text-sapphire_blue">{t('Profile.text.change_password')}</p>
+          <span className="text-[12px] leading-4 text-white_gray">{t('Profile.text.change_password_desc')}</span>
+        </div>
+        <div className="flex items-center">
+          <span className="hidden font-bold text-[14px] leading-[22px] mr-[14px] text-light_primary max-h-[22px] sm:mr-0 sm:text-left sm:block">
+            <SettingIcon />
+          </span>
+          <span className="block font-bold text-[14px] leading-[22px] mr-[14px] text-light_primary max-h-[22px] sm:mr-0 sm:text-left sm:hidden">
+            {t('Profile.text.update_password')}
+          </span>
+          <ArrowDown24Icon
+            className={cn("rotate-0 transition-transform	duration-300 ease-only-ease", {
+              'rotate-[-180deg]': isOpen
+            })} />
+        </div>
+      </div>
       <SecurityForm
         onSubmit={handleSubmit(onSubmit)}
         register={register}
@@ -126,7 +71,7 @@ const PasswordSetting: React.FC = () => {
         apiError={error?.graphQLErrors?.[0]?.extensions?.code}
         isSubmitting={loading}
       />
-    </Wrapper>
+    </div>
   )
 }
 

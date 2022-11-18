@@ -5,6 +5,7 @@ module.exports = {
   ],
   theme: {
     colors: {
+      'transparent': 'transparent',
       'primary': '#0080FF',
       'regular_primary': '#F4FAFF',
       'light_primary': '#369AFE',
@@ -23,7 +24,7 @@ module.exports = {
       'body': '#F4F7FC',
       'black': '#000000',
       'dark_grey': '#eaedf7',
-      'dark_gray': '#7c88b1'
+      'dark_gray': '#7c88b1',
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'],
@@ -34,6 +35,7 @@ module.exports = {
       },
       'boxShadow': {
         'xxl': '0px 2px 4px rgba(28, 41, 90, 0.0367952)',
+        'xsl': '0px 4px 8px rgba(28, 41, 90, 0.0367952)'
       }
     },
     screens: {

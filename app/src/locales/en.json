@@ -12,7 +12,8 @@
       "sign_up": "Sign Up",
       "forgot_password": "Forgot Password",
       "reset_password": "Reset password",
-      "new_document": "New Document"
+      "new_document": "New Document",
+      "teams": "Teams"
     },
     "label": {
       "remember_label": "Remember me",
@@ -187,7 +188,9 @@
     "title": "Account Settings",
     "text": {
       "account": "Account",
+      "plan": "Plan",
       "desc": "This information can be edited from your profile page",
+      "plan_desc": "This is your subscription",
       "delete": "I'd like to delete my account",
       "delete_modal": "Are you sure you want to delete your account? All of your data will be permanently removed. This action cannot be undone.",
       "please_enter": "Please enter <0>{{email}}</0> to confirm",
@@ -196,7 +199,17 @@
       "current_password": "Current password",
       "update_password": "Update Password",
       "new_password": "New password",
-      "confirm_new_password": "Confirm new password"
+      "confirm_new_password": "Confirm new password",
+      "cancel_sub": "Cancel Subcription",
+      "order_sumary": "Order Summary",
+      "curreny_sub": "Current subcription",
+      "new_sub": "New subcription",
+      "balance_due":"Balance due right now",
+      "change_plan": "Change plan",
+      "change_sub": "Change Subcription",
+      "expire": "Plan will expire on <0>{{data}}</0>",
+      "current_plan": "Current Plan",
+      "get_started": "Get Started"
     },
     "label": {
       "delete": "Delete Account"

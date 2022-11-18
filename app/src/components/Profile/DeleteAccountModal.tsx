@@ -4,7 +4,6 @@ import { useTranslation, Trans } from 'react-i18next';
 import { ReactHookFormType } from "@/typeReactHookForm";
 import Modal from '../Common/Modal';
 import Button from '../Common/Button';
-import FormGroup from '../Common/FormGroup';
 import Input from '../Common/Input/Input';
 import ErrorText from '../Common/ErrorText';
 
@@ -35,7 +34,7 @@ const DeleteAccountModal: React.FC<Props> = ({
           {t('Profile.text.delete_modal')}
         </p>
         <form onSubmit={onSubmit} className="mt-6">
-          <FormGroup>
+          <div className="block w-full mb-4">
             <label htmlFor="email" className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mt-[19px] uppercase sm:text-[11px]">
               <Trans
                 components={[<div className="text-sapphire_blue font-bold" />]}
@@ -46,7 +45,7 @@ const DeleteAccountModal: React.FC<Props> = ({
             </label>
             <Input type="email" id="email" name="email" ref={register} />
             {errors?.email?.message && <ErrorText message={String(t(errors.email.message))} />}
-          </FormGroup>
+          </div>
         </form>
       </div>
       <div className="flex justify-end items-center p-6 [&>button+button]:ml-4">

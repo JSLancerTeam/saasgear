@@ -2,8 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
-import FormGroup from '../Common/FormGroup';
-import FormGroupLabel from '../Common/FormGroupLabel';
 import Input from '../Common/Input/Input';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
@@ -20,15 +18,19 @@ const AccountForm: React.FC<Props> = ({ onSubmit, register, loading, apiError, o
   return (
     <form onSubmit={onSubmit} className="mx-0 my-6">
       <div className="flex justify-between">
-        <FormGroup>
-          <FormGroupLabel>{t('Common.label.your_name')}</FormGroupLabel>
+        <div className="block w-full mb-4">
+          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+            {t('Common.label.your_name')}
+          </label>
           <Input name="name" ref={register} />
-        </FormGroup>
+        </div>
       </div>
-      <FormGroup>
-        <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
+      <div className="block w-full mb-4">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          {t('Common.label.email')}
+        </label>
         <Input type="email" name="email" ref={register} disabled />
-      </FormGroup>
+      </div>
       <div className="flex justify-between items-center mt-8 sm:flex-col sm:items-start">
         <div onClick={openPopupDeleteAccount} role="presentation" className="text-[14px] leading-6 text-red mr-[25px] cursor-pointer sm:mb-[10px]">
           {t('Profile.text.delete')}

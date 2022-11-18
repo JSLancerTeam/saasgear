@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as CheckCircleIcon } from '@/assets/images/svg/check-circle.svg';
 import Button from '../Common/Button';
@@ -158,36 +159,38 @@ const Plans: React.FC<Props> = ({
   planChanged,
   isYearly,
   checkIsCurrentPlan,
-}) => (
-  <Wrapper>
-    {plans.map((plan) => (
-      <PlanWrapper
-        onClick={() => onChange(plan.id)}
-        active={planChanged ? plan.id === planChanged.id : false}
-        key={plan.id}
-      >
-        <Name>{plan.name}</Name>
-        <Desc>{plan.desc}</Desc>
-        <PriceWrapper>
-          <Price>${isYearly ? plan.price * 9 : plan.price}</Price>
-          <Unit>/{isYearly ? 'year' : 'month'}</Unit>
-        </PriceWrapper>
-        <FeatureList>
-          {plan.features.map((feature) => (
-            <FeatureItem key={feature}>
-              <FeatureIcon><CheckCircleIcon /></FeatureIcon>
-              <FeatureText>{feature}</FeatureText>
-            </FeatureItem>
-          ))}
-        </FeatureList>
-        {checkIsCurrentPlan(plan.id) ? (
-          <GetStartedBtn>Current Plan</GetStartedBtn>
-        ) : (
-          <GetStartedBtn color="primary">Get Started</GetStartedBtn>
-        )}
-      </PlanWrapper>
-    ))}
-  </Wrapper>
-);
-
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Wrapper>
+      {plans.map((plan) => (
+        <PlanWrapper
+          onClick={() => onChange(plan.id)}
+          active={planChanged ? plan.id === planChanged.id : false}
+          key={plan.id}
+        >
+          <Name>{plan.name}</Name>
+          <Desc>{plan.desc}</Desc>
+          <PriceWrapper>
+            <Price>${isYearly ? plan.price * 9 : plan.price}</Price>
+            <Unit>/{isYearly ? 'year' : 'month'}</Unit>
+          </PriceWrapper>
+          <FeatureList>
+            {plan.features.map((feature) => (
+              <FeatureItem key={feature}>
+                <FeatureIcon><CheckCircleIcon /></FeatureIcon>
+                <FeatureText>{feature}</FeatureText>
+              </FeatureItem>
+            ))}
+          </FeatureList>
+          {checkIsCurrentPlan(plan.id) ? (
+            <GetStartedBtn>{t('Profile.text.current_plan')}</GetStartedBtn>
+          ) : (
+            <GetStartedBtn color="primary">{t('Profile.text.get_started')}</GetStartedBtn>
+          )}
+        </PlanWrapper>
+      ))}
+    </Wrapper>
+  );
+};
 export default Plans;

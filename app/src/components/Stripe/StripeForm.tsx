@@ -10,8 +10,6 @@ import {
 import { COLORS } from '@/constants/style';
 import styled from 'styled-components';
 import Button from '@/components/Common/Button';
-import FormGroup from '@/components/Common/FormGroup';
-import FormGroupLabel from '@/components/Common/FormGroupLabel';
 
 const CardNumberEl = styled(CardNumberElement)`
   padding: 11.6px 10px;
@@ -124,19 +122,23 @@ const StripeForm: React.FC<Props> = ({
       <div>
         {onGoBack && <BackButton type="button" onClick={onGoBack} />}
         <div>
-          <FormGroup>
-            <FormGroupLabel htmlFor="street_address">
+          <div className="block w-full mb-4">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="street_address">
               {t('Payment.label.card')}
-            </FormGroupLabel>
+            </label>
             <CardNumberEl className="card-el" />
-          </FormGroup>
+          </div>
           <div className="flex items-center justify-between">
             <div className="block w-full mb-4 mr-[10px]">
-              <FormGroupLabel htmlFor="first_name">{t('Payment.label.expiration')}</FormGroupLabel>
+              <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="first_name">
+                {t('Payment.label.expiration')}
+              </label>
               <CardExpiryElementEl />
             </div>
             <div className="block w-full mb-4 ml-[10px]">
-              <FormGroupLabel htmlFor="last_name">{t('Payment.label.cvc')}</FormGroupLabel>
+              <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="last_name">
+                {t('Payment.label.cvc')}
+              </label>
               <CardCvcElementEl />
             </div>
           </div>

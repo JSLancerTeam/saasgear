@@ -3,17 +3,10 @@ import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';
-import styled from 'styled-components';
 import ErrorText from '@/components/Common/ErrorText';
 import Button from '@/components/Common/Button';
 import Logo from '@/components/Common/Logo';
 import { ReactHookFormType } from "@/typeReactHookForm";
-
-const FormSubmitButton = styled(Button)`
-  width: 100%;
-  text-transform: uppercase;
-  margin-top: 34px;
-`;
 
 type CustomProps = ReactHookFormType & {
   isSubmitting: boolean;
@@ -96,9 +89,9 @@ const SignUpForm: React.FC<CustomProps> = ({
               )}
             </FormControl>
           </div>
-          <FormSubmitButton color="primary" type="submit">
+          <Button color="primary" type="submit" className="w-full uppercase mt-[34px]">
             {isSubmitting ? t('Common.text.please_wait') : (submitText ?? t('Common.text.submit'))}
-          </FormSubmitButton>
+          </Button>
         </div>
       </form>
       {apiError && <ErrorText message={String(t(`Sign_up.error.${apiError}`))} position="center" />}

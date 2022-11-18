@@ -1,53 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 import type { RootState } from '@/config/store';
 import { toggleSidebar } from '@/features/admin/sidebar';
 import { ReactComponent as LogoIcon } from '@/assets/images/svg/logo.svg';
-import { COLORS } from '@/constants/style';
 import routes from '@/routes';
-
-const MenuText = styled.span`
-  font-size: 18px;
-  line-height: 22px;
-  color: ${COLORS.WHITE_BLUE};
-  margin-left: 10px;
-`;
-
-const NavLinkStyle = styled(NavLink)`
-  width: 100%;
-  height: 100%;
-  padding-left: 27px;
-  border-left: 2px solid transparent;
-  display: flex;
-  align-items: center;
-
-  &.active {
-    border-radius: 0px 10px 10px 0px;
-    background-color: ${COLORS.REGULAR_PRIMARY};
-    border-left-color: ${COLORS.PRIMARY};
-
-    ${MenuText} {
-      color: ${COLORS.PRIMARY};
-      font-weight: 500;
-    }
-
-    svg {
-      *[fill] {
-        fill: ${COLORS.PRIMARY};
-      }
-      *[stroke] {
-        stroke: ${COLORS.PRIMARY};
-      }
-    }
-  }
-`;
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { isOpen } = useSelector((state: RootState) => state.sidebar);
 
   function closeSidebar() {
@@ -61,8 +25,8 @@ const Sidebar: React.FC = () => {
         <a href="/" className='flex h-[81px] items-center pl-[30px] border-b border-r border-solid border-gray'>
           <LogoIcon />
           <div className='text-primary text-[22px] leading-[27px] font-medium ml-2 [&>span:first-child]:font-extrabold'>
-            <span>SaaS</span>
-            <span>gear</span>
+            <span>{t('Common.logo.saas')}</span>
+            <span>{t('Common.logo.gear')}</span>
           </div>
         </a>
         <div className='flex-grow'>
@@ -71,10 +35,15 @@ const Sidebar: React.FC = () => {
               .filter((route) => route.isSidebar)
               .map((route) => (
                 <li key={route.path} className='h-[60px] flex items-center'>
-                  <NavLinkStyle to={route.path} activeClassName="active" onClick={closeSidebar}>
+                  <NavLink
+                    to={route.path}
+                    activeClassName="active"
+                    onClick={closeSidebar}
+                    className="w-full h-full pl-[27px] border-l-2 border-solid border-transparent flex items-center [&.active]:rounded-r-[10px] [&.active]:rounded-b-[10px] [&.active]:rounded-t-[0px] [&.active]:rounded-l-[0px] [&.active]:bg-regular_primary [&.active]:border-primary [&.active>.menu-text]:text-primary [&.active>.menu-text]:font-medium [&.active>svg_*[fill]]:fill-primary [&.active>svg_*[stroke]]:stroke-primary"
+                  >
                     {route.icon}
-                    <MenuText>{route.name}</MenuText>
-                  </NavLinkStyle>
+                    <span className="menu-text text-[18px] leading-[22px] text-white_blue ml-[10px]">{route.name}</span>
+                  </NavLink>
                 </li>
               ))}
           </ul>

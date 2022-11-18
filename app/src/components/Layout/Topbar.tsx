@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 // Actions
@@ -10,55 +9,9 @@ import { toggleSidebar } from '@/features/admin/sidebar';
 import type { RootState } from '@/config/store';
 import { resolveAvatarPath } from '@/helpers/avatar.helper';
 import Avatar from '@/assets/images/avatar.jpg';
-import { mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDownIcon } from '@/assets/images/svg/arrow-down-18.svg';
 import { ReactComponent as MenuIcon } from '@/assets/images/svg/menu.svg';
 import Input from '@/components/Common/Input';
-
-const ProfileList = styled.ul`
-  position: relative;
-  padding: 0;
-  border: 1px solid #eaedf7;
-  border-radius: 5px;
-  box-shadow: 0px 4px 8px rgba(28, 41, 90, 0.0367952);
-  background: #ffffff;
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    transform: translate(-50%, 0);
-    width: 0;
-    height: 0;
-    border: 12px solid transparent;
-    border-bottom-color: #eaedf7;
-
-    ${mobileQuery} {
-      left: unset;
-      right: 4px;
-    }
-  }
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: calc(50%);
-    bottom: 100%;
-    transform: translate(-50%, 0);
-    width: 0;
-    height: 0;
-    border: 10px solid transparent;
-    border-bottom-color: #ffffff;
-
-    ${mobileQuery} {
-      left: unset;
-      right: 8px;
-    }
-  }
-`;
 
 type Props = {
   signout: () => void;
@@ -103,7 +56,7 @@ const Topbar: React.FC<Props> = ({ signout }) => {
       </div>
       {isShowMenu && (
         <div className='absolute top-[calc(100%_+_17px)] right-[10px] w-[200px] sm:top-full'>
-          <ProfileList>
+          <ul className="relative p-0 border border-solid border-dark_grey rounded-[5px] shadow-xsl bg-white before:content-[''] before:block before:absolute before:left-1/2 before:bottom-full before:translate-x-[-1/2] before:translate-y-0 before:w-0 before:h-0 before:border-[12px] before:border-solid before:border-transparent before:border-b-dark_grey sm:before:left-[unset] sm:before:right-1 after:content-[''] after:block after:absolute after:left-1/2 after:bottom-full after:translate-x-[-1/2] after:translate-y-0 after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-b-white sm:after:left-[unset] sm:after:right-2">
             <li className='list-none h-9'>
               <NavLink to="/profile" className="text-[14px] text-sapphire_blue pl-6 overflow-hidden flex items-center w-full h-full active:bg-regular_primary">
                 {t('Common.title.profile')}
@@ -114,7 +67,7 @@ const Topbar: React.FC<Props> = ({ signout }) => {
                 {t('Common.title.sign_out')}
               </button>
             </li>
-          </ProfileList>
+          </ul>
         </div>
       )}
     </div>

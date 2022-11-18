@@ -73,7 +73,7 @@ const GlobalLoading: React.FC = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isCompleting, setIsCompleting] = useState(false);
   const status = useApolloNetworkStatus();
-
+  console.log(status);
   useEffect(() => {
     updateStatus();
   }, [status]);

@@ -3,15 +3,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import GoBack from '@/components/Common/GoBack';
 import Logo from '@/components/Common/Logo';
-import {
-  ForgotPasswordText,
-  ForgotPasswordDescription,
-  ForgotPasswordFormWrapper,
-  ForgotPasswordButton,
-  TextNote,
-} from '@/components/Auth/AuthForm';
-import FormGroup from '@/components/Common/FormGroup';
-import FormGroupLabel from '@/components/Common/FormGroupLabel';
 import FormControl from '@/components/Common/FormControl';
 import ErrorText from '@/components/Common/ErrorText';
 import Input from '@/components/Common/Input/Input';
@@ -39,13 +30,17 @@ const ResetPasswordForm:React.FC<Props> = ({
       <div>
         <Logo />
       </div>
-      <ForgotPasswordText>{t('Common.title.reset_password')}</ForgotPasswordText>
-      <ForgotPasswordDescription>
+      <div className="font-bold text-[26px] leading-9 text-sapphire_blue mt-[3px]">
+        {t('Common.title.reset_password')}
+      </div>
+      <p className="text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10">
         {t('Reset_password.description')}
-      </ForgotPasswordDescription>
-      <ForgotPasswordFormWrapper onSubmit={onSubmit}>
-        <FormGroup>
-          <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
+      </p>
+      <form onSubmit={onSubmit} className="w-[420px] mx-auto my-0 text-left block">
+        <div className="block w-full mb-4">
+          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+            {t('Common.label.password')}
+          </label>
           <FormControl>
             <Input
               type="password"
@@ -57,9 +52,11 @@ const ResetPasswordForm:React.FC<Props> = ({
               <ErrorText message={String(t(errors.password.message))} />
             )}
           </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormGroupLabel>{t('Common.label.confirm_password')}</FormGroupLabel>
+        </div>
+        <div className="block w-full mb-4">
+          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+            {t('Common.label.confirm_password')}
+          </label>
           <FormControl>
             <Input
               type="password"
@@ -71,21 +68,21 @@ const ResetPasswordForm:React.FC<Props> = ({
               <ErrorText message={String(t(errors.passwordConfirmation.message))} />
             )}
           </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <ForgotPasswordButton>
+        </div>
+        <div className="block w-full mb-4">
+          <div className="block text-center mt-[50px]">
             <Button color="primary" type="submit">
               {isSubmitting ? t('Reset_password.please_wait') : t('Common.title.reset_password')}
             </Button>
-          </ForgotPasswordButton>
+          </div>
           {apiError && <Badge type="error">{apiError}</Badge>}
-          <TextNote>
+          <div className="text-[14px] leading-6 text-sapphire_blue text-center mt-[69px]">
             <Trans components={[<Link to="##"></Link>]}>
               {t('Forgot_password.footer')}
             </Trans>
-          </TextNote>
-        </FormGroup>
-      </ForgotPasswordFormWrapper>
+          </div>
+        </div>
+      </form>
     </>
   );
 }

@@ -3,7 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
-import styled from 'styled-components';
+import { useTranslation, Trans } from 'react-i18next';
 
 import { RootState } from '@/config/store';
 import StripeContainer from '@/containers/Stripe';
@@ -14,91 +14,8 @@ import getUserPlanQuery from '@/queries/userPlans/getUserPlan';
 import { setUserPlan } from '@/features/auth/userPlan';
 import Plans from '@/components/Plans';
 import Toggle from '@/components/Common/Input/Toggle';
-import { ContentPage, Description, TitleContent } from '@/components/Layout/blockStyle';
-import { COLORS, mobileQuery } from '@/constants/style';
 import ErrorText from '@/components/Common/ErrorText';
 import Button from '@/components/Common/Button';
-
-const TitleContentStyle = styled(TitleContent)`
-  margin-bottom: 4px;
-`;
-
-const Content = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  ${mobileQuery} {
-    flex-direction: column-reverse;
-  }
-`;
-
-const ToggleYearly = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-  ${mobileQuery} {
-    margin-top: 25px;
-  }
-  label {
-    margin: 0 auto;
-  }
-`;
-
-const LeftContent = styled.div``;
-const RightContent = styled.div`
-  padding-left: 24px;
-  padding-top: 74px;
-  display: flex;
-  ${mobileQuery} {
-    padding: 0;
-    flex-direction: column-reverse;
-  }
-`;
-
-const CurrentPlanWrapper = styled.div`
-  min-width: 300px;
-
-  button {
-    width: 100%;
-  }
-`;
-
-const PaymentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-`;
-
-const SummaryTitle = styled.div`
-  font-weight: bold;
-  font-size: 22px;
-  line-height: 30px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-  margin-bottom: 24px;
-`;
-
-const AmountList = styled.ul`
-  flex-grow: 1;
-`;
-const AmountItem = styled.li`
-  list-style-type: none;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-const AmoutText = styled.p`
-  font-size: 16px;
-  line-height: 26px;
-  color: ${COLORS.WHITE_GRAY};
-  flex-grow: 1;
-`;
-const Amount = styled.span`
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 24px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-`;
 
 const plans = [
   {
@@ -139,6 +56,7 @@ const PlanSetting: React.FC = () => {
   const [createUserPlanMutation, { error: errorCreate, loading: isCreatingUserPlan }] = useMutation(createUserPlanQuery);
   const [fetchUserPlan, { data: userPlanData }] = useLazyQuery(getUserPlanQuery);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!isEmpty(currentPlan)) {
@@ -199,14 +117,14 @@ const PlanSetting: React.FC = () => {
   const amountNew = planChanged ? planChanged.price : 0;
 
   return (
-    <ContentPage>
-      <TitleContentStyle>Plan</TitleContentStyle>
-      <Description>This is your subscription</Description>
-      <Content>
-        <LeftContent>
-          <ToggleYearly>
+    <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-1">{t('Profile.text.plan')}</h5>
+      <p className="text-[16px] leading-[26px] text-white_gray mb-[14px]">{t('Profile.text.plan_desc')}</p>
+      <div className="flex justify-between sm:flex-col-reverse">
+        <div>
+          <div className="flex justify-center mb-[25px] sm:mt-[25px] [&_label]:mx-auto [&_label]:my-0">
             <Toggle onChange={toggle} label="Bill Yearly" />
-          </ToggleYearly>
+          </div>
           <Plans
             plans={plans}
             onChange={changePlan}
@@ -214,52 +132,59 @@ const PlanSetting: React.FC = () => {
             isYearly={isYearly}
             checkIsCurrentPlan={checkIsCurrentPlan}
           />
-        </LeftContent>
+        </div>
         {planChanged && (
-          <RightContent>
+          <div className="pl-6 pt-[74px] flex sm:p-0 sm:flex-col-reverse">
             {checkIsCurrentPlan(planChanged.id) ? (
-              <CurrentPlanWrapper>
+              <div className="min-w-[300px] [&_button]:w-full">
                 {currentPlan.deletedAt ? (
-                  <p>Plan will expire on <b>{dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm')}</b></p>
+                  <p>Plan will expire on <b>{dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm')}</b>
+                    <Trans
+                      components={[<b></b>]}
+                      values={{ data: dayjs(currentPlan.expiredAt).format('YYYY-MM-DD HH:mm') }}
+                    >
+                      {t('Profile.text.expire')}
+                    </Trans>
+                  </p>
                 ) : (
                   <Button
                     color="primary"
                     disabled={isDeletingUserPlan}
                     onClick={handleCancelSubscription}
-                  >Cancel Subcription</Button>
+                  >{t('Profile.text.cancel_sub')}</Button>
                 )}
-              </CurrentPlanWrapper>
+              </div>
             ) : (
-              <PaymentWrapper>
-                <SummaryTitle>Order Summary</SummaryTitle>
-                <AmountList>
-                  <AmountItem>
-                    <AmoutText>Current subcription</AmoutText>
-                    <Amount>${amountCurrent}</Amount>
-                  </AmountItem>
-                  <AmountItem>
-                    <AmoutText>New subcription</AmoutText>
-                    <Amount>${isYearly ? amountNew * 9 : amountNew}</Amount>
-                  </AmountItem>
-                  <AmountItem>
-                    <AmoutText>Balance due right now</AmoutText>
-                    <Amount>${Math.max((isYearly ? amountNew * 9 : amountNew) - amountCurrent, 0)}</Amount>
-                  </AmountItem>
-                </AmountList>
+              <div className="flex flex-col min-w-[300px]">
+                <div className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-6">{t('Profile.text.order_sumary')}</div>
+                <ul className="flex-grow">
+                  <li className="flex justify-between items-center list-none mb-4">
+                    <p className="text-[16px] leading-[26px] text-white_gray flex-grow">{t('Profile.text.curreny_sub')}</p>
+                    <span className="font-bold text-[18px] leading-6 text-sapphire_blue">${amountCurrent}</span>
+                  </li>
+                  <li className="flex justify-between items-center list-none mb-4">
+                    <p className="text-[16px] leading-[26px] text-white_gray flex-grow">{t('Profile.text.new_sub')}</p>
+                    <span className="font-bold text-[18px] leading-6 text-sapphire_blue">${isYearly ? amountNew * 9 : amountNew}</span>
+                  </li>
+                  <li className="flex justify-between items-center list-none mb-4">
+                    <p className="text-[16px] leading-[26px] text-white_gray flex-grow">{t('Profile.text.balance_due')}</p>
+                    <span className="font-bold text-[18px] leading-6 text-sapphire_blue">${Math.max((isYearly ? amountNew * 9 : amountNew) - amountCurrent, 0)}</span>
+                  </li>
+                </ul>
                 {(isEmpty(currentPlan) || (currentPlan && currentPlan.deletedAt)) ? (
                   <StripeContainer
                     onSubmitSuccess={createPaymentMethodSuccess}
                     apiLoading={isCreatingUserPlan}
-                    submitText={currentPlan && currentPlan.deletedAt && 'Change plan'}
+                    submitText={currentPlan && currentPlan.deletedAt && t('Profile.text.change_plan') as string}
                   />
                 ) : (
                   <Button
                     color="primary"
                     onClick={handleChangeSubcription}
                     disabled={isUpdatingUserPlan}
-                  >{isUpdatingUserPlan ? 'Please wait' : 'Change Subcription'}</Button>
+                  >{isUpdatingUserPlan ? t('Common.text.please_wait') : t('Profile.text.change_sub')}</Button>
                 )}
-              </PaymentWrapper>
+              </div>
             )}
 
             {errorCreate?.message && (
@@ -273,10 +198,10 @@ const PlanSetting: React.FC = () => {
             {errorDelete?.message && (
               <ErrorText message={errorDelete.message} />
             )}
-          </RightContent>
+          </div>
         )}
-      </Content>
-    </ContentPage>
+      </div>
+    </div>
   );
 }
 

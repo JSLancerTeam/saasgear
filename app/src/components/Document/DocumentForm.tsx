@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { ReactHookFormType } from "@/typeReactHookForm";
 
 import WYSIWYGEditor from './WYSIWYG';
-import FormGroup from '../Common/FormGroup';
-import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
 import Input from '../Common/Input/Input';
@@ -29,13 +27,17 @@ const DocumentForm: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <form onSubmit={onSubmit}>
-      <FormGroup>
-        <FormGroupLabel>{t('Common.label.name')}</FormGroupLabel>
+      <div className="block w-full mb-4">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          {t('Common.label.name')}
+        </label>
         <Input name="name" ref={register} />
         {formErrors?.name?.message && <ErrorText message={String(t(formErrors.name.message))} />}
-      </FormGroup>
-      <FormGroup>
-        <FormGroupLabel>{t('Common.label.body')}</FormGroupLabel>
+      </div>
+      <div className="block w-full mb-4">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          {t('Common.label.body')}
+        </label>
         <Controller
           name="body"
           control={control}
@@ -45,7 +47,7 @@ const DocumentForm: React.FC<Props> = ({
           )}
         />
         {formErrors?.body?.message && <ErrorText message={String(t(formErrors.body.message))} />}
-      </FormGroup>
+      </div>
       {apiError && <ErrorText message={`Document.error.${apiError}`} />}
 
       <div className="flex justify-end">

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ITeamMember } from "@/features/admin/team";
-import { Table } from '../Common/Table';
 import Button from '../Common/Button';
 
 type Props = {
@@ -12,7 +11,7 @@ type Props = {
 const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
   const { t } = useTranslation();
   return (
-    <Table>
+    <table className="w-full border-collapse [&_tr]:h-[56px] [&_th]:font-bold [&_th]:text-[12px] [&_th]:leading-[15px] [&_th]:tracking-[2px] [&_th]:uppercase [&_th]:text-white_blue [&_th]:text-left [&_td]:text-[14px] [&_td]:leading-6 [&_td]:text-sapphire_blue [&_tbody_tr:nth-child(even)]:bg-light_gray [&_tbody_tr:hover]:bg-regular_primary">
       <thead>
         <tr>
           <th>{t('Team.text.member')}</th>
@@ -39,7 +38,7 @@ const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
           </tr>
         )}
       </tbody>
-    </Table>
+    </table>
   );
 };
 

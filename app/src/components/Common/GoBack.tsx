@@ -17,7 +17,7 @@ const GoBack: React.FC<Props> = ({ link }) => {
   }
 
   return (
-    <div onClick={goBack} role='presentation' className='text-left mb-4 block cursor-pointer'>
+    <div onClick={goBack} role='presentation' className="text-left mb-4 block cursor-pointer">
       <img src={goBackIcon} alt="" />
     </div>
   );

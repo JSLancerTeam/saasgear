@@ -37,7 +37,7 @@ const ListDocument: React.FC = () => {
           </Button>
         </div>
       </div>
-      <div className='bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6'>
+      <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
         <DocumentTable
           data={data?.getDocuments?.documents}
           total={data?.getDocuments?.count}

@@ -44,8 +44,8 @@ const SignIn: React.FC = () => {
   }
 
   return (
-    <div className='flex justify-center min-h-screen sm:flex-col sm:pt-[40px]'>
-      <div className='w-[45%] flex justify-center items-center sm:w-full'>
+    <div className="flex justify-center min-h-screen sm:flex-col sm:pt-[40px]">
+      <div className="w-[45%] flex justify-center items-center sm:w-full">
         <SignInForm
           onSubmit={handleSubmit(onSubmit)}
           register={register}
@@ -54,7 +54,7 @@ const SignIn: React.FC = () => {
           isSubmitting={loading}
         />
       </div>
-      <div className='w-[55%] bg-primary overflow-hidden sm:hidden'>
+      <div className="w-[55%] bg-primary overflow-hidden sm:hidden">
         <AuthAdsArea />
       </div>
     </div>

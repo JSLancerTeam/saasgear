@@ -43,7 +43,7 @@ type Props = {
   color?: ButtonColor;
   type?: ButtonType;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   [key: string]: unknown;
 }
 

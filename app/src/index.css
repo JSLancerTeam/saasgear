@@ -61,6 +61,32 @@
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
 
+  .plan-wrapper {
+    background: theme('colors.primary');
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .plan-wrapper .name, .plan-wrapper .desc, .plan-wrapper .price, .plan-wrapper .unit, .plan-wrapper .feature-text, .plan-wrapper .get-started-btn {
+    color: theme('colors.white');
+  }
+
+  .plan-wrapper .desc {
+    opacity: 0.7;
+  }
+
+  .plan-wrapper .feature-list {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .plan-wrapper .feature-item svg circle, .plan-wrapper .feature-item svg path {
+    stroke: #8dead2;
+  }
+
+  .plan-wrapper .get-started-btn {
+    border-color: theme('colors.white');
+    background: theme('colors.primary');
+  }
+
   @screen sm {
     .topbar_avatar img {
       width: 33.33px;

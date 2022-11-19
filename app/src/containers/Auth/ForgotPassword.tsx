@@ -42,9 +42,9 @@ const ForgotPassword: React.FC = () => {
   }
 
   return (
-    <div className='h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative'>
-      <div className='absolute h-full w-full bg-primary z-[-2]' />
-      <div className='w-[762px] mx-auto my-0 text-center bg-white p-[40px] rounded-[5px] relative'>
+    <div className="h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative">
+      <div className="absolute h-full w-full bg-primary z-[-2]" />
+      <div className="w-[762px] mx-auto my-0 text-center bg-white p-[40px] rounded-[5px] relative">
         <ForgotPasswordForm
           onSubmit={handleSubmit(onSubmit)}
           register={register}
@@ -53,22 +53,22 @@ const ForgotPassword: React.FC = () => {
           isSubmitting={loading}
           apiError={error?.graphQLErrors?.[0]?.extensions?.code}
         />
-        <div className='absolute w-[495px] h-[480px] left-[-400px] top-[-175px] z-[-1]'>
+        <div className="absolute w-[495px] h-[480px] left-[-400px] top-[-175px] z-[-1]">
           <img src={squareRadiusTop} alt="" />
         </div>
-        <div className='absolute w-[195px] h-[195px] left-[-60px] bottom-[-25px] z-[-1]'>
+        <div className="absolute w-[195px] h-[195px] left-[-60px] bottom-[-25px] z-[-1]">
           <img src={squareRadiusTopPrimary} alt="" />
         </div>
-        <div className='absolute w-[114px] h-[121px] top-[-57px] right-[-54px] z-[-1]'>
+        <div className="absolute w-[114px] h-[121px] top-[-57px] right-[-54px] z-[-1]">
           <img src={squareRadiusTopPrimarySmall} alt="" />
         </div>
-        <div className='absolute w-[129px] h-[121px] top-[-105px] right-[-300px]'>
+        <div className="absolute w-[129px] h-[121px] top-[-105px] right-[-300px]">
           <img src={squareGrid} alt="" />
         </div>
-        <div className='absolute w-[593px] h-[528px] right-[-400px] bottom-[-190px] z-[-1]'>
+        <div className="absolute w-[593px] h-[528px] right-[-400px] bottom-[-190px] z-[-1]">
           <img src={squareRadiusTopBig} alt="" />
         </div>
-        <div className='absolute w-[58px] h-[58px] bottom-[-26px] right-[164px] z-[-1]'>
+        <div className="absolute w-[58px] h-[58px] bottom-[-26px] right-[164px] z-[-1]">
           <img src={circleSmall} alt="" />
         </div>
       </div>

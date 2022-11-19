@@ -49,7 +49,7 @@ const SecurityForm: React.FC<Props> = ({
           <ErrorText message={String(t(formErrors.confirmPassword.message))} />
         )}
       </div>
-      <div className='flex justify-end items-center mt-8 sm:justify-start'>
+      <div className="flex justify-end items-center mt-8 sm:justify-start">
         <Button type="submit" color="primary" disabled={isSubmitting}>
           {isSubmitting ? t('Common.text.please_wait') : t('Profile.text.update_password')}
         </Button>

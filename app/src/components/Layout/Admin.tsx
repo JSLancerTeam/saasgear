@@ -10,11 +10,11 @@ type Props = {
 }
 
 const AdminLayout: React.FC<Props> = ({ signout }) => (
-  <div className='flex'>
+  <div className="flex">
     <Sidebar />
-    <div className='flex flex-col flex-grow'>
+    <div className="flex flex-col flex-grow">
       <Topbar signout={signout} />
-      <div className='flex-grow bg-body overflow-y-auto px-[15px] py-[32px] sm:min-h-[calc(100vh_-_64px)]'>
+      <div className="flex-grow bg-body overflow-y-auto px-[15px] py-[32px] sm:min-h-[calc(100vh_-_64px)]">
         <Switch>
           {routes.map((route) => (
             <Route

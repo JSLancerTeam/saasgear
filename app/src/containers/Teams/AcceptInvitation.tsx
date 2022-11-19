@@ -58,14 +58,14 @@ const AcceptInvitation: React.FC = () => {
   return loading && getProfileLoading ? (
     <div> {t('Common.text.loading')}</div>
   ) : (
-    <div className='h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative'>
-      <div className='absolute w-full h-full bg-primary z-[-2]' />
-      <div className='w-[762px] mx-auto my-0 text-center bg-white p-10 relative rounded-[5px]'>
+    <div className="h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative">
+      <div className="absolute w-full h-full bg-primary z-[-2]" />
+      <div className="w-[762px] mx-auto my-0 text-center bg-white p-10 relative rounded-[5px]">
         <div>
           <Logo />
         </div>
-        <div className='font-bold text-[26px] leading-9 text-sapphire_blue mt-[3px]'>{t('Accept_invitation.title')}</div>
-        <p className='text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10'>
+        <div className="font-bold text-[26px] leading-9 text-sapphire_blue mt-[3px]">{t('Accept_invitation.title')}</div>
+        <p className="text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10">
           <Trans
             components={[<strong></strong>]}
             values={{ teamName: teamInfo?.teamName, owner: teamInfo?.owner }}
@@ -73,13 +73,13 @@ const AcceptInvitation: React.FC = () => {
             {t('Accept_invitation.have_invitated')}
           </Trans>
         </p>
-        <div className='flex justify-center [&>button:first-child]:mr-8'>
+        <div className="flex justify-center [&>button:first-child]:mr-8">
           <Button color="primary" onClick={() => handleUserJoinTeam('accept')}>
             {t('Accept_invitation.accept')}
           </Button>
           <Button onClick={() => handleUserJoinTeam('decline')}>{t('Accept_invitation.decline')}</Button>
         </div>
-        <div className='absolute w-[495px] h-[480px] left-[-400px] top-[-175px] z-[-1]'>
+        <div className="absolute w-[495px] h-[480px] left-[-400px] top-[-175px] z-[-1]">
           <svg
             width="496"
             height="482"
@@ -93,7 +93,7 @@ const AcceptInvitation: React.FC = () => {
             />
           </svg>
         </div>
-        <div className='absolute w-[195px] h-[195px] left-[-60px] bottom-[-25px] z-[-1]'>
+        <div className="absolute w-[195px] h-[195px] left-[-60px] bottom-[-25px] z-[-1]">
           <svg
             width="195"
             height="195"
@@ -107,7 +107,7 @@ const AcceptInvitation: React.FC = () => {
             />
           </svg>
         </div>
-        <div className='absolute w-[114px] h-[121px] top-[-57px] right-[-54px] z-[-1]'>
+        <div className="absolute w-[114px] h-[121px] top-[-57px] right-[-54px] z-[-1]">
           <svg
             width="114"
             height="121"
@@ -121,7 +121,7 @@ const AcceptInvitation: React.FC = () => {
             />
           </svg>
         </div>
-        <div className='absolute w-[129px] h-[121px] top-[-105px] right-[-300px]'>
+        <div className="absolute w-[129px] h-[121px] top-[-105px] right-[-300px]">
           <svg
             width="131"
             height="123"
@@ -165,7 +165,7 @@ const AcceptInvitation: React.FC = () => {
             </g>
           </svg>
         </div>
-        <div className='absolute w-[593px] h-[528px] right-[-400px] bottom-[-190px] z-[-1]'>
+        <div className="absolute w-[593px] h-[528px] right-[-400px] bottom-[-190px] z-[-1]">
           <svg
             width="594"
             height="523"
@@ -179,7 +179,7 @@ const AcceptInvitation: React.FC = () => {
             />
           </svg>
         </div>
-        <div className='absolute w-[58px] h-[58px] bottom-[-26px] right-[164px] z-[-1]'>
+        <div className="absolute w-[58px] h-[58px] bottom-[-26px] right-[164px] z-[-1]">
           <svg
             width="60"
             height="60"

@@ -80,8 +80,8 @@ const SignUp: React.FC = () => {
   }
 
   return (
-    <div className='flex justify-center min-h-screen sm:flex-col sm:pt-10'>
-      <div className='w-[45%] flex justify-center items-center sm:w-full'>
+    <div className="flex justify-center min-h-screen sm:flex-col sm:pt-10">
+      <div className="w-[45%] flex justify-center items-center sm:w-full">
         {showStripeForm ? (
           <StripeContainer
             onSubmitSuccess={createPaymentMethodSuccess}
@@ -100,7 +100,7 @@ const SignUp: React.FC = () => {
           />
         )}
       </div>
-      <div className='w-[55%] bg-primary overflow-hidden sm:hidden'>
+      <div className="w-[55%] bg-primary overflow-hidden sm:hidden">
         <AuthAdsArea />
       </div>
     </div>

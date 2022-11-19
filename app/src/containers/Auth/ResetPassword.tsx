@@ -63,8 +63,8 @@ const ResetPassword: React.FC = () => {
     }
   }
   return (
-    <div className='h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative'>
-      <div className='absolute w-full h-full bg-primary z-[-2]' />
+    <div className="h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative">
+      <div className="absolute w-full h-full bg-primary z-[-2]" />
       <div className="w-[762px] mx-auto my-0 text-center bg-white p-10 rounded-[5px] relative">
         <ResetPasswordForm
           onSubmit={handleSubmit(onSubmit)}

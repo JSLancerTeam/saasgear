@@ -24,15 +24,15 @@ const SignUpForm: React.FC<CustomProps> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <div className='bg-white max-w-[300px]'>
+    <div className="bg-white max-w-[300px]">
       <Logo />
-      <form onSubmit={onSubmit} className='mb-6'>
-        <div className='font-bold text-[26px] leading-9 text-sapphire_blue mb-[34px]'>
+      <form onSubmit={onSubmit} className="mb-6">
+        <div className="font-bold text-[26px] leading-9 text-sapphire_blue mb-[34px]">
           {t('Sign_up.text.heading')}
         </div>
         <div>
-          <div className='mb-4 w-full block'>
-            <label className='font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase'>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">
               {t('Common.label.your_name')}
             </label>
             <FormControl>
@@ -47,8 +47,8 @@ const SignUpForm: React.FC<CustomProps> = ({
               )}
             </FormControl>
           </div>
-          <div className='mb-4 w-full block'>
-            <label className='font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase'>{t('Common.label.email')}</label>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Common.label.email')}</label>
             <FormControl>
               <Input
                 type="email"
@@ -61,8 +61,8 @@ const SignUpForm: React.FC<CustomProps> = ({
               )}
             </FormControl>
           </div>
-          <div className='mb-4 w-full block'>
-            <label className='font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase'>{t('Common.label.password')}</label>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Common.label.password')}</label>
             <FormControl>
               <Input
                 type="password"
@@ -75,8 +75,8 @@ const SignUpForm: React.FC<CustomProps> = ({
               )}
             </FormControl>
           </div>
-          <div className='mb-4 w-full block'>
-            <label className='font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase'>{t('Common.label.confirm_password')}</label>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Common.label.confirm_password')}</label>
             <FormControl>
               <Input
                 type="password"
@@ -95,12 +95,12 @@ const SignUpForm: React.FC<CustomProps> = ({
         </div>
       </form>
       {apiError && <ErrorText message={String(t(`Sign_up.error.${apiError}`))} position="center" />}
-      <div className='text-[14px] leading-6 text-sapphire_blue'>
+      <div className="text-[14px] leading-6 text-sapphire_blue">
         <Trans components={[<Link to="##"></Link>, <Link to="##"></Link>, <Link to="##"></Link>]}>
           {t('Sign_up.text.footer_desc')}
         </Trans>
       </div>
-      <div className='text-[14px] leading-6 text-sapphire_blue mt-[92px] text-center'>
+      <div className="text-[14px] leading-6 text-sapphire_blue mt-[92px] text-center">
         <Trans components={[<Link to="/auth/signin"></Link>]}>
           {t('Sign_up.text.have_account')}
         </Trans>

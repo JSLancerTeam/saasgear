@@ -44,7 +44,6 @@
     "react-slideshow-image": "^3.4.3",
     "react-toastify": "^6.1.0",
     "redux": "^4.0.5",
-    "styled-components": "^5.2.1",
     "subscriptions-transport-ws": "^0.9.19",
     "typescript": "^4.0.5",
     "yup": "^0.29.3"
@@ -111,7 +110,6 @@
     "@types/react-helmet": "^6.1.2",
     "@types/react-redux": "^7.1.18",
     "@types/react-router-dom": "^5.1.8",
-    "@types/styled-components": "^5.1.14",
     "@types/webpack-env": "^1.16.2",
     "@types/yup": "^0.29.13",
     "@typescript-eslint/eslint-plugin": "^5.43.0",

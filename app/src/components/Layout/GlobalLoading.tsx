@@ -1,79 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import cn from 'classnames';
 import { useApolloNetworkStatus } from '@/config/apollo';
 import { awaitSetTimeOut } from '@/utils/timer';
-
-const loading = keyframes`
-  0% {
-		width: 0;
-	}
-
-	100% {
-		width: 80%
-	}
-`;
-
-const completing = keyframes`
-  100% {
-    width: 80%;
-  }
-`;
-
-const completed = keyframes`
-  0% {
-		width: 80%;
-	}
-
-	100% {
-		width: 100%;
-	}
-`;
-
-const ProgressBar = styled.div`
-  overflow: hidden;
-  width: 100%;
-  position: fixed;
-  z-index: 10;
-  top: 0;
-`;
-
-const Bar = styled.div`
-  background: #fff;
-`;
-
-const Progress = styled.div<{ loading: number; completing: boolean; completed: boolean }>`
-  background: #0362fc;
-  padding: 0px;
-  width: 0;
-
-  ${(props) =>
-    props.loading &&
-    css`
-      padding: 1px;
-      animation: ${loading} 4s ease;
-    `}
-
-  ${(props) =>
-    props.completing &&
-    css`
-      padding: 1px;
-      animation: ${completing} 0.3s ease;
-    `}
-
-  ${(props) =>
-    props.completed &&
-    css`
-      padding: 1px;
-      animation: ${completed} 0.3s ease;
-    `}
-`;
 
 const GlobalLoading: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isCompleting, setIsCompleting] = useState(false);
   const status = useApolloNetworkStatus();
-  console.log(status);
+
   useEffect(() => {
     updateStatus();
   }, [status]);
@@ -97,15 +32,18 @@ const GlobalLoading: React.FC = () => {
   }
 
   return (
-    <ProgressBar>
-      <Bar>
-        <Progress
-          loading={Number(isLoading)}
-          completing={isCompleting}
-          completed={isCompleted}
+    <div className="overflow-hidden w-full fixed z-10 top-0">
+      <div className="bg-white">
+        <div
+          className={cn("bg-[#0362fc] w-0 p-0", {
+            'p-[1px]': isLoading || isCompleting || isCompleted,
+            'animate-[loading_4s_ease]': isLoading,
+            'animate-[completing_0.3s_ease]': isCompleting,
+            'animate-[completed_0.3s_ease]': isCompleted,
+          })}
         />
-      </Bar>
-    </ProgressBar>
+      </div>
+    </div>
   );
 }
 

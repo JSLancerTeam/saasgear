@@ -38,6 +38,19 @@ module.exports = {
         'xsl': '0px 4px 8px rgba(28, 41, 90, 0.0367952)'
       }
     },
+    keyframes: {
+      loading: {
+        '0%': { width: '0' },
+        '100%': { width: '80%' },
+      },
+      completing: {
+        '100%': { width: '80%' },
+      },
+      completed: {
+        '0%': { width: '80%' },
+        '100%': { width: '100%' },
+      }
+    },
     screens: {
       'sm': {'max': '768px'},
     }

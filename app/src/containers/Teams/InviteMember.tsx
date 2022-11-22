@@ -62,8 +62,8 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
   }
 
   return (
-    <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
-      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-8">{t('Team.invite')}</h5>
+    <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-8">{t('Team.invite')}</h5>
       <InviteMemberForm
         register={register}
         onSubmit={handleSubmit(onSubmit)}
@@ -73,7 +73,7 @@ const InviteMember: React.FC<Props> = ({ teamMembers, alias }) => {
       />
       {teamMembers && teamMembers.length > 0 && (
         <div className="mt-8">
-          <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-8">{t('Team.text.pending')}</h5>
+          <h5 className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-8">{t('Team.text.pending')}</h5>
           <ListTeamMember
             handleAction={onActionInlistMember}
             teamMembers={teamMembers}

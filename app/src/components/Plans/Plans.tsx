@@ -92,23 +92,23 @@ const Plans: React.FC<Props> = ({
           onClick={() => onChange(plan.id)}
           key={plan.id}
           role="presentation"
-          className={classNames("flex flex-col w-[430px] border border-solid border-dark_gray rounded-[10px] p-6 cursor-pointer [&:first-child]:mr-[25px] [&:first-child]:sm:mr-0 sm:w-full sm:max-w-full sm:mr-0 sm:mb-[15px]", {
+          className={classNames("flex flex-col w-[430px] border border-solid border-dark-gray rounded-[10px] p-6 cursor-pointer [&:first-child]:mr-[25px] [&:first-child]:sm:mr-0 sm:w-full sm:max-w-full sm:mr-0 sm:mb-[15px]", {
             "plan-wrapper": planChanged ? plan.id === planChanged.id : false
           })}
         >
-          <h5 className="font-medium text-[14px] leading-[17px] text-sapphire_blue mb-[6px] name">{plan.name}</h5>
-          <p className="desc text-[12px] leading-4 text-white_blue">{plan.desc}</p>
+          <h5 className="font-medium text-[14px] leading-[17px] text-sapphire-blue mb-[6px] name">{plan.name}</h5>
+          <p className="desc text-[12px] leading-4 text-white-blue">{plan.desc}</p>
           <div className="flex items-end mx-0 my-6">
             <span className="price font-bold text-[32px] leading-9 text-green">${isYearly ? plan.price * 9 : plan.price}</span>
-            <span className="unit text-[12px] leading-[25px] text-white_gray opacity-90">/{isYearly ? 'year' : 'month'}</span>
+            <span className="unit text-[12px] leading-[25px] text-white-gray opacity-90">/{isYearly ? 'year' : 'month'}</span>
           </div>
-          <ul className="feature-list pt-6 pb-8 border-t border-solid border-dark_gray flex-grow">
+          <ul className="feature-list pt-6 pb-8 border-t border-solid border-dark-gray flex-grow">
             {plan.features.map((feature) => (
               <li key={feature} className="feature-item list-none flex items-center [&+&]:mt-2">
                 <span className="w-4 h-4">
                   <CheckCircleIcon />
                 </span>
-                <span className="feature-text text-[14px] leading-6 text-white_gray ml-3">{feature}</span>
+                <span className="feature-text text-[14px] leading-6 text-white-gray ml-3">{feature}</span>
               </li>
             ))}
           </ul>

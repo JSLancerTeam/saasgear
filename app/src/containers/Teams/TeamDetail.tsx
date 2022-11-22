@@ -53,8 +53,8 @@ const TeamDetail: React.FC<Props> = ({ team }) => {
   }
 
   return (
-    <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
-      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-8">
+    <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-8">
         {t('Team.detail')}
       </h5>
       <TeamForm

@@ -48,14 +48,14 @@ const PasswordSetting: React.FC = () => {
     >
       <div onClick={() => setIsOpen(!isOpen)} role="presentation" className="flex justify-between items-center cursor-pointer h-[90px]">
         <div className="flex flex-col">
-          <p className="text-[16px] leading-[26px] text-sapphire_blue">{t('Profile.text.change_password')}</p>
-          <span className="text-[12px] leading-4 text-white_gray">{t('Profile.text.change_password_desc')}</span>
+          <p className="text-[16px] leading-[26px] text-sapphire-blue">{t('Profile.text.change_password')}</p>
+          <span className="text-[12px] leading-4 text-white-gray">{t('Profile.text.change_password_desc')}</span>
         </div>
         <div className="flex items-center">
-          <span className="hidden font-bold text-[14px] leading-[22px] mr-[14px] text-light_primary max-h-[22px] sm:mr-0 sm:text-left sm:block">
+          <span className="hidden font-bold text-[14px] leading-[22px] mr-[14px] text-light-primary max-h-[22px] sm:mr-0 sm:text-left sm:block">
             <SettingIcon />
           </span>
-          <span className="block font-bold text-[14px] leading-[22px] mr-[14px] text-light_primary max-h-[22px] sm:mr-0 sm:text-left sm:hidden">
+          <span className="block font-bold text-[14px] leading-[22px] mr-[14px] text-light-primary max-h-[22px] sm:mr-0 sm:text-left sm:hidden">
             {t('Profile.text.update_password')}
           </span>
           <ArrowDown24Icon

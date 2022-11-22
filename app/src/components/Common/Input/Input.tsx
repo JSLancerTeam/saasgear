@@ -16,7 +16,7 @@ const Input = React.forwardRef(
       type={type}
       defaultValue={defaultValue}
       placeholder={placeholder}
-      className={`bg-light_gray border-[1px] border-solid border-white_blue rounded-[10px] px-[10px] py-[10.5px] text-[16px] leading-[19px] text-white_gray w-full focus:border-light_primary focus:outline-none active:border-light_primary active:outline-none placeholder:text-[16px] placeholder:leading-[19px] placeholder:text-light_grey ${className}`}
+      className={`bg-light-gray border-[1px] border-solid border-white-blue rounded-[10px] px-[10px] py-[10.5px] text-[16px] leading-[19px] text-white-gray w-full focus:border-light-primary focus:outline-none active:border-light-primary active:outline-none placeholder:text-[16px] placeholder:leading-[19px] placeholder:text-light-grey ${className}`}
       {...props}
       ref={ref}
     />

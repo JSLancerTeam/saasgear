@@ -40,10 +40,10 @@ const VerifyEmail: React.FC = () => {
         <div>
           <Logo />
         </div>
-        <div className="font-bold text-[26px] leading-9 mt-[3px] text-sapphire_blue">
+        <div className="font-bold text-[26px] leading-9 mt-[3px] text-sapphire-blue">
           {t('Verify_email.title')}
         </div>
-        <p className="text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10">
+        <p className="text-[14px] leading-6 text-sapphire-blue max-w-[567px] mx-auto mt-6 mb-10">
           {t('Verify_email.description')}
         </p>
         <Badge type={verifyResult !== null ? 'success' : 'error'}>

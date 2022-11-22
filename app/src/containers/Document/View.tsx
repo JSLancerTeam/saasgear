@@ -36,8 +36,8 @@ const ViewDocument: React.FC = () => {
 
       {!loading && documentData?.getDocumentDetail && (
         <>
-          <h3 className="font-bold text-[26px] leading-9 text-sapphire_blue mb-8">{documentData.getDocumentDetail.name}</h3>
-          <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+          <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue mb-8">{documentData.getDocumentDetail.name}</h3>
+          <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
             <div
               dangerouslySetInnerHTML={createMarkup(
                 documentData.getDocumentDetail.body,

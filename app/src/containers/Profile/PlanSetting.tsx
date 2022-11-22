@@ -117,9 +117,9 @@ const PlanSetting: React.FC = () => {
   const amountNew = planChanged ? planChanged.price : 0;
 
   return (
-    <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
-      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-1">{t('Profile.text.plan')}</h5>
-      <p className="text-[16px] leading-[26px] text-white_gray mb-[14px]">{t('Profile.text.plan_desc')}</p>
+    <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-1">{t('Profile.text.plan')}</h5>
+      <p className="text-[16px] leading-[26px] text-white-gray mb-[14px]">{t('Profile.text.plan_desc')}</p>
       <div className="flex justify-between sm:flex-col-reverse">
         <div>
           <div className="flex justify-center mb-[25px] sm:mt-[25px] [&_label]:mx-auto [&_label]:my-0">
@@ -156,19 +156,19 @@ const PlanSetting: React.FC = () => {
               </div>
             ) : (
               <div className="flex flex-col min-w-[300px]">
-                <div className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-6">{t('Profile.text.order_sumary')}</div>
+                <div className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-6">{t('Profile.text.order_sumary')}</div>
                 <ul className="flex-grow">
                   <li className="flex justify-between items-center list-none mb-4">
-                    <p className="text-[16px] leading-[26px] text-white_gray flex-grow">{t('Profile.text.curreny_sub')}</p>
-                    <span className="font-bold text-[18px] leading-6 text-sapphire_blue">${amountCurrent}</span>
+                    <p className="text-[16px] leading-[26px] text-white-gray flex-grow">{t('Profile.text.curreny_sub')}</p>
+                    <span className="font-bold text-[18px] leading-6 text-sapphire-blue">${amountCurrent}</span>
                   </li>
                   <li className="flex justify-between items-center list-none mb-4">
-                    <p className="text-[16px] leading-[26px] text-white_gray flex-grow">{t('Profile.text.new_sub')}</p>
-                    <span className="font-bold text-[18px] leading-6 text-sapphire_blue">${isYearly ? amountNew * 9 : amountNew}</span>
+                    <p className="text-[16px] leading-[26px] text-white-gray flex-grow">{t('Profile.text.new_sub')}</p>
+                    <span className="font-bold text-[18px] leading-6 text-sapphire-blue">${isYearly ? amountNew * 9 : amountNew}</span>
                   </li>
                   <li className="flex justify-between items-center list-none mb-4">
-                    <p className="text-[16px] leading-[26px] text-white_gray flex-grow">{t('Profile.text.balance_due')}</p>
-                    <span className="font-bold text-[18px] leading-6 text-sapphire_blue">${Math.max((isYearly ? amountNew * 9 : amountNew) - amountCurrent, 0)}</span>
+                    <p className="text-[16px] leading-[26px] text-white-gray flex-grow">{t('Profile.text.balance_due')}</p>
+                    <span className="font-bold text-[18px] leading-6 text-sapphire-blue">${Math.max((isYearly ? amountNew * 9 : amountNew) - amountCurrent, 0)}</span>
                   </li>
                 </ul>
                 {(isEmpty(currentPlan) || (currentPlan && currentPlan.deletedAt)) ? (

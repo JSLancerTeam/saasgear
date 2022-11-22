@@ -64,8 +64,8 @@ const AcceptInvitation: React.FC = () => {
         <div>
           <Logo />
         </div>
-        <div className="font-bold text-[26px] leading-9 text-sapphire_blue mt-[3px]">{t('Accept_invitation.title')}</div>
-        <p className="text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10">
+        <div className="font-bold text-[26px] leading-9 text-sapphire-blue mt-[3px]">{t('Accept_invitation.title')}</div>
+        <p className="text-[14px] leading-6 text-sapphire-blue max-w-[567px] mx-auto mt-6 mb-10">
           <Trans
             components={[<strong></strong>]}
             values={{ teamName: teamInfo?.teamName, owner: teamInfo?.owner }}

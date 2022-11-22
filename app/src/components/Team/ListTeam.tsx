@@ -13,9 +13,9 @@ const ListTeam: React.FC<Props> = ({ teams }) => {
   const history = useHistory();
   const { t } = useTranslation();
   return (
-    <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
-      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-8"> {t('Team.list_team')}</h5>
-      <table className="w-full border-collapse [&_tr]:h-[56px] [&_th]:font-bold [&_th]:text-[12px] [&_th]:leading-[15px] [&_th]:tracking-[2px] [&_th]:uppercase [&_th]:text-white_blue [&_th]:text-left [&_td]:text-[14px] [&_td]:leading-6 [&_td]:text-sapphire_blue [&_tbody_tr:nth-child(even)]:bg-light_gray [&_tbody_tr:hover]:bg-regular_primary">
+    <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-8"> {t('Team.list_team')}</h5>
+      <table className="w-full border-collapse [&_tr]:h-[56px] [&_th]:font-bold [&_th]:text-[12px] [&_th]:leading-[15px] [&_th]:tracking-[2px] [&_th]:uppercase [&_th]:text-white-blue [&_th]:text-left [&_td]:text-[14px] [&_td]:leading-6 [&_td]:text-sapphire-blue [&_tbody_tr:nth-child(even)]:bg-light-gray [&_tbody_tr:hover]:bg-regular-primary">
         <thead>
           <tr>
             <th>{t('Team.text.name')}</th>

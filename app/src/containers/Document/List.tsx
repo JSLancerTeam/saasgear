@@ -22,7 +22,7 @@ const ListDocument: React.FC = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-[26px] sm:flex-col sm:items-start">
-        <h3 className="font-bold text-[26px] leading-9 text-sapphire_blue mb-0">
+        <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue mb-0">
           {t('Document.title')}
         </h3>
         <div className="flex sm:mt-[15px] sm:w-full">
@@ -37,7 +37,7 @@ const ListDocument: React.FC = () => {
           </Button>
         </div>
       </div>
-      <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
         <DocumentTable
           data={data?.getDocuments?.documents}
           total={data?.getDocuments?.count}

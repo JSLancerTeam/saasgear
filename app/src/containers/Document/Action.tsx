@@ -83,7 +83,7 @@ const ActionDocument: React.FC = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-[26px]">
-        <h3 className="font-bold text-[26px] leading-9 text-sapphire_blue">
+        <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue">
           {documentData?.getDocumentDetail?.name
             ? documentData.getDocumentDetail.name
             : t('Common.title.new_document')}
@@ -97,7 +97,7 @@ const ActionDocument: React.FC = () => {
           {isCreating || isUpdating ? t('Common.text.please_wait') : t('Common.text.save')}
         </Button>
       </div>
-      <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
         <DocumentForm
           editorContent={editorContent}
           onSubmit={handleSubmit(onSubmit)}

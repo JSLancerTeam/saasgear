@@ -30,15 +30,15 @@ const ResetPasswordForm:React.FC<Props> = ({
       <div>
         <Logo />
       </div>
-      <div className="font-bold text-[26px] leading-9 text-sapphire_blue mt-[3px]">
+      <div className="font-bold text-[26px] leading-9 text-sapphire-blue mt-[3px]">
         {t('Common.title.reset_password')}
       </div>
-      <p className="text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10">
+      <p className="text-[14px] leading-6 text-sapphire-blue max-w-[567px] mx-auto mt-6 mb-10">
         {t('Reset_password.description')}
       </p>
       <form onSubmit={onSubmit} className="w-[420px] mx-auto my-0 text-left block">
         <div className="block w-full mb-4">
-          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
             {t('Common.label.password')}
           </label>
           <FormControl>
@@ -54,7 +54,7 @@ const ResetPasswordForm:React.FC<Props> = ({
           </FormControl>
         </div>
         <div className="block w-full mb-4">
-          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
             {t('Common.label.confirm_password')}
           </label>
           <FormControl>
@@ -76,7 +76,7 @@ const ResetPasswordForm:React.FC<Props> = ({
             </Button>
           </div>
           {apiError && <Badge type="error">{apiError}</Badge>}
-          <div className="text-[14px] leading-6 text-sapphire_blue text-center mt-[69px]">
+          <div className="text-[14px] leading-6 text-sapphire-blue text-center mt-[69px]">
             <Trans components={[<Link to="##"></Link>]}>
               {t('Forgot_password.footer')}
             </Trans>

@@ -28,14 +28,14 @@ const DocumentForm: React.FC<Props> = ({
   return (
     <form onSubmit={onSubmit}>
       <div className="block w-full mb-4">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
           {t('Common.label.name')}
         </label>
         <Input name="name" ref={register} />
         {formErrors?.name?.message && <ErrorText message={String(t(formErrors.name.message))} />}
       </div>
       <div className="block w-full mb-4">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
           {t('Common.label.body')}
         </label>
         <Controller

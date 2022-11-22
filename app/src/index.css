@@ -41,8 +41,8 @@
   }
 
   .editor-wrapper {
-    background: theme('colors.light_gray');
-    border: 1px solid theme('colors.white_blue');
+    background: theme('colors.light-gray');
+    border: 1px solid theme('colors.white-blue');
     border-radius: 10px;
     overflow: hidden;
   }
@@ -53,7 +53,7 @@
 
   .toolbar {
     border: none;
-    border-bottom: 1px solid theme('colors.white_blue');
+    border-bottom: 1px solid theme('colors.white-blue');
   }
 
   .table_responsive {

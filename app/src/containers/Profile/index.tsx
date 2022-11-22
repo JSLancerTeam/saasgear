@@ -12,14 +12,14 @@ const Profile: React.FC = () => {
 
   return (
     <div>
-      <h3 className="font-bold text-[26px] leading-9 text-sapphire_blue mb-8">{t('Profile.title')}</h3>
+      <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue mb-8">{t('Profile.title')}</h3>
       {loading ? <div>{t('Common.text.loading')}</div> : (
         <>
-          <div className="bg-white border border-solid border-dark_grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6 pb-0">
-            <h5 className="font-bold text-[22px] leading-[30px] text-sapphire_blue mb-1">
+          <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6 pb-0">
+            <h5 className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-1">
               {t('Profile.text.account')}
             </h5>
-            <p className="text-[16px] leading-[26px] text-white_gray mb-[14px]">
+            <p className="text-[16px] leading-[26px] text-white-gray mb-[14px]">
               {t('Profile.text.desc')}
             </p>
             <InformationSetting user={data} />

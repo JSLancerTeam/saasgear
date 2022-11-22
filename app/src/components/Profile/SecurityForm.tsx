@@ -23,7 +23,7 @@ const SecurityForm: React.FC<Props> = ({
   return (
     <form onSubmit={onSubmit} className="mx-0 my-6">
       <div className="block w-full mb-4">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
           {t('Profile.text.current_password')}
         </label>
         <Input type="password" name="currentPassword" ref={register} />
@@ -32,7 +32,7 @@ const SecurityForm: React.FC<Props> = ({
         )}
       </div>
       <div className="block w-full mb-4">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
           {t('Profile.text.new_password')}
         </label>
         <Input type="password" name="newPassword" ref={register} />
@@ -41,7 +41,7 @@ const SecurityForm: React.FC<Props> = ({
         )}
       </div>
       <div className="block w-full mb-4">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
           {t('Profile.text.confirm_new_password')}
         </label>
         <Input type="password" name="confirmPassword" ref={register} />

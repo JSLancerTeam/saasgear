@@ -68,23 +68,23 @@ const StripeForm: React.FC<Props> = ({
         {onGoBack && <Button type="button" onClick={onGoBack} className="border-transparent p-0 mb-5 cursor-pointer [&>svg]:text-red [&>svg]:w-5" />}
         <div>
           <div className="block w-full mb-4">
-            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="street_address">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="street_address">
               {t('Payment.label.card')}
             </label>
-            <CardNumberElement className="card-el p-[10px] py-[11.6px] bg-light_gray border border-solid border-white_blue rounded-[10px] text-[16px] leading-[19px] text-center text-white_gray box-border" />
+            <CardNumberElement className="card-el p-[10px] py-[11.6px] bg-light-gray border border-solid border-white-blue rounded-[10px] text-[16px] leading-[19px] text-center text-white-gray box-border" />
           </div>
           <div className="flex items-center justify-between">
             <div className="block w-full mb-4 mr-[10px]">
-              <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="first_name">
+              <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="first_name">
                 {t('Payment.label.expiration')}
               </label>
-              <CardExpiryElement className="px-[10px] py-[11.6px] bg-light_gray border border-solid border-white_blue rounded-[10px] text-[16px] leading-[19px] text-center text-white_gray w-full box-border" />
+              <CardExpiryElement className="px-[10px] py-[11.6px] bg-light-gray border border-solid border-white-blue rounded-[10px] text-[16px] leading-[19px] text-center text-white-gray w-full box-border" />
             </div>
             <div className="block w-full mb-4 ml-[10px]">
-              <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="last_name">
+              <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]" htmlFor="last_name">
                 {t('Payment.label.cvc')}
               </label>
-              <CardCvcElement className="px-[10px] py-[11.6px] bg-light_gray border border-solid border-white_blue rounded-[10px] text-[16px] leading-[19px] text-center text-white_gray w-full box-border" />
+              <CardCvcElement className="px-[10px] py-[11.6px] bg-light-gray border border-solid border-white-blue rounded-[10px] text-[16px] leading-[19px] text-center text-white-gray w-full box-border" />
             </div>
           </div>
         </div>

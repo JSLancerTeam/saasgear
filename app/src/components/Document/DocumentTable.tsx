@@ -25,7 +25,7 @@ const DocumentTable: React.FC<Props> = ({ data, total, loading, onFetch }) => {
 
   return (
     <div className="block w-full overflow-x-auto table_responsive">
-      <table className="w-full border-collapse [&_tr]:h-[56px] [&_th]:font-bold [&_th]:text-[12px] [&_th]:leading-[15px] [&_th]:tracking-[2px] [&_th]:uppercase [&_th]:text-white_blue [&_th]:text-left [&_td]:text-[14px] [&_td]:leading-6 [&_td]:text-sapphire_blue [&_tbody_tr:nth-child(even)]:bg-light_gray [&_tbody_tr:hover]:bg-regular_primary">
+      <table className="w-full border-collapse [&_tr]:h-[56px] [&_th]:font-bold [&_th]:text-[12px] [&_th]:leading-[15px] [&_th]:tracking-[2px] [&_th]:uppercase [&_th]:text-white-blue [&_th]:text-left [&_td]:text-[14px] [&_td]:leading-6 [&_td]:text-sapphire-blue [&_tbody_tr:nth-child(even)]:bg-light-gray [&_tbody_tr:hover]:bg-regular-primary">
         <thead>
           <tr>
             <th scope="col">{t('Document.table.id')}</th>

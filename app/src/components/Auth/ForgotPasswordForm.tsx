@@ -31,16 +31,16 @@ const ForgotPasswordForm: React.FC<Props> = ({
       <div>
         <Logo />
       </div>
-      <div className="font-bold text-[26px] leading-9 text-sapphire_blue mt-[3px]">
+      <div className="font-bold text-[26px] leading-9 text-sapphire-blue mt-[3px]">
         {t('Common.title.forgot_password')}
       </div>
-      <p className="text-[14px] leading-6 text-sapphire_blue max-w-[567px] mx-auto mt-6 mb-10">
+      <p className="text-[14px] leading-6 text-sapphire-blue max-w-[567px] mx-auto mt-6 mb-10">
         {t('Forgot_password.description')}
       </p>
       {!isSubmitted ? (
         <form onSubmit={onSubmit} className="w-[420px] mx-auto my-0 text-left block">
           <div className="mb-4 w-full block">
-            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mb-[19px] uppercase">
               {t('Common.label.your_email')}
             </label>
             <FormControl>
@@ -60,7 +60,7 @@ const ForgotPasswordForm: React.FC<Props> = ({
               </Button>
             </div>
             {apiError && <ErrorText message={String(t(`Forgot_password.error.${apiError}`))} position="center" />}
-            <div className="text-[14px] leading-6 text-sapphire_blue text-center mt-[69px]">
+            <div className="text-[14px] leading-6 text-sapphire-blue text-center mt-[69px]">
               <Trans components={[<Link to="##"></Link>]}>
                 {t('Forgot_password.footer')}
               </Trans>
@@ -72,7 +72,7 @@ const ForgotPasswordForm: React.FC<Props> = ({
           <p className="text-[16px] leading-6 max-w-[567px] mx-auto mt-[24px] mb-[40px] bg-green text-white px-[15px] py-[14px] rounded-[3px]">
             {t('Forgot_password.confirm')}
           </p>
-          <div className="text-[14px] leading-6 text-sapphire_blue text-center mt-[69px]">
+          <div className="text-[14px] leading-6 text-sapphire-blue text-center mt-[69px]">
             <Trans components={[<Link to="/auth/signin"></Link>]}>
               {t('Forgot_password.go_to')}
             </Trans>

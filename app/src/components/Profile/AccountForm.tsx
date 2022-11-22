@@ -19,14 +19,14 @@ const AccountForm: React.FC<Props> = ({ onSubmit, register, loading, apiError, o
     <form onSubmit={onSubmit} className="mx-0 my-6">
       <div className="flex justify-between">
         <div className="block w-full mb-4">
-          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
             {t('Common.label.your_name')}
           </label>
           <Input name="name" ref={register} />
         </div>
       </div>
       <div className="block w-full mb-4">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
           {t('Common.label.email')}
         </label>
         <Input type="email" name="email" ref={register} disabled />

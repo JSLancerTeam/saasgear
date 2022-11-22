@@ -50,20 +50,20 @@ const Topbar: React.FC<Props> = ({ signout }) => {
           <div className="w-[50px] h-[50px] flex justify-center items-center topbar_avatar">
             <img src={resolveAvatarPath(avatarUrl, Avatar)} alt="avatar" />
           </div>
-          <span className="font-medium text-[18px] leading-[22px] text-sapphire_blue mx-2 my-0 sm:hidden">{name}</span>
+          <span className="font-medium text-[18px] leading-[22px] text-sapphire-blue mx-2 my-0 sm:hidden">{name}</span>
           <ArrowDownIcon />
         </div>
       </div>
       {isShowMenu && (
         <div className="absolute top-[calc(100%_+_17px)] right-[10px] w-[200px] sm:top-full">
-          <ul className="relative p-0 border border-solid border-dark_grey rounded-[5px] shadow-xsl bg-white before:content-[''] before:block before:absolute before:left-1/2 before:bottom-full before:translate-x-[-1/2] before:translate-y-0 before:w-0 before:h-0 before:border-[12px] before:border-solid before:border-transparent before:border-b-dark_grey sm:before:left-[unset] sm:before:right-1 after:content-[''] after:block after:absolute after:left-1/2 after:bottom-full after:translate-x-[-1/2] after:translate-y-0 after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-b-white sm:after:left-[unset] sm:after:right-2">
+          <ul className="relative p-0 border border-solid border-dark-grey rounded-[5px] shadow-xsl bg-white before:content-[''] before:block before:absolute before:left-1/2 before:bottom-full before:translate-x-[-1/2] before:translate-y-0 before:w-0 before:h-0 before:border-[12px] before:border-solid before:border-transparent before:border-b-dark-grey sm:before:left-[unset] sm:before:right-1 after:content-[''] after:block after:absolute after:left-1/2 after:bottom-full after:translate-x-[-1/2] after:translate-y-0 after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-b-white sm:after:left-[unset] sm:after:right-2">
             <li className="list-none h-9">
-              <NavLink to="/profile" className="text-[14px] text-sapphire_blue pl-6 overflow-hidden flex items-center w-full h-full active:bg-regular_primary">
+              <NavLink to="/profile" className="text-[14px] text-sapphire-blue pl-6 overflow-hidden flex items-center w-full h-full active:bg-regular-primary">
                 {t('Common.title.profile')}
               </NavLink>
             </li>
             <li className="list-none h-9">
-              <button type="button" onClick={signout} className="text-[14px] text-sapphire_blue pl-6 overflow-hidden flex items-center w-full h-full border-none outline-none bg-transparent cursor-pointer">
+              <button type="button" onClick={signout} className="text-[14px] text-sapphire-blue pl-6 overflow-hidden flex items-center w-full h-full border-none outline-none bg-transparent cursor-pointer">
                 {t('Common.title.sign_out')}
               </button>
             </li>

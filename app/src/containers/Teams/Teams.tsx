@@ -9,7 +9,7 @@ const Teams: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <h3 className="font-bold text-[26px] leading-9 text-sapphire_blue mb-8">
+      <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue mb-8">
         {t('Common.title.teams')}
       </h3>
       <Switch>

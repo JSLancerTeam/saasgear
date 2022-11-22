@@ -26,18 +26,18 @@ const DeleteAccountModal: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <Modal isOpen={isOpen}>
-      <div className="font-bold text-[26px] leading-9 text-sapphire_blue pt-6 px-6">
+      <div className="font-bold text-[26px] leading-9 text-sapphire-blue pt-6 px-6">
         {t('Profile.label.delete')}
       </div>
       <div className="p-6 border border-solid border-[#7c88b1] border-opacity-[0.16]">
-        <p className="text-[14px] leading-6 text-white_gray">
+        <p className="text-[14px] leading-6 text-white-gray">
           {t('Profile.text.delete_modal')}
         </p>
         <form onSubmit={onSubmit} className="mt-6">
           <div className="block w-full mb-4">
-            <label htmlFor="email" className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mt-[19px] uppercase sm:text-[11px]">
+            <label htmlFor="email" className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mt-[19px] uppercase sm:text-[11px]">
               <Trans
-                components={[<div className="text-sapphire_blue font-bold" />]}
+                components={[<div className="text-sapphire-blue font-bold" />]}
                 values={{ email }}
               >
                 {t('Profile.text.please_enter')}

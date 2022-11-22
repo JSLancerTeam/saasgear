@@ -18,8 +18,8 @@ const AuthAdsArea: React.FC = () => {
       <div className="absolute top-[180px] left-[56px]">
         <img src={squareRadiusPrimary} alt="" />
       </div>
-      <div className="absolute left-[38px] bottom-[110px] border-[1px] border-solid border-light_blue rounded-[50%] w-[58px] h-[58px]" />
-      <div className="absolute left-[26.52%] right-0 bottom-0 top-[44.01%]">
+      <div className="absolute left-[38px] bottom-[110px] border-[1px] border-solid border-light-blue rounded-[50%] w-[58px] h-[58px]" />
+      <div className="absolute left-[240px] right-0 bottom-0">
         <img src={squareRadiusTopBig} alt="" />
       </div>
       <div className="max-w-full h-full [&>div]:h-full">

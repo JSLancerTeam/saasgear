@@ -14,13 +14,13 @@ const Checkbox = React.forwardRef(
     { type, defaultChecked, placeholder, id, className, ...props }: Props,
     ref: React.Ref<HTMLInputElement>
   ) => (
-    <span className="relative w-6 h-6 inline-block rounded overflow-hidden border-[1px] border-solid border-light_white_gray">
+    <span className="relative w-6 h-6 inline-block rounded overflow-hidden border-[1px] border-solid border-light-white-gray">
       {" "}
       <input
         type={type}
         defaultChecked={defaultChecked}
         placeholder={placeholder}
-        className={`absolute opacity-0 cursor-pointer h-0 w-0 [&:checked~.checkmark]:bg-semi_primary [&:checked~.checkmark::after]:block ${className}`}
+        className={`absolute opacity-0 cursor-pointer h-0 w-0 [&:checked~.checkmark]:bg-semi-primary [&:checked~.checkmark::after]:block ${className}`}
         {...props}
         ref={ref}
         id={id}

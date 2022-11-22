@@ -25,7 +25,7 @@ const TeamForm: React.FC<Props> = ({
   return (
     <form onSubmit={onSubmit}>
       <div className="mb-4 w-full block">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mb-[19px] uppercase">
           {t('Team.label.name')}
         </label>
         <FormControl>
@@ -41,7 +41,7 @@ const TeamForm: React.FC<Props> = ({
         </FormControl>
       </div>
       <div className="mb-4 w-full block">
-        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white_blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Team.label.id')}</label>
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Team.label.id')}</label>
         <FormControl>
           <Input
             type="text"

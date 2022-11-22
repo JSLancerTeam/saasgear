@@ -44,25 +44,32 @@ ReactJS and NodeJS SaaS boilerplate for your next SaaS application.
 
 [:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/blob/master/docs/redux-toolkit.md)
 
-## Developers
-- David Tran - [davidtran](http://github.com/davidtran)
-- Leo Phan - [nhuthuy212507](https://github.com/nhuthuy212507)
-- Clement Le - [tuananhitoct](https://github.com/tuananhitoct)
-
 ## Technology stack
+-
 
 ### Front-end
-![Frontend Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/front-end-stack2.png)
+- TypeScript
+- React
+- Tailwind
+- Apollo
+- Redux Toolkit
+- React Hook Form
+- DayJS
+- DraftJS
 
 ### Back-end
-![API Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/backend-stack.png)
+- TypeScript
+- NodeJS
+- ExpressJS
+- MySQL
+- Mailgun
+- MJML
+- Knex
+- Apollo Server
+- Stripe
 
-### Support databases
-![Databasee Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/database-stack.png)
-
-### Payment
-![Payment Stack](https://github.com/JSLancerTeam/saasgear/blob/documents/docs/images/payment-stack.png)
-<br />
+## Developer
+- David Tran - [davidtran](https://twitter.com/davidtranwd)
 
 ## License
 All code in this repository is provided under the MIT

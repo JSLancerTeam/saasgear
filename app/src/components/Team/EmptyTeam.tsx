@@ -1,32 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import Button from '../Common/Button';
-import { Description } from '../Layout/blockStyle';
-
-const Content = styled.div`
-  display: flex;
-`;
-
-const MainContent = styled.div`
-  flex-grow: 1;
-`;
 
 const EmptyTeam: React.FC = () => {
   const history = useHistory();
   const { t } = useTranslation();
 
   return (
-    <Content>
-      <MainContent>
-        <Description>{t('Team.text.click_button')}</Description>
+    <div className="flex">
+      <div className="flex-grow">
+        <p className="text-[16px] leading-[26px] text-white-gray mb-[14px]">{t('Team.text.click_button')}</p>
         <Button color="primary" onClick={() => history.push('/teams/new')}>
           {t('Team.text.create')}
         </Button>
-      </MainContent>
-    </Content>
+      </div>
+    </div>
   );
 }
 

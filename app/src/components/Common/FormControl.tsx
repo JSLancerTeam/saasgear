@@ -1,10 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const FormControlWrapper = styled.div`
-  width: 100%;
-  display: block;
-`;
 
 interface Props {
   className?: string;
@@ -12,14 +6,10 @@ interface Props {
   [key: string]: unknown;
 }
 
-const FormControl: React.FC<Props> = ({ className, children, ...props }) => (
-  <FormControlWrapper className={className} {...props}>
+const FormControl: React.FC<Props> = ({ className = "", children, ...props }) => (
+  <div className={`w-full block ${className}`} {...props}>
     {children}
-  </FormControlWrapper>
+  </div>
 )
-
-FormControl.defaultProps = {
-  className: "",
-};
 
 export default React.memo(FormControl);

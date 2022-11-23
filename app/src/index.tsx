@@ -7,6 +7,8 @@ import { Integrations } from '@sentry/tracing';
 import store from '@/config/store';
 import App from './App';
 
+import './index.css'
+
 import './config/i18n';
 
 init({

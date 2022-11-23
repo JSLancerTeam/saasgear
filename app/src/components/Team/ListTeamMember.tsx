@@ -1,17 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import type { ITeamMember } from "@/features/admin/team";
-import { Table } from '../Common/Table';
 import Button from '../Common/Button';
-
-const ActionTd = styled.td`
-  width: 20%;
-
-  button:first-child {
-    margin-right: 20px;
-  }
-`;
 
 type Props = {
   teamMembers: ITeamMember[];
@@ -21,7 +11,7 @@ type Props = {
 const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
   const { t } = useTranslation();
   return (
-    <Table>
+    <table className="w-full border-collapse [&_tr]:h-[56px] [&_th]:font-bold [&_th]:text-[12px] [&_th]:leading-[15px] [&_th]:tracking-[2px] [&_th]:uppercase [&_th]:text-white-blue [&_th]:text-left [&_td]:text-[14px] [&_td]:leading-6 [&_td]:text-sapphire-blue [&_tbody_tr:nth-child(even)]:bg-light-gray [&_tbody_tr:hover]:bg-regular-primary">
       <thead>
         <tr>
           <th>{t('Team.text.member')}</th>
@@ -35,10 +25,10 @@ const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
               <td width="70%">{it.email}</td>
               <td width="10%">{it.isOwner ? 'admin' : 'member'}</td>
               {!!handleAction && (
-                <ActionTd>
+                <td className="w-1/5 [&_button:first-child]:mr-[20px]">
                   <Button>{t('Common.text.cancel')}</Button>
                   <Button color="primary">{t('Team.text.invitation')}</Button>
-                </ActionTd>
+                </td>
               )}
             </tr>
           ))
@@ -48,7 +38,7 @@ const ListTeamMember: React.FC<Props> = ({ teamMembers, handleAction }) => {
           </tr>
         )}
       </tbody>
-    </Table>
+    </table>
   );
 };
 

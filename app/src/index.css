@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply not-italic box-border tracking-[0.5px];
+    font-family: theme('fontFamily.inter');
+  }
+  a {
+    @apply no-underline;
+    color: theme('colors.primary');
+  }
+  html, body {
+    @apply m-0 p-0 relative;
+  }
+
+  h1, h2, h3, h4, h5, h6, ul, li, p {
+    @apply m-0 p-0;
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+  .public-DraftEditor-content {
+    min-height: 500px;
+    overflow: auto;
+  }
+
+  .topbar_avatar img {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+
+  .transform_modal {
+    transform: translate(-50%, -50%);
+  }
+
+  .editor-wrapper {
+    background: theme('colors.light-gray');
+    border: 1px solid theme('colors.white-blue');
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .editor {
+    padding: 10px;
+  }
+
+  .toolbar {
+    border: none;
+    border-bottom: 1px solid theme('colors.white-blue');
+  }
+
+  .table_responsive {
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  .plan-wrapper {
+    background: theme('colors.primary');
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .plan-wrapper .name, .plan-wrapper .desc, .plan-wrapper .price, .plan-wrapper .unit, .plan-wrapper .feature-text, .plan-wrapper .get-started-btn {
+    color: theme('colors.white');
+  }
+
+  .plan-wrapper .desc {
+    opacity: 0.7;
+  }
+
+  .plan-wrapper .feature-list {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .plan-wrapper .feature-item svg circle, .plan-wrapper .feature-item svg path {
+    stroke: #8dead2;
+  }
+
+  .plan-wrapper .get-started-btn {
+    border-color: theme('colors.white');
+    background: theme('colors.primary');
+  }
+
+  @screen sm {
+    .topbar_avatar img {
+      width: 33.33px;
+      height: 33.33px;
+    }
+  }
+}

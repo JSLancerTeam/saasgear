@@ -1,66 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { COLORS, mobileQuery } from '@/constants/style';
+import cn from 'classnames';
 
 type Overlay = {
   isOpen: boolean;
 }
-
-const Overlay = styled.div<Overlay>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(39, 50, 89, 0.42);
-  display: none;
-
-  ${(props) =>
-    props.isOpen &&
-    css`
-      display: block;
-    `}
-`;
-
-const Wrapper = styled.div`
-  position: fixed;
-  background: white;
-  width: 765px;
-  max-width: 70%;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  ${mobileQuery} {
-    max-width: 90%;
-  }
-`;
-
-export const ModalHeader = styled.h3`
-  font-weight: bold;
-  font-size: 26px;
-  line-height: 36px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-  padding: 24px 24px 0;
-`;
-
-export const ModalContent = styled.div`
-  padding: 24px;
-  border-bottom: 1px solid rgba(124, 136, 177, 0.16);
-`;
-
-export const ModalFooter = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 24px;
-
-  button + button {
-    margin-left: 16px;
-  }
-`;
 
 type Props = {
   isOpen: Overlay["isOpen"];
@@ -68,9 +12,11 @@ type Props = {
 }
 
 const Modal: React.FC<Props> = ({ isOpen, children }) => (
-  <Overlay isOpen={isOpen}>
-    <Wrapper>{children}</Wrapper>
-  </Overlay>
+  <div className={cn("fixed top-0 left-0 w-full h-full block bg-[#273259] bg-opacity-[0.42]", { 'hidden': !isOpen })}>
+    <div className="fixed bg-white w-[765px] max-w-[70%] h-auto top-1/2 left-1/2 transform_modal rounded-[10px] sm:max-w-[90%]">
+      {children}
+    </div>
+  </div>
 );
 
 Modal.propTypes = {

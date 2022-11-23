@@ -1,28 +1,12 @@
 import React, { memo } from 'react';
 import { Controller, Control } from 'react-hook-form';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { ReactHookFormType } from "@/typeReactHookForm";
 
-import { mobileQuery } from '@/constants/style';
 import WYSIWYGEditor from './WYSIWYG';
-import FormGroup from '../Common/FormGroup';
-import FormGroupLabel from '../Common/FormGroupLabel';
 import ErrorText from '../Common/ErrorText';
 import Button from '../Common/Button';
 import Input from '../Common/Input/Input';
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const SaveBtn = styled(Button)`
-  width: 264px;
-  ${mobileQuery} {
-    width: 100%;
-  }
-`;
 
 type Props = ReactHookFormType & {
   editorContent?: string;
@@ -43,13 +27,17 @@ const DocumentForm: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <form onSubmit={onSubmit}>
-      <FormGroup>
-        <FormGroupLabel>{t('Common.label.name')}</FormGroupLabel>
+      <div className="block w-full mb-4">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          {t('Common.label.name')}
+        </label>
         <Input name="name" ref={register} />
-        {formErrors?.name?.message && <ErrorText message={t(formErrors.name.message)} />}
-      </FormGroup>
-      <FormGroup>
-        <FormGroupLabel>{t('Common.label.body')}</FormGroupLabel>
+        {formErrors?.name?.message && <ErrorText message={String(t(formErrors.name.message))} />}
+      </div>
+      <div className="block w-full mb-4">
+        <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block uppercase mb-[19px]">
+          {t('Common.label.body')}
+        </label>
         <Controller
           name="body"
           control={control}
@@ -58,15 +46,15 @@ const DocumentForm: React.FC<Props> = ({
             <WYSIWYGEditor editorContent={editorContent} onChange={onChange} />
           )}
         />
-        {formErrors?.body?.message && <ErrorText message={t(formErrors.body.message)} />}
-      </FormGroup>
+        {formErrors?.body?.message && <ErrorText message={String(t(formErrors.body.message))} />}
+      </div>
       {apiError && <ErrorText message={`Document.error.${apiError}`} />}
 
-      <ButtonGroup>
-        <SaveBtn color="primary" type="submit" disabled={isSubmitting}>
+      <div className="flex justify-end">
+        <Button color="primary" type="submit" disabled={isSubmitting} className="w-[264px] sm:w-full">
           {isSubmitting ? t('Common.text.please_wait') : t('Common.text.save')}
-        </SaveBtn>
-      </ButtonGroup>
+        </Button>
+      </div>
     </form>
   );
 };

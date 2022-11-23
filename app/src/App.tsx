@@ -14,7 +14,6 @@ import Social from '@/containers/Social';
 import AcceptInvitation from '@/containers/Teams/AcceptInvitation';
 import { createClient } from '@/config/apollo';
 import GlobalLoading from '@/components/Layout/GlobalLoading';
-import GlobalStyle from '@/theme/globalStyles';
 import 'react-toastify/dist/ReactToastify.css';
 import useDocumentHeader from './hooks/useDocumentTitle';
 import { RootState } from './config/store';
@@ -35,7 +34,6 @@ const App: React.FC = () => {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <GlobalStyle />
         <GlobalLoading />
         <ToastContainer />
         <Switch>

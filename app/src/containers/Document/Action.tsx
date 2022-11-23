@@ -5,33 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import styled from 'styled-components';
 
 import DocumentForm from '@/components/Document/DocumentForm';
 import createDocumentQuery from '@/queries/document/createDocument';
 import updateDocumentQuery from '@/queries/document/updateDocument';
 import getDocumentDetailQuery from '@/queries/document/getDocumentDetail';
-import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
 import Button from '@/components/Common/Button';
-import { mobileQuery } from '@/constants/style';
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 26px;
-`;
-
-const TitlePageStyle = styled(TitlePage)`
-  margin-bottom: 0;
-`;
-
-const SaveBtn = styled(Button)`
-  width: 264px;
-  ${mobileQuery} {
-    display: none;
-  }
-`;
 
 const ActionDocumentSchema = yup.object().shape({
   name: yup.string().required('Common.validation.require_name'),
@@ -103,21 +82,22 @@ const ActionDocument: React.FC = () => {
 
   return (
     <div>
-      <Header>
-        <TitlePageStyle>
+      <div className="flex justify-between items-center mb-[26px]">
+        <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue">
           {documentData?.getDocumentDetail?.name
             ? documentData.getDocumentDetail.name
             : t('Common.title.new_document')}
-        </TitlePageStyle>
-        <SaveBtn
+        </h3>
+        <Button
           color="primary"
           onClick={handleSubmit(onSubmit)}
           disabled={isCreating || isUpdating}
+          className="w-[264px] sm:hidden"
         >
           {isCreating || isUpdating ? t('Common.text.please_wait') : t('Common.text.save')}
-        </SaveBtn>
-      </Header>
-      <ContentPage>
+        </Button>
+      </div>
+      <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
         <DocumentForm
           editorContent={editorContent}
           onSubmit={handleSubmit(onSubmit)}
@@ -127,7 +107,7 @@ const ActionDocument: React.FC = () => {
           formErrors={errors}
           apiError={createError?.graphQLErrors?.[0]?.extensions?.code || updateError?.graphQLErrors?.[0]?.extensions?.code}
         />
-      </ContentPage>
+      </div>
     </div>
   );
 };

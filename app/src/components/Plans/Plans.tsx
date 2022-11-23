@@ -1,140 +1,65 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { COLORS, mobileQuery } from '@/constants/style';
+import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as CheckCircleIcon } from '@/assets/images/svg/check-circle.svg';
 import Button from '../Common/Button';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
+// const PlanWrapper = styled.div<{ active: boolean }>`
+//   width: 430px;
+//   display: flex;
+//   flex-direction: column;
+//   border: 1px solid #7c88b1;
+//   border-radius: 10px;
+//   padding: 24px;
+//   cursor: pointer;
 
-  ${mobileQuery} {
-    flex-direction: column;
-  }
-`;
+//   &:first-child {
+//     margin-right: 25px;
+//     ${mobileQuery} {
+//       margin-right: 0;
+//     }
+//   }
 
-const Name = styled.h5`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-  margin-bottom: 6px;
-`;
+//   ${mobileQuery} {
+//     width: 100%;
+//     max-width: 100%;
+//     margin-right: 0;
+//     margin-bottom: 15px;
+//   }
 
-const Desc = styled.p`
-  font-size: 12px;
-  line-height: 16px;
-  color: ${COLORS.WHITE_BLUE};
-`;
+//   ${(props) =>
+//     props.active &&
+//     css`
+//       background: ${COLORS.PRIMARY};
+//       border-color: rgba(255, 255, 255, 0.2);
 
-const PriceWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  margin: 24px 0;
-`;
+//       ${Name}, ${Desc}, ${Price}, ${Unit}, ${FeatureText}, ${GetStartedBtn} {
+//         color: ${COLORS.WHITE};
+//       }
 
-const Price = styled.span`
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 36px;
-  color: ${COLORS.GREEN};
-`;
+//       ${Desc} {
+//         opacity: 0.7;
+//       }
 
-const Unit = styled.span`
-  font-size: 12px;
-  line-height: 25px;
-  color: ${COLORS.WHITE_GRAY};
-  opacity: 0.9;
-`;
+//       ${FeatureList} {
+//         border-color: rgba(255, 255, 255, 0.2);
+//       }
 
-const FeatureList = styled.ul`
-  padding-top: 24px;
-  padding-bottom: 32px;
-  border-top: 1px solid #7c88b1;
-  flex-grow: 1;
-`;
+//       ${FeatureItem} {
+//         svg {
+//           circle,
+//           path {
+//             stroke: #8dead2;
+//           }
+//         }
+//       }
 
-const FeatureItem = styled.li`
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  & + & {
-    margin-top: 8px;
-  }
-`;
-
-const FeatureIcon = styled.span`
-  width: 16px;
-  height: 16px;
-`;
-
-const FeatureText = styled.span`
-  font-size: 14px;
-  line-height: 24px;
-  color: ${COLORS.WHITE_GRAY};
-  margin-left: 12px;
-`;
-
-const GetStartedBtn = styled(Button)`
-  width: 100%;
-`;
-
-const PlanWrapper = styled.div<{ active: boolean }>`
-  width: 430px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #7c88b1;
-  border-radius: 10px;
-  padding: 24px;
-  cursor: pointer;
-
-  &:first-child {
-    margin-right: 25px;
-    ${mobileQuery} {
-      margin-right: 0;
-    }
-  }
-
-  ${mobileQuery} {
-    width: 100%;
-    max-width: 100%;
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
-
-  ${(props) =>
-    props.active &&
-    css`
-      background: ${COLORS.PRIMARY};
-      border-color: rgba(255, 255, 255, 0.2);
-
-      ${Name}, ${Desc}, ${Price}, ${Unit}, ${FeatureText}, ${GetStartedBtn} {
-        color: ${COLORS.WHITE};
-      }
-
-      ${Desc} {
-        opacity: 0.7;
-      }
-
-      ${FeatureList} {
-        border-color: rgba(255, 255, 255, 0.2);
-      }
-
-      ${FeatureItem} {
-        svg {
-          circle,
-          path {
-            stroke: #8dead2;
-          }
-        }
-      }
-
-      ${GetStartedBtn} {
-        border-color: ${COLORS.WHITE};
-        background: ${COLORS.PRIMARY};
-      }
-    `}
-`;
+//       ${GetStartedBtn} {
+//         border-color: ${COLORS.WHITE};
+//         background: ${COLORS.PRIMARY};
+//       }
+//     `}
+// `;
 
 type Plans = {
   id: string;
@@ -158,36 +83,43 @@ const Plans: React.FC<Props> = ({
   planChanged,
   isYearly,
   checkIsCurrentPlan,
-}) => (
-  <Wrapper>
-    {plans.map((plan) => (
-      <PlanWrapper
-        onClick={() => onChange(plan.id)}
-        active={planChanged ? plan.id === planChanged.id : false}
-        key={plan.id}
-      >
-        <Name>{plan.name}</Name>
-        <Desc>{plan.desc}</Desc>
-        <PriceWrapper>
-          <Price>${isYearly ? plan.price * 9 : plan.price}</Price>
-          <Unit>/{isYearly ? 'year' : 'month'}</Unit>
-        </PriceWrapper>
-        <FeatureList>
-          {plan.features.map((feature) => (
-            <FeatureItem key={feature}>
-              <FeatureIcon><CheckCircleIcon /></FeatureIcon>
-              <FeatureText>{feature}</FeatureText>
-            </FeatureItem>
-          ))}
-        </FeatureList>
-        {checkIsCurrentPlan(plan.id) ? (
-          <GetStartedBtn>Current Plan</GetStartedBtn>
-        ) : (
-          <GetStartedBtn color="primary">Get Started</GetStartedBtn>
-        )}
-      </PlanWrapper>
-    ))}
-  </Wrapper>
-);
-
+}) => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex justify-center sm:flex-col">
+      {plans.map((plan) => (
+        <div
+          onClick={() => onChange(plan.id)}
+          key={plan.id}
+          role="presentation"
+          className={classNames("flex flex-col w-[430px] border border-solid border-dark-gray rounded-[10px] p-6 cursor-pointer [&:first-child]:mr-[25px] [&:first-child]:sm:mr-0 sm:w-full sm:max-w-full sm:mr-0 sm:mb-[15px]", {
+            "plan-wrapper": planChanged ? plan.id === planChanged.id : false
+          })}
+        >
+          <h5 className="font-medium text-[14px] leading-[17px] text-sapphire-blue mb-[6px] name">{plan.name}</h5>
+          <p className="desc text-[12px] leading-4 text-white-blue">{plan.desc}</p>
+          <div className="flex items-end mx-0 my-6">
+            <span className="price font-bold text-[32px] leading-9 text-green">${isYearly ? plan.price * 9 : plan.price}</span>
+            <span className="unit text-[12px] leading-[25px] text-white-gray opacity-90">/{isYearly ? 'year' : 'month'}</span>
+          </div>
+          <ul className="feature-list pt-6 pb-8 border-t border-solid border-dark-gray flex-grow">
+            {plan.features.map((feature) => (
+              <li key={feature} className="feature-item list-none flex items-center [&+&]:mt-2">
+                <span className="w-4 h-4">
+                  <CheckCircleIcon />
+                </span>
+                <span className="feature-text text-[14px] leading-6 text-white-gray ml-3">{feature}</span>
+              </li>
+            ))}
+          </ul>
+          {checkIsCurrentPlan(plan.id) ? (
+            <Button className="get-start-btn w-full">{t('Profile.text.current_plan')}</Button>
+          ) : (
+            <Button color="primary" className="get-start-btn w-full">{t('Profile.text.get_started')}</Button>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
 export default Plans;

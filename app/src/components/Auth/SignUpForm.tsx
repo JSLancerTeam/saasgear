@@ -3,30 +3,10 @@ import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import FormControl from '@/components/Common/FormControl';
 import Input from '@/components/Common/Input/Input';
-import {
-  SignUpFormContainer,
-  FormContent,
-  FormHeader,
-  FormNote,
-} from '@/components/Auth/AuthForm';
-import styled from 'styled-components';
 import ErrorText from '@/components/Common/ErrorText';
 import Button from '@/components/Common/Button';
 import Logo from '@/components/Common/Logo';
-import FormGroup from '@/components/Common/FormGroup';
-import FormGroupLabel from '@/components/Common/FormGroupLabel';
 import { ReactHookFormType } from "@/typeReactHookForm";
-
-const FormSubmitButton = styled(Button)`
-  width: 100%;
-  text-transform: uppercase;
-  margin-top: 34px;
-`;
-
-const TextHaveAccount = styled(FormNote)`
-  margin-top: 92px;
-  text-align: center;
-`;
 
 type CustomProps = ReactHookFormType & {
   isSubmitting: boolean;
@@ -44,13 +24,17 @@ const SignUpForm: React.FC<CustomProps> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <SignUpFormContainer>
+    <div className="bg-white max-w-[300px]">
       <Logo />
-      <FormContent onSubmit={onSubmit}>
-        <FormHeader>{t('Sign_up.text.heading')}</FormHeader>
+      <form onSubmit={onSubmit} className="mb-6">
+        <div className="font-bold text-[26px] leading-9 text-sapphire-blue mb-[34px]">
+          {t('Sign_up.text.heading')}
+        </div>
         <div>
-          <FormGroup>
-            <FormGroupLabel>{t('Common.label.your_name')}</FormGroupLabel>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mb-[19px] uppercase">
+              {t('Common.label.your_name')}
+            </label>
             <FormControl>
               <Input
                 type="text"
@@ -59,12 +43,12 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.name?.message && (
-                <ErrorText message={t(formErrors.name.message)} />
+                <ErrorText message={String(t(formErrors.name.message))} />
               )}
             </FormControl>
-          </FormGroup>
-          <FormGroup>
-            <FormGroupLabel>{t('Common.label.email')}</FormGroupLabel>
+          </div>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Common.label.email')}</label>
             <FormControl>
               <Input
                 type="email"
@@ -73,12 +57,12 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.email?.message && (
-                <ErrorText message={t(formErrors.email.message)} />
+                <ErrorText message={String(t(formErrors.email.message))} />
               )}
             </FormControl>
-          </FormGroup>
-          <FormGroup>
-            <FormGroupLabel>{t('Common.label.password')}</FormGroupLabel>
+          </div>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Common.label.password')}</label>
             <FormControl>
               <Input
                 type="password"
@@ -87,12 +71,12 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.password?.message && (
-                <ErrorText message={t(formErrors.password.message)} />
+                <ErrorText message={String(t(formErrors.password.message))} />
               )}
             </FormControl>
-          </FormGroup>
-          <FormGroup>
-            <FormGroupLabel>{t('Common.label.confirm_password')}</FormGroupLabel>
+          </div>
+          <div className="mb-4 w-full block">
+            <label className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mb-[19px] uppercase">{t('Common.label.confirm_password')}</label>
             <FormControl>
               <Input
                 type="password"
@@ -101,27 +85,27 @@ const SignUpForm: React.FC<CustomProps> = ({
                 ref={register}
               />
               {formErrors?.passwordConfirmation?.message && (
-                <ErrorText message={t(formErrors.passwordConfirmation.message)} />
+                <ErrorText message={String(t(formErrors.passwordConfirmation.message))} />
               )}
             </FormControl>
-          </FormGroup>
-          <FormSubmitButton color="primary" type="submit">
+          </div>
+          <Button color="primary" type="submit" className="w-full uppercase mt-[34px]">
             {isSubmitting ? t('Common.text.please_wait') : (submitText ?? t('Common.text.submit'))}
-          </FormSubmitButton>
+          </Button>
         </div>
-      </FormContent>
-      {apiError && <ErrorText message={t(`Sign_up.error.${apiError}`)} position="center" />}
-      <FormNote>
+      </form>
+      {apiError && <ErrorText message={String(t(`Sign_up.error.${apiError}`))} position="center" />}
+      <div className="text-[14px] leading-6 text-sapphire-blue">
         <Trans components={[<Link to="##"></Link>, <Link to="##"></Link>, <Link to="##"></Link>]}>
           {t('Sign_up.text.footer_desc')}
         </Trans>
-      </FormNote>
-      <TextHaveAccount>
+      </div>
+      <div className="text-[14px] leading-6 text-sapphire-blue mt-[92px] text-center">
         <Trans components={[<Link to="/auth/signin"></Link>]}>
           {t('Sign_up.text.have_account')}
         </Trans>
-      </TextHaveAccount>
-    </SignUpFormContainer>
+      </div>
+    </div>
   );
 };
 export default SignUpForm;

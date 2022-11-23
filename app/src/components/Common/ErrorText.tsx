@@ -1,16 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { COLORS } from '@/constants/style';
-
-const Error = styled.p<{position: string | undefined}>`
-  font-size: 12px;
-  color: ${COLORS.RED};
-  margin: 5px 0 7px;
-  display: block;
-  ${({ position }) => css`
-    text-align: ${position};
-  `}
-`;
+import classNames from 'classnames';
 
 interface Props {
   message?: string;
@@ -18,15 +7,17 @@ interface Props {
   [key: string]: unknown;
 }
 
-const ErrorText: React.FC<Props> = ({ message, position, ...props }) => (
-  <Error {...props} position={position}>
+const ErrorText: React.FC<Props> = ({ message = "", position = "left", ...props }) => (
+  <p
+    className={classNames('text-[12px] text-red mt-[5px] mb-[7px] block', {
+      'text-left': position === 'left',
+      'text-center': position === 'center',
+      'text-right': position === 'right'
+    })}
+    {...props}
+  >
     {message}
-  </Error>
+  </p>
 )
-
-ErrorText.defaultProps = {
-  message: "",
-  position: 'left',
-};
 
 export default ErrorText;

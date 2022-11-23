@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 // Actions
 import { toggleSidebar } from '@/features/admin/sidebar';
@@ -9,198 +9,9 @@ import { toggleSidebar } from '@/features/admin/sidebar';
 import type { RootState } from '@/config/store';
 import { resolveAvatarPath } from '@/helpers/avatar.helper';
 import Avatar from '@/assets/images/avatar.jpg';
-import { COLORS, mobileQuery } from '@/constants/style';
 import { ReactComponent as ArrowDownIcon } from '@/assets/images/svg/arrow-down-18.svg';
 import { ReactComponent as MenuIcon } from '@/assets/images/svg/menu.svg';
 import Input from '@/components/Common/Input';
-
-const Wrapper = styled.div`
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 25px;
-  padding-right: 32px;
-  position: relative;
-
-  ${mobileQuery} {
-    padding: 0 15px;
-    height: 64px;
-  }
-`;
-
-const LeftContent = styled.div`
-  position: relative;
-
-  ${mobileQuery} {
-    width: 100%;
-    margin-right: 15px;
-  }
-
-  & > input {
-    ${mobileQuery} {
-      height: 38px;
-      padding-left: 30px;
-    }
-  }
-`;
-
-const MenuMobile = styled.div`
-  display: none;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 10px;
-  z-index: 15;
-
-  ${mobileQuery} {
-    display: block;
-  }
-`;
-
-const RightContent = styled.div``;
-
-const SearchInput = styled(Input)`
-  width: 468px;
-  border-color: #d2d5e1;
-
-  ${mobileQuery} {
-    width: 100%;
-  }
-`;
-
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  & > svg {
-    ${mobileQuery} {
-      display: none;
-    }
-  }
-`;
-
-const AvatarWrapper = styled.div`
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    border-radius: 100%;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-
-    ${mobileQuery} {
-      width: 33.33px;
-      height: 33.33px;
-    }
-  }
-`;
-
-const Name = styled.span`
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-  margin: 0 8px;
-
-  ${mobileQuery} {
-    display: none;
-  }
-`;
-
-const ProfileMenu = styled.div`
-  position: absolute;
-  top: calc(100% + 17px);
-  right: 10px;
-  width: 200px;
-
-  ${mobileQuery} {
-    top: 100%;
-  }
-`;
-
-const ProfileList = styled.ul`
-  position: relative;
-  padding: 0;
-  border: 1px solid #eaedf7;
-  border-radius: 5px;
-  box-shadow: 0px 4px 8px rgba(28, 41, 90, 0.0367952);
-  background: #ffffff;
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    transform: translate(-50%, 0);
-    width: 0;
-    height: 0;
-    border: 12px solid transparent;
-    border-bottom-color: #eaedf7;
-
-    ${mobileQuery} {
-      left: unset;
-      right: 4px;
-    }
-  }
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: calc(50%);
-    bottom: 100%;
-    transform: translate(-50%, 0);
-    width: 0;
-    height: 0;
-    border: 10px solid transparent;
-    border-bottom-color: #ffffff;
-
-    ${mobileQuery} {
-      left: unset;
-      right: 8px;
-    }
-  }
-`;
-const ProfileItem = styled.li`
-  list-style-type: none;
-  height: 36px;
-`;
-
-const NavLinkStyle = styled(NavLink)`
-  font-size: 14px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-  padding-left: 24px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-
-  &.active {
-    background-color: ${COLORS.REGULAR_PRIMARY};
-  }
-`;
-
-const SignoutBtn = styled.button`
-  font-size: 14px;
-  color: ${COLORS.SAPPHIRE_BLUE};
-  padding-left: 24px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  cursor: pointer;
-`;
 
 type Props = {
   signout: () => void;
@@ -208,6 +19,7 @@ type Props = {
 
 const Topbar: React.FC<Props> = ({ signout }) => {
   const dispath = useDispatch();
+  const { t } = useTranslation();
   const {
     data: { avatarUrl, name },
   } = useSelector((state: RootState) => state.user);
@@ -226,35 +38,39 @@ const Topbar: React.FC<Props> = ({ signout }) => {
   }, []);
 
   return (
-    <Wrapper>
-      <LeftContent>
-        <MenuMobile onClick={() => dispath(toggleSidebar(true))}>
+    <div className="h-[80px] flex items-center justify-between pl-[25px] pr-[32px] relative sm:py-0 sm:px-[15px] sm:h-16">
+      <div className="relative sm:w-full sm:mr-[15px] [&>input]:sm:h-[38px] [&>input]:sm:pl-[30px]">
+        <div onClick={() => dispath(toggleSidebar(true))} role='presentation' className="hidden absolute top-1/2 translate-y-[-50%] left-[10px] z-[15] sm:block">
           <MenuIcon />
-        </MenuMobile>
-        <SearchInput placeholder="Search..." />
-      </LeftContent>
-      <RightContent>
-        <Profile onClick={() => setIsShowMenu(!isShowMenu)} ref={profileRef}>
-          <AvatarWrapper>
+        </div>
+        <Input placeholder="Search..." className="w-[468px] border-[#d2d5e1] sm:w-full" />
+      </div>
+      <div>
+        <div onClick={() => setIsShowMenu(!isShowMenu)} ref={profileRef} role='presentation' className="flex items-center cursor-pointer [&>svg]:sm:hidden">
+          <div className="w-[50px] h-[50px] flex justify-center items-center topbar_avatar">
             <img src={resolveAvatarPath(avatarUrl, Avatar)} alt="avatar" />
-          </AvatarWrapper>
-          <Name>{name}</Name>
+          </div>
+          <span className="font-medium text-[18px] leading-[22px] text-sapphire-blue mx-2 my-0 sm:hidden">{name}</span>
           <ArrowDownIcon />
-        </Profile>
-      </RightContent>
+        </div>
+      </div>
       {isShowMenu && (
-        <ProfileMenu>
-          <ProfileList>
-            <ProfileItem>
-              <NavLinkStyle to="/profile">Profile</NavLinkStyle>
-            </ProfileItem>
-            <ProfileItem>
-              <SignoutBtn onClick={signout}>Sign Out</SignoutBtn>
-            </ProfileItem>
-          </ProfileList>
-        </ProfileMenu>
+        <div className="absolute top-[calc(100%_+_17px)] right-[10px] w-[200px] sm:top-full">
+          <ul className="relative p-0 border border-solid border-dark-grey rounded-[5px] shadow-xsl bg-white before:content-[''] before:block before:absolute before:left-1/2 before:bottom-full before:translate-x-[-1/2] before:translate-y-0 before:w-0 before:h-0 before:border-[12px] before:border-solid before:border-transparent before:border-b-dark-grey sm:before:left-[unset] sm:before:right-1 after:content-[''] after:block after:absolute after:left-1/2 after:bottom-full after:translate-x-[-1/2] after:translate-y-0 after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-b-white sm:after:left-[unset] sm:after:right-2">
+            <li className="list-none h-9">
+              <NavLink to="/profile" className="text-[14px] text-sapphire-blue pl-6 overflow-hidden flex items-center w-full h-full active:bg-regular-primary">
+                {t('Common.title.profile')}
+              </NavLink>
+            </li>
+            <li className="list-none h-9">
+              <button type="button" onClick={signout} className="text-[14px] text-sapphire-blue pl-6 overflow-hidden flex items-center w-full h-full border-none outline-none bg-transparent cursor-pointer">
+                {t('Common.title.sign_out')}
+              </button>
+            </li>
+          </ul>
+        </div>
       )}
-    </Wrapper>
+    </div>
   );
 };
 

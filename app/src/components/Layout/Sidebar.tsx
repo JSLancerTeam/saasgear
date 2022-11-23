@@ -1,122 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 import type { RootState } from '@/config/store';
 import { toggleSidebar } from '@/features/admin/sidebar';
 import { ReactComponent as LogoIcon } from '@/assets/images/svg/logo.svg';
-import { COLORS, mobileQuery } from '@/constants/style';
 import routes from '@/routes';
-
-const Wrapper = styled.div`
-  width: 235px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  ${mobileQuery} {
-    position: fixed;
-    left: -235px;
-    z-index: 0;
-    background: #fff;
-    z-index: 50;
-    transition: all .4s ease-in-out;
-    &.active {
-      left: 0;
-      z-index: 50;
-    }
-  }
-`;
-
-const WrapperOverlay = styled.div`
-  ${mobileQuery} {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background: rgba(0, 0, 0, .3);
-    left: 0;
-    top: 0;
-    z-index: 49;
-  }
-`
-
-const LogoWrapper = styled.a`
-  display: flex;
-  height: 81px;
-  align-items: center;
-  padding-left: 30px;
-  border-bottom: 1px solid ${COLORS.GRAY};
-  border-right: 1px solid ${COLORS.GRAY};
-`;
-
-const LogoText = styled.div`
-  color: #0080ff;
-  font-size: 22px;
-  line-height: 27px;
-  font-weight: 500;
-  margin-left: 8px;
-
-  span:first-child {
-    font-weight: 800;
-  }
-`;
-
-const MenuWrapper = styled.div`
-  flex-grow: 1;
-`;
-
-const MenuList = styled.ul`
-  padding: 0;
-  padding-right: 14px;
-`;
-
-const MenuItem = styled.li`
-  height: 60px;
-  display: flex;
-  align-items: center;
-`;
-
-const MenuText = styled.span`
-  font-size: 18px;
-  line-height: 22px;
-  color: ${COLORS.WHITE_BLUE};
-  margin-left: 10px;
-`;
-
-const NavLinkStyle = styled(NavLink)`
-  width: 100%;
-  height: 100%;
-  padding-left: 27px;
-  border-left: 2px solid transparent;
-  display: flex;
-  align-items: center;
-
-  &.active {
-    border-radius: 0px 10px 10px 0px;
-    background-color: ${COLORS.REGULAR_PRIMARY};
-    border-left-color: ${COLORS.PRIMARY};
-
-    ${MenuText} {
-      color: ${COLORS.PRIMARY};
-      font-weight: 500;
-    }
-
-    svg {
-      *[fill] {
-        fill: ${COLORS.PRIMARY};
-      }
-      *[stroke] {
-        stroke: ${COLORS.PRIMARY};
-      }
-    }
-  }
-`;
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { isOpen } = useSelector((state: RootState) => state.sidebar);
 
   function closeSidebar() {
@@ -125,30 +20,35 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
-      {isOpen && <WrapperOverlay onClick={closeSidebar} /> }
-      <Wrapper className={cn({ active: isOpen })}>
-        <LogoWrapper href="/">
+      {isOpen && <div onClick={closeSidebar} role='presentation' className="sm:fixed sm:h-screen sm:w-screen overflow-hidden sm:left-0 sm:top-0 sm:z-[49] text-black opacity-30" /> }
+      <div className={cn("w-[235px] h-screen flex flex-col sm:fixed sm:left-[-235px] sm:z-[50] sm:bg-white sm:transition-all sm:duration-[400ms] sm:active:left-0 sm:active:z-[50]", { "active": isOpen })}>
+        <a href="/" className="flex h-[81px] items-center pl-[30px] border-b border-r border-solid border-gray">
           <LogoIcon />
-          <LogoText>
-            <span>SaaS</span>
-            <span>gear</span>
-          </LogoText>
-        </LogoWrapper>
-        <MenuWrapper>
-          <MenuList>
+          <div className="text-primary text-[22px] leading-[27px] font-medium ml-2 [&>span:first-child]:font-extrabold">
+            <span>{t('Common.logo.saas')}</span>
+            <span>{t('Common.logo.gear')}</span>
+          </div>
+        </a>
+        <div className="flex-grow">
+          <ul className="p-0 pr-[14px]">
             {routes
               .filter((route) => route.isSidebar)
               .map((route) => (
-                <MenuItem key={route.path}>
-                  <NavLinkStyle to={route.path} activeClassName="active" onClick={closeSidebar}>
+                <li key={route.path} className="h-[60px] flex items-center">
+                  <NavLink
+                    to={route.path}
+                    activeClassName="active"
+                    onClick={closeSidebar}
+                    className="w-full h-full pl-[27px] border-l-2 border-solid border-transparent flex items-center [&.active]:rounded-r-[10px] [&.active]:rounded-b-[10px] [&.active]:rounded-t-[0px] [&.active]:rounded-l-[0px] [&.active]:bg-regular-primary [&.active]:border-primary [&.active>.menu-text]:text-primary [&.active>.menu-text]:font-medium [&.active>svg_*[fill]]:fill-primary [&.active>svg_*[stroke]]:stroke-primary"
+                  >
                     {route.icon}
-                    <MenuText>{route.name}</MenuText>
-                  </NavLinkStyle>
-                </MenuItem>
+                    <span className="menu-text text-[18px] leading-[22px] text-white-blue ml-[10px]">{route.name}</span>
+                  </NavLink>
+                </li>
               ))}
-          </MenuList>
-        </MenuWrapper>
-      </Wrapper>
+          </ul>
+        </div>
+      </div>
     </>
   );
 };

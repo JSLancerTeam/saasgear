@@ -9,7 +9,6 @@ import { useMutation } from '@apollo/client';
 import TeamForm from '@/components/Team/TeamForm';
 import { addNew } from '@/features/admin/team';
 import createTeamQuery from '@/queries/teams/createNewTeam';
-import { ContentPage, TitleContent } from '@/components/Layout/blockStyle';
 import ErrorText from '@/components/Common/ErrorText';
 import type { Team } from "@/features/admin/team";
 import { t } from 'i18next';
@@ -54,8 +53,10 @@ const TeamDetail: React.FC<Props> = ({ team }) => {
   }
 
   return (
-    <ContentPage>
-      <TitleContent>{t('Team.detail')}</TitleContent>
+    <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
+      <h5 className="font-bold text-[22px] leading-[30px] text-sapphire-blue mb-8">
+        {t('Team.detail')}
+      </h5>
       <TeamForm
         onSubmit={handleSubmit(createTeam)}
         register={register}
@@ -64,7 +65,7 @@ const TeamDetail: React.FC<Props> = ({ team }) => {
         isEdit={!!team}
       />
       {error && <ErrorText>{t(`Team.error.${error?.graphQLErrors?.[0]?.extensions?.code}`)}</ErrorText>}
-    </ContentPage>
+    </div>
   );
 }
 

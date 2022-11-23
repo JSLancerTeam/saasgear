@@ -1,36 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useTranslation, Trans } from 'react-i18next';
 
 import { ReactHookFormType } from "@/typeReactHookForm";
-import { COLORS, mobileQuery } from '@/constants/style';
-import Modal, { ModalHeader, ModalContent, ModalFooter } from '../Common/Modal';
+import Modal from '../Common/Modal';
 import Button from '../Common/Button';
-import FormGroupLabel from '../Common/FormGroupLabel';
-import FormGroup from '../Common/FormGroup';
 import Input from '../Common/Input/Input';
 import ErrorText from '../Common/ErrorText';
-
-const DeleteText = styled.p`
-  font-size: 14px;
-  line-height: 24px;
-  color: ${COLORS.WHITE_GRAY};
-`;
-
-const Form = styled.form`
-  margin-top: 24px;
-`;
-
-const EmailText = styled.label`
-  color: ${COLORS.SAPPHIRE_BLUE};
-  font-weight: bold;
-`;
-
-const NoteLabel = styled(FormGroupLabel)`
-  ${mobileQuery} {
-    font-size: 11px;
-  }
-`;
 
 type Props = ReactHookFormType & {
   closeModal?: () => void;
@@ -51,32 +26,34 @@ const DeleteAccountModal: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <Modal isOpen={isOpen}>
-      <ModalHeader>{t('Profile.label.delete')}</ModalHeader>
-      <ModalContent>
-        <DeleteText>
+      <div className="font-bold text-[26px] leading-9 text-sapphire-blue pt-6 px-6">
+        {t('Profile.label.delete')}
+      </div>
+      <div className="p-6 border border-solid border-[#7c88b1] border-opacity-[0.16]">
+        <p className="text-[14px] leading-6 text-white-gray">
           {t('Profile.text.delete_modal')}
-        </DeleteText>
-        <Form onSubmit={onSubmit}>
-          <FormGroup>
-            <NoteLabel>
+        </p>
+        <form onSubmit={onSubmit} className="mt-6">
+          <div className="block w-full mb-4">
+            <label htmlFor="email" className="font-bold text-[12px] leading-[15px] tracking-[2px] text-white-blue mix-blend-normal opacity-90 block mt-[19px] uppercase sm:text-[11px]">
               <Trans
-                components={[<EmailText></EmailText>]}
+                components={[<div className="text-sapphire-blue font-bold" />]}
                 values={{ email }}
               >
                 {t('Profile.text.please_enter')}
               </Trans>
-            </NoteLabel>
-            <Input type="email" name="email" ref={register} />
-            {errors?.email?.message && <ErrorText message={t(errors.email.message)} />}
-          </FormGroup>
-        </Form>
-      </ModalContent>
-      <ModalFooter>
+            </label>
+            <Input type="email" id="email" name="email" ref={register} />
+            {errors?.email?.message && <ErrorText message={String(t(errors.email.message))} />}
+          </div>
+        </form>
+      </div>
+      <div className="flex justify-end items-center p-6 [&>button+button]:ml-4">
         <Button onClick={closeModal}>{t('Common.text.no')}</Button>
         <Button type="submit" color="primary" disabled={!isValid}>
           {t('Common.text.delete')}
         </Button>
-      </ModalFooter>
+      </div>
     </Modal>
   );
 };

@@ -1,69 +1,14 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import DocumentTable from '@/components/Document/DocumentTable';
 import getDocumentListQuery from '@/queries/document/getDocumentList';
-import { ContentPage, TitlePage } from '@/components/Layout/blockStyle';
 import Input from '@/components/Common/Input/Input';
 import Button from '@/components/Common/Button';
 
 import { ReactComponent as AddIcon } from '@/assets/images/svg/add.svg';
-import { mobileQuery } from '@/constants/style';
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 26px;
-
-  ${mobileQuery} {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const TitlePageStyle = styled(TitlePage)`
-  margin-bottom: 0;
-`;
-
-const RightHeader = styled.div`
-  display: flex;
-
-  ${mobileQuery} {
-    margin-top: 15px;
-    width: 100%;
-  }
-`;
-
-const SearchInput = styled(Input)`
-  width: 284px;
-  margin-right: 38px;
-
-
-  ${mobileQuery} {
-    width: 100%;
-    margin-right: 5px;
-  }
-`;
-
-const CreateBtn = styled(Button)`
-  width: 264px;
-
-  ${mobileQuery} {
-    width: 30%;
-  }
-`;
-
-const CreateBtnContent = styled.span<{ mobile?: boolean }>`
-  display: ${(props) => props.mobile ? 'none' : 'block'};
-
-  ${mobileQuery} {
-    display: ${(props) => props.mobile ? 'block' : 'none'};
-  }
-`
 
 const ListDocument: React.FC = () => {
   const history = useHistory();
@@ -76,27 +21,30 @@ const ListDocument: React.FC = () => {
 
   return (
     <div>
-      <Header>
-        <TitlePageStyle>{t('Document.title')}</TitlePageStyle>
-        <RightHeader>
-          <SearchInput placeholder={t('Common.placeholder.search')} />
-          <CreateBtn
+      <div className="flex justify-between items-center mb-[26px] sm:flex-col sm:items-start">
+        <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue mb-0">
+          {t('Document.title')}
+        </h3>
+        <div className="flex sm:mt-[15px] sm:w-full">
+          <Input placeholder={t('Common.placeholder.search')} className="w-[284px] mr-[38px] sm:w-full sm:mr-[5px]" />
+          <Button
             color="primary"
             onClick={() => history.push('/document/create')}
+            className="w-[264px] sm:w-[30%]"
           >
-            <CreateBtnContent>{t('Document.create')}</CreateBtnContent>
-            <CreateBtnContent mobile><AddIcon /></CreateBtnContent>
-          </CreateBtn>
-        </RightHeader>
-      </Header>
-      <ContentPage>
+            <span className="block sm:hidden">{t('Document.create')}</span>
+            <span className="hidden sm:block"><AddIcon /></span>
+          </Button>
+        </div>
+      </div>
+      <div className="bg-white border border-solid border-dark-grey shadow-xxl rounded-[10px] p-6 mb-[25px] sm:px-[10px] sm:py-6">
         <DocumentTable
           data={data?.getDocuments?.documents}
           total={data?.getDocuments?.count}
           loading={loading}
           onFetch={onFetchDocuments}
         />
-      </ContentPage>
+      </div>
     </div>
   );
 };

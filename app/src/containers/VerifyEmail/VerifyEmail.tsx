@@ -4,19 +4,6 @@ import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import getQueryParam from '@/utils/getQueryParam';
 import verifyEmailQuery from '@/queries/auth/verifyEmail';
-import {
-  ForgotPasswordWrapper,
-  Overlay,
-  ForgotPasswordContainer,
-  SquareIconTop,
-  SmallSquareBottom,
-  SmallSquareTop,
-  SmallSquareGrid,
-  SquareIconBottom,
-  CircleIcon,
-  ForgotPasswordText,
-  ForgotPasswordDescription,
-} from '@/components/Auth/AuthForm';
 import GoBack from '@/components/Common/GoBack';
 import Logo from '@/components/Common/Logo';
 import Badge from '@/components/Common/Badge';
@@ -46,21 +33,23 @@ const VerifyEmail: React.FC = () => {
   }
 
   return (
-    <ForgotPasswordWrapper>
-      <Overlay />
-      <ForgotPasswordContainer>
+    <div className="h-screen overflow-hidden flex w-full min-h-screen items-center justify-center relative">
+      <div className="absolute w-full h-full bg-primary z-[-2]" />
+      <div className="w-[762px] mx-auto my-0 text-center bg-white p-10 rounded-[5px] relative">
         <GoBack />
         <div>
           <Logo />
         </div>
-        <ForgotPasswordText>{t('Verify_email.title')}</ForgotPasswordText>
-        <ForgotPasswordDescription>
+        <div className="font-bold text-[26px] leading-9 mt-[3px] text-sapphire-blue">
+          {t('Verify_email.title')}
+        </div>
+        <p className="text-[14px] leading-6 text-sapphire-blue max-w-[567px] mx-auto mt-6 mb-10">
           {t('Verify_email.description')}
-        </ForgotPasswordDescription>
+        </p>
         <Badge type={verifyResult !== null ? 'success' : 'error'}>
           {verifyResult !== null ? t('Verify_email.success') : error?.message}
         </Badge>
-        <SquareIconTop>
+        <div className="absolute w-[495px] h-[480px] left-[-400px] top-[-175px] z-[-1]">
           <svg
             width="496"
             height="482"
@@ -73,8 +62,8 @@ const VerifyEmail: React.FC = () => {
               stroke="#2291FF"
             />
           </svg>
-        </SquareIconTop>
-        <SmallSquareBottom>
+        </div>
+        <div className="absolute w-[195px] h-[195px] left-[60px] bottom-[-25px] z-[-1]">
           <svg
             width="195"
             height="195"
@@ -87,8 +76,8 @@ const VerifyEmail: React.FC = () => {
               fill="#0075E8"
             />
           </svg>
-        </SmallSquareBottom>
-        <SmallSquareTop>
+        </div>
+        <div className="absolute w-[114px] h-[121px] top-[-57px] right-[-54px] z-[-1]">
           <svg
             width="114"
             height="121"
@@ -101,8 +90,8 @@ const VerifyEmail: React.FC = () => {
               fill="#1788F8"
             />
           </svg>
-        </SmallSquareTop>
-        <SmallSquareGrid>
+        </div>
+        <div className="absolute w-[129px] h-[121px] top-[-105px] right-[-300px]">
           <svg
             width="131"
             height="123"
@@ -145,8 +134,8 @@ const VerifyEmail: React.FC = () => {
               />
             </g>
           </svg>
-        </SmallSquareGrid>
-        <SquareIconBottom>
+        </div>
+        <div className="absolute w-[593px] h-[528px] right-[-400px] bottom-[-190px] z-[-1]">
           <svg
             width="594"
             height="523"
@@ -159,8 +148,8 @@ const VerifyEmail: React.FC = () => {
               stroke="#2291FF"
             />
           </svg>
-        </SquareIconBottom>
-        <CircleIcon>
+        </div>
+        <div className="absolute w-[58px] h-[58px] bottom-[-26px] right-[164px] z-[-1]">
           <svg
             width="60"
             height="60"
@@ -170,9 +159,9 @@ const VerifyEmail: React.FC = () => {
           >
             <circle cx="30" cy="30" r="29" stroke="#2291FF" />
           </svg>
-        </CircleIcon>
-      </ForgotPasswordContainer>
-    </ForgotPasswordWrapper>
+        </div>
+      </div>
+    </div>
   );
 }
 

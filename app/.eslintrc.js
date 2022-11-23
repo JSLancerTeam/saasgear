@@ -1,9 +1,16 @@
 const path = require('path');
 
 module.exports = {
-  parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', 'lodash'],
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'airbnb', 
+    'prettier', 
+    'prettier/react',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended'
+  ],
+  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', 'lodash', '@typescript-eslint', "eslint-plugin-react"],
   env: {
     browser: true,
     node: true,
@@ -20,7 +27,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [['@', path.resolve(__dirname, './src')]],
-        extensions: ['.ts', '.js', '.jsx', '.json'],
+        extensions: ['.ts', '.js', '.jsx', '.json', '.tsx'],
       },
       node: {
         paths: ['src'],
@@ -47,15 +54,7 @@ module.exports = {
     ],
     'jsx-a11y/aria-props': 2,
     'jsx-a11y/heading-has-content': 0,
-    'jsx-a11y/label-has-associated-control': [
-      2,
-      {
-        // NOTE: If this error triggers, either disable it or add
-        // your custom components, labels and attributes via these options
-        // See https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md
-        controlComponents: ['Input'],
-      },
-    ],
+    'jsx-a11y/label-has-associated-control': 0,
     'jsx-a11y/label-has-for': 0,
     'jsx-a11y/mouse-events-have-key-events': 2,
     'jsx-a11y/role-has-required-aria-props': 2,
@@ -81,12 +80,23 @@ module.exports = {
     'react/self-closing-comp': 0,
     'react/sort-comp': 0,
     'react/no-danger': 0,
-    'react/jsx-props-no-spreading': [
-      2,
-      {
-        custom: 'ignore',
-      },
-    ],
+    'react/jsx-props-no-spreading': 0,
     'lodash/import-scope': [2, 'method'],
+    'react/prop-types': 0,
+    'max-classes-per-file': 'off',
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    'react/jsx-no-bind': 0,
+    'react/button-has-type': 0
   },
 };

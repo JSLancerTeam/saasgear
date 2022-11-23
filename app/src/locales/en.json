@@ -1,0 +1,230 @@
+{
+  "Common": {
+    "logo": {
+      "saas": "SaaS",
+      "gear": "gear"
+    },
+    "title": {
+      "saasgear": "SaaSgear",
+      "profile": "Profile",
+      "sign_in": "Sign In",
+      "sign_out": "Sign Out",
+      "sign_up": "Sign Up",
+      "forgot_password": "Forgot Password",
+      "reset_password": "Reset password",
+      "new_document": "New Document",
+      "teams": "Teams"
+    },
+    "label": {
+      "remember_label": "Remember me",
+      "email": "Email",
+      "password": "Password",
+      "your_name": "Your Name",
+      "confirm_password": "Confirm password",
+      "your_email": "Your Email",
+      "name": "Name",
+      "body": "Body",
+      "edit_profile": "Edit Profile"
+    },
+    "text": {
+      "hi": "Hi",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "please_wait": "Please wait",
+      "save_and_update": "Save and Update",
+      "send": "Send",
+      "loading": "Loading ...",
+      "save": "Save",
+      "no_result": "No result",
+      "edit": "Edit",
+      "delete": "Delete",
+      "no": "No",
+      "view": "View",
+      "admin": "admin",
+      "member": "member",
+      "avatar": "Avatar"
+    },
+    "validation": {
+      "require_name": "Name is required",
+      "require_body": "Body is required",
+      "require_email": "Email is required",
+      "valid_email": "Email invalid",
+      "require_password": "Password is required",
+      "min_password": "Password must be at least 6 characters",
+      "require_password_confirm": "Password confirm is required",
+      "password_match": "Password must match",
+      "require_current_password": "Current password is required",
+      "require_new_password": "New password is required"
+    },
+    "placeholder": {
+      "email": "yourname@yourbusiness.com",
+      "password": "your password",
+      "name": "David",
+      "confirm_password": "Confirm your password",
+      "search": "Search..",
+      "g_email": "david@jslancer.com"
+    },
+    "status": {
+      "update_success": "Update profile successfully!",
+      "channge_avatar_success": "Change avatar successfully",
+      "change_avatar_failed": "Can not update your avatar",
+      "error_big_size": "File is too big",
+      "change_password_success": "Change password successfully!"
+    },
+    "alt": {
+      "avatar": "avatar"
+    },
+    "error": {
+      "INTERNAL_SERVER_ERROR": "Internal server error."
+    }
+  },
+  "Sign_in": {
+    "text": {
+      "heading": "Welcome Back!",
+      "button_text": "Sign in",
+      "next": "Next",
+      "forgot_password": "Forgot Password?",
+      "not_have_account": "Dont have account? <0>Register</0>"
+    },
+    "error": {
+      "UNAUTHENTICATED": "Invalid email or password",
+      "GRAPHQL_VALIDATION_FAILED": "The 'password' field length must be greater than or equal to 6 characters long."
+    }
+  },
+  "Sign_up": {
+    "text": {
+      "heading": "Create Account",
+      "button_text": "Sign up",
+      "next": "Next",
+      "footer_desc": "By clicking Sign Up, you agree to our <0>Terms</0>, <1>Data Policy</1> and <2>Cookie Policy</2>.",
+      "have_account": "Already have account? <0>Sign In</0>."
+    },
+    "error": {
+      "INTERNAL_SERVER_ERROR": "Email address has been used",
+      "incomplete_number": "Your card number is incomplete.",
+      "incomplete_expiry": "Your card's expiration date is incomplete.",
+      "incomplete_cvc": "Your card's security code is incomplete."
+    }
+  },
+  "Forgot_password": {
+    "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
+    "footer": "If you still need help, contact <0>Saasgear Support</0>",
+    "confirm": "We've sent you an email with a link to reset password. Please check your email so create new password",
+    "go_to": "Go to <0>Sign In</0>"
+  },
+  "Reset_password": {
+    "change_success": "Change password successfully!",
+    "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
+    "footer": "If you still need help, contact",
+    "support": "Saasgear Support",
+    "please_wait": "Please wait ..."
+  },
+  "Advertisement": {
+    "ad1_title": "ReactJS",
+    "ad1": "High-performance and powerful interactive UI with React.",
+    "ad2_title": "Subscription payments",
+    "ad2": "We have integrated Stripe subscription payments to allow you to monetize your SaaS.",
+    "ad3_title": "Teams",
+    "ad3": "Your users are able to invite their teammates to their account."
+  },
+  "Verify_email": {
+    "title": "Verify Account",
+    "description": "Enter your username, or the email address you used to register. We will send you an email containing your username and a link to reset your password.",
+    "success": "Verify email success"
+  },
+  "Accept_invitation": {
+    "title": "Accept Invitation?",
+    "have_invitated": "You' ve been invitated to join <0>{{teamName}}</0> by <0>{{owner}}</0>",
+    "by": "by",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "Dashboard": "Dashboard Page",
+  "Team": {
+    "detail": "Team Detail",
+    "members": "Team Members",
+    "invite": "Invite Team Members",
+    "list_team": "My Teams",
+    "text": {
+      "save": "Save Team",
+      "add": "Add Team",
+      "member": "Member",
+      "role": "Role",
+      "invitation": "Invitation",
+      "invite": "Invite",
+      "pending": "Pending Invitations",
+      "name": "Name",
+      "click_button": "Click button below to create your first team!",
+      "create": "Create Team"
+    },
+    "label": {
+      "name": "Team name",
+      "id": "Team ID"
+    },
+    "placeholder": {
+      "team_name": "Your team name",
+      "team_id": "A unique ID for your team"
+    },
+    "validation": {
+      "require_team_name": "Team name is reqired",
+      "require_team_id": "Team ID is required"
+    },
+    "error": {
+      "INTERNAL_SERVER_ERROR": "Team exist"
+    }
+  },
+  "Document": {
+    "title": "Document",
+    "create": "Create New Document",
+    "table": {
+      "id": "ID",
+      "name": "Name",
+      "created_by": "Created By",
+      "created_at": "Created At",
+      "action": "Action"
+    }
+  },
+  "Profile": {
+    "title": "Account Settings",
+    "text": {
+      "account": "Account",
+      "plan": "Plan",
+      "desc": "This information can be edited from your profile page",
+      "plan_desc": "This is your subscription",
+      "delete": "I'd like to delete my account",
+      "delete_modal": "Are you sure you want to delete your account? All of your data will be permanently removed. This action cannot be undone.",
+      "please_enter": "Please enter <0>{{email}}</0> to confirm",
+      "change_password": "Change Password",
+      "change_password_desc": "Forgot your password, find back in seconds",
+      "current_password": "Current password",
+      "update_password": "Update Password",
+      "new_password": "New password",
+      "confirm_new_password": "Confirm new password",
+      "cancel_sub": "Cancel Subcription",
+      "order_sumary": "Order Summary",
+      "curreny_sub": "Current subcription",
+      "new_sub": "New subcription",
+      "balance_due":"Balance due right now",
+      "change_plan": "Change plan",
+      "change_sub": "Change Subcription",
+      "expire": "Plan will expire on <0>{{data}}</0>",
+      "current_plan": "Current Plan",
+      "get_started": "Get Started"
+    },
+    "label": {
+      "delete": "Delete Account"
+    },
+    "error": {
+      "password": {
+        "INTERNAL_SERVER_ERROR": "Current password is not correct"
+      }
+    }
+  },
+  "Payment": {
+    "label": {
+      "card": "Card Number",
+      "expiration": "Expiration",
+      "cvc": "CVC"
+    }
+  }
+}

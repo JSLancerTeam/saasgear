@@ -4,28 +4,41 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb-base"],
+  "extends": [
+    "airbnb-typescript"
+  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": 2018,
+    "project": "tsconfig.json"
   },
-  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  },
+  "parser": "@typescript-eslint/parser",
   "rules": {
+    "@typescript-eslint/naming-convention": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/no-unused-expressions": 0,
     "operator-linebreak": ["error", "after"],
     "object-curly-newline": ["error", { "consistent": true }],
     "arrow-body-style": [2, "as-needed"],
     "no-unused-expressions": ["error", { "allowShortCircuit": true }],
     "implicit-arrow-linebreak": 0,
     "class-methods-use-this": 0,
-    "import/imports-first": 1,
-    "import/newline-after-import": 1,
+    "import/imports-first": 0,
+    "import/newline-after-import": 0,
     "import/no-dynamic-require": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-named-as-default": 0,
-    "import/no-unresolved": 2,
+    "import/no-unresolved": 0,
     "import/no-webpack-loader-syntax": 0,
     "import/prefer-default-export": 0,
     "camelcase": 0,
@@ -44,6 +57,8 @@
     "no-use-before-define": 0,
     "no-restricted-syntax": 0,
     "no-continue": 0,
-    "no-unsafe-finally": 0
+    "no-unsafe-finally": 0,
+    "react/jsx-filename-extension": 0,
+    "import/extensions": 0  
   }
 }

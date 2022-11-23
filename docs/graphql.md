@@ -113,7 +113,7 @@ Now we can import and use the query in the container. Since our boilerplate foll
 
 ```jsx
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import loginQuery from '@/queries/example/login';
 
 const LoginContainer = () => {

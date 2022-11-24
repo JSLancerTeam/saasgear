@@ -12,7 +12,7 @@ import './index.css'
 import './config/i18n';
 
 init({
-  dsn: process.env.REACT_APP_SENTRY_DSN,
+  dsn: import.meta.env.REACT_APP_SENTRY_DSN,
   integrations: [new Integrations.BrowserTracing()],
   tracesSampleRate: 1.0,
 });
@@ -30,6 +30,6 @@ const render = () => {
 
 render();
 
-if (process.env.NODE_ENV === 'development' && module.hot) {
+if (import.meta.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./App', render);
 }

@@ -28,7 +28,7 @@ export function createClient(): ApolloClient<NormalizedCacheObject> {
   // set to an external playground at https://graphqlhub.com/graphql
   const httpLink = new HttpLink({
     credentials: 'include',
-    uri: process.env.REACT_APP_GRAPHQL_URL,
+    uri: import.meta.env.REACT_APP_GRAPHQL_URL,
   });
 
   // Return a new Apollo Client back, with the cache we've just created,

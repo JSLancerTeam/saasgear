@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import StripeForm from '@/components/Stripe/StripeForm';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(import.meta.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 type Props = {
   onSubmitSuccess: (token: string) => void;

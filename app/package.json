@@ -5,7 +5,6 @@
   "dependencies": {
     "@apollo/client": "^3.4.11",
     "@apollo/react-hooks": "^4.0.0",
-    "@craco/craco": "^5.8.0",
     "@hookform/resolvers": "^1.0.0",
     "@reduxjs/toolkit": "^1.4.0",
     "@sentry/react": "^5.27.6",
@@ -40,12 +39,12 @@
     "react-i18next": "^12.0.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^5.0.1",
     "react-slideshow-image": "^3.4.3",
     "react-toastify": "^6.1.0",
     "redux": "^4.0.5",
     "subscriptions-transport-ws": "^0.9.19",
     "typescript": "^4.0.5",
+    "vite-plugin-env-compatible": "^1.1.1",
     "yup": "^0.29.3"
   },
   "scripts": {
@@ -53,9 +52,10 @@
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "lint:staged": "lint-staged",
     "lint:prod": "NODE_ENV=production npm run lint",
-    "start": "craco start",
-    "build": "npm run lint:prod && npm run build:css && craco build",
-    "eject": "craco eject"
+    "start": "vite",
+    "build": "npm run lint:prod && npm run build:css && tsc && vite build",
+    "eject": "craco eject",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -114,6 +114,7 @@
     "@types/yup": "^0.29.13",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.42.1",
+    "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
@@ -137,6 +138,9 @@
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "vite": "^3.2.4",
+    "vite-plugin-svgr": "^2.2.2",
+    "vite-tsconfig-paths": "^3.6.0"
   }
 }

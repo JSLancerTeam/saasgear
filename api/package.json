@@ -7,11 +7,11 @@
     "start": "ts-node -r tsconfig-paths/register server.ts",
     "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --inspect server",
     "db:create-products": "node --experimental-modules --es-module-specifier-resolution=node scripts/create-products.js",
-    "db:migrate": "knex --esm migrate:latest --knexfile config/knexfile.cjs",
-    "db:rollback": "knex --esm migrate:rollback --knexfile config/knexfile.cjs",
-    "db:create": "knex --esm migrate:make --knexfile config/knexfile.cjs",
-    "db:down": "knex --esm migrate:down --knexfile config/knexfile.cjs",
-    "db:seed": "knex --esm seed:run --knexfile config/knexfile.cjs",
+    "db:migrate": "knex migrate:latest --knexfile config/knexfile.ts",
+    "db:rollback": "knex migrate:rollback --knexfile config/knexfile.ts",
+    "db:create": "knex migrate:make --knexfile config/knexfile.ts",
+    "db:down": "knex migrate:down --knexfile config/knexfile.ts",
+    "db:seed": "knex seed:run --knexfile config/knexfile.ts",
     "postinstall": "link-module-alias && npx npm-force-resolutions",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --ext .ts . --fix"
@@ -47,6 +47,7 @@
     "mysql2": "^2.2.5",
     "redis": "^3.0.2",
     "stripe": "^8.121.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.4.3",
     "uuid": "^8.3.1"
   },
@@ -76,7 +77,6 @@
     "husky": "^4.3.0",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
-    "ts-node": "^10.2.1",
     "tsconfig-paths": "^3.11.0"
   },
   "husky": {

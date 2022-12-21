@@ -1,6 +1,5 @@
-import Knex from 'knex';
 
-export const seed = (knex: Knex): Promise<number[]> =>
+export const seed = (knex: any): Promise<number[]> =>
   knex('users')
     .del()
     .then(() =>

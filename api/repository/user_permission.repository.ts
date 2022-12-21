@@ -1,4 +1,3 @@
-import Knex from 'knex';
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
 import formatDateDB from '~/utils/format-date-db';
@@ -25,7 +24,7 @@ export const userPermissionColumns = {
   deletedAt: 'user_permissions.deleted_at',
 };
 
-export async function insertMultiPermission(data: UserPermission[], transaction: Knex.Transaction = null): Promise<number[]> {
+export async function insertMultiPermission(data: UserPermission[], transaction: any = null): Promise<number[]> {
   const query = database(TABLE).insert(data);
   if (!transaction) {
     return query;

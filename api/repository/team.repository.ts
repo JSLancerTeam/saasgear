@@ -1,4 +1,3 @@
-import Knex from 'knex';
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
 import { createTeamMember, teamMembersColumns, TeamMember } from './team_members.repository';
@@ -49,7 +48,7 @@ export const teamsColumns = {
  * @param Transaction transaction Transaction object want to use within query
  *
  */
-export async function insertTeam(data: Team, transaction: Knex.Transaction = null): Promise<number[]> {
+export async function insertTeam(data: Team, transaction: any = null): Promise<number[]> {
   const query = database(TABLE).insert(data);
   if (!transaction) {
     return query;
@@ -65,7 +64,7 @@ export async function insertTeam(data: Team, transaction: Knex.Transaction = nul
  * @param Transaction transaction Transaction object want to use within query
  *
  */
-export async function updateTeam(teamId: number, data: Team, transaction: Knex.Transaction = null): Promise<number> {
+export async function updateTeam(teamId: number, data: Team, transaction: any = null): Promise<number> {
   const query = database(TABLE).where({ id: teamId }).update(data);
 
   if (!transaction) {

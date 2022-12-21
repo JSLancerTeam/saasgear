@@ -1,4 +1,3 @@
-import Knex from 'knex';
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
 
@@ -24,6 +23,6 @@ export const priceColumns = {
   updatedAt: 'prices.updated_at',
 };
 
-export function insertPrice(priceData: Price[] = [], transaction: Knex.Transaction): Promise<number[]> {
+export function insertPrice(priceData: Price[] = [], transaction: any): Promise<number[]> {
   return database(TABLE).insert(priceData).transacting(transaction);
 }

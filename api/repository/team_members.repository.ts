@@ -1,4 +1,3 @@
-import Knex from 'knex';
 import dayjs from 'dayjs';
 import formatDateDB from '~/utils/format-date-db';
 
@@ -65,7 +64,7 @@ export async function getListTeamMemberByAliasTeam({ alias }: Alias): Promise<Ge
     });
 }
 
-export async function createTeamMember(data: TeamMember, transaction: Knex.Transaction = null): Promise<number[]> {
+export async function createTeamMember(data: TeamMember, transaction: any = null): Promise<number[]> {
   const query = database(TABLE).insert(data);
   if (!transaction) {
     return query;

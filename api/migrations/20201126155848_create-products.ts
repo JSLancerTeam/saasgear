@@ -1,7 +1,7 @@
 import Knex from 'knex';
 
-export function up(knex: Knex): Knex.SchemaBuilder {
-  return knex.schema.createTable('products', (t) => {
+export function up(knex: any): Knex.SchemaBuilder {
+  return knex.schema.createTable('products', (t: any) => {
     t.increments('id');
     t.string('name').notNullable();
     t.string('type').notNullable();
@@ -16,6 +16,6 @@ export function up(knex: Knex): Knex.SchemaBuilder {
   });
 }
 
-export function down(knex: Knex): Knex.SchemaBuilder {
+export function down(knex: any): Knex.SchemaBuilder {
   return knex.schema.dropTable('products');
 }

@@ -1,4 +1,3 @@
-import Knex from 'knex';
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
 import { teamsColumns } from './team.repository';
@@ -40,7 +39,7 @@ export const teamInvitationsColumns = {
  * @param object      data        Object contains invitations data
  * @param Transaction transaction Transaction object want to use within query
  */
-export async function createTeamInvitation(data: TeamInvitation, transaction: Knex.Transaction = null): Promise<number[]> {
+export async function createTeamInvitation(data: TeamInvitation, transaction: any = null): Promise<number[]> {
   const query = database(TABLE).insert(data);
   if (!transaction) {
     return query;

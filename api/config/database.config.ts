@@ -4,6 +4,9 @@ import config from './knexfile';
 
 dotenv.config({ path: '.env' });
 
+// const enviroment =
+//   process.env.NODE_ENV === 'production' ? 'production' : 'development';
+
 export default knex(
   config(
     process.env.DATABASE_NAME,

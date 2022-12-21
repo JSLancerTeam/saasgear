@@ -1,4 +1,3 @@
-import Knex from 'knex';
 import database from '~/config/database.config';
 import { TABLES } from '~/constants/database.constant';
 import formatDateDB from '~/utils/format-date-db';
@@ -56,7 +55,7 @@ export const userPlanColumns = {
   deletedAt: 'user_plans.deleted_at',
 };
 
-export function insertUserPlan(data: UserPlanData, transaction: Knex.Transaction = null): Promise<number[]> {
+export function insertUserPlan(data: UserPlanData, transaction: any = null): Promise<number[]> {
   const query = database(TABLE).insert(data);
   if (!transaction) {
     return query;

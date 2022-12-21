@@ -1,7 +1,7 @@
 import Knex from 'knex';
 
-export function up(knex: Knex): Knex.SchemaBuilder {
-  return knex.schema.createTable('user_tokens', (t) => {
+export function up(knex: any): Knex.SchemaBuilder {
+  return knex.schema.createTable('user_tokens', (t: any) => {
     t.increments('id');
     t.integer('user_id').unsigned().notNullable();
     t.string('token');
@@ -17,6 +17,6 @@ export function up(knex: Knex): Knex.SchemaBuilder {
   });
 }
 
-export function down(knex: Knex): Knex.SchemaBuilder {
+export function down(knex: any): Knex.SchemaBuilder {
   return knex.schema.dropTable('user_tokens');
 }

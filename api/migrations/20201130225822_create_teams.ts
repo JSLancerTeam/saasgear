@@ -1,8 +1,6 @@
-import Knex from 'knex';
-
-export function up(knex: Knex): Promise<[void, void, void]> {
+export function up(knex: any): Promise<[void, void, void]> {
   return Promise.all([
-    knex.schema.createTable('teams', (table) => {
+    knex.schema.createTable('teams', (table: any) => {
       table.increments('id');
       table.string('name').notNullable();
       table.string('alias').notNullable();
@@ -16,7 +14,7 @@ export function up(knex: Knex): Promise<[void, void, void]> {
       table.dateTime('deleted_at');
       table.integer('created_by').unsigned().notNullable();
     }),
-    knex.schema.createTable('team_invitations', (table) => {
+    knex.schema.createTable('team_invitations', (table: any) => {
       table.string('email').notNullable();
       table.integer('team_id').unsigned();
       table.foreign('team_id').references('id').inTable('teams');
@@ -32,7 +30,7 @@ export function up(knex: Knex): Promise<[void, void, void]> {
         .notNullable()
         .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     }),
-    knex.schema.createTable('team_members', (table) => {
+    knex.schema.createTable('team_members', (table: any) => {
       table.integer('user_id').unsigned().notNullable();
       table.integer('team_id').unsigned().notNullable();
       table.foreign('user_id').references('id').inTable('users');
@@ -52,7 +50,7 @@ export function up(knex: Knex): Promise<[void, void, void]> {
   ]);
 }
 
-export function down(knex: Knex): Promise<[void, void, void]> {
+export function down(knex: any): Promise<[void, void, void]> {
   return Promise.all([
     knex.schema.dropTable('team_invitations'),
     knex.schema.dropTable('team_members'),

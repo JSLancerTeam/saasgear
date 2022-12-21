@@ -34,7 +34,7 @@ export default (database: string, host: string, user: string, password: string, 
   migrations: {
     tableName: 'migrations',
     directory: '../migrations',
-    loadExtensions: ['.js, .ts'],
+    loadExtensions: ['.ts'],
   },
   seeds: { directory: '../seeds', recursive: true },
 });

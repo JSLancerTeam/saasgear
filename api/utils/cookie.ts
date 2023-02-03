@@ -5,7 +5,7 @@ export const COOKIE_NAME = {
 };
 
 export function setAuthenticationCookie(res: Response, token: string): void {
-  res.cookie(COOKIE_NAME.TOKEN, `Bearer ${token}`, { maxAge: 60 * 60 * 24, httpOnly: true });
+  res.cookie(COOKIE_NAME.TOKEN, `Bearer ${token}`, { maxAge: 60 * 60 * 24 * 1000, httpOnly: true });
 }
 
 export function clearCookie(res: Response, key: string): void {

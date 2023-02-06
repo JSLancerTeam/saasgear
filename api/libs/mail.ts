@@ -9,7 +9,7 @@ const mailgun = mailgunFactory({
 export default async function sendMail(to: string, subject: string, html: string): Promise<boolean> {
   try {
     mailgun.messages().send({
-      from: process.env.MAIL_FROM,
+      from: process.env.MAILGUN_DEFAULT_TO_EMAIL,
       to,
       subject,
       html,

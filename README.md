@@ -36,7 +36,7 @@ ReactJS and NodeJS SaaS boilerplate for your next SaaS application.
 
 [:globe_with_meridians: GraphQL](https://github.com/JSLancerTeam/saasgear/blob/master/docs/graphql.md)
 
-[:closed_lock_with_key: Authentication](https://github.com/JSLancerTeam/blob/master/saasgear/docs/authentication.md)
+[:closed_lock_with_key: Authentication](https://github.com/JSLancerTeam/saasgear/blob/master/docs/authentication.md)
 
 [:envelope: Email](https://github.com/JSLancerTeam/saasgear/blob/master/docs/mail.md)
 
@@ -45,7 +45,6 @@ ReactJS and NodeJS SaaS boilerplate for your next SaaS application.
 [:ear_of_rice: Redux toolkit](https://github.com/JSLancerTeam/saasgear/blob/master/docs/redux-toolkit.md)
 
 ## Technology stack
--
 
 ### Front-end
 - TypeScript

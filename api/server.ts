@@ -6,10 +6,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-
+require('module-alias/register');
 import { ApolloServer, makeExecutableSchema, IResolvers, ApolloError } from 'apollo-server-express';
 import { withScope, Severity, captureException, init } from '@sentry/node';
-
 import accessLogStream from '~/middlewares/logger.middleware';
 import RootSchema from './graphql/root.schema';
 import RootResolver from './graphql/root.resolver';
@@ -39,7 +38,7 @@ const corsOptions = {
   app.use(cookieParser());
 
   app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello orld!');
   });
   app.post('/stripe-hooks', bodyParser.raw({ type: 'application/json' }), stripeHooks);
 

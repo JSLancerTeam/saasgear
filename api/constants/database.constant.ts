@@ -9,6 +9,9 @@ export const TABLES = {
   teamInvitations: 'team_invitations',
   teamMembers: 'team_members',
   documents: 'documents',
+  allowed_sites: 'allowed_sites',
+  visitors: 'unique_visitors',
+  impressions: 'impressions',
 };
 
 export const DEFAULT_LIMIT = 20;

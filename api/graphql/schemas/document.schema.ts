@@ -7,6 +7,7 @@ export const DocumentSchema = gql`
     body: String!
     createdBy: String!
     createdAt: Date!
+    userId: Int!
   }
 
   type DocumentList {

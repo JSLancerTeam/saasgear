@@ -62,6 +62,7 @@ export async function getDocuments(userId: number, offset: number, limit: number
 export async function getDocumentDetail(id: number): Promise<FindDocumentById> {
   try {
     const document = await findDocumentById(id);
+    console.log(document)
     return document;
   } catch (error) {
     logger.error(error);

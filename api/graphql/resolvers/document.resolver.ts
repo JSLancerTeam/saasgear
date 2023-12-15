@@ -5,11 +5,11 @@ import { isAuthenticated } from './authorization.resolver';
 const resolvers = {
   Query: {
     getDocuments: combineResolvers(
-      isAuthenticated,
+      // isAuthenticated,
       (_, { offset, limit }, { user }) => getDocuments(user.id, offset, limit),
     ),
     getDocumentDetail: combineResolvers(
-      isAuthenticated,
+      // isAuthenticated,
       (_, { id }) => getDocumentDetail(id),
     ),
   },

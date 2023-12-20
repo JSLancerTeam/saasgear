@@ -24,14 +24,15 @@ type impressionsProps = {
 };
 
 
-export async function findImpressionsByURL(user_id: number, site_url: string): Promise<impressionsProps[]> {
+export async function findImpressionsURL(user_id: number, site_url: string): Promise<impressionsProps[]> {
 	return database(TABLE)
 		.join(TABLES.allowed_sites, impressionsColumns.site_id, siteColumns.id)
 		.select(impressionsColumns, `${siteColumns.url} as url`)
 		.where({ [siteColumns.url]: site_url, [siteColumns.user_id]: user_id });
 }
 
-export async function findImpressionsBySiteId(site_id: number): Promise<impressionsProps[]> {
+export async function findImpressionsSiteId(site_id: number): Promise<impressionsProps[]> {
+	
 	return database(TABLE)
 		.select(impressionsColumns)
 		.where('site_id', site_id);
@@ -48,17 +49,11 @@ export async function updateImpressions(id: number, interaction: string): Promis
 	return database(TABLE)
 		.where('id', id)
 		.update({
-			field: true
+			[field]: true
 		});
 }
 
 export async function insertImpressions(data: impressionsProps) {
-	const insertedIds = await database(TABLE).insert(data)
-	if (insertedIds.length === 0) {
-		return { success: false, message: 'Successfully inserted an impression!'};
-	}
-	else {
-		return { success: true, message: 'Impression could not be inserted in the database.'};
-	}
-
+	console.log('dound')
+	return database(TABLE).insert(data);
 }

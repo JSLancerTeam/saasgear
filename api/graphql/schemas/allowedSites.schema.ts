@@ -30,4 +30,5 @@ export const AllowedSitesSchema = gql`
 				deleteSite(url: String!): Int!
 				changeURL(newURL: String!, siteId: Int!): String
 		}
-		`;
+		
+`;

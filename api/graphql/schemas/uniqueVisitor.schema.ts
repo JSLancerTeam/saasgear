@@ -31,7 +31,7 @@ export const UniqueVisitorSchema = gql`
         extend type Query {
             getSiteVisitors(siteId: Int!): visitorResponse
             getVisitorByIp(ipAddress: String!): Visitor
-    }
+        }
 
 		extend type Mutation {
 				addNewVisitor(siteId: Int!): [Int]!
@@ -40,4 +40,5 @@ export const UniqueVisitorSchema = gql`
                 deleteVisitorById(siteId: Int!): Int!
                 deleteVisitorByIp(ipAddress: String!): Int!
 		}
-		`;
+		
+`;

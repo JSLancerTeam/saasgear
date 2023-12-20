@@ -23,11 +23,11 @@ export const ImpressionsSchema = gql`
 
 		extend type Query {
 				getImpressionsByURL(url: String!): ImpressionList,
-				getImpressionsBySiteId(site_id: Int!): ImpressionList
+				getImpressionsBySiteId(siteId: Int!): ImpressionList
 		}
 
 		extend type Mutation {
-				createImpression(site_id: Int!, ip: String!): ImpressionUpdateResponse!
-				registerInteraction(site_id: Int!, ip: String!, interaction: String!): ImpressionUpdateResponse!
+				addImpression(siteId: Int!): [Int]
+				registerInteraction(impressionId: Int!, interaction: String!): Int!
 		}
 		`;

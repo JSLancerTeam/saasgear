@@ -26,7 +26,7 @@ const SignInForm: React.FC<Props> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white max-w-[300px] w-[300px]">
+    <div className="bg-white max-w-[300px] w-[300px] mt-16">
       <Logo />
       <form onSubmit={onSubmit} className="mb-[24px]">
         <div className="font-bold text-[26px] leading-9 text-sapphire-blue mb-[34px]">{t('Sign_in.text.heading')}</div>
@@ -81,7 +81,7 @@ const SignInForm: React.FC<Props> = ({
         </div>
       </form>
       {apiError && <ErrorText message={String(t(`Sign_in.error.${apiError}`))} position="center" />}
-      <div className="mt-[179px] text-center text-[14px] leading-[24px] text-sapphire-blue">
+      <div className="mt-[60px] text-center text-[14px] leading-[24px] text-sapphire-blue">
         <Trans components={[<Link to="/auth/signup"></Link>]}>
           {t('Sign_in.text.not_have_account')}
         </Trans>

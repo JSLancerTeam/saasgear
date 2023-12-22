@@ -1,23 +1,71 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Route, Switch } from 'react-router-dom';
-import TeamDetail from './TeamDetail';
-import EditTeam from './EditTeam';
-import ListTeam from './ListTeam';
+import React, { useState, FormEvent } from 'react';
+import './Teams.css';
+
+interface DomainFormData {
+  domainName: string;
+}
 
 const Teams: React.FC = () => {
-  const { t } = useTranslation();
+  const [formData, setFormData] = useState<DomainFormData>({ domainName: '' });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        'https://your-backend-endpoint.com/domains',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Success:', result);
+    } catch (error) {
+      console.error('Error adding domain:', error);
+    }
+  };
+
   return (
-    <div>
+    <>
       <h3 className="font-bold text-[26px] leading-9 text-sapphire-blue mb-8">
-        {t('Common.title.teams')}
+        Add new domain
       </h3>
-      <Switch>
-        <Route path="/teams/new" exact component={TeamDetail} />
-        <Route path="/teams/edit/:teamId" exact component={EditTeam} />
-        <Route component={ListTeam} />
-      </Switch>
-    </div>
+      <div className="add-domain-container">
+
+        <div className="add-domain-form-container">
+          <form onSubmit={handleSubmit} className="add-domain-form">
+            <div className="form-group">
+              <input
+                type="text"
+                id="domainName"
+                name="domainName"
+                placeholder="Enter domain name"
+                value={formData.domainName}
+                onChange={handleInputChange}
+                className="form-control"
+              />
+            </div>
+            <button type="submit" className="submit-btn">
+              Add Domain
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
+
 export default Teams;

@@ -9,7 +9,10 @@ import { logout as logoutUser } from '@/features/auth/user';
 import getUserPlanQuery from '@/queries/userPlans/getUserPlan';
 import logoutQuery from '@/queries/auth/logout';
 
-const AdminLayoutContainer: React.FC = () => {
+type props = {
+  options:string[];
+}
+const AdminLayoutContainer: React.FC<props> = ({options}) => {
   const { data: userPlanData, loading: loadingUserPlan } = useQuery(
     getUserPlanQuery,
   );
@@ -32,7 +35,7 @@ const AdminLayoutContainer: React.FC = () => {
     history.push('/auth/signin');
   }
 
-  return <AdminLayout signout={signout} />;
+  return <AdminLayout signout={signout} options={options}/>;
 }
 
 export default AdminLayoutContainer;

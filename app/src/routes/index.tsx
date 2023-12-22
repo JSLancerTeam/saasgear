@@ -1,5 +1,5 @@
 import React from 'react';
-import Dashborad from '@/containers/Dashboard';
+import Dashboard from '@/containers/Dashboard';
 import Profile from '@/containers/Profile';
 import Document from '@/containers/Document';
 import ActionDocument from '@/containers/Document/Action';
@@ -8,13 +8,16 @@ import Teams from '@/containers/Teams';
 import { ReactComponent as DashboardIcon } from '@/assets/images/svg/dashboard.svg';
 import { ReactComponent as DocumentIcon } from '@/assets/images/svg/document.svg';
 import { ReactComponent as UserIcon } from '@/assets/images/svg/user.svg';
+import {} from '@/containers/Dashboard/CustomChart';
+import Accessibility from '@/containers/Accessibility/Accessibility';
+import { ReactComponent as AccessibilityIcon} from '@/assets/images/svg/Accessibility.svg';
 
 const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
     exact: false,
-    component: Dashborad,
+    component:Dashboard,
     icon: <DashboardIcon />,
     isSidebar: true,
   },
@@ -27,8 +30,8 @@ const routes = [
     isSidebar: true,
   },
   {
-    path: '/teams',
-    name: 'Teams',
+    path: '/add-domain',
+    name: 'Add Domain',
     exact: false,
     component: Teams,
     icon: <UserIcon />,
@@ -61,6 +64,14 @@ const routes = [
     exact: false,
     component: Profile,
     isSidebar: false,
+  },
+  {
+    path:'/accessibility-test',
+    name:'Accessibility',
+    exact:true,
+    component: Accessibility,
+    icon: <AccessibilityIcon />,
+    isSidebar:true,
   },
 ];
 

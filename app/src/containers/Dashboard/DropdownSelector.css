@@ -1,0 +1,58 @@
+.dropdown-selector-container {
+  display: flex;
+  /* justify-content: space-between; */
+  /* padding: 10px; */
+  /* background-color: #f9f9f9; */
+  /* border-radius: 10px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  /* max-width: 400px; */
+  margin: auto;
+  gap: 4px;
+  margin-right: 0px;
+}
+
+.dropdown-selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.dropdown {
+  padding: 7px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  width: 200px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+
+@media (max-width: 640px) {
+  .dashboard-card {
+    width: auto; /* Full width on small screens */
+    margin: 10px; /* Add some margin on small screens */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1007px) {
+  .dashboard-card {
+    width: 45%; /* Adjust width for medium screens */
+    margin: 10px; /* Adjust margin for medium screens */
+  }
+}
+
+@media (min-width: 1008px) {
+  .dashboard-card {
+    width: 22.5%; /* Adjust width for large screens */
+    margin: 10px; /* Adjust margin for large screens */
+  }
+}

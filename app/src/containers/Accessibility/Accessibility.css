@@ -1,0 +1,110 @@
+.accessibility-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
+}
+
+.accessibility-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+.accessibility-card .card-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-status, .card-score, .card-risk {
+  margin: 20px 0;
+  font-size: 1.2em;
+}
+
+.not-compliant {
+  color: red;
+}
+
+.high {
+  color: #d9534f;
+}
+
+.score-circle {
+  border: 3px solid grey;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.score-circle span {
+  display: inline-block;
+  font-size: 1.5em;
+}
+.accessibility-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px; /* You can set a max-width as per your design */
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  flex-grow: 1;
+  margin-right: 10px; /* Spacing between the input and the button */
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .search-bar-container {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .search-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .accessibility-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .accessibility-card {
+    width: 100%;
+  }
+}

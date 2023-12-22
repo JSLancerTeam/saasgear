@@ -83,6 +83,43 @@
   cursor: pointer;
 }
 
+/* Add to Accessibility.css */
+.accordion details {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 10px; /* Space between accordion items */
+  width: 100%;
+}
+
+.accordion summary {
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none; /* Remove the default marker */
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none; /* Hide the default arrow icon in Chrome */
+}
+
+.fail-count {
+  float: right; /* Position fail count to the right */
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8em;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .accordion details {
+    width: auto;
+    padding: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   .search-bar-container {
     flex-direction: column;

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Accessibility.css'; // Make sure your CSS file is updated with the styles for the search bar
+import './Accessibility.css'; // Make sure your CSS file is updated with the styles for the accordion
 
 const Accessibility = () => (
   <div className="accessibility-wrapper">
@@ -26,6 +26,25 @@ const Accessibility = () => (
         <div className="card-header">Lawsuit Risk</div>
         <div className="card-risk high">High</div>
         <p>Multiple violations may be exposing your site to legal action.</p>
+      </div>
+      {/* Accordion Section */}
+      <div className="accordion w-full">
+        <details>
+          <summary>Blind <span className="fail-count">45 Fail</span></summary>
+          <p>Details about Blind accessibility issues...</p>
+        </details>
+        <details>
+          <summary>Deafblind <span className="fail-count">36 Fail</span></summary>
+          <p>Details about Deafblind accessibility issues...</p>
+        </details>
+        <details>
+          <summary>Mobility <span className="fail-count">33 Fail</span></summary>
+          <p>Details about Mobility accessibility issues...</p>
+        </details>
+        <details>
+          <summary>Low Vision <span className="fail-count">24 Fail</span></summary>
+          <p>Details about Low Vision accessibility issues...</p>
+        </details>
       </div>
     </div>
   </div>

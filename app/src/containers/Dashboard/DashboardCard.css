@@ -4,10 +4,10 @@
   border: 1px solid rgb(123, 111, 111);
   display: flex;
   flex-direction: column;
-  max-width: 70%;/* Adjust for wider cards */
-  width: 310px; /* Example fixed width, you can adjust as necessary */
+  /* max-width: 70%; */
+  /* width: 310px; */
   /* margin: 1rem; */
-  height:100px;
+  height:6rem;
   overflow: hidden;
 
 }
@@ -87,23 +87,51 @@
   height: 16px;
 }
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .dashboard-card {
-    width: auto; /* Full width on small screens */
-    margin: 10px; /* Add some margin on small screens */
+    width: auto;
+    margin: 10px;
+
   }
 }
 
 @media (min-width: 641px) and (max-width: 1007px) {
   .dashboard-card {
-    width: 45%; /* Adjust width for medium screens */
-    margin: 10px; /* Adjust margin for medium screens */
+    width: 45%;
+    margin: 10px;
+
+
   }
 }
 
 @media (min-width: 1008px) {
   .dashboard-card {
-    width: 22.5%; /* Adjust width for large screens */
-    margin: 10px; /* Adjust margin for large screens */
+    width: 22.5%;
+    margin: 10px;
+
+  }
+} */
+@media (max-width: 640px) {
+  .dashboard-card {
+
+   width: 100%; /* Full width on small screens */
+    /* margin: 10px; */
+
   }
 }
+
+@media (min-width: 641px) and (max-width: 1007px) {
+  .dashboard-card {
+    max-width: 50%; /* Adjust width for medium screens */
+    /* margin: 10px; */
+     /* Adjust margin for medium screens */
+
+  }
+}
+
+/* @media (min-width: 1008px) {
+  .dashboard-card {
+
+
+  }
+} */

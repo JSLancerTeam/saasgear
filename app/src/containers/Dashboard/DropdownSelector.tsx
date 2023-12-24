@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+// DropdownSelector.tsx
+import React, {useEffect,useState} from 'react';
 import './DropdownSelector.css';
 
-const DropdownSelector: React.FC = () => {
+interface DropdownSelectorProps {
+  granularity: string;
+  onGranularityChange: (newGranularity: string) => void;
+}
+
+const DropdownSelector: React.FC<DropdownSelectorProps> = ({
+  granularity,
+  onGranularityChange,
+}) => {
   const [timeRange, setTimeRange] = useState<string>('Month To Date');
-  const [granularity, setGranularity] = useState<string>('Day');
 
   return (
     <div className="dropdown-selector-container">
       <div className="dropdown-selector">
-        <label htmlFor="time-range" className="dropdown-label">Time Range</label>
+        <label htmlFor="time-range" className="dropdown-label">
+          Time Range
+        </label>
         <select
           id="time-range"
           value={timeRange}
@@ -20,13 +30,14 @@ const DropdownSelector: React.FC = () => {
           <option value="Year To Date">Year To Date</option>
         </select>
       </div>
-
       <div className="dropdown-selector">
-        <label htmlFor="granularity" className="dropdown-label">Granularity</label>
+        <label htmlFor="granularity" className="dropdown-label">
+          Granularity
+        </label>
         <select
           id="granularity"
           value={granularity}
-          onChange={(e) => setGranularity(e.target.value)}
+          onChange={(e) => onGranularityChange(e.target.value)}
           className="dropdown"
         >
           <option value="Day">Day</option>

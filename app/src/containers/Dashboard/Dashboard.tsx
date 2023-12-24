@@ -4,6 +4,7 @@ import DashboardCard from './DashboardCard';
 import ExportButton from './ExportButton';
 import DropdownSelector from './DropdownSelector';
 import CustomChart from './CustomChart';
+import './Dashboard.css';
 
 interface ChartData {
   date: string;
@@ -16,13 +17,14 @@ interface CardData {
   heading: string;
   count: number;
   countType: string;
+  baseCount: number;
 }
 
 const Dashboard: React.FC = () => {
   const { t } = useTranslation();
   const [chartData, setChartData] = useState<ChartData[]>([]);
   const [cards, setCards] = useState<CardData[]>([]);
-
+  const [granularity, setGranularity] = useState<string>('Day');
   useEffect(() => {
     // Simulate fetching chart data
     const chartTimeoutId = setTimeout(() => {
@@ -34,32 +36,103 @@ const Dashboard: React.FC = () => {
       ];
       setChartData(fetchedChartData);
     }, 2000);
-
-    // Simulate fetching card data
     const cardTimeoutId = setTimeout(() => {
       const fetchedCardData: CardData[] = [
-        { id: 1, heading: 'Impressions', count: 1500, countType: 'times' },
-        { id: 2, heading: 'Widget opened', count: 300, countType: 'times' },
-        { id: 3, heading: 'Tools opened', count: 400, countType: 'times' },
-        { id: 4, heading: 'Pop-ups Clicked', count: 500, countType: 'clicks' },
-        { id: 5, heading: 'Total Events', count: 600, countType: 'events' },
-        { id: 6, heading: 'Widget closed', count: 700, countType: 'events' },
-        { id: 7, heading: 'Tool closed', count: 800, countType: 'events' },
-        { id: 8, heading: 'Pop-ups closed', count: 900, countType: 'events' },
-        // ... more card data if needed
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        {
+          id: 1,
+          heading: 'Impressions',
+          baseCount: 1500,
+          count: 1500,
+          countType: 'times',
+        },
+        // ... more card data
       ];
-      setCards(fetchedCardData);
+      // Simulate fetching card data
+      setCards(
+        fetchedCardData.map((card) => ({
+          ...card,
+          count: card.baseCount, // Initialize count with baseCount
+        })),
+      );
     }, 2000);
 
-    // Clean up the timeouts when the component unmounts
     return () => {
       clearTimeout(chartTimeoutId);
       clearTimeout(cardTimeoutId);
     };
   }, []);
 
+  useEffect(() => {
+    setCards((currentCards) =>
+      currentCards.map((card) => ({
+        ...card,
+        count: adjustCountByGranularity(card.baseCount),
+      })),
+    );
+  }, [granularity]);
+
+  const adjustCountByGranularity = (baseCount: number): number => {
+    switch (granularity) {
+      case 'Week':
+        return baseCount * 7;
+      case 'Month':
+        return baseCount * 30;
+      default:
+        return baseCount;
+    }
+  };
+
   return (
-    <>
+    <div className="container">
       {/* Dropdown, Plus Button, and ExportButton */}
       <div className="ml-4 flex gap-4 mb-4">
         <button
@@ -86,38 +159,44 @@ const Dashboard: React.FC = () => {
         </button>
 
         <ExportButton />
-        <DropdownSelector />
+        {/* <DropdownSelector granularity={granularity} setGranularity={setGranularity} /> */}
+        <DropdownSelector
+          granularity={granularity}
+          onGranularityChange={setGranularity}
+        />
       </div>
 
       {/* Cards Section */}
-      <div className="cards-container">
-        <div className="pl-10">
-          {/* Render first row of DashboardCards */}
-          <div className="cards-row flex">
-            {cards.slice(0, 4).map(card => (
-              <DashboardCard
-                key={card.id}
-                heading={card.heading}
-                count={card.count}
-                countType={card.countType}
-              />
-            ))}
-          </div>
-          {/* Render second row of DashboardCards */}
-          <div className="cards-row flex">
-            {cards.slice(4, 9).map(card => (
-              <DashboardCard
-                key={card.id}
-                heading={card.heading}
-                count={card.count}
-                countType={card.countType}
-              />
-            ))}
-          </div>
-        </div>
+
+      <div className="pl-10 cards-row">
+        {/* Render first row of DashboardCards */}
+        {/* <div className="cards-row flex"> */}
+        {cards.slice(0, 4).map((card) => (
+          <DashboardCard
+            key={card.id}
+            heading={card.heading}
+            count={card.count}
+            countType={card.countType}
+          />
+        ))}
+        {/* </div> */}
+        {/* Render second row of DashboardCards */}
+        {/* <div className="cards-row flex"> */}
+        {cards.slice(4, 9).map((card) => (
+          <DashboardCard
+            key={card.id}
+            heading={card.heading}
+            count={card.count}
+            countType={card.countType}
+          />
+        ))}
+        {/* </div> */}
+      </div>
+
+      <div>
         <CustomChart data={chartData} />
       </div>
-    </>
+    </div>
   );
 };
 export default Dashboard;

@@ -1,0 +1,97 @@
+.dropdown-container {
+  position: relative;
+  font-family: Arial, sans-serif;
+  margin-right: 10px ;
+
+}
+
+.dropdown-button {
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /*Fullwidth*/
+  box-sizing: border-box;
+  /*Borderandpaddingincludedinwidth*/
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.dropdown-icon {
+  margin-left: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f2f2f2;
+}
+
+
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .dropdown-button {
+    padding: 8px;
+  }
+
+  .dropdown-menu {
+    position: static; /* Full-width dropdown items on small screens */
+    width: 100%; /* Ensure the dropdown menu is full width */
+    box-shadow: none; /* Optional: remove shadow on small screens for a flat design */
+  }
+
+  .dropdown-item {
+    padding: 8px 12px; /* Slightly smaller padding on small screens */
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1007px) {
+  .dropdown-button {
+    padding: 10px 12px; /* Medium padding for medium screens */
+    font-size: 0.9rem; /* Adjust font size for medium screens */
+  }
+
+  .dropdown-menu {
+    width: auto; /* Let the dropdown menu size according to its content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Reintroduce shadow for better definition */
+  }
+}
+
+@media (min-width: 1008px) {
+  .dropdown-button {
+    padding: 12px 15px; /* Larger padding for large screens */
+    font-size: 1rem; /* Standard font size for large screens */
+  }
+
+  .dropdown-menu {
+    width: auto; /* Auto-width based on content size */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Consistent shadow for depth perception */
+  }
+}

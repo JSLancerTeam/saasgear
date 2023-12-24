@@ -1,0 +1,8 @@
+@import "./DashboardCard.css";
+
+.cards-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
